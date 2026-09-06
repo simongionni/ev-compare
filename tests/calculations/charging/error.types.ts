@@ -1,4 +1,4 @@
-import type {ChargingCalculationError} from "@/calculations/charging/error";
+import type {ChargingCalculationError, TimeCalculationError} from "@/calculations/charging/error";
 
 const validCalculationError: ChargingCalculationError = {
   type: "invalidBatteryCapacity",
@@ -9,6 +9,11 @@ const validSocCalculationError: ChargingCalculationError = {
   type: "invalidSoc",
   field: "fromSocPercent",
   value: -10
+};
+
+const validTimeCalculationError: TimeCalculationError = {
+  type: "invalidPower",
+  value: -50
 };
 
 // @ts-expect-error error: missing required property 'type'
@@ -39,5 +44,16 @@ const invalidSocCalculationError2: ChargingCalculationError = {
   //@ts-expect-error error: invalid field value for 'field' property
   field: "banana",
   value: -10
+};
+
+//@ts-expect-error error: missing required property 'value' for 'invalidPower' type
+const invalidTimeCalculationError1: TimeCalculationError = {
+  type: "invalidPower"
+};
+
+const invalidTimeCalculationError2: TimeCalculationError = {
+  //@ts-expect-error error: invalid type value for 'type' property
+  type: "invalidType",
+  value: -50
 };
 
