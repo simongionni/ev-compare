@@ -1,4 +1,4 @@
-import {ChargingCalculationError} from "@/calculations/charging/error";
+import type {ChargingCalculationError} from "@/calculations/charging/error";
 
 const validCalculationError: ChargingCalculationError = {
   type: "invalidBatteryCapacity",
@@ -30,6 +30,14 @@ const invalidCalculationError3: ChargingCalculationError = {
 // @ts-expect-error error: missing required property 'field' for 'invalidSoc' type
 const invalidSocCalculationError1: ChargingCalculationError = {
   type: "invalidSoc",
+  value: -10
+};
+
+const invalidSocCalculationError2: ChargingCalculationError = {
+  
+  type: "invalidSoc",
+  //@ts-expect-error error: invalid field value for 'field' property
+  field: "banana",
   value: -10
 };
 
