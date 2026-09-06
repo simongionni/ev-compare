@@ -10,41 +10,18 @@ export type ConstantPowerChargingTimeInput = {
   powerKw: number;
 };
 
+/**
+ * Calculates the time required to charge a battery from one SoC percentage to another at a constant power.
+ * @param input - An object containing the battery capacity in kWh, the initial and final SoC percentages, and the charging power in kW.
+ * @returns The time required in hours, or an error if the input is invalid.
+ */
+
 export function constantPowerChargingTime({
     batteryCapacityKwh,
     fromSocPercent,
     toSocPercent,
     powerKw,
 } : ConstantPowerChargingTimeInput): CalculationResult<number, ChargingCalculationError> {
-    if (batteryCapacityKwh <= 0) {
-        return {
-            ok: false,
-            error: {
-                type: "invalidBatteryCapacity",
-                value: batteryCapacityKwh
-            }
-        };
-    }
-    if (fromSocPercent < 0 || fromSocPercent > 100) {
-        return {
-            ok: false,
-            error: {
-                type: "invalidSoc",
-                field: "fromSocPercent",
-                value: fromSocPercent
-            }
-        };
-    }
-    if (toSocPercent < 0 || toSocPercent > 100) {
-        return {
-            ok: false,
-            error: {
-                type: "invalidSoc",
-                field: "toSocPercent",
-                value: toSocPercent
-            }
-        };
-    }
 
     if (fromSocPercent >= toSocPercent) {
         return {
@@ -57,22 +34,19 @@ export function constantPowerChargingTime({
             }
         };
     }
-    if (powerKw <= 0) {
-        return {
-            ok: false,
-            error: {
-                type: "invalidPower",
-                value: powerKw
-            }
-        };
-    }
     const energyDeltaKwh = energyDeltaForSocChange({
         batteryCapacityKwh,
         fromSocPercent: fromSocPercent,
         toSocPercent: toSocPercent
     });
+    if (!energyDeltaKwh.ok) {
+        return {
+            ok: false,
+            error: energyDeltaKwh.error
+        };
+    }
     return timeForEnergyAtConstantPower({
-        energyKwh: energyDeltaKwh.ok ? energyDeltaKwh.value : 0,
+        energyKwh:  energyDeltaKwh.value,
         powerKw
     });
 }
