@@ -1,39 +1,37 @@
-import type {ACChargingCapability, ACChargingStation, RawACChargingCapability, RawACChargingStation} from "@/domain/charging";
-import type {CalculationResult} from "@/calculations/result";
-import type {ChargingCalculationError} from "@/calculations/charging/error";
-import type {ChargingFactoryError} from "@/domain/chargingErrors";
-import { createACChargingCapability, createACChargingStation } from "@/domain/chargingFactories";
+import type {
+  ACChargingCapability,
+  ACChargingStation,
+} from "@/domain/charging";
 
-
-export type ResolveEffectiveChargingPowerInput = {
-    rawVehicleChargingSpec: RawACChargingCapability;
-    rawChargingStation: RawACChargingStation;
+export type ResolveEffectiveAcPowerInput = {
+  vehicle: ACChargingCapability;
+  station: ACChargingStation;
 };
 
-export function resolveEffectiveChargingPower(
-    {
-        rawVehicleChargingSpec, 
-        rawChargingStation
-    }: ResolveEffectiveChargingPowerInput) : CalculationResult<number, ChargingCalculationError | ChargingFactoryError> {
-        const vehicleChargingSpecResult : CalculationResult<ACChargingCapability, ChargingFactoryError> = createACChargingCapability(rawVehicleChargingSpec);
-        const chargingStationResult : CalculationResult<ACChargingStation, ChargingFactoryError> = createACChargingStation(rawChargingStation);
-        if (!vehicleChargingSpecResult.ok) {
-            return {
-                ok: false,
-                error: vehicleChargingSpecResult.error
-            };
-        }
-        if (!chargingStationResult.ok) {
-            return {
-                ok: false,
-                error: chargingStationResult.error
-            };
-        }
-        const vehicleChargingSpec : ACChargingCapability = vehicleChargingSpecResult.value;
-        const chargingStation : ACChargingStation = chargingStationResult.value;
-        const effectivePowerKw = Math.min(vehicleChargingSpec.maxPowerKw/vehicleChargingSpec.phases, chargingStation.maxPowerKw/chargingStation.phases) * Math.min(vehicleChargingSpec.phases, chargingStation.phases);
-        return {
-            ok: true,
-            value: effectivePowerKw
-        };
+/**
+ * Resolves the effective AC charging power supported by both
+ * the vehicle and the charging station.
+ *
+ * Assumes that the total available power is distributed uniformly
+ * across the available phases.
+ *
+ * @returns Effective charging power in kW.
+ */
+export function resolveEffectiveAcPower({
+  vehicle,
+  station,
+}: ResolveEffectiveAcPowerInput): number {
+  const vehiclePowerPerPhase =
+    vehicle.maxPowerKw / vehicle.phases;
+
+  const stationPowerPerPhase =
+    station.maxPowerKw / station.phases;
+
+  const usablePhases =
+    Math.min(vehicle.phases, station.phases);
+
+  return (
+    Math.min(vehiclePowerPerPhase, stationPowerPerPhase)
+    * usablePhases
+  );
 }
