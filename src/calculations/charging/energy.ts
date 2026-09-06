@@ -1,5 +1,5 @@
 import type { CalculationResult } from "@/calculations/result";
-import type { ChargingCalculationError } from "@/calculations/charging/error";
+import type { EnergyDeltaCalculationError } from "@/calculations/charging/error";
 
 export type EnergyDeltaForSocChangeInput  = {
   batteryCapacityKwh: number;
@@ -16,7 +16,7 @@ export function energyDeltaForSocChange({
   batteryCapacityKwh,
   fromSocPercent,
   toSocPercent,
-}: EnergyDeltaForSocChangeInput): CalculationResult<number,ChargingCalculationError> {
+}: EnergyDeltaForSocChangeInput): CalculationResult<number,EnergyDeltaCalculationError> {
   if (batteryCapacityKwh <= 0) {
     return {
       ok: false,

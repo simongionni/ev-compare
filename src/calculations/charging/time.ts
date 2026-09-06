@@ -1,5 +1,5 @@
 import type { CalculationResult } from "@/calculations/result";
-import type { ChargingCalculationError, TimeCalculationError } from "@/calculations/charging/error";
+import type { TimeCalculationError } from "@/calculations/charging/error";
 
 export type TimeForEnergyAtConstantPowerInput = {
   energyKwh: number;
@@ -15,7 +15,7 @@ export type TimeForEnergyAtConstantPowerInput = {
 export function timeForEnergyAtConstantPower({
   energyKwh,
   powerKw,
-}: TimeForEnergyAtConstantPowerInput) : CalculationResult<number, ChargingCalculationError> {
+}: TimeForEnergyAtConstantPowerInput) : CalculationResult<number, TimeCalculationError> {
     if (powerKw <= 0) {
         return {
             ok: false,
