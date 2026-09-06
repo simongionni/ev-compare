@@ -23,7 +23,7 @@ export function constantPowerChargingTime({
     powerKw,
 } : ConstantPowerChargingTimeInput): CalculationResult<number, ChargingCalculationError> {
 
-    if (fromSocPercent >= toSocPercent) {
+    if (fromSocPercent > toSocPercent) {
         return {
             ok: false,
             error: {
