@@ -3,6 +3,12 @@ export type ChargingCurvePoint = {
   powerKw: number;
 };
 
+export type RawACChargingCapability = {
+  maxPowerKw: number;
+  phases: number;
+  maxCurrentA?: number;
+};
+
 export type ACChargingCapability = {
   maxPowerKw: number;
   phases: number;
@@ -18,6 +24,11 @@ export type VehicleChargingSpec = {
   usableBatteryCapacityKwh: number;
   ac: ACChargingCapability;
   dc?: DCChargingCapability;
+};
+
+export type RawACChargingStation = {
+  maxPowerKw: number;
+  phases: number;
 };
 
 export type ACChargingStation = {
