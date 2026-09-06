@@ -1,5 +1,5 @@
 import type { CalculationResult } from "@/calculations/result";
-import type { ChargingCalculationError } from "@/calculations/charging/errors";
+import type { ChargingCalculationError } from "@/calculations/charging/error";
 
 export type EnergyDeltaForSocChangeInput  = {
   batteryCapacityKwh: number;
