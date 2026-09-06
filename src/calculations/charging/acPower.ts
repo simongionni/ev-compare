@@ -2,8 +2,6 @@ import type {ACChargingCapability, ACChargingStation, RawACChargingCapability, R
 import type {CalculationResult} from "@/calculations/result";
 import type {ChargingCalculationError} from "@/calculations/charging/error";
 import type {ChargingFactoryError} from "@/domain/chargingErrors";
-import {timeForEnergyAtConstantPower} from "@/calculations/charging/time";
-import {energyDeltaForSocChange} from "@/calculations/charging/energy";
 import { createACChargingCapability, createACChargingStation } from "@/domain/chargingFactories";
 
 
