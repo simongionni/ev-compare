@@ -6,6 +6,11 @@ export type EnergyDeltaForSocChangeInput  = {
   fromSocPercent: number;
   toSocPercent: number;
 };
+/**
+ * Calculates the energy delta required for a change in SoC.
+ * @param input - An object containing the battery capacity in kWh and the initial and final SoC percentages.
+ * @returns The energy delta in kWh, or an error if the input is invalid.
+ */
 
 export function energyDeltaForSocChange({
   batteryCapacityKwh,
