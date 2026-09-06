@@ -11,6 +11,13 @@ const validSocCalculationError: ChargingCalculationError = {
   value: -10
 };
 
+const validSocRangeCalculationError: ChargingCalculationError = {
+  type: "invalidSocRange",
+  message: "The starting SoC percentage must be less than the ending SoC percentage.",
+  fromSocPercent: 80,
+  toSocPercent: 20
+};
+
 const validTimeCalculationError: TimeCalculationError = {
   type: "invalidPower",
   value: -50
@@ -44,6 +51,35 @@ const invalidSocCalculationError2: ChargingCalculationError = {
   //@ts-expect-error error: invalid field value for 'field' property
   field: "banana",
   value: -10
+};
+
+//@ts-expect-error error: missing required property 'message' for 'invalidSocRange' type
+const invalidSocRangeCalculationError1: ChargingCalculationError = {
+  type: "invalidSocRange",
+  fromSocPercent: 80,
+  toSocPercent: 20
+};
+
+//@ts-expect-error error: missing required property 'fromSocPercent' for 'invalidSocRange' type
+const invalidSocRangeCalculationError2: ChargingCalculationError = {
+  type: "invalidSocRange",
+  message: "The starting SoC percentage must be less than the ending SoC percentage.",
+  toSocPercent: 20
+};
+
+//@ts-expect-error error: missing required property 'toSocPercent' for 'invalidSocRange' type
+const invalidSocRangeCalculationError3: ChargingCalculationError = {
+  type: "invalidSocRange",
+  message: "The starting SoC percentage must be less than the ending SoC percentage.",
+  fromSocPercent: 80
+};
+
+const invalidSocRangeCalculationError4: ChargingCalculationError = {
+  type: "invalidSocRange",
+  //@ts-expect-error error: invalid type for 'message' property
+  message: -1,
+  fromSocPercent: 80,
+  toSocPercent: 20
 };
 
 //@ts-expect-error error: missing required property 'value' for 'invalidPower' type

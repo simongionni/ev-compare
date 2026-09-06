@@ -7,7 +7,14 @@ export type EnergyDeltaCalculationError =
       type: "invalidSoc";
       field: "fromSocPercent" | "toSocPercent";
       value: number;
+    }
+  | {
+      type: "invalidSocRange";
+      message: string;
+      fromSocPercent: number;
+      toSocPercent: number;
     };
+
 
 export type TimeCalculationError =
   | {
