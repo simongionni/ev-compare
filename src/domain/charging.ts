@@ -1,39 +1,39 @@
-type ChargingCurvePoint = {
+export type ChargingCurvePoint = {
   socPercent: number;
   powerKw: number;
 };
 
-type ACChargingCapability = {
+export type ACChargingCapability = {
   maxPowerKw: number;
   phases: number;
   maxCurrentA?: number;
 };
 
-type DCChargingCapability = {
+export type DCChargingCapability = {
   maxPowerKw: number;
   chargingCurve: ChargingCurvePoint[];
 };
 
-type VehicleChargingSpec = {
+export type VehicleChargingSpec = {
   usableBatteryCapacityKwh: number;
   ac: ACChargingCapability;
   dc?: DCChargingCapability;
 };
 
-type ACChargingStation = {
+export type ACChargingStation = {
   type: "AC";
   maxPowerKw: number;
   phases: number;
 };
 
-type DCChargingStation = {
+export type DCChargingStation = {
   type: "DC";
   maxPowerKw: number;
 };
 
-type ChargingStation = ACChargingStation | DCChargingStation;
+export type ChargingStation = ACChargingStation | DCChargingStation;
 
-type TerminationCondition =
+export type TerminationCondition =
   | {
       type: "targetSoc";
       targetSocPercent: number;
@@ -43,7 +43,7 @@ type TerminationCondition =
       durationMinutes: number;
     };
 
-type ChargingSession = {
+export type ChargingSession = {
   initialSocPercent: number;
   termination: TerminationCondition;
 };
