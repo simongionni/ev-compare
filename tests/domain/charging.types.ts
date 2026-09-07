@@ -30,6 +30,25 @@ const invalidPoint5 : Charging.ChargingCurvePoint = {
     powerKw: "0"
 }
 
+const validRawACChargingCapability : Charging.RawACChargingCapability = {
+  maxPowerKw: 0,
+  phases: 1,
+  maxCurrentA: 0
+}
+
+// @ts-expect-error - maxPowerKw is missing
+const invalidRawACChargingCapability1 : Charging.RawACChargingCapability = {
+  phases: 1,
+  maxCurrentA: 0
+}
+
+// @ts-expect-error - phases is missing
+const invalidRawACChargingCapability2 : Charging.RawACChargingCapability = {
+  maxPowerKw: 0,
+  maxCurrentA: 0
+}
+
+
 const validACChargingCapability : Charging.ACChargingCapability = {
   maxPowerKw: 0,
   phases: 1,
@@ -177,6 +196,21 @@ const invalidVehicleChargingSpec9 : Charging.VehicleChargingSpec = {
   usableBatteryCapacityKwh: 0,
  // @ts-expect-error - ac is an object with invalid properties
   ac: {maxPowerKw: "0", phases: "1", maxCurrentA: "0"}
+}
+
+const validRawACChargingStation : Charging.RawACChargingStation = {
+  maxPowerKw: 0,
+  phases: 1
+}
+
+// @ts-expect-error - maxPowerKw is missing
+const invalidRawACChargingStation1 : Charging.RawACChargingStation = {
+  phases: 1
+}
+
+// @ts-expect-error - phases is missing
+const invalidRawACChargingStation2 : Charging.RawACChargingStation = {
+  maxPowerKw: 0
 }
 
 const validACChargingStation : Charging.ACChargingStation = {
