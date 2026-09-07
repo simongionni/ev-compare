@@ -28,7 +28,7 @@ export function constantPowerChargingTime({
             ok: false,
             error: {
                 type: "invalidSocRange",
-                message: "The starting SoC percentage must be less than the ending SoC percentage.",
+                message: "The starting SoC percentage must not be greater than the ending SoC percentage.",
                 fromSocPercent: fromSocPercent,
                 toSocPercent: toSocPercent
             }

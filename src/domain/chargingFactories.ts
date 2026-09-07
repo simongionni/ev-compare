@@ -8,7 +8,7 @@ export function createACChargingCapability(
   ACChargingCapability,
   ACChargingCapabilityValidationError
 > {
-  if (raw.maxPowerKw <= 0) {
+  if (raw.maxPowerKw <= 0 || !Number.isFinite(raw.maxPowerKw)) {
     return {
       ok: false,
       error: {
@@ -18,7 +18,7 @@ export function createACChargingCapability(
     };
   }
 
-  if (raw.phases < 1 || raw.phases > 3) {
+  if (raw.phases < 1 || raw.phases > 3 || !Number.isInteger(raw.phases)) {
     return {
       ok: false,
       error: {
@@ -28,7 +28,7 @@ export function createACChargingCapability(
     };
   }
 
-  if (raw.maxCurrentA !== undefined && raw.maxCurrentA <= 0) { //condizione in più perche maxCurrentA è opzionale, quindi se non è definito non deve generare errore
+  if (raw.maxCurrentA !== undefined && (raw.maxCurrentA <= 0 || !Number.isFinite(raw.maxCurrentA))) { //condizione in più perche maxCurrentA è opzionale, quindi se non è definito non deve generare errore
     return {
       ok: false,
       error: {
@@ -51,7 +51,7 @@ export function createACChargingCapability(
 export function createACChargingStation(
   raw: RawACChargingStation,
 ): CalculationResult<ACChargingStation, ACChargingStationValidationError> {
-    if (raw.maxPowerKw <= 0) {
+    if (raw.maxPowerKw <= 0 || !Number.isFinite(raw.maxPowerKw)) {
         return {
             ok: false,
             error: {
@@ -61,7 +61,7 @@ export function createACChargingStation(
         };
     }
 
-    if (raw.phases < 1 || raw.phases > 3) {
+    if (raw.phases < 1 || raw.phases > 3 || !Number.isInteger(raw.phases)) {
         return {
             ok: false,
             error: {
