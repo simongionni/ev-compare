@@ -11,17 +11,7 @@ export function powerAtSoc({
   curve,
   socPercent,
 }: PowerAtSocInput): CalculationResult<number, DcCurveError> {
-  const startingSoc = curve[0].socPercent;
-  const finalSoc = curve[1].socPercent;
-
-  const startingPower = curve[0].powerKw;
-  const finalPower = curve[1].powerKw;
-
-  if (
-    socPercent < startingSoc ||
-    socPercent > finalSoc ||
-    !Number.isFinite(socPercent)
-  ) {
+  if (!Number.isFinite(socPercent)) {
     return {
       ok: false,
       error: {
@@ -32,11 +22,29 @@ export function powerAtSoc({
     };
   }
 
+  const firstPoint = curve[0];
+  const lastPoint = curve[curve.length - 1];
+
+  if (socPercent <= firstPoint.socPercent) {
+    return { ok: true, value: firstPoint.powerKw };
+  }
+
+  if (socPercent >= lastPoint.socPercent) {
+    return { ok: true, value: lastPoint.powerKw };
+  }
+
+  const finalPointIndex = curve.findIndex(
+    (point) => point.socPercent >= socPercent,
+  );
+  const startingPoint = curve[finalPointIndex - 1];
+  const finalPoint = curve[finalPointIndex];
+
   return {
     ok: true,
     value:
-      startingPower +
-      ((finalPower - startingPower) / (finalSoc - startingSoc)) *
-        (socPercent - startingSoc),
+      startingPoint.powerKw +
+      ((finalPoint.powerKw - startingPoint.powerKw) /
+        (finalPoint.socPercent - startingPoint.socPercent)) *
+        (socPercent - startingPoint.socPercent),
   };
 }
