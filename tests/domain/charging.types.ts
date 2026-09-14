@@ -90,7 +90,7 @@ const invalidACChargingCapability5 : Charging.ACChargingCapability = {
 
 const validDCChargingCapability : Charging.DCChargingCapability = {
   maxPowerKw: 0,
-  chargingCurve: [validPoint]
+  chargingCurve: [validPoint, validPoint]
 }
 
 // @ts-expect-error - chargingCurve is missing
@@ -100,13 +100,13 @@ const invalidDCChargingCapability1 : Charging.DCChargingCapability = {
 
 // @ts-expect-error - maxPowerKw is missing
 const invalidDCChargingCapability2 : Charging.DCChargingCapability = {
-  chargingCurve: [validPoint]
+  chargingCurve: [validPoint, validPoint]
 }
 
 const invalidDCChargingCapability3 : Charging.DCChargingCapability = {
   // @ts-expect-error - maxPowerKw is a string
   maxPowerKw: "0",
-  chargingCurve: [validPoint]
+  chargingCurve: [validPoint, validPoint]
 }
 
 const invalidDCChargingCapability4 : Charging.DCChargingCapability = {

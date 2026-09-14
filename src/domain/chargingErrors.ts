@@ -8,6 +8,19 @@ export type ChargingCurvePointValidationError =
       value: number;
     };
 
+export type ChargingCurveValidationError =
+  | ChargingCurvePointValidationError
+  | {
+      type: "notEnoughPoints";
+      value: number;
+    }
+  | {
+      type: "invalidSocOrder";
+      index: number;
+      previousSocPercent: number;
+      value: number;
+    };
+
 export type ACChargingCapabilityValidationError =
   | {
       type: "invalidMaxPower";
@@ -33,6 +46,6 @@ export type ACChargingStationValidationError =
     };
 
 export type ChargingFactoryError =
-  | ChargingCurvePointValidationError
+  | ChargingCurveValidationError
   | ACChargingCapabilityValidationError
   | ACChargingStationValidationError;

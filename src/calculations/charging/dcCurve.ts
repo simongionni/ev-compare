@@ -1,9 +1,9 @@
-import type { ChargingCurvePoint } from "@/domain/charging";
+import type { ChargingCurve } from "@/domain/charging";
 import type { CalculationResult } from "@/calculations/result";
 import type { DcCurveError } from "@/calculations/charging/error";
 
 export type PowerAtSocInput = {
-  curve: ChargingCurvePoint[];
+  curve: ChargingCurve;
   socPercent: number;
 };
 

@@ -1,5 +1,5 @@
 import {describe, expect, it} from "vitest";
-import {createACChargingCapability, createACChargingStation, createChargingCurvePoint} from "@/domain/chargingFactories";
+import {createACChargingCapability, createACChargingStation, createChargingCurve, createChargingCurvePoint} from "@/domain/chargingFactories";
 
 describe("createChargingCurvePoint", () => {
     it("returns an error for an invalid SoC", () => {
@@ -24,6 +24,75 @@ describe("createChargingCurvePoint", () => {
         const raw = { socPercent: 50, powerKw: 100 };
 
         expect(createChargingCurvePoint(raw)).toEqual({ ok: true, value: raw });
+    });
+});
+
+describe("createChargingCurve", () => {
+    it("returns an error when there are fewer than two points", () => {
+        expect(createChargingCurve([{ socPercent: 0, powerKw: 200 }])).toEqual({
+            ok: false,
+            error: { type: "notEnoughPoints", value: 1 },
+        });
+    });
+
+    it("returns the point validation error when a point is invalid", () => {
+        expect(createChargingCurve([
+            { socPercent: 0, powerKw: 200 },
+            { socPercent: 101, powerKw: 100 },
+        ])).toEqual({
+            ok: false,
+            error: { type: "invalidSoc", value: 101 },
+        });
+    });
+
+    it("ignores duplicated SoC values like a Set, keeping the first point", () => {
+        expect(createChargingCurve([
+            { socPercent: 0, powerKw: 200 },
+            { socPercent: 20, powerKw: 150 },
+            { socPercent: 20, powerKw: 100 },
+            { socPercent: 80, powerKw: 50 },
+        ])).toEqual({
+            ok: true,
+            value: [
+                { socPercent: 0, powerKw: 200 },
+                { socPercent: 20, powerKw: 150 },
+                { socPercent: 80, powerKw: 50 },
+            ],
+        });
+    });
+
+    it("checks the minimum length after removing duplicated SoC values", () => {
+        expect(createChargingCurve([
+            { socPercent: 20, powerKw: 200 },
+            { socPercent: 20, powerKw: 150 },
+        ])).toEqual({
+            ok: false,
+            error: { type: "notEnoughPoints", value: 1 },
+        });
+    });
+
+    it("returns an error when unique SoC values are decreasing", () => {
+        expect(createChargingCurve([
+            { socPercent: 20, powerKw: 200 },
+            { socPercent: 10, powerKw: 150 },
+        ])).toEqual({
+            ok: false,
+            error: {
+                type: "invalidSocOrder",
+                index: 1,
+                previousSocPercent: 20,
+                value: 10,
+            },
+        });
+    });
+
+    it("returns a valid charging curve", () => {
+        const raw = [
+            { socPercent: 0, powerKw: 200 },
+            { socPercent: 80, powerKw: 50 },
+        ];
+
+        expect(createChargingCurve(raw)).toEqual({ ok: true, value: raw });
     });
 });
 

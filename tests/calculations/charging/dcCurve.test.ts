@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { powerAtSoc } from "@/calculations/charging/dcCurve";
-import { createChargingCurvePoint } from "@/domain/chargingFactories";
+import { createChargingCurve } from "@/domain/chargingFactories";
 
 describe("powerAtSoc", () => {
   const rawCurve = [
@@ -9,15 +9,13 @@ describe("powerAtSoc", () => {
     { socPercent: 40, powerKw: 110 },
     { socPercent: 80, powerKw: 50 },
   ];
-  const curve = rawCurve.map((point) => {
-    const result = createChargingCurvePoint(point);
+  const curveResult = createChargingCurve(rawCurve);
 
-    if (!result.ok) {
-      throw new Error("Test setup produced an invalid charging curve point");
-    }
+  if (!curveResult.ok) {
+    throw new Error("Test setup produced an invalid charging curve");
+  }
 
-    return result.value;
-  });
+  const curve = curveResult.value;
 
   it("finds the containing interval and interpolates within it", () => {
     expect(powerAtSoc({ curve, socPercent: 30 })).toEqual({

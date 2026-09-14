@@ -5,6 +5,14 @@ export type RawChargingCurvePoint = {
 
 export type ChargingCurvePoint = RawChargingCurvePoint;
 
+export type RawChargingCurve = RawChargingCurvePoint[];
+
+export type ChargingCurve = [
+  ChargingCurvePoint,
+  ChargingCurvePoint,
+  ...ChargingCurvePoint[],
+];
+
 export type RawACChargingCapability = {
   maxPowerKw: number;
   phases: number;
@@ -19,7 +27,7 @@ export type ACChargingCapability = {
 
 export type DCChargingCapability = {
   maxPowerKw: number;
-  chargingCurve: ChargingCurvePoint[];
+  chargingCurve: ChargingCurve;
 };
 
 export type VehicleChargingSpec = {

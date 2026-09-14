@@ -6,11 +6,14 @@ import type {
   RawACChargingStation,
   ChargingCurvePoint,
   RawChargingCurvePoint,
+  ChargingCurve,
+  RawChargingCurve,
 } from "@/domain/charging";
 import type {
   ACChargingCapabilityValidationError,
   ACChargingStationValidationError,
   ChargingCurvePointValidationError,
+  ChargingCurveValidationError,
 } from "@/domain/chargingErrors";
 
 export function createChargingCurvePoint(
@@ -46,6 +49,70 @@ export function createChargingCurvePoint(
       socPercent: raw.socPercent,
       powerKw: raw.powerKw,
     },
+  };
+}
+
+export function createChargingCurve(
+  raw: RawChargingCurve,
+): CalculationResult<ChargingCurve, ChargingCurveValidationError> {
+  if (raw.length < 2) {
+    return {
+      ok: false,
+      error: {
+        type: "notEnoughPoints",
+        value: raw.length,
+      },
+    };
+  }
+
+  const curve: ChargingCurvePoint[] = [];
+  const seenSocPercentages = new Set<number>();
+
+  for (const [index, rawPoint] of raw.entries()) {
+    const pointResult = createChargingCurvePoint(rawPoint);
+
+    if (!pointResult.ok) {
+      return pointResult;
+    }
+
+    if (seenSocPercentages.has(pointResult.value.socPercent)) {
+      continue;
+    }
+
+    const previousPoint = curve[curve.length - 1];
+
+    if (
+      previousPoint !== undefined &&
+      pointResult.value.socPercent < previousPoint.socPercent
+    ) {
+      return {
+        ok: false,
+        error: {
+          type: "invalidSocOrder",
+          index,
+          previousSocPercent: previousPoint.socPercent,
+          value: pointResult.value.socPercent,
+        },
+      };
+    }
+
+    seenSocPercentages.add(pointResult.value.socPercent);
+    curve.push(pointResult.value);
+  }
+
+  if (curve.length < 2) {
+    return {
+      ok: false,
+      error: {
+        type: "notEnoughPoints",
+        value: curve.length,
+      },
+    };
+  }
+
+  return {
+    ok: true,
+    value: [curve[0], curve[1], ...curve.slice(2)],
   };
 }
 
