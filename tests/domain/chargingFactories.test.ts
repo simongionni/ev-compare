@@ -45,29 +45,15 @@ describe("createChargingCurve", () => {
         });
     });
 
-    it("ignores duplicated SoC values like a Set, keeping the first point", () => {
+    it("returns an error when a SoC value is duplicated", () => {
         expect(createChargingCurve([
             { socPercent: 0, powerKw: 200 },
             { socPercent: 20, powerKw: 150 },
             { socPercent: 20, powerKw: 100 },
             { socPercent: 80, powerKw: 50 },
         ])).toEqual({
-            ok: true,
-            value: [
-                { socPercent: 0, powerKw: 200 },
-                { socPercent: 20, powerKw: 150 },
-                { socPercent: 80, powerKw: 50 },
-            ],
-        });
-    });
-
-    it("checks the minimum length after removing duplicated SoC values", () => {
-        expect(createChargingCurve([
-            { socPercent: 20, powerKw: 200 },
-            { socPercent: 20, powerKw: 150 },
-        ])).toEqual({
             ok: false,
-            error: { type: "notEnoughPoints", value: 1 },
+            error: { type: "duplicateSoc", index: 2, value: 20 },
         });
     });
 

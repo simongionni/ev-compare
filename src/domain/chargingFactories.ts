@@ -76,7 +76,14 @@ export function createChargingCurve(
     }
 
     if (seenSocPercentages.has(pointResult.value.socPercent)) {
-      continue;
+      return {
+        ok: false,
+        error: {
+          type: "duplicateSoc",
+          index,
+          value: pointResult.value.socPercent,
+        },
+      };
     }
 
     const previousPoint = curve[curve.length - 1];
@@ -98,16 +105,6 @@ export function createChargingCurve(
 
     seenSocPercentages.add(pointResult.value.socPercent);
     curve.push(pointResult.value);
-  }
-
-  if (curve.length < 2) {
-    return {
-      ok: false,
-      error: {
-        type: "notEnoughPoints",
-        value: curve.length,
-      },
-    };
   }
 
   return {

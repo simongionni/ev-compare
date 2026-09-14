@@ -15,6 +15,11 @@ export type ChargingCurveValidationError =
       value: number;
     }
   | {
+      type: "duplicateSoc";
+      index: number;
+      value: number;
+    }
+  | {
       type: "invalidSocOrder";
       index: number;
       previousSocPercent: number;
