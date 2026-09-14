@@ -1,12 +1,38 @@
 import {describe, expect, it} from "vitest";
-import {createACChargingCapability, createACChargingStation} from "@/domain/chargingFactories";
+import {createACChargingCapability, createACChargingStation, createChargingCurvePoint} from "@/domain/chargingFactories";
+
+describe("createChargingCurvePoint", () => {
+    it("returns an error for an invalid SoC", () => {
+        const result = createChargingCurvePoint({ socPercent: 101, powerKw: 100 });
+
+        expect(result).toEqual({
+            ok: false,
+            error: { type: "invalidSoc", value: 101 },
+        });
+    });
+
+    it("returns an error for an invalid power", () => {
+        const result = createChargingCurvePoint({ socPercent: 50, powerKw: 0 });
+
+        expect(result).toEqual({
+            ok: false,
+            error: { type: "invalidPower", value: 0 },
+        });
+    });
+
+    it("returns a charging curve point for valid input", () => {
+        const raw = { socPercent: 50, powerKw: 100 };
+
+        expect(createChargingCurvePoint(raw)).toEqual({ ok: true, value: raw });
+    });
+});
 
 describe("createACChargingCapability", () => {
     it("returns an error for invalid maxPowerKw", () => {
         const raw = {
             maxPowerKw: -1,
             phases: 1,
-            maxCurrentA: 0
+            maxCurrentA: 10
         };
         const result = createACChargingCapability(raw);
         expect(result.ok).toBe(false);
@@ -17,7 +43,7 @@ describe("createACChargingCapability", () => {
         const raw = {
             maxPowerKw: 1,
             phases: 4,
-            maxCurrentA: 0
+            maxCurrentA: 10
         };
         const result = createACChargingCapability(raw);
         expect(result.ok).toBe(false);

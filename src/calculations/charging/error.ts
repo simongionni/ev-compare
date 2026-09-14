@@ -26,4 +26,13 @@ export type TimeCalculationError =
       value: number;
     }
 
-export type ChargingCalculationError = EnergyDeltaCalculationError | TimeCalculationError;
+export type DcCurveError = {
+  type: "invalidSoc";
+  field: "socPercent";
+  value: number;
+};
+
+export type ChargingCalculationError =
+  | EnergyDeltaCalculationError
+  | TimeCalculationError
+  | DcCurveError;

@@ -1,3 +1,13 @@
+export type ChargingCurvePointValidationError =
+  | {
+      type: "invalidSoc";
+      value: number;
+    }
+  | {
+      type: "invalidPower";
+      value: number;
+    };
+
 export type ACChargingCapabilityValidationError =
   | {
       type: "invalidMaxPower";
@@ -22,4 +32,7 @@ export type ACChargingStationValidationError =
       value: number;
     };
 
-export type ChargingFactoryError = ACChargingCapabilityValidationError | ACChargingStationValidationError;
+export type ChargingFactoryError =
+  | ChargingCurvePointValidationError
+  | ACChargingCapabilityValidationError
+  | ACChargingStationValidationError;

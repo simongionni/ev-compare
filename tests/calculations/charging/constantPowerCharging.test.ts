@@ -12,6 +12,16 @@ describe("constantPowerChargingTime", () => {
         result.ok && expect(result.value).toBeCloseTo(1.8, 1);
     });
 
+    it("calculates charging time correctly for valid inputs with equal socpercents", () => {
+        const batteryCapacityKwh = 75; // Example battery capacity in kWh
+        const fromSocPercent = 50; // Starting SOC percentage
+        const toSocPercent = 50; // Ending SOC percentage
+        const powerKw = 25; // Example charging power in kW
+        const result = constantPowerChargingTime({batteryCapacityKwh, fromSocPercent, toSocPercent, powerKw });
+        expect(result.ok).toBe(true);
+        result.ok && expect(result.value).toEqual(0);
+    }); 
+
     it("returns an error for invalid battery capacity", () => {
         const batteryCapacityKwh = -10; // Invalid battery capacity
         const fromSocPercent = 20; // Starting SOC percentage
@@ -69,7 +79,7 @@ describe("constantPowerChargingTime", () => {
             ok: false,
             error: {
                 type: "invalidSocRange",
-                message: "The starting SoC percentage must be less than the ending SoC percentage.",
+                message: "The starting SoC percentage must not be greater than the ending SoC percentage.",
                 fromSocPercent: fromSocPercent,
                 toSocPercent: toSocPercent
             }

@@ -1,6 +1,53 @@
 import type { CalculationResult } from "@/calculations/result";
-import type {ACChargingCapability, RawACChargingCapability, ACChargingStation, RawACChargingStation} from "@/domain/charging";
-import type {ACChargingCapabilityValidationError, ACChargingStationValidationError} from "@/domain/chargingErrors";
+import type {
+  ACChargingCapability,
+  RawACChargingCapability,
+  ACChargingStation,
+  RawACChargingStation,
+  ChargingCurvePoint,
+  RawChargingCurvePoint,
+} from "@/domain/charging";
+import type {
+  ACChargingCapabilityValidationError,
+  ACChargingStationValidationError,
+  ChargingCurvePointValidationError,
+} from "@/domain/chargingErrors";
+
+export function createChargingCurvePoint(
+  raw: RawChargingCurvePoint,
+): CalculationResult<ChargingCurvePoint, ChargingCurvePointValidationError> {
+  if (
+    raw.socPercent < 0 ||
+    raw.socPercent > 100 ||
+    !Number.isFinite(raw.socPercent)
+  ) {
+    return {
+      ok: false,
+      error: {
+        type: "invalidSoc",
+        value: raw.socPercent,
+      },
+    };
+  }
+
+  if (raw.powerKw <= 0 || !Number.isFinite(raw.powerKw)) {
+    return {
+      ok: false,
+      error: {
+        type: "invalidPower",
+        value: raw.powerKw,
+      },
+    };
+  }
+
+  return {
+    ok: true,
+    value: {
+      socPercent: raw.socPercent,
+      powerKw: raw.powerKw,
+    },
+  };
+}
 
 export function createACChargingCapability(
   raw: RawACChargingCapability,

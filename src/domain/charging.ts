@@ -1,7 +1,9 @@
-export type ChargingCurvePoint = {
+export type RawChargingCurvePoint = {
   socPercent: number;
   powerKw: number;
 };
+
+export type ChargingCurvePoint = RawChargingCurvePoint;
 
 export type RawACChargingCapability = {
   maxPowerKw: number;
