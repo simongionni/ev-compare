@@ -190,7 +190,7 @@ describe("dcChargingTime", () => {
   });
 
   describe("boundary conditions", () => {
-    it("returns an error when the starting and ending SoC are equal", () => {
+    it("returns zero hours when the starting and ending SoC are equal", () => {
       expect(
         dcChargingTime({
           batteryCapacityKwh: 60,
@@ -199,16 +199,7 @@ describe("dcChargingTime", () => {
           vehicle: flatVehicle,
           station: stationWithPower(350),
         }),
-      ).toEqual({
-        ok: false,
-        error: {
-          type: "invalidSocRange",
-          message:
-            "The starting SoC percentage must be less than the ending SoC percentage.",
-          fromSocPercent: 50,
-          toSocPercent: 50,
-        },
-      });
+      ).toEqual({ ok: true, value: 0 });
     });
 
     it("holds the endpoint power outside the curve SoC range", () => {
@@ -300,7 +291,7 @@ describe("dcChargingTime", () => {
         error: {
           type: "invalidSocRange",
           message:
-            "The starting SoC percentage must be less than the ending SoC percentage.",
+            "The starting SoC percentage must not be greater than the ending SoC percentage.",
           fromSocPercent: 80,
           toSocPercent: 20,
         },

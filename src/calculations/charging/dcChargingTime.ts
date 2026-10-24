@@ -49,13 +49,13 @@ export function dcChargingTime({
   vehicle,
   station,
 }: DCChargingTimeInput): CalculationResult<number, ChargingCalculationError> {
-  if (fromSocPercent >= toSocPercent) {
+  if (fromSocPercent > toSocPercent) {
     return {
       ok: false,
       error: {
         type: "invalidSocRange",
         message:
-          "The starting SoC percentage must be less than the ending SoC percentage.",
+          "The starting SoC percentage must not be greater than the ending SoC percentage.",
         fromSocPercent,
         toSocPercent,
       },
