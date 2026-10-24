@@ -17,7 +17,7 @@ export function energyDeltaForSocChange({
   fromSocPercent,
   toSocPercent,
 }: EnergyDeltaForSocChangeInput): CalculationResult<number,EnergyDeltaCalculationError> {
-  if (batteryCapacityKwh <= 0) {
+  if (batteryCapacityKwh <= 0 || !Number.isFinite(batteryCapacityKwh)) {
     return {
       ok: false,
       error: {
@@ -27,7 +27,7 @@ export function energyDeltaForSocChange({
     };
   }
 
-  if (fromSocPercent < 0 || fromSocPercent > 100) {
+  if (fromSocPercent < 0 || fromSocPercent > 100 || !Number.isFinite(fromSocPercent)) {
     return {
       ok: false,
       error: {
@@ -38,7 +38,7 @@ export function energyDeltaForSocChange({
     };
   }
 
-  if (toSocPercent < 0 || toSocPercent > 100) {
+  if (toSocPercent < 0 || toSocPercent > 100 || !Number.isFinite(toSocPercent)) {
     return {
       ok: false,
       error: {

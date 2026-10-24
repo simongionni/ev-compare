@@ -63,4 +63,17 @@ describe("energyDeltaForSocChange", () => {
         }
       });
     });
+    it("returns an error for non-finite inputs", () => {
+      expect(
+        energyDeltaForSocChange({ batteryCapacityKwh: Number.NaN, fromSocPercent: 20, toSocPercent: 80 }),
+      ).toEqual({ ok: false, error: { type: "invalidBatteryCapacity", value: Number.NaN } });
+
+      expect(
+        energyDeltaForSocChange({ batteryCapacityKwh: 75, fromSocPercent: Number.NaN, toSocPercent: 80 }),
+      ).toEqual({ ok: false, error: { type: "invalidSoc", field: "fromSocPercent", value: Number.NaN } });
+
+      expect(
+        energyDeltaForSocChange({ batteryCapacityKwh: 75, fromSocPercent: 20, toSocPercent: Number.NaN }),
+      ).toEqual({ ok: false, error: { type: "invalidSoc", field: "toSocPercent", value: Number.NaN } });
+    });
 });
