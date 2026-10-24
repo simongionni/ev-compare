@@ -4,8 +4,18 @@ An educational web application for exploring and comparing electric vehicles,
 eventually including configurable charging and range calculations. OpenEV Data
 is the intended future vehicle-data source.
 
-Only the project scaffold exists. Domain architecture, EV types, data integration,
-and calculation logic are intentionally not implemented yet.
+## Status
+
+Milestone M0.1 is implemented: a UI-independent charging domain model and charging
+simulation engine in `src/domain/` and `src/calculations/`. It covers AC and DC charging,
+DC charging curves and charging sessions ending at a target state of charge or after a
+duration. Vehicle data integration (OpenEV Data) and a user interface for these
+calculations are not implemented yet; the web app is still the initial landing page.
+
+## Documentation
+
+Technical documentation is in [`docs/`](docs/README.md). Start with the
+[charging module overview](docs/charging/README.md).
 
 ## Local setup
 
@@ -26,7 +36,7 @@ Open http://localhost:3000. On Windows, use `npm.cmd` if PowerShell blocks `npm.
 | `npm run build`        | Create a production build                         |
 | `npm start`            | Serve the production build                        |
 | `npm run lint`         | Run ESLint                                        |
-| `npm test`             | Run the single Vitest smoke test                  |
+| `npm test`             | Run the Vitest test suite                         |
 | `npm run typecheck`    | Generate Next.js route types and check TypeScript |
 | `npm run format`       | Format files with Prettier                        |
 | `npm run format:check` | Check formatting                                  |
@@ -35,12 +45,13 @@ Open http://localhost:3000. On Windows, use `npm.cmd` if PowerShell blocks `npm.
 
 Next.js App Router with React and strict TypeScript; plain HTML without a CSS
 framework. ESLint uses Next.js rules, with formatting handled by Prettier.
-Vitest uses its default Node environment without a custom configuration.
+Vitest uses its default Node environment; `vitest.config.ts` only adds
+`vite-tsconfig-paths` to resolve the `@/` import alias.
 The npm lockfile records the installed dependency versions.
 ESLint stays on major 9 and TypeScript on major 6 because Next.js's current
 lint plugins do not yet support ESLint 10 or TypeScript 7.
 
-`src/app/` contains the minimal page and layout. Empty directories were created
-for `src/domain/`, `src/calculations/`, `src/data/`, `src/components/`, `scripts/`,
-and `docs/decisions/`. Git does not preserve empty directories; recreate them
-when adding their first real files. No placeholder domain code is provided.
+`src/app/` contains the minimal page and layout. `src/domain/` and
+`src/calculations/` contain the charging module. Empty directories were created for
+`src/data/`, `src/components/`, `scripts/` and `docs/decisions/`. Git does not preserve
+empty directories; recreate them when adding their first real files.
