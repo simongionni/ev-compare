@@ -36,3 +36,16 @@ export type ChargingCalculationError =
   | EnergyDeltaCalculationError
   | TimeCalculationError
   | DcCurveError;
+
+export type ChargingSessionConfigurationError =
+  | {
+      type: "dcChargingNotSupported";
+    }
+  | {
+      type: "invalidDuration";
+      value: number;
+    };
+
+export type ChargingSessionError =
+  | ChargingCalculationError
+  | ChargingSessionConfigurationError;
