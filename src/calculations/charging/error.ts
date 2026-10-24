@@ -32,10 +32,16 @@ export type DcCurveError = {
   value: number;
 };
 
+export type AcPowerError = {
+  type: "invalidPhases";
+  value: number;
+};
+
 export type ChargingCalculationError =
   | EnergyDeltaCalculationError
   | TimeCalculationError
-  | DcCurveError;
+  | DcCurveError
+  | AcPowerError;
 
 export type ChargingSessionConfigurationError =
   | {

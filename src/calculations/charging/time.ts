@@ -16,7 +16,7 @@ export function timeForEnergyAtConstantPower({
   energyKwh,
   powerKw,
 }: TimeForEnergyAtConstantPowerInput) : CalculationResult<number, TimeCalculationError> {
-    if (powerKw <= 0) {
+    if (powerKw <= 0 || !Number.isFinite(powerKw)) {
         return {
             ok: false,
             error: {
@@ -26,7 +26,7 @@ export function timeForEnergyAtConstantPower({
             
         };
     }
-    if (energyKwh < 0) {
+    if (energyKwh < 0 || !Number.isFinite(energyKwh)) {
         return {
             ok: false,
             error: {

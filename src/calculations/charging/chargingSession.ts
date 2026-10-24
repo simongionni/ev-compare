@@ -160,20 +160,14 @@ function simulateToTargetSoc(
     return energyDeltaKwh;
   }
 
-  if (targetSocPercent <= initialSocPercent) {
-    return {
-      ok: true,
-      value: {
-        initialSocPercent,
-        finalSocPercent: initialSocPercent,
-        chargingTimeHours: 0,
-        deliveredEnergyKwh: 0,
-        terminationReason: "targetReached",
-      },
-    };
-  }
+  const targetAlreadyReached = targetSocPercent <= initialSocPercent;
+  const finalSocPercent = targetAlreadyReached
+    ? initialSocPercent
+    : targetSocPercent;
 
-  const chargingTimeHours = chargingTime(initialSocPercent, targetSocPercent);
+  // Computed even when the target is already reached (zero hours), so the vehicle and station
+  // are always validated.
+  const chargingTimeHours = chargingTime(initialSocPercent, finalSocPercent);
 
   if (!chargingTimeHours.ok) {
     return chargingTimeHours;
@@ -183,9 +177,9 @@ function simulateToTargetSoc(
     ok: true,
     value: {
       initialSocPercent,
-      finalSocPercent: targetSocPercent,
+      finalSocPercent,
       chargingTimeHours: chargingTimeHours.value,
-      deliveredEnergyKwh: energyDeltaKwh.value,
+      deliveredEnergyKwh: targetAlreadyReached ? 0 : energyDeltaKwh.value,
       terminationReason: "targetReached",
     },
   };

@@ -100,4 +100,18 @@ describe("constantPowerChargingTime", () => {
             }
         });
     });
+
+    it("reports an out-of-range starting SOC rather than a decreasing range", () => {
+        expect(constantPowerChargingTime({ batteryCapacityKwh: 75, fromSocPercent: 120, toSocPercent: 80, powerKw: 25 })).toEqual({
+            ok: false,
+            error: { type: "invalidSoc", field: "fromSocPercent", value: 120 }
+        });
+    });
+
+    it.each([Number.NaN, Number.POSITIVE_INFINITY])("returns an error for a charging power of %s", (powerKw) => {
+        expect(constantPowerChargingTime({ batteryCapacityKwh: 75, fromSocPercent: 20, toSocPercent: 80, powerKw })).toEqual({
+            ok: false,
+            error: { type: "invalidPower", value: powerKw }
+        });
+    });
 });

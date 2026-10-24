@@ -15,6 +15,8 @@ export type ResolveEffectiveAcPowerInput = {
  * Assumes that the total available power is distributed uniformly
  * across the available phases.
  *
+ * Assumes valid limits (positive finite power, 1-3 phases); acChargingTime validates them.
+ *
  * @returns Effective charging power in kW.
  */
 export function resolveEffectiveAcPower({

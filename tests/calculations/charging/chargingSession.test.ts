@@ -594,5 +594,130 @@ describe("simulateChargingSession", () => {
         }),
       ).toEqual({ ok: false, error: { type: "invalidPower", value: 0 } });
     });
+
+    it.each([
+      { type: "targetSoc", targetSocPercent: 80 },
+      { type: "targetSoc", targetSocPercent: 20 },
+      { type: "targetSoc", targetSocPercent: 10 },
+      { type: "duration", durationMinutes: 30 },
+    ] as const)(
+      "rejects an infinite DC station power ($type)",
+      (termination) => {
+        expect(
+          simulateChargingSession({
+            vehicle,
+            station: dcStation(Number.POSITIVE_INFINITY),
+            session: { initialSocPercent: 20, termination },
+          }),
+        ).toEqual({
+          ok: false,
+          error: { type: "invalidPower", value: Number.POSITIVE_INFINITY },
+        });
+      },
+    );
+
+    it.each([
+      { type: "targetSoc", targetSocPercent: 80 },
+      { type: "targetSoc", targetSocPercent: 10 },
+      { type: "duration", durationMinutes: 30 },
+    ] as const)(
+      "rejects an infinite AC station power ($type)",
+      (termination) => {
+        expect(
+          simulateChargingSession({
+            vehicle,
+            station: { type: "AC", maxPowerKw: Number.POSITIVE_INFINITY, phases: 3 },
+            session: { initialSocPercent: 20, termination },
+          }),
+        ).toEqual({
+          ok: false,
+          error: { type: "invalidPower", value: Number.POSITIVE_INFINITY },
+        });
+      },
+    );
+
+    it("rejects invalid vehicle AC phases", () => {
+      expect(
+        simulateChargingSession({
+          vehicle: { ...vehicle, ac: { maxPowerKw: 11, phases: Number.NaN } },
+          station: acStation(22, 3),
+          session: {
+            initialSocPercent: 20,
+            termination: { type: "duration", durationMinutes: 30 },
+          },
+        }),
+      ).toEqual({
+        ok: false,
+        error: { type: "invalidPhases", value: Number.NaN },
+      });
+    });
+
+    it.each([Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY, 100.5])(
+      "rejects an initial SoC of %s",
+      (initialSocPercent) => {
+        expect(
+          simulateChargingSession({
+            vehicle,
+            station: acStation(22, 3),
+            session: {
+              initialSocPercent,
+              termination: { type: "duration", durationMinutes: 30 },
+            },
+          }),
+        ).toEqual({
+          ok: false,
+          error: {
+            type: "invalidSoc",
+            field: "fromSocPercent",
+            value: initialSocPercent,
+          },
+        });
+      },
+    );
+
+    it.each([Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])(
+      "rejects a target SoC of %s",
+      (targetSocPercent) => {
+        expect(
+          simulateChargingSession({
+            vehicle,
+            station: dcStation(350),
+            session: {
+              initialSocPercent: 20,
+              termination: { type: "targetSoc", targetSocPercent },
+            },
+          }),
+        ).toEqual({
+          ok: false,
+          error: {
+            type: "invalidSoc",
+            field: "toSocPercent",
+            value: targetSocPercent,
+          },
+        });
+      },
+    );
+
+    it("rejects an infinite battery capacity", () => {
+      expect(
+        simulateChargingSession({
+          vehicle: {
+            ...vehicle,
+            usableBatteryCapacityKwh: Number.POSITIVE_INFINITY,
+          },
+          station: acStation(22, 3),
+          session: {
+            initialSocPercent: 20,
+            termination: { type: "duration", durationMinutes: 30 },
+          },
+        }),
+      ).toEqual({
+        ok: false,
+        error: {
+          type: "invalidBatteryCapacity",
+          value: Number.POSITIVE_INFINITY,
+        },
+      });
+    });
   });
 });

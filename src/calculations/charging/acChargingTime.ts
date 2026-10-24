@@ -19,6 +19,20 @@ export function acChargingTime({
     vehicle,
     station
 }: ACChargingTimeInput): CalculationResult<number, ChargingCalculationError> {
+    // Vehicle and station limits are validated individually before resolveEffectiveAcPower
+    // combines them: Math.min would hide an invalid limit, such as Infinity, behind the other one.
+    for (const maxPowerKw of [vehicle.maxPowerKw, station.maxPowerKw]) {
+        if (maxPowerKw <= 0 || !Number.isFinite(maxPowerKw)) {
+            return { ok: false, error: { type: "invalidPower", value: maxPowerKw } };
+        }
+    }
+
+    for (const phases of [vehicle.phases, station.phases]) {
+        if (phases < 1 || phases > 3 || !Number.isInteger(phases)) {
+            return { ok: false, error: { type: "invalidPhases", value: phases } };
+        }
+    }
+
     return constantPowerChargingTime({
         batteryCapacityKwh,
         fromSocPercent,

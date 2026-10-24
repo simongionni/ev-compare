@@ -4,6 +4,7 @@ import {
   createACChargingCapability,
   createACChargingStation,
 } from "@/domain/chargingFactories";
+import type { ACChargingCapability, ACChargingStation } from "@/domain/charging";
 
 describe("acChargingTime", () => {
   it("calculates charging time using the effective AC power", () => {
@@ -186,4 +187,47 @@ describe("acChargingTime", () => {
       },
     });
   });
+
+  // Domain values built directly, bypassing the factories, as a caller could.
+  const validVehicle: ACChargingCapability = { maxPowerKw: 11, phases: 3 };
+  const validStation: ACChargingStation = { type: "AC", maxPowerKw: 22, phases: 3 };
+  const validInput = {
+    batteryCapacityKwh: 60,
+    fromSocPercent: 20,
+    toSocPercent: 80,
+    vehicle: validVehicle,
+    station: validStation,
+  };
+
+  it.each([0, -11, Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])(
+    "rejects a station maximum power of %s even when the vehicle limit is valid",
+    (maxPowerKw) => {
+      expect(
+        acChargingTime({ ...validInput, station: { ...validStation, maxPowerKw } }),
+      ).toEqual({ ok: false, error: { type: "invalidPower", value: maxPowerKw } });
+    },
+  );
+
+  it.each([0, -11, Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])(
+    "rejects a vehicle maximum power of %s even when the station limit is valid",
+    (maxPowerKw) => {
+      expect(
+        acChargingTime({ ...validInput, vehicle: { ...validVehicle, maxPowerKw } }),
+      ).toEqual({ ok: false, error: { type: "invalidPower", value: maxPowerKw } });
+    },
+  );
+
+  it.each([0, 1.5, 4, Number.NaN, Number.POSITIVE_INFINITY])(
+    "rejects %s vehicle or station phases",
+    (phases) => {
+      const expected = { ok: false, error: { type: "invalidPhases", value: phases } };
+
+      expect(
+        acChargingTime({ ...validInput, vehicle: { ...validVehicle, phases } }),
+      ).toEqual(expected);
+      expect(
+        acChargingTime({ ...validInput, station: { ...validStation, phases } }),
+      ).toEqual(expected);
+    },
+  );
 });

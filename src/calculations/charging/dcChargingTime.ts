@@ -49,6 +49,17 @@ export function dcChargingTime({
   vehicle,
   station,
 }: DCChargingTimeInput): CalculationResult<number, ChargingCalculationError> {
+  // Validated before the range check, so an out-of-range SoC is reported as such.
+  const energyDeltaKwh = energyDeltaForSocChange({
+    batteryCapacityKwh,
+    fromSocPercent,
+    toSocPercent,
+  });
+
+  if (!energyDeltaKwh.ok) {
+    return energyDeltaKwh;
+  }
+
   if (fromSocPercent > toSocPercent) {
     return {
       ok: false,
@@ -62,27 +73,21 @@ export function dcChargingTime({
     };
   }
 
-  const energyDeltaKwh = energyDeltaForSocChange({
-    batteryCapacityKwh,
-    fromSocPercent,
-    toSocPercent,
-  });
-
-  if (!energyDeltaKwh.ok) {
-    return energyDeltaKwh;
+  // Each limit is validated on its own: Math.min would hide an invalid limit, such as Infinity,
+  // behind the other one.
+  for (const limitKw of [vehicle.maxPowerKw, station.maxPowerKw]) {
+    if (!Number.isFinite(limitKw) || limitKw <= 0) {
+      return {
+        ok: false,
+        error: {
+          type: "invalidPower",
+          value: limitKw,
+        },
+      };
+    }
   }
 
   const maxPowerKw = Math.min(vehicle.maxPowerKw, station.maxPowerKw);
-
-  if (!Number.isFinite(maxPowerKw) || maxPowerKw <= 0) {
-    return {
-      ok: false,
-      error: {
-        type: "invalidPower",
-        value: maxPowerKw,
-      },
-    };
-  }
 
   const socSpanPercent = toSocPercent - fromSocPercent;
   const stepCount = Math.ceil(socSpanPercent / MAX_SOC_STEP_PERCENT);

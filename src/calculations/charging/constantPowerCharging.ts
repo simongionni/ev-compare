@@ -23,17 +23,7 @@ export function constantPowerChargingTime({
     powerKw,
 } : ConstantPowerChargingTimeInput): CalculationResult<number, ChargingCalculationError> {
 
-    if (fromSocPercent > toSocPercent) {
-        return {
-            ok: false,
-            error: {
-                type: "invalidSocRange",
-                message: "The starting SoC percentage must not be greater than the ending SoC percentage.",
-                fromSocPercent: fromSocPercent,
-                toSocPercent: toSocPercent
-            }
-        };
-    }
+    // Validated before the range check, so an out-of-range SoC is reported as such.
     const energyDeltaKwh = energyDeltaForSocChange({
         batteryCapacityKwh,
         fromSocPercent: fromSocPercent,
@@ -43,6 +33,17 @@ export function constantPowerChargingTime({
         return {
             ok: false,
             error: energyDeltaKwh.error
+        };
+    }
+    if (fromSocPercent > toSocPercent) {
+        return {
+            ok: false,
+            error: {
+                type: "invalidSocRange",
+                message: "The starting SoC percentage must not be greater than the ending SoC percentage.",
+                fromSocPercent: fromSocPercent,
+                toSocPercent: toSocPercent
+            }
         };
     }
     return timeForEnergyAtConstantPower({

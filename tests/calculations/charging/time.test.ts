@@ -25,4 +25,28 @@ describe("timeForEnergyAtConstantPower", () => {
 
     expect(result).toEqual({ ok: false, error: { type: "invalidEnergy", value: -100 } });
   });
+
+  it.each([0, Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])(
+    "returns an error for a power of %s",
+    (powerKw) => {
+      expect(timeForEnergyAtConstantPower({ energyKwh: 50, powerKw })).toEqual({
+        ok: false,
+        error: { type: "invalidPower", value: powerKw },
+      });
+    },
+  );
+
+  it.each([Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])(
+    "returns an error for an energy of %s",
+    (energyKwh) => {
+      expect(timeForEnergyAtConstantPower({ energyKwh, powerKw: 25 })).toEqual({
+        ok: false,
+        error: { type: "invalidEnergy", value: energyKwh },
+      });
+    },
+  );
+
+  it("returns zero hours for zero energy", () => {
+    expect(timeForEnergyAtConstantPower({ energyKwh: 0, powerKw: 25 })).toEqual({ ok: true, value: 0 });
+  });
 });

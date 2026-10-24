@@ -20,6 +20,25 @@ describe("createChargingCurvePoint", () => {
         });
     });
 
+    it.each([-1, Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])("returns an error for a SoC of %s", (socPercent) => {
+        expect(createChargingCurvePoint({ socPercent, powerKw: 100 })).toEqual({
+            ok: false,
+            error: { type: "invalidSoc", value: socPercent },
+        });
+    });
+
+    it.each([-1, Number.NaN, Number.POSITIVE_INFINITY])("returns an error for a power of %s", (powerKw) => {
+        expect(createChargingCurvePoint({ socPercent: 50, powerKw })).toEqual({
+            ok: false,
+            error: { type: "invalidPower", value: powerKw },
+        });
+    });
+
+    it("accepts the 0% and 100% SoC bounds", () => {
+        expect(createChargingCurvePoint({ socPercent: 0, powerKw: 100 }).ok).toBe(true);
+        expect(createChargingCurvePoint({ socPercent: 100, powerKw: 100 }).ok).toBe(true);
+    });
+
     it("returns a charging curve point for valid input", () => {
         const raw = { socPercent: 50, powerKw: 100 };
 
@@ -116,6 +135,27 @@ describe("createACChargingCapability", () => {
         !result.ok && result.error ? expect(result.error.type).toBe("invalidMaxCurrent") : null;
     });
 
+    it.each([0, Number.NaN, Number.POSITIVE_INFINITY])("returns an error for a maxPowerKw of %s", (maxPowerKw) => {
+        expect(createACChargingCapability({ maxPowerKw, phases: 3 })).toEqual({
+            ok: false,
+            error: { type: "invalidMaxPower", value: maxPowerKw },
+        });
+    });
+
+    it.each([0, 1.5, Number.NaN])("returns an error for %s phases", (phases) => {
+        expect(createACChargingCapability({ maxPowerKw: 11, phases })).toEqual({
+            ok: false,
+            error: { type: "invalidPhases", value: phases },
+        });
+    });
+
+    it.each([0, Number.NaN, Number.POSITIVE_INFINITY])("returns an error for a maxCurrentA of %s", (maxCurrentA) => {
+        expect(createACChargingCapability({ maxPowerKw: 11, phases: 3, maxCurrentA })).toEqual({
+            ok: false,
+            error: { type: "invalidMaxCurrent", value: maxCurrentA },
+        });
+    });
+
     it("returns a valid ACChargingCapability for valid input", () => {
         const raw = {
             maxPowerKw: 1,
@@ -147,6 +187,20 @@ describe("createACChargingStation", () => {
         const result = createACChargingStation(raw);
         expect(result.ok).toBe(false);
         !result.ok && result.error ? expect(result.error.type).toBe("invalidPhases") : null;
+    });
+
+    it.each([0, Number.NaN, Number.POSITIVE_INFINITY])("returns an error for a maxPowerKw of %s", (maxPowerKw) => {
+        expect(createACChargingStation({ maxPowerKw, phases: 3 })).toEqual({
+            ok: false,
+            error: { type: "invalidMaxPower", value: maxPowerKw },
+        });
+    });
+
+    it.each([0, 1.5, Number.NaN])("returns an error for %s phases", (phases) => {
+        expect(createACChargingStation({ maxPowerKw: 22, phases })).toEqual({
+            ok: false,
+            error: { type: "invalidPhases", value: phases },
+        });
     });
 
     it("returns a valid ACChargingStation for valid input", () => {

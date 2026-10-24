@@ -298,6 +298,15 @@ describe("dcChargingTime", () => {
       });
     });
 
+    it("reports an out-of-range starting SoC rather than a decreasing range", () => {
+      expect(
+        dcChargingTime({ ...validInput, fromSocPercent: 120, toSocPercent: 80 }),
+      ).toEqual({
+        ok: false,
+        error: { type: "invalidSoc", field: "fromSocPercent", value: 120 },
+      });
+    });
+
     it("returns an error for a non-positive vehicle maximum power", () => {
       expect(
         dcChargingTime({
@@ -322,6 +331,41 @@ describe("dcChargingTime", () => {
       ).toEqual({
         ok: false,
         error: { type: "invalidPower", value: Number.NaN },
+      });
+    });
+
+    it.each([Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY, Number.NaN])(
+      "rejects a station maximum power of %s even when the vehicle limit is valid",
+      (maxPowerKw) => {
+        expect(
+          dcChargingTime({ ...validInput, station: stationWithPower(maxPowerKw) }),
+        ).toEqual({ ok: false, error: { type: "invalidPower", value: maxPowerKw } });
+      },
+    );
+
+    it.each([Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY, Number.NaN])(
+      "rejects a vehicle maximum power of %s even when the station limit is valid",
+      (maxPowerKw) => {
+        expect(
+          dcChargingTime({
+            ...validInput,
+            vehicle: { ...flatVehicle, maxPowerKw },
+          }),
+        ).toEqual({ ok: false, error: { type: "invalidPower", value: maxPowerKw } });
+      },
+    );
+
+    it("rejects an invalid power limit even when the SoC span is empty", () => {
+      expect(
+        dcChargingTime({
+          ...validInput,
+          fromSocPercent: 50,
+          toSocPercent: 50,
+          station: stationWithPower(Number.POSITIVE_INFINITY),
+        }),
+      ).toEqual({
+        ok: false,
+        error: { type: "invalidPower", value: Number.POSITIVE_INFINITY },
       });
     });
   });
