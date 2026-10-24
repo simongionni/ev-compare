@@ -41,3 +41,29 @@ const invalidACChargingStationError3: ChargingErrors.ACChargingStationValidation
   type: "invalid",
   value: -1,
 };
+
+const validDCChargingCapabilityError: ChargingErrors.DCChargingCapabilityValidationError = {
+  type: "invalidMaxPower",
+  value: -1,
+};
+
+const validDCChargingCapabilityCurveError: ChargingErrors.DCChargingCapabilityValidationError = {
+  type: "notEnoughPoints",
+  value: 1,
+};
+
+//@ts-expect-error missing value property
+const invalidDCChargingCapabilityError1: ChargingErrors.DCChargingCapabilityValidationError = {
+  type: "invalidMaxPower",
+};
+
+const validDCChargingStationError: ChargingErrors.DCChargingStationValidationError = {
+  type: "invalidMaxPower",
+  value: -1,
+};
+
+const invalidDCChargingStationError1: ChargingErrors.DCChargingStationValidationError = {
+  //@ts-expect-error curve errors do not apply to a station
+  type: "notEnoughPoints",
+  value: 1,
+};

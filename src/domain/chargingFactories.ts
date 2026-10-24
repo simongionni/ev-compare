@@ -8,12 +8,18 @@ import type {
   RawChargingCurvePoint,
   ChargingCurve,
   RawChargingCurve,
+  DCChargingCapability,
+  RawDCChargingCapability,
+  DCChargingStation,
+  RawDCChargingStation,
 } from "@/domain/charging";
 import type {
   ACChargingCapabilityValidationError,
   ACChargingStationValidationError,
   ChargingCurvePointValidationError,
   ChargingCurveValidationError,
+  DCChargingCapabilityValidationError,
+  DCChargingStationValidationError,
 } from "@/domain/chargingErrors";
 
 export function createChargingCurvePoint(
@@ -190,4 +196,58 @@ export function createACChargingStation(
             phases: raw.phases,
         },
     };
+}
+
+
+export function createDCChargingCapability(
+  raw: RawDCChargingCapability,
+): CalculationResult<
+  DCChargingCapability,
+  DCChargingCapabilityValidationError
+> {
+  if (raw.maxPowerKw <= 0 || !Number.isFinite(raw.maxPowerKw)) {
+    return {
+      ok: false,
+      error: {
+        type: "invalidMaxPower",
+        value: raw.maxPowerKw,
+      },
+    };
+  }
+
+  const curveResult = createChargingCurve(raw.chargingCurve);
+
+  if (!curveResult.ok) {
+    return curveResult;
+  }
+
+  return {
+    ok: true,
+    value: {
+      maxPowerKw: raw.maxPowerKw,
+      chargingCurve: curveResult.value,
+    },
+  };
+}
+
+export function createDCChargingStation(
+  raw: RawDCChargingStation,
+): CalculationResult<DCChargingStation, DCChargingStationValidationError> {
+  if (raw.maxPowerKw <= 0 || !Number.isFinite(raw.maxPowerKw)) {
+    return {
+      ok: false,
+      error: {
+        type: "invalidMaxPower",
+        value: raw.maxPowerKw,
+      },
+    };
+  }
+
+  return {
+    ok: true,
+    value: {
+      type: "DC",
+      maxPowerKw: raw.maxPowerKw,
+    },
+  };
 }

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { dcChargingTime } from "@/calculations/charging/dcChargingTime";
-import { createChargingCurve } from "@/domain/chargingFactories";
+import { createDCChargingCapability } from "@/domain/chargingFactories";
 import type {
   DCChargingCapability,
   DCChargingStation,
@@ -13,13 +13,16 @@ function vehicleWithCurve(
   rawCurve: RawChargingCurve,
   maxPowerKw: number,
 ): DCChargingCapability {
-  const curveResult = createChargingCurve(rawCurve);
+  const result = createDCChargingCapability({
+    maxPowerKw,
+    chargingCurve: rawCurve,
+  });
 
-  if (!curveResult.ok) {
-    throw new Error("Test setup produced an invalid charging curve");
+  if (!result.ok) {
+    throw new Error("Test setup produced an invalid DC capability");
   }
 
-  return { maxPowerKw, chargingCurve: curveResult.value };
+  return result.value;
 }
 
 function stationWithPower(maxPowerKw: number): DCChargingStation {

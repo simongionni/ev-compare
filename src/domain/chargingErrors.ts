@@ -50,7 +50,21 @@ export type ACChargingStationValidationError =
       value: number;
     };
 
+export type DCChargingCapabilityValidationError =
+  | ChargingCurveValidationError
+  | {
+      type: "invalidMaxPower";
+      value: number;
+    };
+
+export type DCChargingStationValidationError = {
+  type: "invalidMaxPower";
+  value: number;
+};
+
 export type ChargingFactoryError =
   | ChargingCurveValidationError
   | ACChargingCapabilityValidationError
-  | ACChargingStationValidationError;
+  | ACChargingStationValidationError
+  | DCChargingCapabilityValidationError
+  | DCChargingStationValidationError;

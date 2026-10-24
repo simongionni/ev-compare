@@ -1,5 +1,5 @@
 import {describe, expect, it} from "vitest";
-import {createACChargingCapability, createACChargingStation, createChargingCurve, createChargingCurvePoint} from "@/domain/chargingFactories";
+import {createACChargingCapability, createACChargingStation, createChargingCurve, createChargingCurvePoint, createDCChargingCapability, createDCChargingStation} from "@/domain/chargingFactories";
 
 describe("createChargingCurvePoint", () => {
     it("returns an error for an invalid SoC", () => {
@@ -211,5 +211,114 @@ describe("createACChargingStation", () => {
         const result = createACChargingStation(raw);
         expect(result.ok).toBe(true);
         result.ok && result.value ? expect(result.value).toEqual({ ...raw, type: "AC" }) : null;
+    });
+});
+
+
+describe("createDCChargingCapability", () => {
+    const chargingCurve = [
+        { socPercent: 0, powerKw: 200 },
+        { socPercent: 80, powerKw: 50 },
+    ];
+
+    it("returns a valid DCChargingCapability for valid input", () => {
+        expect(createDCChargingCapability({ maxPowerKw: 150, chargingCurve })).toEqual({
+            ok: true,
+            value: { maxPowerKw: 150, chargingCurve },
+        });
+    });
+
+    it.each([0, -1, Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])("returns an error for a maxPowerKw of %s", (maxPowerKw) => {
+        expect(createDCChargingCapability({ maxPowerKw, chargingCurve })).toEqual({
+            ok: false,
+            error: { type: "invalidMaxPower", value: maxPowerKw },
+        });
+    });
+
+    it("propagates a charging curve with too few points", () => {
+        expect(createDCChargingCapability({
+            maxPowerKw: 150,
+            chargingCurve: [{ socPercent: 0, powerKw: 200 }],
+        })).toEqual({
+            ok: false,
+            error: { type: "notEnoughPoints", value: 1 },
+        });
+    });
+
+    it("propagates an invalid charging curve point", () => {
+        expect(createDCChargingCapability({
+            maxPowerKw: 150,
+            chargingCurve: [
+                { socPercent: 0, powerKw: 200 },
+                { socPercent: 80, powerKw: Number.POSITIVE_INFINITY },
+            ],
+        })).toEqual({
+            ok: false,
+            error: { type: "invalidPower", value: Number.POSITIVE_INFINITY },
+        });
+    });
+
+    it("propagates an unordered charging curve", () => {
+        expect(createDCChargingCapability({
+            maxPowerKw: 150,
+            chargingCurve: [
+                { socPercent: 80, powerKw: 50 },
+                { socPercent: 0, powerKw: 200 },
+            ],
+        })).toEqual({
+            ok: false,
+            error: { type: "invalidSocOrder", index: 1, previousSocPercent: 80, value: 0 },
+        });
+    });
+
+    it("reports an invalid maxPowerKw before an invalid charging curve", () => {
+        expect(createDCChargingCapability({ maxPowerKw: 0, chargingCurve: [] })).toEqual({
+            ok: false,
+            error: { type: "invalidMaxPower", value: 0 },
+        });
+    });
+
+    it("does not mutate or share its input", () => {
+        const raw = {
+            maxPowerKw: 150,
+            chargingCurve: [
+                { socPercent: 0, powerKw: 200 },
+                { socPercent: 80, powerKw: 50 },
+            ],
+        };
+        const snapshot = structuredClone(raw);
+        const result = createDCChargingCapability(raw);
+
+        if (!result.ok) {
+            throw new Error("Expected a valid DCChargingCapability");
+        }
+
+        expect(raw).toEqual(snapshot);
+        expect(result.value.chargingCurve).not.toBe(raw.chargingCurve);
+        expect(result.value.chargingCurve[0]).not.toBe(raw.chargingCurve[0]);
+    });
+});
+
+describe("createDCChargingStation", () => {
+    it("returns a valid DCChargingStation for valid input", () => {
+        expect(createDCChargingStation({ maxPowerKw: 350 })).toEqual({
+            ok: true,
+            value: { type: "DC", maxPowerKw: 350 },
+        });
+    });
+
+    it.each([0, -1, Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])("returns an error for a maxPowerKw of %s", (maxPowerKw) => {
+        expect(createDCChargingStation({ maxPowerKw })).toEqual({
+            ok: false,
+            error: { type: "invalidMaxPower", value: maxPowerKw },
+        });
+    });
+
+    it("does not mutate or share its input", () => {
+        const raw = { maxPowerKw: 350 };
+        const result = createDCChargingStation(raw);
+
+        expect(raw).toEqual({ maxPowerKw: 350 });
+        expect(result.ok && result.value).not.toBe(raw);
     });
 });

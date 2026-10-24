@@ -25,6 +25,11 @@ export type ACChargingCapability = {
   maxCurrentA?: number;
 };
 
+export type RawDCChargingCapability = {
+  maxPowerKw: number;
+  chargingCurve: RawChargingCurve;
+};
+
 export type DCChargingCapability = {
   maxPowerKw: number;
   chargingCurve: ChargingCurve;
@@ -45,6 +50,10 @@ export type ACChargingStation = {
   type: "AC";
   maxPowerKw: number;
   phases: number;
+};
+
+export type RawDCChargingStation = {
+  maxPowerKw: number;
 };
 
 export type DCChargingStation = {
