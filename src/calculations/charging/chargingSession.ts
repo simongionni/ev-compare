@@ -17,10 +17,16 @@ const MINUTES_PER_HOUR = 60;
 const FULL_SOC_PERCENT = 100;
 
 /**
- * Number of bisection steps used to invert the charging time into a final SoC.
- * 50 halvings of a span of at most 100 percentage points leave an error below 1e-13 points.
+ * Width, in SoC percentage points, below which the bisection that inverts the charging time
+ * into a final SoC stops. 1e-6 points is about 1 mWh on a 100 kWh battery, and is reached after
+ * at most 27 halvings of a 100-point span.
  */
-const SOC_BISECTION_ITERATIONS = 50;
+const SOC_TOLERANCE_PERCENT = 1e-6;
+
+/**
+ * Upper bound on the bisection steps, as a safeguard; the tolerance is normally reached first.
+ */
+const SOC_BISECTION_MAX_ITERATIONS = 50;
 
 export type SimulateChargingSessionInput = {
   vehicle: VehicleChargingSpec;
@@ -248,8 +254,9 @@ function simulateForDuration(
 
 /**
  * Finds the SoC reached after charging for the given time, by bisection on the forward
- * charging time (which increases with the target SoC). Returns the lower bound, so the charging
- * time to the returned SoC never exceeds the given duration.
+ * charging time (which increases with the target SoC). Stops once the bracket is narrower than
+ * SOC_TOLERANCE_PERCENT. Returns the lower bound, so the charging time to the returned SoC never
+ * exceeds the given duration.
  *
  * Assumes the battery is not full within the duration.
  */
@@ -261,7 +268,12 @@ function socReachedAfter(
   let lowerSocPercent = initialSocPercent;
   let upperSocPercent = FULL_SOC_PERCENT;
 
-  for (let iteration = 0; iteration < SOC_BISECTION_ITERATIONS; iteration++) {
+  for (
+    let iteration = 0;
+    iteration < SOC_BISECTION_MAX_ITERATIONS &&
+    upperSocPercent - lowerSocPercent > SOC_TOLERANCE_PERCENT;
+    iteration++
+  ) {
     const midSocPercent = (lowerSocPercent + upperSocPercent) / 2;
     const hours = chargingTime(initialSocPercent, midSocPercent);
 

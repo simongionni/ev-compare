@@ -160,9 +160,9 @@ describe("simulateChargingSession", () => {
         }),
       );
 
-      expect(simulation.finalSocPercent).toBeCloseTo(20 + (11 / 60) * 100, 8);
+      expect(simulation.finalSocPercent).toBeCloseTo(20 + (11 / 60) * 100, 5);
       expect(simulation.chargingTimeHours).toBe(1);
-      expect(simulation.deliveredEnergyKwh).toBeCloseTo(11, 8);
+      expect(simulation.deliveredEnergyKwh).toBeCloseTo(11, 5);
       expect(simulation.terminationReason).toBe("durationElapsed");
     });
 
@@ -178,7 +178,7 @@ describe("simulateChargingSession", () => {
         }),
       );
 
-      expect(simulation.deliveredEnergyKwh).toBeCloseTo(14.8, 8);
+      expect(simulation.deliveredEnergyKwh).toBeCloseTo(14.8, 5);
     });
   });
 
@@ -238,8 +238,8 @@ describe("simulateChargingSession", () => {
         }),
       );
 
-      expect(simulation.deliveredEnergyKwh).toBeCloseTo(20, 8);
-      expect(simulation.finalSocPercent).toBeCloseTo(20 + (20 / 60) * 100, 8);
+      expect(simulation.deliveredEnergyKwh).toBeCloseTo(20, 5);
+      expect(simulation.finalSocPercent).toBeCloseTo(20 + (20 / 60) * 100, 5);
     });
 
     it("charges for a duration on a flat curve", () => {
@@ -254,7 +254,7 @@ describe("simulateChargingSession", () => {
         }),
       );
 
-      expect(simulation.deliveredEnergyKwh).toBeCloseTo(25, 8);
+      expect(simulation.deliveredEnergyKwh).toBeCloseTo(25, 5);
       expect(simulation.chargingTimeHours).toBe(0.25);
       expect(simulation.terminationReason).toBe("durationElapsed");
     });
@@ -288,7 +288,7 @@ describe("simulateChargingSession", () => {
         }),
       );
 
-      expect(simulation.finalSocPercent).toBeCloseTo(80, 6);
+      expect(simulation.finalSocPercent).toBeCloseTo(80, 5);
     });
 
     it("returns a final SoC whose forward charging time equals the duration", () => {
@@ -313,7 +313,7 @@ describe("simulateChargingSession", () => {
         }),
       );
 
-      expect(forwardHours).toBeCloseTo(20 / 60, 8);
+      expect(forwardHours).toBeCloseTo(20 / 60, 6);
       expect(forwardHours).toBeLessThanOrEqual(20 / 60);
     });
   });
