@@ -1,0 +1,57 @@
+export type EnergyDeltaCalculationError =
+  | {
+      type: "invalidBatteryCapacity";
+      value: number;
+    }
+  | {
+      type: "invalidSoc";
+      field: "fromSocPercent" | "toSocPercent";
+      value: number;
+    }
+  | {
+      type: "invalidSocRange";
+      message: string;
+      fromSocPercent: number;
+      toSocPercent: number;
+    };
+
+
+export type TimeCalculationError =
+  | {
+      type: "invalidPower";
+      value: number;
+    }
+  | {
+      type: "invalidEnergy";
+      value: number;
+    }
+
+export type DcCurveError = {
+  type: "invalidSoc";
+  field: "socPercent";
+  value: number;
+};
+
+export type AcPowerError = {
+  type: "invalidPhases";
+  value: number;
+};
+
+export type ChargingCalculationError =
+  | EnergyDeltaCalculationError
+  | TimeCalculationError
+  | DcCurveError
+  | AcPowerError;
+
+export type ChargingSessionConfigurationError =
+  | {
+      type: "dcChargingNotSupported";
+    }
+  | {
+      type: "invalidDuration";
+      value: number;
+    };
+
+export type ChargingSessionError =
+  | ChargingCalculationError
+  | ChargingSessionConfigurationError;
