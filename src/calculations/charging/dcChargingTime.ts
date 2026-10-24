@@ -74,7 +74,7 @@ export function dcChargingTime({
 
   const maxPowerKw = Math.min(vehicle.maxPowerKw, station.maxPowerKw);
 
-  if (Number.isNaN(maxPowerKw) || maxPowerKw <= 0) {
+  if (!Number.isFinite(maxPowerKw) || maxPowerKw <= 0) {
     return {
       ok: false,
       error: {
