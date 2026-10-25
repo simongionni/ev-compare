@@ -1,0 +1,77 @@
+flowchart LR
+    A([Accedi a EV Compare])
+
+    subgraph S[Scoprire]
+        CR[Combina e affina i criteri<br/>marca o modello · bisogni pratici · specifiche]
+        E[Esplora risultati e veicoli]
+        W[Comprendi perché un risultato è compatibile]
+    end
+
+    subgraph V[Analizzare un veicolo]
+        H[Apri la scheda del veicolo]
+        I[Valuta la compatibilità con le esigenze]
+        J[Esplora le caratteristiche tecniche]
+        D[Interpreta dati e prestazioni]
+    end
+
+    subgraph C[Confrontare]
+        SEL[Gestisci la selezione per il confronto]
+        O[Confronta i veicoli]
+        P[Esamina differenze pratiche]
+        Q[Esamina differenze tecniche]
+        R[Comprendi motivi e compromessi]
+    end
+
+    subgraph X[Approfondimenti e strumenti facoltativi]
+        T1[Consulta una spiegazione<br/>nel contesto corrente]
+        TS[Configura ed esplora simulazioni interattive<br/>autonomia · consumi · ricarica]
+        K[Consulta fonti, stime, ipotesi e limiti]
+    end
+
+    A -->|Scopri| E
+    A -->|Analizza un veicolo| H
+    A -->|Confronto diretto| SEL
+    A -->|Strumenti tecnici| TS
+
+    E -->|Combina o modifica| CR
+    CR --> E
+    E -.->|Perché è adatto?| W
+    E -->|Apri| H
+    E -->|Aggiungi o rimuovi| SEL
+
+    H --> I
+    H --> J
+    H --> D
+    H -->|Aggiungi o rimuovi| SEL
+
+    SEL -->|Con veicoli selezionati| O
+    SEL -->|Continua a esplorare| E
+    O -->|Modifica selezione| SEL
+    O -->|Apri un veicolo| H
+    O --> P
+    O --> Q
+    O --> R
+
+    CR -.->|Che cosa significa?| T1
+    J -.->|Che cosa significa?| T1
+    R -.->|Dettagli| T1
+
+    H -->|Riusa il veicolo| TS
+    O -->|Riusa i veicoli| TS
+    TS -->|Riprendi il contesto conservato| H
+    TS -->|Riprendi il contesto conservato| O
+    TS -->|Esplora veicoli| E
+    TS -->|Gestisci la selezione| SEL
+
+    E -.-> K
+    H -.-> K
+    O -.-> K
+    TS -.->|Ipotesi del modello| K
+
+    classDef activity fill:#FFE86D,stroke:#A28E26,color:#574900;
+    classDef terminal fill:#B3E65F,stroke:#6E9A24,color:#2F440B;
+    classDef support fill:#DDDDD8,stroke:#8A8A7E,color:#434339;
+    class A terminal;
+    class CR,E,W,H,I,J,D,SEL,O,P,Q,R,TS activity;
+    class T1,K support;
+
