@@ -67,3 +67,19 @@ Treat the Product Vision as a set of goals and constraints, not as a checklist t
 Make independent design decisions and explain meaningful trade-offs in the accompanying design review rather than adding explanatory copy to the interface itself.
 
 When reviewing a design, explicitly look for unnecessary microcopy, artificial interactions and features included only to satisfy a requirement superficially.
+
+## 8. Technical accuracy over convenient simplifications
+
+Interfaces and explanations must respect the technical correctness of the phenomena they represent.
+
+Do not introduce inaccurate equivalences between technical parameters and practical outcomes merely to simplify the UX.
+
+Use assumptions and approximations when necessary, and distinguish them clearly from verified data.
+
+## 9. Contextual experimentation, not forced tutorials
+
+Interfaces may encourage experimentation through meaningful contextual suggestions, especially in simulations.
+
+Avoid imposed exercises, tutorials disguised as features, repetitive didactic prompts and unrequested explanations.
+
+Learning must remain optional and emerge from interaction.
