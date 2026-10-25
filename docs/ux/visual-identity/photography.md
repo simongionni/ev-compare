@@ -8,6 +8,10 @@ The vehicles in the scenarios (Nordis E4, Aurora Vela, Brisa Family, Meridian To
 
 The placeholder (`photoSlot` in [`_source/lib.mjs`](_source/lib.mjs)) is a neutral tonal field with crop marks and a camera icon. It is also a reasonable production fallback for models without a usable image, as long as it stays clearly a placeholder.
 
+## Iteration 3 (Livrea Consolidated)
+
+Same decision: real photographs of the correct model, placeholders until then. Sizes follow Refined (result card 328 × 156, comparison header 300 × 124, thumbnails 60 × 40 and 104 × 60); the landing has two staggered frames, 380 × 236 and 168 × 208. The placeholder now shows the intended set (light wall, floor line at two thirds, ground shadow where the car stands, crop marks) with a "FOTO SEGNAPOSTO · model · view" label, so it doubles as a framing guide for future photos.
+
 ## Requirements for real images
 
 | Context                           | Refined                        | Expressive                        |

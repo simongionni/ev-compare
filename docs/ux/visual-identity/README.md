@@ -2,6 +2,16 @@
 
 Visual identity concepts applied to the same consolidated UX scenarios, to choose a direction before the UI stack and the first vertical slice. No concept is a recommendation.
 
+## Iteration 3 — synthesis
+
+One concept that combines the two Livrea evolutions: Refined's structure, lightness, components, tables and Schibsted Grotesk, with Expressive's vehicle palette and yellow in a redesigned colour system (ink for actions, yellow for the user's scenario, vehicle colours with numbers, signals with icons). A proposal to validate, not an approved identity. Critical comparison: [`livrea-consolidation.md`](livrea-consolidation.md).
+
+| Concept                 | Idea                                                                                                                                                                      | Docs                                                    |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| **Livrea Consolidated** | Refined's layout and type; Cobalto, Mandarino, Smeraldo, Magenta as numbered vehicle marks; near-black ink for actions; yellow for scenario parameters and their effects. | [`livrea-consolidated/`](livrea-consolidated/README.md) |
+
+The identity sheet includes two studies of yellow intensity (A discreet, B characterising) on identical components; B is applied to the screens.
+
 ## Iteration 2 — evolutions of Livrea
 
 Livrea was chosen for further work. Two evolutions keep its vivid palette and the colour identity of compared vehicles, introduce real vehicle photography (placeholders for now), give colour room for states and signals, and borrow Tavola's tables and chart precision. Critical comparison: [`livrea-evolution.md`](livrea-evolution.md).
@@ -27,8 +37,8 @@ Kept unchanged as history. Comparison: [`comparison.md`](comparison.md).
 
 Open [`review.html`](review.html) in a browser (double-click works; no server needed). It shows:
 
-- an overview of all concepts, grouped by iteration, latest first;
-- the same scenario side by side for any selection of concepts, with presets (Famiglia Livrea, Iterazione 2, Iterazione 1, Tutti), zoom (fit, 50 %, 75 %, 100 %) and synchronised scrolling; `review.html#scenari/livrea` opens the Livrea family directly;
+- an overview of all concepts, grouped by iteration, latest first; the latest concept carries a yellow "Ultima iterazione" label;
+- the same scenario side by side for any selection of concepts, with presets (Refined ↔ Expressive ↔ Consolidated, the default; Famiglia Livrea; Iterazione 2; Iterazione 1; Tutti), zoom (fit, 50 %, 75 %, 100 %) and synchronised scrolling; `review.html#scenari/sintesi` opens the iteration 3 comparison directly, `review.html#scenari/livrea` the whole Livrea family;
 - every screen of a concept;
 - a full-screen viewer (fit, 100 %, 200 %; ← → move through the concepts being compared, ↑ ↓ change scenario, Esc closes);
 - identity sheets (palette and colour rules, type, components, vehicle representation, chart series);
@@ -53,11 +63,13 @@ visual-identity/
   review.html            review page
   review/                page script, styles, manifest.js (content), assets.js (generated hashes)
   _source/               SVG generator: lib.mjs, content.mjs, one module per concept, build.mjs
-  fonts/                 fonts embedded in iteration 2 SVGs, with OFL licences
+  fonts/                 fonts embedded in iteration 2 and 3 SVGs, with OFL licences
   tavola/ livrea/ notturno/                 iteration 1
   livrea-refined/ livrea-expressive/        iteration 2
-  comparison.md          iteration 1 comparison
-  livrea-evolution.md    iteration 2 comparison
+  livrea-consolidated/                      iteration 3
+  comparison.md            iteration 1 comparison
+  livrea-evolution.md      iteration 2 comparison
+  livrea-consolidation.md  iteration 3 comparison
   photography.md         photography decision and sourcing strategy
   ux-notes.md            presentation choices and UX observations not built into the baseline
 ```
@@ -84,14 +96,15 @@ To add a concept: create `_source/<id>.mjs` exporting the five screens, add the 
 
 ## Fonts and images
 
-**Iteration 2** SVGs embed their fonts (subset WOFF2, base64), so they render as designed everywhere, including inside the review page. Details and licences: [`fonts/README.md`](fonts/README.md).
+**Iterations 2 and 3** SVGs embed their fonts (subset WOFF2, base64), so they render as designed everywhere, including inside the review page. Details and licences: [`fonts/README.md`](fonts/README.md).
 
-| Concept           | Fonts (SIL Open Font License) |
-| ----------------- | ----------------------------- |
-| Livrea Refined    | Schibsted Grotesk             |
-| Livrea Expressive | Anybody, Overpass             |
+| Concept             | Fonts (SIL Open Font License) |
+| ------------------- | ----------------------------- |
+| Livrea Refined      | Schibsted Grotesk             |
+| Livrea Expressive   | Anybody, Overpass             |
+| Livrea Consolidated | Schibsted Grotesk             |
 
-They contain **no photographs**: the scenario vehicles are fictional, so every image is a labelled placeholder. See [`photography.md`](photography.md).
+They contain **no photographs**: the scenario vehicles are fictional, so every image is a labelled placeholder. See [`photography.md`](photography.md). Livrea Consolidated uses its own placeholder (studio set, floor line, ground shadow, label pill), defined in its module; the shared `photoSlot` is unchanged.
 
 **Iteration 1** SVGs embed no fonts or images; they name the intended typefaces with fallbacks, and reviewers without the fonts see the fallback.
 
@@ -104,6 +117,14 @@ They contain **no photographs**: the scenario vehicles are fictional, so every i
 Iteration 1 vehicle drawings are generic body styles generated in `_source/lib.mjs`, not real models; Notturno's photographs are gradient placeholders.
 
 ## Checks
+
+Iteration 3:
+
+- All 30 SVGs parse as XML; the 5 new ones have no external references and were rendered with headless Chrome at 1440 px and inspected; Schibsted Grotesk reports as loaded inside the SVG.
+- A full build leaves the 25 earlier SVGs byte-identical, and the consolidated wireframes are untouched.
+- Strings and values come from `content.mjs`, as for every concept.
+- The vehicle palette passes the colour-vision validator on all pairs against the page; text tokens meet WCAG 4.5:1 (ratios in the concept README).
+- Review page exercised in headless Chrome: overview grouping and latest label, default preset and `#scenari/sintesi`, every scenario for the new preset, `Tutti` with six columns, zoom, synchronised scrolling, viewer navigation and zoom, concept page, identity sheets, assessment, hashed URLs on every image.
 
 Iteration 2:
 

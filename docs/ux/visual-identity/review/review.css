@@ -425,6 +425,12 @@ main {
   padding: 2px 10px;
   white-space: nowrap;
 }
+.status.latest {
+  color: #17171b;
+  background: #ffd23f;
+  border-color: #17171b;
+  font-weight: 600;
+}
 .toolbar-label {
   font-size: 12px;
   font-weight: 600;

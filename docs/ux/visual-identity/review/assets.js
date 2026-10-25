@@ -25,4 +25,9 @@ window.VI_ASSETS = {
   "livrea-expressive/02-discovery.svg": "9319cf9274",
   "livrea-expressive/03-comparison.svg": "b752f78e42",
   "livrea-expressive/04-charging.svg": "8b0fd855cc",
+  "livrea-consolidated/00-identity.svg": "af43c1589b",
+  "livrea-consolidated/01-landing.svg": "e707254ea6",
+  "livrea-consolidated/02-discovery.svg": "77281077fb",
+  "livrea-consolidated/03-comparison.svg": "e1fe257bbf",
+  "livrea-consolidated/04-charging.svg": "da428f68e2",
 };

@@ -63,7 +63,10 @@
               h("div", { class: "title-row" }, [
                 h("h3", { text: c.name }),
                 c.status
-                  ? h("span", { class: "status", text: c.status })
+                  ? h("span", {
+                      class: `status${c.iteration === latest.id ? " latest" : ""}`,
+                      text: c.status,
+                    })
                   : null,
               ]),
               h("p", { class: "tagline", text: c.tagline }),

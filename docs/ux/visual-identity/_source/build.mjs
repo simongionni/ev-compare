@@ -19,6 +19,7 @@ const ALL = [
   "notturno",
   "livrea-refined",
   "livrea-expressive",
+  "livrea-consolidated",
 ];
 
 const only = process.argv.slice(2);

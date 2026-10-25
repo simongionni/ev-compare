@@ -52,3 +52,18 @@ Still open:
 - Order versus colour: after a removal, slot numbers no longer match selection order. The wireframe says vehicles appear in selection order; whether columns follow slot or selection order needs a decision.
 - A fifth vehicle (if ever allowed) has no colour in either variant.
 - Single-vehicle analysis is described, not drawn.
+
+## Iteration 3 (Livrea Consolidated)
+
+Presentation choices beyond restyling:
+
+| Where                            | Addition                                             | Note                                                              |
+| -------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------- |
+| Landing                          | Second, narrower photo frame                         | Composition only; placeholder.                                    |
+| Discovery, criteria column       | Count "6" on a yellow plate next to "Criteri attivi" | Same information as "Criteri attivi (6)" (as in Expressive).      |
+| Comparison context bar           | "6 criteri" on a yellow plate                        | Same text as the wireframe summary, split into plate and outcome. |
+| Comparison, "Con i tuoi criteri" | Yellow tab beside the heading                        | Colour only.                                                      |
+| Charging, "Con altre colonnine"  | Chosen station row in pale yellow                    | Same highlight as before, now in the scenario colour.             |
+| Links                            | Underline for text links without an arrow            | Consequence of ink actions; to validate.                          |
+
+Question raised: whether every control can be classified unambiguously as a scenario parameter (yellow) or a view choice (ink). Charge type and end-of-charging condition are treated as scenario parameters because they change the results.

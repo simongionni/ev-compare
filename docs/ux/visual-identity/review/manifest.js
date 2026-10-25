@@ -15,15 +15,31 @@ window.VI_MANIFEST = {
       summary:
         "Due evoluzioni di Livrea con fotografie reali (qui segnaposto), un sistema cromatico che distingue veicoli, segnali e interfaccia, e alcune soluzioni di Tavola per tabelle e grafici.",
     },
+    {
+      id: 3,
+      title: "Iterazione 3 — sintesi",
+      summary:
+        "Un solo concept: struttura, leggerezza e tipografia di Livrea Refined, palette di Livrea Expressive in un sistema cromatico riprogettato. Da validare, non definitivo.",
+    },
   ],
   // Side-by-side presets; the first one is the default.
   presets: [
+    {
+      id: "sintesi",
+      label: "Refined ↔ Expressive ↔ Consolidated",
+      concepts: ["livrea-refined", "livrea-expressive", "livrea-consolidated"],
+    },
     {
       id: "livrea",
       iteration: 1,
       status: "Scelto da approfondire",
       label: "Famiglia Livrea",
-      concepts: ["livrea", "livrea-refined", "livrea-expressive"],
+      concepts: [
+        "livrea",
+        "livrea-refined",
+        "livrea-expressive",
+        "livrea-consolidated",
+      ],
     },
     {
       id: "iterazione-2",
@@ -44,6 +60,7 @@ window.VI_MANIFEST = {
         "notturno",
         "livrea-refined",
         "livrea-expressive",
+        "livrea-consolidated",
       ],
     },
   ],
@@ -224,6 +241,36 @@ window.VI_MANIFEST = {
         "Il carattere largo occupa molto spazio; richiede regole di troncamento e titoli brevi.",
         "Più convenzioni da imparare (strisce, targhe gialle e nere).",
         "Maggior costo: font a larghezza variabile, componenti più specifici, foto di qualità a tutta larghezza.",
+      ],
+    },
+    {
+      id: "livrea-consolidated",
+      iteration: 3,
+      status: "Ultima iterazione · da validare",
+      name: "Livrea Consolidated",
+      tagline: "Leggera come Refined, riconoscibile come Expressive.",
+      summary:
+        "Layout, superfici, tabelle e Schibsted Grotesk di Refined. Inchiostro quasi nero per azioni e navigazione; giallo targa per ciò che l’utente imposta e che cambia i risultati (criteri, condizioni di simulazione) e per l’effetto delle sue modifiche; Cobalto, Mandarino, Smeraldo e Magenta per i veicoli, sempre con numero o marcatore. Foto come in Refined, su un segnaposto che mostra l’impostazione dello scatto.",
+      swatches: [
+        "#FAF8F4",
+        "#FFFFFF",
+        "#17171B",
+        "#FFD23F",
+        "#2548E0",
+        "#E8601C",
+        "#11A37A",
+        "#B8338E",
+      ],
+      fonts: "Schibsted Grotesk",
+      strengths: [
+        "Conserva la leggibilità di Refined su ricerca, confronto e grafici: il colore è solo in segni, filetti, targhe e linee.",
+        "Il giallo dà identità anche senza veicoli selezionati e collega criteri, confronto e simulazione.",
+        "Nessun colore ha due significati: l’interfaccia non usa più il blu, che ora è il veicolo 1.",
+      ],
+      limits: [
+        "Il giallo richiede disciplina: va distinta ogni volta una scelta di scenario (giallo) da una scelta di vista (inchiostro).",
+        "Con l’inchiostro per le azioni, i link si distinguono per peso, freccia o sottolineatura, non per colore.",
+        "La landing resta sobria; il carattere dipende ancora molto dalle future fotografie.",
       ],
     },
   ],
