@@ -16,6 +16,7 @@
       <nav class="tabs" aria-label="Sezioni">
         <a href="#panoramica">Panoramica</a>
         <a href="#scenari">Scenari a confronto</a>
+        <a href="#scenari/livrea">Famiglia Livrea</a>
         <span class="tabs-group" id="concept-tabs"></span>
         <a href="#identita">Identità</a>
         <a href="#valutazione">Punti di forza e limiti</a>
@@ -24,11 +25,22 @@
 
     <main>
       <section id="view-panoramica" class="view" hidden>
-        <div class="concepts" id="overview"></div>
+        <div id="overview"></div>
       </section>
 
       <section id="view-scenari" class="view" hidden>
         <div class="toolbar">
+          <span class="toolbar-label">Concept</span>
+          <div
+            class="seg"
+            id="preset-picker"
+            role="group"
+            aria-label="Preset"
+          ></div>
+          <div class="concept-picker" id="concept-picker"></div>
+        </div>
+        <div class="toolbar">
+          <span class="toolbar-label">Scenario</span>
           <div
             class="seg"
             id="scenario-picker"
@@ -61,11 +73,13 @@
       </section>
 
       <section id="view-valutazione" class="view" hidden>
-        <div class="assessment" id="assessment"></div>
+        <div id="assessment"></div>
         <p class="note">
-          Il confronto critico completo è in
-          <a href="comparison.md">comparison.md</a>. Le osservazioni UX non
-          incorporate sono in <a href="ux-notes.md">ux-notes.md</a>.
+          Il confronto critico della prima iterazione è in
+          <a href="comparison.md">comparison.md</a>; quello delle evoluzioni di
+          Livrea in <a href="livrea-evolution.md">livrea-evolution.md</a>. Le
+          osservazioni UX non incorporate sono in
+          <a href="ux-notes.md">ux-notes.md</a>.
         </p>
       </section>
     </main>

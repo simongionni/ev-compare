@@ -1,5 +1,7 @@
 # Visual identity concepts — critical comparison
 
+_Iteration 1. Kept as history; Livrea was then chosen for further work. The comparison of its two evolutions is in [`livrea-evolution.md`](livrea-evolution.md)._
+
 Compares [Tavola](tavola/README.md), [Livrea](livrea/README.md) and [Notturno](notturno/README.md) as applied to the same four scenarios. Ratings are relative (● strongest of the three, ◐ adequate, ○ weakest) and summarise the argument; the argument matters more than the symbol. No winner is declared.
 
 | Criterion                          | Tavola | Livrea | Notturno |

@@ -13,11 +13,18 @@ const FILES = {
   comparison: "03-comparison.svg",
   charging: "04-charging.svg",
 };
-const ALL = ["tavola", "livrea", "notturno"];
+const ALL = [
+  "tavola",
+  "livrea",
+  "notturno",
+  "livrea-refined",
+  "livrea-expressive",
+];
 
 const only = process.argv.slice(2);
 for (const id of ALL) {
   if (only.length && !only.includes(id)) continue;
+  if (!existsSync(join(root, "_source", `${id}.mjs`))) continue;
   const concept = (await import(`./${id}.mjs`)).default;
   mkdirSync(join(root, id), { recursive: true });
   for (const [screen, file] of Object.entries(FILES)) {

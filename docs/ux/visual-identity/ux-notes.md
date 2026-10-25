@@ -25,3 +25,30 @@ The concepts keep the information architecture, content and flows of the consoli
 3. **Hover-dependent reading** (Notturno, and the chart interactions described for all three) needs keyboard and touch equivalents.
 4. **Vehicle images.** All concepts assume an image per vehicle (drawing, silhouette or photo). The data source has none; a fallback is required in any direction.
 5. **Theme.** No wireframe defines light or dark. Notturno is dark-only; Tavola and Livrea are light-only. The choice affects the token model of the first slice.
+
+## Iteration 2 (Livrea Refined, Livrea Expressive)
+
+Presentation choices beyond restyling:
+
+| Concept    | Where                           | Addition                                               | Note                                                                                                            |
+| ---------- | ------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| Both       | Cards, headers, search, landing | Vehicle photographs (placeholders)                     | The wireframes have image placeholders; the size and placement are new. See [`photography.md`](photography.md). |
+| Both       | Charging chart                  | Hatched region above the station's power, curve points | Same data; makes "limitata dalla colonnina" and the interpolation visible.                                      |
+| Both       | Nav                             | Comparison count shown with the vehicles' marks        | Same count as the wireframe badge.                                                                              |
+| Refined    | Comparison, "Altre differenze"  | Zero-based scale with numbered badges                  | As Tavola's scale; not a ranking.                                                                               |
+| Refined    | Energy chart                    | Hover tooltip at 20 minutes                            | Interaction state; engine values already in the wireframe.                                                      |
+| Expressive | Comparison, "Altre differenze"  | Livery bars from zero ending with stripes              | Bars can be read as scores; see iteration 1 note.                                                               |
+| Expressive | Comparison context bar, notice  | Yellow wash for the user's criteria and their effect   | Colour only; no new content.                                                                                    |
+| Expressive | Criteria column                 | Count "6" on a yellow plate next to "Criteri attivi"   | Same information as "Criteri attivi (6)".                                                                       |
+
+Questions answered in the variants (see their READMEs, "Vehicle identity"):
+
+1. **Colour assignment.** Both variants use the rule proposed in iteration 1: lowest free slot, stable colours, no repainting. The identity sheets show an add/remove sequence.
+2. **Non-colour encoding.** Refined: number + marker shape. Expressive: stripe count + marker shape.
+3. **Colour for states.** Both variants separate interface or settings colours, vehicle colours and signal colours.
+
+Still open:
+
+- Order versus colour: after a removal, slot numbers no longer match selection order. The wireframe says vehicles appear in selection order; whether columns follow slot or selection order needs a decision.
+- A fifth vehicle (if ever allowed) has no colour in either variant.
+- Single-vehicle analysis is described, not drawn.

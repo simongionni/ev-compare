@@ -22,9 +22,13 @@
   };
   const scenarioById = (id) => M.scenarios.find((s) => s.id === id);
   const conceptById = (id) => M.concepts.find((c) => c.id === id);
+  // Latest iteration first.
+  const iterations = [...M.iterations].sort((a, b) => b.id - a.id);
+  const conceptsOf = (it) => M.concepts.filter((c) => c.iteration === it.id);
 
+  const latest = iterations[0];
   $("#meta").textContent =
-    `${M.iteration} · ${M.concepts.length} concept · aggiornata il ${M.updated}`;
+    `${latest.title} · ${M.concepts.length} concept · aggiornata il ${M.updated}`;
   M.concepts.forEach((c) =>
     $("#concept-tabs").append(
       h("a", { href: `#concept/${c.id}`, text: c.name }),
@@ -32,46 +36,63 @@
   );
 
   // ---------------------------------------------------------------- overview
-  M.concepts.forEach((c) => {
+  iterations.forEach((it) => {
     $("#overview").append(
-      h("article", { class: "concept-card" }, [
-        h(
-          "button",
-          {
-            class: "thumb",
-            type: "button",
-            title: "Ingrandisci",
-            onclick: () => openViewer(c.id, "landing"),
-          },
-          h("img", {
-            src: src(c.id, scenarioById("landing")),
-            alt: `${c.name}, landing`,
-            loading: "lazy",
-          }),
-        ),
-        h("div", { class: "body" }, [
-          h("h3", { text: c.name }),
-          h("p", { class: "tagline", text: c.tagline }),
-          h("p", { text: c.summary }),
-          h(
-            "div",
-            { class: "swatches", "aria-label": "Palette" },
-            c.swatches.map((hex) =>
-              h("span", { style: `background:${hex}`, title: hex }),
+      h("h2", { class: "iteration", text: it.title }),
+      h("p", { class: "lead", text: it.summary }),
+      h(
+        "div",
+        { class: "concepts" },
+        conceptsOf(it).map((c) =>
+          h("article", { class: "concept-card" }, [
+            h(
+              "button",
+              {
+                class: "thumb",
+                type: "button",
+                title: "Ingrandisci",
+                onclick: () => openViewer(c.id, "landing"),
+              },
+              h("img", {
+                src: src(c.id, scenarioById("landing")),
+                alt: `${c.name}, landing`,
+                loading: "lazy",
+              }),
             ),
-          ),
-          h("div", { class: "fonts", text: c.fonts }),
-          h("div", { class: "links" }, [
-            h("a", { href: `#concept/${c.id}`, text: "Tutte le schermate →" }),
-            h("a", { href: `${c.id}/README.md`, text: "Documentazione" }),
+            h("div", { class: "body" }, [
+              h("div", { class: "title-row" }, [
+                h("h3", { text: c.name }),
+                c.status
+                  ? h("span", { class: "status", text: c.status })
+                  : null,
+              ]),
+              h("p", { class: "tagline", text: c.tagline }),
+              h("p", { text: c.summary }),
+              h(
+                "div",
+                { class: "swatches", "aria-label": "Palette" },
+                c.swatches.map((hex) =>
+                  h("span", { style: `background:${hex}`, title: hex }),
+                ),
+              ),
+              h("div", { class: "fonts", text: c.fonts }),
+              h("div", { class: "links" }, [
+                h("a", {
+                  href: `#concept/${c.id}`,
+                  text: "Tutte le schermate →",
+                }),
+                h("a", { href: `${c.id}/README.md`, text: "Documentazione" }),
+              ]),
+            ]),
           ]),
-        ]),
-      ]),
+        ),
+      ),
     );
   });
 
   // ---------------------------------------------------------------- scenarios side by side
   let currentScenario = M.scenarios[0].id;
+  let selected = [...M.presets[0].concepts];
   const picker = $("#scenario-picker");
   M.scenarios.forEach((s) =>
     picker.append(
@@ -86,6 +107,38 @@
       }),
     ),
   );
+  M.presets.forEach((p) =>
+    $("#preset-picker").append(
+      h("button", {
+        type: "button",
+        "data-id": p.id,
+        text: p.label,
+        onclick: () => {
+          selected = [...p.concepts];
+          renderColumns();
+        },
+      }),
+    ),
+  );
+  M.concepts.forEach((c) =>
+    $("#concept-picker").append(
+      h("label", { class: "check" }, [
+        h("input", {
+          type: "checkbox",
+          value: c.id,
+          onchange: (e) => {
+            selected = M.concepts
+              .map((x) => x.id)
+              .filter((id) =>
+                id === c.id ? e.target.checked : selected.includes(id),
+              );
+            renderColumns();
+          },
+        }),
+        c.name,
+      ]),
+    ),
+  );
 
   function renderColumns() {
     picker
@@ -96,31 +149,48 @@
           String(b.dataset.id === currentScenario),
         ),
       );
+    $("#preset-picker")
+      .querySelectorAll("button")
+      .forEach((b) => {
+        const p = M.presets.find((x) => x.id === b.dataset.id);
+        b.setAttribute(
+          "aria-pressed",
+          String(p.concepts.join() === selected.join()),
+        );
+      });
+    $("#concept-picker")
+      .querySelectorAll("input")
+      .forEach((i) => (i.checked = selected.includes(i.value)));
     const s = scenarioById(currentScenario);
     const zoom = $("#zoom").value;
     const cols = $("#columns");
-    cols.style.setProperty("--n", M.concepts.length);
+    const shown = selected.map(conceptById);
+    cols.style.setProperty("--n", Math.max(1, shown.length));
     cols.replaceChildren(
-      ...M.concepts.map((c) => {
+      ...shown.map((c) => {
         const img = h("img", {
           src: src(c.id, s),
           alt: `${c.name}, ${s.title}`,
-          onclick: () => openViewer(c.id, s.id),
+          onclick: () => openViewer(c.id, s.id, selected),
         });
-        if (zoom !== "fit") img.style.width = `${s.size[0] * Number(zoom)}px`;
+        if (zoom !== "fit") img.style.width = `${s.width * Number(zoom)}px`;
         return h("div", { class: "column" }, [
           h("header", {}, [
             h("strong", { text: c.name }),
             h("button", {
               type: "button",
               text: "Ingrandisci",
-              onclick: () => openViewer(c.id, s.id),
+              onclick: () => openViewer(c.id, s.id, selected),
             }),
           ]),
           h("div", { class: `scroller${zoom === "fit" ? " fit" : ""}` }, img),
         ]);
       }),
     );
+    if (!shown.length)
+      cols.append(
+        h("p", { class: "note", text: "Nessun concept selezionato." }),
+      );
     const scrollers = [...cols.querySelectorAll(".scroller")];
     let lock = false;
     scrollers.forEach((sc) =>
@@ -164,9 +234,7 @@
             h("figure", {}, [
               h("figcaption", {}, [
                 h("strong", { text: s.title }),
-                h("span", {
-                  text: `${c.id}/${s.file} · ${s.size[0]} × ${s.size[1]}`,
-                }),
+                h("span", { text: `${c.id}/${s.file}` }),
               ]),
               h(
                 "button",
@@ -194,56 +262,68 @@
     h("h2", { text: "Elementi di identità" }),
     h("p", {
       class: "lead",
-      text: "Palette, tipografia, componenti, rappresentazione dei veicoli e serie dei grafici di ogni concept.",
+      text: "Palette, sistema cromatico, tipografia, componenti, rappresentazione dei veicoli e serie dei grafici di ogni concept.",
     }),
-    h(
-      "div",
-      { class: "screens" },
-      M.concepts.map((c) =>
-        h(
-          "div",
-          { class: "screen" },
-          h("figure", {}, [
-            h("figcaption", {}, [
-              h("strong", { text: c.name }),
-              h("span", { text: c.fonts }),
+  );
+  iterations.forEach((it) =>
+    $("#identity").append(
+      h("h2", { class: "iteration", text: it.title }),
+      h(
+        "div",
+        { class: "screens" },
+        conceptsOf(it).map((c) =>
+          h(
+            "div",
+            { class: "screen" },
+            h("figure", {}, [
+              h("figcaption", {}, [
+                h("strong", { text: c.name }),
+                h("span", { text: c.fonts }),
+              ]),
+              h(
+                "button",
+                {
+                  type: "button",
+                  title: "Ingrandisci",
+                  onclick: () => openViewer(c.id, "identity"),
+                },
+                h("img", {
+                  src: src(c.id, idScenario),
+                  alt: `${c.name}, identity sheet`,
+                  loading: "lazy",
+                }),
+              ),
             ]),
-            h(
-              "button",
-              {
-                type: "button",
-                title: "Ingrandisci",
-                onclick: () => openViewer(c.id, "identity"),
-              },
-              h("img", {
-                src: src(c.id, idScenario),
-                alt: `${c.name}, identity sheet`,
-                loading: "lazy",
-              }),
-            ),
-          ]),
+          ),
         ),
       ),
     ),
   );
-  M.concepts.forEach((c) =>
+  iterations.forEach((it) =>
     $("#assessment").append(
-      h("article", {}, [
-        h("h3", { text: c.name }),
-        h("p", { class: "note", text: c.tagline }),
-        h("h4", { text: "Punti di forza" }),
-        h(
-          "ul",
-          {},
-          c.strengths.map((s) => h("li", { text: s })),
+      h("h2", { class: "iteration", text: it.title }),
+      h(
+        "div",
+        { class: "assessment-grid" },
+        conceptsOf(it).map((c) =>
+          h("article", {}, [
+            h("h3", { text: c.name }),
+            h("p", { class: "note", text: c.tagline }),
+            h("h4", { text: "Punti di forza" }),
+            h(
+              "ul",
+              {},
+              c.strengths.map((s) => h("li", { text: s })),
+            ),
+            h("h4", { text: "Limiti e rischi" }),
+            h(
+              "ul",
+              {},
+              c.limits.map((s) => h("li", { text: s })),
+            ),
+          ]),
         ),
-        h("h4", { text: "Limiti e rischi" }),
-        h(
-          "ul",
-          {},
-          c.limits.map((s) => h("li", { text: s })),
-        ),
-      ]),
+      ),
     ),
   );
 
@@ -251,10 +331,18 @@
   const viewer = $("#viewer");
   const stage = $("#viewer-stage");
   const vimg = $("#viewer-img");
-  let vState = { concept: null, scenario: null, zoom: "fit" };
+  // `pool`: the concepts ← → move through (the side-by-side selection, or all).
+  let vState = { concept: null, scenario: null, zoom: "fit", pool: [] };
 
-  function openViewer(concept, scenario) {
-    vState = { ...vState, concept, scenario };
+  function openViewer(concept, scenario, pool) {
+    vState = {
+      ...vState,
+      concept,
+      scenario,
+      pool: (pool && pool.length ? pool : M.concepts.map((c) => c.id)).map(
+        (id) => ({ id }),
+      ),
+    };
     viewer.hidden = false;
     document.body.style.overflow = "hidden";
     renderViewer(true);
@@ -268,7 +356,7 @@
     $("#viewer-open").href = src(c.id, s);
     stage.classList.toggle("fit", vState.zoom === "fit");
     vimg.style.width =
-      vState.zoom === "fit" ? "" : `${s.size[0] * Number(vState.zoom)}px`;
+      vState.zoom === "fit" ? "" : `${s.width * Number(vState.zoom)}px`;
     viewer
       .querySelectorAll("[data-zoom]")
       .forEach((b) =>
@@ -283,18 +371,16 @@
   const step = (list, id, d) =>
     list[(list.findIndex((x) => x.id === id) + d + list.length) % list.length]
       .id;
+  const moveConcept = (d) => {
+    vState.concept = step(vState.pool, vState.concept, d);
+    renderViewer(false);
+  };
   viewer.addEventListener("click", (e) => {
     const act = e.target.dataset.act;
     const zoom = e.target.dataset.zoom;
     if (act === "close") closeViewer();
-    if (act === "prev-concept") {
-      vState.concept = step(M.concepts, vState.concept, -1);
-      renderViewer(false);
-    }
-    if (act === "next-concept") {
-      vState.concept = step(M.concepts, vState.concept, 1);
-      renderViewer(false);
-    }
+    if (act === "prev-concept") moveConcept(-1);
+    if (act === "next-concept") moveConcept(1);
     if (zoom) {
       vState.zoom = zoom;
       renderViewer(false);
@@ -304,14 +390,8 @@
     if (viewer.hidden) return;
     const keys = {
       Escape: closeViewer,
-      ArrowLeft: () => {
-        vState.concept = step(M.concepts, vState.concept, -1);
-        renderViewer(false);
-      },
-      ArrowRight: () => {
-        vState.concept = step(M.concepts, vState.concept, 1);
-        renderViewer(false);
-      },
+      ArrowLeft: () => moveConcept(-1),
+      ArrowRight: () => moveConcept(1),
       ArrowUp: () => {
         vState.scenario = step(M.scenarios, vState.scenario, -1);
         renderViewer(true);
@@ -340,6 +420,7 @@
   });
 
   // ---------------------------------------------------------------- routing
+  // #scenari/<preset> opens the side-by-side view with a preset, e.g. #scenari/livrea.
   function route() {
     const hash = location.hash.slice(1) || "panoramica";
     const [view, arg] = hash.split("/");
@@ -352,18 +433,25 @@
     document
       .querySelectorAll(".view")
       .forEach((v) => (v.hidden = v.id !== `view-${name}`));
-    document
-      .querySelectorAll(".tabs a")
-      .forEach((a) =>
-        a.toggleAttribute(
-          "aria-current",
-          a.getAttribute("href") === `#${hash}`,
-        ),
-      );
+    const tabs = [...document.querySelectorAll(".tabs a")];
+    const exact = tabs.some((a) => a.getAttribute("href") === `#${hash}`);
+    tabs.forEach((a) =>
+      a.toggleAttribute(
+        "aria-current",
+        a.getAttribute("href") === `#${hash}` ||
+          (!exact &&
+            name === "scenari" &&
+            a.getAttribute("href") === "#scenari"),
+      ),
+    );
     document
       .querySelectorAll(".tabs a[aria-current]")
       .forEach((a) => a.setAttribute("aria-current", "page"));
-    if (name === "scenari") renderColumns();
+    if (name === "scenari") {
+      const preset = M.presets.find((p) => p.id === arg);
+      if (preset) selected = [...preset.concepts];
+      renderColumns();
+    }
     if (name === "concept") renderConcept(arg);
     window.scrollTo(0, 0);
   }

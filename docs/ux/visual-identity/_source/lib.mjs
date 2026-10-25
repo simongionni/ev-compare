@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+
 // Small SVG helpers shared by the three concept renderers.
 // Every element is written as a string; styling lives in each concept's <style> block.
 
@@ -352,3 +355,158 @@ export const annotation = (x, y, label) =>
       esc(label),
     ),
   ]);
+
+// ---------------------------------------------------------------------------
+// Embedded fonts (second iteration). Subset WOFF2 files and their OFL licences live in ../fonts.
+// Fonts are embedded because SVGs shown through <img> cannot load external resources.
+
+const FONT_FILES = {
+  "Schibsted Grotesk": {
+    file: "SchibstedGrotesk-subset.woff2",
+    weight: "400 900",
+  },
+  Anybody: {
+    file: "Anybody-subset.woff2",
+    weight: "100 900",
+    stretch: "50% 150%",
+  },
+  Overpass: { file: "Overpass-subset.woff2", weight: "100 900" },
+};
+const fontCache = {};
+
+/** @font-face rules with base64 data for the given families. */
+export const fontFaces = (families) =>
+  families
+    .map((name) => {
+      const f = FONT_FILES[name];
+      fontCache[name] ??= readFileSync(
+        fileURLToPath(new URL(`../fonts/${f.file}`, import.meta.url)),
+      ).toString("base64");
+      return `@font-face{font-family:'${name}';src:url(data:font/woff2;base64,${fontCache[name]}) format('woff2');font-weight:${f.weight};${f.stretch ? `font-stretch:${f.stretch};` : ""}font-display:block}`;
+    })
+    .join("\n");
+
+/**
+ * Neutral photographic placeholder, clearly labelled. Stands in for a real, licensed photograph
+ * of the named model until images are sourced (see ../photography.md). No vehicle is drawn.
+ */
+export const photoSlot = (
+  x,
+  y,
+  w,
+  h,
+  {
+    model,
+    view = "vista ¾ anteriore",
+    tone = "light",
+    rx = 0,
+    label = true,
+    id,
+  } = {},
+) => {
+  const T =
+    tone === "dark"
+      ? { a: "#5A5853", b: "#3E3D3A", ink: "#E9E6DF", line: "#76736C" }
+      : { a: "#EEECE7", b: "#D8D5CD", ink: "#5E5B55", line: "#BDB9B0" };
+  const gid = id || `ph${Math.round(x)}_${Math.round(y)}_${Math.round(w)}`;
+  const c = Math.min(14, w / 10);
+  const corners = [
+    [x + 8, y + 8, 1, 1],
+    [x + w - 8, y + 8, -1, 1],
+    [x + 8, y + h - 8, 1, -1],
+    [x + w - 8, y + h - 8, -1, -1],
+  ]
+    .map(
+      ([cx, cy, dx, dy]) =>
+        `M${cx},${cy + dy * c} L${cx},${cy} L${cx + dx * c},${cy}`,
+    )
+    .join(" ");
+  const out = [
+    el(
+      "defs",
+      {},
+      el(
+        "linearGradient",
+        { id: gid, x1: 0, y1: 0, x2: 0, y2: 1 },
+        el("stop", { offset: 0, "stop-color": T.a }) +
+          el("stop", { offset: 0.62, "stop-color": T.b }) +
+          el("stop", { offset: 1, "stop-color": T.a }),
+      ),
+    ),
+    el("rect", { x, y, width: w, height: h, rx, fill: `url(#${gid})` }),
+    el("path", {
+      d: corners,
+      fill: "none",
+      stroke: T.line,
+      "stroke-width": 1.2,
+    }),
+  ];
+  if (label && w >= 120 && h >= 64) {
+    const cx = x + w / 2,
+      cy = y + h / 2 - (model ? 10 : 0);
+    // camera glyph
+    out.push(
+      el("rect", {
+        x: cx - 11,
+        y: cy - 7,
+        width: 22,
+        height: 15,
+        rx: 3,
+        fill: "none",
+        stroke: T.ink,
+        "stroke-width": 1.4,
+      }),
+      el("circle", {
+        cx,
+        cy: cy + 0.5,
+        r: 4,
+        fill: "none",
+        stroke: T.ink,
+        "stroke-width": 1.4,
+      }),
+      el("path", {
+        d: `M${cx - 5},${cy - 7} l2,-3 h6 l2,3`,
+        fill: "none",
+        stroke: T.ink,
+        "stroke-width": 1.4,
+      }),
+      el(
+        "text",
+        {
+          x: cx,
+          y: cy + 26,
+          "text-anchor": "middle",
+          style: `font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:700;letter-spacing:1.2px;fill:${T.ink}`,
+        },
+        "FOTO SEGNAPOSTO",
+      ),
+    );
+    if (model && h >= 96)
+      out.push(
+        el(
+          "text",
+          {
+            x: cx,
+            y: cy + 41,
+            "text-anchor": "middle",
+            style: `font-family:Arial,Helvetica,sans-serif;font-size:11px;fill:${T.ink}`,
+          },
+          esc(`${model} · ${view}`),
+        ),
+      );
+  } else if (label) {
+    out.push(
+      el(
+        "text",
+        {
+          x: x + w / 2,
+          y: y + h / 2 + 4,
+          "text-anchor": "middle",
+          style: `font-family:Arial,Helvetica,sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;fill:${T.ink}`,
+        },
+        "FOTO",
+      ),
+    );
+  }
+  return g(out);
+};
