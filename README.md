@@ -12,6 +12,10 @@ DC charging curves and charging sessions ending at a target state of charge or a
 duration. Vehicle data integration (OpenEV Data) and a user interface for these
 calculations are not implemented yet; the web app is still the initial landing page.
 
+Milestone M0.2 has closed its visual identity exploration: Livrea Consolidated is the selected
+visual identity ([`docs/ux/visual-identity/`](docs/ux/visual-identity/README.md)). The UI stack
+has not been chosen yet.
+
 ## Documentation
 
 Technical documentation is in [`docs/`](docs/README.md). Start with the

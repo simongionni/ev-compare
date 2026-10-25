@@ -2,6 +2,8 @@
 
 _Each vehicle in the comparison wears a colour that follows it everywhere._
 
+> Exploration history (M0.2). Chosen in iteration 1 for further work; evolved into Livrea Refined and Livrea Expressive. The selected visual identity of EV Compare is [Livrea Consolidated](../livrea-consolidated/README.md).
+
 ![Landing](01-landing.svg)
 
 | Screen                              | File                                     |

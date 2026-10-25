@@ -2,6 +2,8 @@
 
 _Iteration 2, variant A. Livrea's liveliness, calibrated for everyday use._
 
+> Exploration history (M0.2). Merged into Livrea Consolidated in iteration 3. The selected visual identity of EV Compare is [Livrea Consolidated](../livrea-consolidated/README.md).
+
 ![Landing](01-landing.svg)
 
 | Screen                              | File                                     |

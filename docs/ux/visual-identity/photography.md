@@ -29,9 +29,9 @@ Common rules:
 - The image never carries information that is not also in text (photos do not replace data).
 - Alt text with model and view.
 
-## Sourcing strategy (to decide before implementation)
+## Sourcing strategy (to decide before real photographs are published)
 
-Options, to be evaluated case by case; none was used here and no licence is assumed:
+Future work for the selected identity, not a requirement for the first vertical slice: until it is decided, the labelled placeholder is shown. Options, to be evaluated case by case; none was used here and no licence is assumed:
 
 1. **Manufacturer media sites.** Usually allow editorial use; terms vary by brand and often exclude commercial or comparative contexts. Each brand's terms must be read and recorded.
 2. **Wikimedia Commons.** Per-file licences (often CC BY or CC BY-SA, sometimes public domain). Require attribution and, for share-alike, compliance with the licence terms. Quality and consistency vary.

@@ -2,6 +2,8 @@
 
 _The vehicle as an annotated technical drawing._
 
+> Exploration history (M0.2). Not continued after iteration 1; its tables and chart precision were reused. The selected visual identity of EV Compare is [Livrea Consolidated](../livrea-consolidated/README.md).
+
 ![Landing](01-landing.svg)
 
 | Screen                              | File                                     |

@@ -26,19 +26,150 @@
   const iterations = [...M.iterations].sort((a, b) => b.id - a.id);
   const conceptsOf = (it) => M.concepts.filter((c) => c.iteration === it.id);
 
-  const latest = iterations[0];
+  const D = M.decision;
+  const chosen = conceptById(D.selected);
+  const isChosen = (c) => c.id === D.selected;
+  const statusChip = (c) =>
+    c.status
+      ? h("span", {
+          class: `status${isChosen(c) ? " selected" : ""}`,
+          text: c.status,
+        })
+      : null;
   $("#meta").textContent =
-    `${latest.title} · ${M.concepts.length} concept · aggiornata il ${M.updated}`;
-  M.concepts.forEach((c) =>
-    $("#concept-tabs").append(
-      h("a", { href: `#concept/${c.id}`, text: c.name }),
+    `${D.title} · ${M.concepts.length} concept · aggiornata il ${M.updated}`;
+  $(".selected-tab").setAttribute("href", `#concept/${chosen.id}`);
+  // The selected concept has its own tab; the others follow as history.
+  M.concepts
+    .filter((c) => !isChosen(c))
+    .forEach((c) =>
+      $("#concept-tabs").append(
+        h("a", { href: `#concept/${c.id}`, text: c.name }),
+      ),
+    );
+
+  // ---------------------------------------------------------------- decision
+  const list = (items) =>
+    h(
+      "ul",
+      {},
+      items.map((t) => h("li", { text: t })),
+    );
+  const decisionBanner = (withThumb) =>
+    h("article", { class: "decision" }, [
+      withThumb
+        ? h(
+            "button",
+            {
+              class: "thumb",
+              type: "button",
+              title: "Ingrandisci",
+              onclick: () => openViewer(chosen.id, "landing"),
+            },
+            h("img", {
+              src: src(chosen.id, scenarioById("landing")),
+              alt: `${chosen.name}, landing`,
+            }),
+          )
+        : null,
+      h("div", { class: "body" }, [
+        h("div", { class: "title-row" }, [
+          h("h2", { text: D.title }),
+          statusChip(chosen),
+        ]),
+        h("p", { text: D.summary }),
+        h("div", { class: "links" }, [
+          h("a", {
+            href: `#concept/${chosen.id}`,
+            text: "Tutte le schermate →",
+          }),
+          h("a", {
+            href: "#",
+            text: "Identity sheet",
+            onclick: (e) => {
+              e.preventDefault();
+              openViewer(chosen.id, "identity");
+            },
+          }),
+          h("a", { href: "#decisioni", text: "Stato delle decisioni" }),
+          h("a", { href: D.docs, text: "Documentazione" }),
+        ]),
+      ]),
+    ]);
+
+  $("#decisions").append(
+    h("h2", { text: "Decisioni" }),
+    h("p", {
+      class: "lead",
+      text: `${chosen.name} selezionata il ${D.date}. Documentazione completa nel README del concept; razionale della selezione nel confronto dell’iterazione 3.`,
+    }),
+    h("p", { class: "note" }, [
+      h("a", { href: D.docs, text: `${chosen.name} — README` }),
+      " · ",
+      h("a", { href: D.rationale, text: D.rationale }),
+    ]),
+    h("div", { class: "assessment-grid" }, [
+      h("article", {}, [
+        h("h3", { text: "Consolidate" }),
+        h("p", {
+          class: "note",
+          text: "Approvate; baseline per il frontend.",
+        }),
+        list(D.consolidated),
+      ]),
+      h("article", {}, [
+        h("h3", { text: "Provvisorie" }),
+        h("p", {
+          class: "note",
+          text: "Da verificare durante l’implementazione, partendo da quanto disegnato.",
+        }),
+        list(D.provisional),
+      ]),
+      h("article", {}, [
+        h("h3", { text: "Attività future" }),
+        h("p", { class: "note", text: "Non ancora progettate o risolte." }),
+        list(D.future),
+      ]),
+    ]),
+    h("p", { class: "note", text: D.note }),
+    h("h2", { class: "iteration", text: "Storico delle decisioni" }),
+    h(
+      "ol",
+      { class: "history" },
+      D.history.map((d) => {
+        const it = M.iterations.find((x) => x.id === d.iteration);
+        return h("li", {}, [
+          h("strong", { text: it.title }),
+          h("span", { text: ` ${d.outcome} ` }),
+          h("a", { href: d.doc, text: d.doc }),
+          h("span", { text: " · " }),
+          h("a", {
+            href: "#",
+            text: "Schermate a confronto",
+            onclick: (e) => {
+              e.preventDefault();
+              selected = conceptsOf(it).map((c) => c.id);
+              if (location.hash === "#scenari") route();
+              else location.hash = "#scenari";
+            },
+          }),
+        ]);
+      }),
     ),
   );
 
   // ---------------------------------------------------------------- overview
+  $("#overview").append(
+    decisionBanner(true),
+    h("h2", { class: "iteration", text: "Storico dell’esplorazione" }),
+    h("p", {
+      class: "lead",
+      text: "Tutti i concept, dall’ultima iterazione alla prima. Restano consultabili come storico; non sono alternative in valutazione.",
+    }),
+  );
   iterations.forEach((it) => {
     $("#overview").append(
-      h("h2", { class: "iteration", text: it.title }),
+      h("h3", { class: "iteration", text: it.title }),
       h("p", { class: "lead", text: it.summary }),
       h(
         "div",
@@ -62,12 +193,7 @@
             h("div", { class: "body" }, [
               h("div", { class: "title-row" }, [
                 h("h3", { text: c.name }),
-                c.status
-                  ? h("span", {
-                      class: `status${c.iteration === latest.id ? " latest" : ""}`,
-                      text: c.status,
-                    })
-                  : null,
+                statusChip(c),
               ]),
               h("p", { class: "tagline", text: c.tagline }),
               h("p", { text: c.summary }),
@@ -179,7 +305,10 @@
         if (zoom !== "fit") img.style.width = `${s.width * Number(zoom)}px`;
         return h("div", { class: "column" }, [
           h("header", {}, [
-            h("strong", { text: c.name }),
+            h("span", { class: "title-row" }, [
+              h("strong", { text: c.name }),
+              isChosen(c) ? statusChip(c) : null,
+            ]),
             h("button", {
               type: "button",
               text: "Ingrandisci",
@@ -218,7 +347,17 @@
   function renderConcept(id) {
     const c = conceptById(id);
     if (!c) return;
+    const it = M.iterations.find((x) => x.id === c.iteration);
     $("#concept-detail").replaceChildren(
+      isChosen(c)
+        ? decisionBanner(false)
+        : h("p", { class: "history-note" }, [
+            `Storico dell’esplorazione · ${it.title}${c.status ? ` · ${c.status}` : ""}. `,
+            h("a", {
+              href: `#concept/${chosen.id}`,
+              text: `Identità selezionata: ${chosen.name} →`,
+            }),
+          ]),
       h("h2", { text: c.name }),
       h("p", { class: "lead", text: `${c.tagline} ${c.summary}` }),
       h("p", { class: "note" }, [
@@ -353,7 +492,8 @@
   function renderViewer(resetScroll) {
     const c = conceptById(vState.concept);
     const s = scenarioById(vState.scenario);
-    $("#viewer-title").textContent = `${c.name} — ${s.title}`;
+    $("#viewer-title").textContent =
+      `${c.name}${isChosen(c) ? " (selezionata)" : ""} — ${s.title}`;
     vimg.src = src(c.id, s);
     vimg.alt = `${c.name}, ${s.title}`;
     $("#viewer-open").href = src(c.id, s);
@@ -430,7 +570,13 @@
     const name =
       view === "concept"
         ? "concept"
-        : ["panoramica", "scenari", "identita", "valutazione"].includes(view)
+        : [
+              "panoramica",
+              "decisioni",
+              "scenari",
+              "identita",
+              "valutazione",
+            ].includes(view)
           ? view
           : "panoramica";
     document

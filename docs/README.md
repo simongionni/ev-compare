@@ -14,6 +14,14 @@ describe the implementation as it exists on the `dev` branch.
 | [Assumptions and limitations](charging/limitations.md) | Physical simplifications, numerical accuracy, open questions, technical debt |
 | [Testing](charging/testing.md)                         | Test organization, covered behavior, commands                                |
 
+## UX and visual identity (milestone M0.2)
+
+| Page                                            | Contents                                                                  |
+| ----------------------------------------------- | ------------------------------------------------------------------------- |
+| [Product Vision](product-vision.md)             | Vision, audience, product principles                                      |
+| [Design Principles](ux/design-principles.md)    | Principles for UX, visual design and frontend work                        |
+| [Visual identity](ux/visual-identity/README.md) | Selected identity (Livrea Consolidated), exploration history, review page |
+
 ## Other directories
 
 - `docs/decisions/` is reserved for architecture decision records. None exist yet.

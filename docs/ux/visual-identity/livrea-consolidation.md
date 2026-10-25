@@ -1,6 +1,8 @@
 # Iteration 3 — Livrea Consolidated against Refined and Expressive
 
-Critical comparison of [Livrea Consolidated](livrea-consolidated/README.md) with the two iteration 2 variants, [Livrea Refined](livrea-refined/README.md) and [Livrea Expressive](livrea-expressive/README.md), on the same five artefacts. The iteration 2 comparison stays unchanged in [`livrea-evolution.md`](livrea-evolution.md), and the iteration 1 comparison in [`comparison.md`](comparison.md). The consolidated concept is a proposal; it is not declared final or approved.
+Critical comparison of [Livrea Consolidated](livrea-consolidated/README.md) with the two iteration 2 variants, [Livrea Refined](livrea-refined/README.md) and [Livrea Expressive](livrea-expressive/README.md), on the same five artefacts. The iteration 2 comparison stays unchanged in [`livrea-evolution.md`](livrea-evolution.md), and the iteration 1 comparison in [`comparison.md`](comparison.md).
+
+**Outcome: Livrea Consolidated was selected as the visual identity of EV Compare (2026-10-25), closing the M0.2 exploration.** This page is kept as the rationale of that selection. What is consolidated, what is provisional and what is future work is listed once, in [Livrea Consolidated — Decision status](livrea-consolidated/README.md#decision-status).
 
 Ratings are relative within these three (● strongest, ◐ adequate, ○ weakest).
 
@@ -17,6 +19,10 @@ Ratings are relative within these three (● strongest, ◐ adequate, ○ weakes
 | Implementation feasibility | ●       | ◐          | ●            |
 
 "◐ to ●" means better than Refined, short of Expressive, with the final position depending on the yellow intensity and on real photography.
+
+## Why Livrea Consolidated was selected
+
+The comparison below supports it: Consolidated matches Refined on lightness, legibility, dense screens and implementation feasibility, the qualities that matter most for daily use of search, comparison and technical exploration, and recovers much of Expressive's recognisability and personality through its palette and a narrower, functional use of yellow. Its colour system gives every colour one job (section 4). Its remaining weaknesses (identity without vehicles, the dependence on real photography, the discipline yellow requires) are known, bounded, and do not block implementation.
 
 ## 1. How the synthesis improves Refined
 
@@ -70,7 +76,9 @@ Not on the screens drawn. Checks carried out:
 
 Residual risks: Smeraldo's line contrast on the page (3.0:1) outside white cards, and the pale yellow band and table row (only a slight tint difference, but the information is also in the yellow axis bar and in text).
 
-## 6. Decisions that still need evaluation
+## 6. Points left open at selection
+
+Listed as they stood when the comparison was written. Their current classification (provisional decision or future work) is in [Decision status](livrea-consolidated/README.md#decision-status).
 
 1. **Yellow intensity**: B is applied; A is drawn in the identity sheet as a fallback. To be judged on more screens and in use.
 2. **Link style**: underlined ink versus a dedicated link colour (which would have to avoid every vehicle hue).

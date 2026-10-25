@@ -2,6 +2,62 @@
 // SVG paths are relative to docs/ux/visual-identity/. Content hashes come from assets.js (generated).
 window.VI_MANIFEST = {
   updated: "2026-10-25",
+  // The selected identity and the state of its decisions. Earlier concepts stay as history.
+  decision: {
+    selected: "livrea-consolidated",
+    date: "2026-10-25",
+    title: "Identità selezionata: Livrea Consolidated",
+    summary:
+      "Livrea Consolidated è l’identità visiva scelta per l’implementazione di EV Compare e chiude l’esplorazione della fase M0.2. I cinque concept precedenti restano consultabili come storico; non sono alternative in valutazione. Prossimo passo: la scelta dello stack UI.",
+    docs: "livrea-consolidated/README.md",
+    rationale: "livrea-consolidation.md",
+    consolidated: [
+      "Sistema cromatico: interfaccia in inchiostro, giallo per lo scenario, colori dei veicoli, segnali; ogni famiglia ha un solo compito.",
+      "Schibsted Grotesk come unica famiglia tipografica, con la gerarchia delle schermate.",
+      "Gerarchie visive: pagina chiara, card bianche con filetti, colore solo in segni piccoli.",
+      "Stile dei componenti: pulsanti e campi a pillola, tabelle a filetti con colonna della provenienza, azioni e cambi di vista in inchiostro.",
+      "Visualizzazioni tecniche: punti della curva del costruttore, interpolazione dichiarata, area oltre il limite della colonnina, etichette dirette.",
+      "Rappresentazione dei veicoli: numero e forma del marcatore sempre con il colore, primo slot libero, nessuna ricolorazione; foto reali del modello corretto.",
+      "Giallo per i parametri dello scenario e per il loro effetto, sempre accompagnato dall’inchiostro.",
+      "Distinzione tra colori dell’interfaccia, dei veicoli e dei segnali; i segnali hanno sempre icona e parole.",
+    ],
+    provisional: [
+      "Intensità del giallo: si parte dalla variante B; A resta il ripiego se B risulta insistente.",
+      "Stile dei link: inchiostro, peso 600, freccia o sottolineatura; da verificare rispetto a un colore dedicato.",
+      "Trattamento definitivo del logo: per ora i quattro colori degli slot, come nelle tavole.",
+      "Dimensioni minime degli indicatori cromatici (filetti di 4 px, numeri, linguette, marcatori).",
+      "Comportamento su schermi di dimensioni diverse da quella delle tavole (1440 px).",
+    ],
+    future: [
+      "Estensione del linguaggio visivo alle schermate non disegnate, in particolare Vehicle Analysis.",
+      "Adattamento responsive e mobile.",
+      "Eventuale dark mode.",
+      "Approvvigionamento e gestione delle fotografie autentiche dei veicoli.",
+      "Verifica dell’accessibilità nell’interfaccia funzionante.",
+      "Confronti con un numero elevato di veicoli.",
+    ],
+    note: "Le decisioni provvisorie e le attività future non bloccano il primo vertical slice.",
+    history: [
+      {
+        iteration: 1,
+        outcome:
+          "Livrea scelta come direzione da approfondire. Tavola non proseguito, con alcuni elementi ripresi (tabelle, precisione dei grafici); Notturno non proseguito.",
+        doc: "comparison.md",
+      },
+      {
+        iteration: 2,
+        outcome:
+          "Livrea Refined e Livrea Expressive non scelte singolarmente: la struttura e la tipografia di Refined e la palette e il giallo di Expressive confluiscono in una sintesi.",
+        doc: "livrea-evolution.md",
+      },
+      {
+        iteration: 3,
+        outcome:
+          "Livrea Consolidated selezionata come identità visiva di EV Compare.",
+        doc: "livrea-consolidation.md",
+      },
+    ],
+  },
   iterations: [
     {
       id: 1,
@@ -13,13 +69,13 @@ window.VI_MANIFEST = {
       id: 2,
       title: "Iterazione 2 — evoluzioni di Livrea",
       summary:
-        "Due evoluzioni di Livrea con fotografie reali (qui segnaposto), un sistema cromatico che distingue veicoli, segnali e interfaccia, e alcune soluzioni di Tavola per tabelle e grafici.",
+        "Due evoluzioni di Livrea con fotografie reali (qui segnaposto), un sistema cromatico che distingue veicoli, segnali e interfaccia, e alcune soluzioni di Tavola per tabelle e grafici. Entrambe sono confluite nella sintesi dell’iterazione 3.",
     },
     {
       id: 3,
       title: "Iterazione 3 — sintesi",
       summary:
-        "Un solo concept: struttura, leggerezza e tipografia di Livrea Refined, palette di Livrea Expressive in un sistema cromatico riprogettato. Da validare, non definitivo.",
+        "Un solo concept: struttura, leggerezza e tipografia di Livrea Refined, palette di Livrea Expressive in un sistema cromatico riprogettato. Selezionato come identità visiva di EV Compare.",
     },
   ],
   // Side-by-side presets; the first one is the default.
@@ -31,8 +87,6 @@ window.VI_MANIFEST = {
     },
     {
       id: "livrea",
-      iteration: 1,
-      status: "Scelto da approfondire",
       label: "Famiglia Livrea",
       concepts: [
         "livrea",
@@ -188,6 +242,7 @@ window.VI_MANIFEST = {
     {
       id: "livrea-refined",
       iteration: 2,
+      status: "Confluito in Livrea Consolidated",
       name: "Livrea Refined",
       tagline: "La vivacità di Livrea, calibrata per l’uso quotidiano.",
       summary:
@@ -217,6 +272,7 @@ window.VI_MANIFEST = {
     {
       id: "livrea-expressive",
       iteration: 2,
+      status: "Confluito in Livrea Consolidated",
       name: "Livrea Expressive",
       tagline:
         "La livrea come linguaggio: colore e strisce, targhe, cifre strette.",
@@ -246,7 +302,7 @@ window.VI_MANIFEST = {
     {
       id: "livrea-consolidated",
       iteration: 3,
-      status: "Ultima iterazione · da validare",
+      status: "Identità selezionata",
       name: "Livrea Consolidated",
       tagline: "Leggera come Refined, riconoscibile come Expressive.",
       summary:
