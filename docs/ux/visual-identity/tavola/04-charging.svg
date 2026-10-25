@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1120" viewBox="0 0 1440 1120" role="img" aria-labelledby="title desc">
+<title id="title">Tavola — DC charging curves</title>
+<desc id="desc">Concept Tavola: confronto delle curve di ricarica DC di Nordis E4 e Aurora Vela a 150 kW, valori dal simulatore M0.1.</desc>
+<style>
+.s9{font-size:9px}.s10{font-size:10px}.s11{font-size:11px}.s12{font-size:12px}.s13{font-size:13px}.s14{font-size:14px}.s15{font-size:15px}.s16{font-size:16px}.s17{font-size:17px}.s18{font-size:18px}.s19{font-size:19px}.s20{font-size:20px}.s22{font-size:22px}.s24{font-size:24px}.s26{font-size:26px}.s28{font-size:28px}.s30{font-size:30px}.s32{font-size:32px}.s36{font-size:36px}.s40{font-size:40px}.s44{font-size:44px}.s48{font-size:48px}.s52{font-size:52px}.s56{font-size:56px}.s64{font-size:64px}.s72{font-size:72px}.s80{font-size:80px}.s96{font-size:96px}.s120{font-size:120px}.s160{font-size:160px}.w3{font-weight:300}.w4{font-weight:400}.w5{font-weight:500}.w6{font-weight:600}.w7{font-weight:700}.w8{font-weight:800}.w9{font-weight:900}.tab{font-variant-numeric:tabular-nums}.u{text-decoration:underline}.it{font-style:italic}
+text{font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;fill:#161616}
+.m{font-family:'IBM Plex Mono',Consolas,'SFMono-Regular',Menlo,monospace}
+.c2{fill:#4A4741}.c3{fill:#6B675F}.sig{fill:#C8361B}.inv{fill:#FBFAF6}.blue{fill:#2251A3}
+.caps{letter-spacing:1.2px}
+.paper{fill:#F3F0E8}.sheet{fill:#FBFAF6}.ink{fill:#161616}.sigf{fill:#C8361B}
+.box{fill:#FBFAF6;stroke:#161616;stroke-width:1}
+.boxr{fill:#FBFAF6;stroke:#CFC9BC;stroke-width:1}
+.dash{fill:#FBFAF6;stroke:#161616;stroke-width:1;stroke-dasharray:4 3}
+.hair{stroke:#CFC9BC;stroke-width:1;fill:none}
+.hairink{stroke:#161616;stroke-width:1;fill:none}
+.grid{stroke:#E4DFD3;stroke-width:1;fill:none}
+.stroke{stroke:#161616;stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.thin{stroke:#161616;stroke-width:1;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.sigs{stroke:#C8361B;stroke-width:2;fill:none}
+.center{stroke:#6B675F;stroke-width:0.8;stroke-dasharray:10 3 2 3;fill:none}
+.carbody{fill:#FBFAF6;stroke:#161616;stroke-width:1.4;stroke-linejoin:round}
+.carwin{fill:none;stroke:#161616;stroke-width:1}
+.wheel{fill:#FBFAF6;stroke:#161616;stroke-width:1.4}
+.dim{stroke:#4A4741;stroke-width:0.8;fill:none}
+.s1{stroke:#161616;stroke-width:2;fill:none;stroke-linejoin:round}
+.s2{stroke:#2251A3;stroke-width:2;fill:none;stroke-dasharray:7 4;stroke-linejoin:round}
+.s1pot{stroke:#161616;stroke-width:1;fill:none;stroke-dasharray:1.5 3}
+.limit{stroke:#4A4741;stroke-width:1;stroke-dasharray:12 3 2 3;fill:none}
+</style>
+<defs>
+<pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#CFC9BC" stroke-width="1"/></pattern>
+</defs>
+<rect x="0" y="0" width="1440" height="1120" class="paper"/>
+<g><rect x="0" y="0" width="1440" height="64" class="paper"/><line x1="0" y1="64" x2="1440" y2="64" class="hairink"/><g><rect x="32" y="19" width="26" height="26" class="hairink"/><circle cx="45" cy="34" r="6" class="thin"/><line x1="35" y1="40" x2="55" y2="40" class="thin"/><line x1="45" y1="23" x2="45" y2="27" class="thin"/></g><text x="68" y="38" class="s17 w6">EV Compare</text><text x="220" y="38" class="s15 w5">Cerca</text><text x="305" y="38" class="s15 w6">Confronta</text><rect x="305" y="61" width="75.6" height="3" class="sigf"/><text x="447" y="38" class="s15 w5">Strumenti tecnici</text><rect x="390" y="25" width="18" height="18" class="sigf"/><text x="399" y="38" class="m s12 w6 inv" text-anchor="middle">2</text><text x="1408" y="38" class="s14 c2" text-anchor="end">Fonti e metodo</text></g>
+<rect x="0" y="65" width="1440" height="46" class="sheet"/>
+<line x1="0" y1="111" x2="1440" y2="111" class="hair"/>
+<text x="32" y="94" class="s14 w6 u">‹ Confronto</text>
+<text x="128" y="94" class="m s12 c3">Nordis E4 · Aurora Vela</text>
+<text x="32" y="160" class="s28 w6">Ricarica a confronto</text>
+<line x1="1100" y1="152" x2="1126" y2="152" class="s1"/>
+<text x="1134" y="157" class="s14 w6">Nordis E4</text>
+<line x1="1260" y1="152" x2="1286" y2="152" class="s2"/>
+<text x="1294" y="157" class="s14 w6">Aurora Vela</text>
+<rect x="32" y="184" width="1376" height="104" class="box"/>
+<text x="52" y="210" class="m s10 c3 caps">STESSE CONDIZIONI PER ENTRAMBI</text>
+<text x="52" y="234" class="s12 c2">Tipo di ricarica</text>
+<g><g><rect x="52" y="246" width="176" height="34" class="ink"/><text x="140" y="267.5" class="s13 w6 inv" text-anchor="middle">Colonnina rapida (DC)</text></g><g><rect x="228" y="246" width="160" height="34" class="box"/><text x="308" y="267.5" class="s13 w5" text-anchor="middle">Casa o colonnina AC</text></g></g>
+<text x="452" y="234" class="s12 c2">Potenza della colonnina</text>
+<g><g><rect x="452" y="246" width="64" height="34" class="box"/><text x="484" y="267.5" class="s13 w5" text-anchor="middle">50 kW</text></g><g><rect x="516" y="246" width="64" height="34" class="ink"/><text x="548" y="267.5" class="s13 w6 inv" text-anchor="middle">150 kW</text></g><g><rect x="580" y="246" width="64" height="34" class="box"/><text x="612" y="267.5" class="s13 w5" text-anchor="middle">350 kW</text></g></g>
+<text x="716" y="234" class="s12 c2">Livello di carica</text>
+<text x="996" y="234" class="m s13 w6" text-anchor="end">10% → 80%</text>
+<line x1="724" y1="263" x2="988" y2="263" class="hair"/>
+<line x1="750.4" y1="263" x2="935.2" y2="263" class="stroke"/>
+<line x1="724" y1="268" x2="724" y2="274" class="thin"/>
+<line x1="750.4" y1="268" x2="750.4" y2="271" class="thin"/>
+<line x1="776.8" y1="268" x2="776.8" y2="271" class="thin"/>
+<line x1="803.2" y1="268" x2="803.2" y2="271" class="thin"/>
+<line x1="829.6" y1="268" x2="829.6" y2="271" class="thin"/>
+<line x1="856" y1="268" x2="856" y2="274" class="thin"/>
+<line x1="882.4" y1="268" x2="882.4" y2="271" class="thin"/>
+<line x1="908.8" y1="268" x2="908.8" y2="271" class="thin"/>
+<line x1="935.2" y1="268" x2="935.2" y2="271" class="thin"/>
+<line x1="961.6" y1="268" x2="961.6" y2="271" class="thin"/>
+<line x1="988" y1="268" x2="988" y2="274" class="thin"/>
+<rect x="744.4" y="256" width="12" height="14" class="box" stroke-width="1.5"/>
+<rect x="929.2" y="256" width="12" height="14" class="box" stroke-width="1.5"/>
+<text x="1044" y="234" class="s12 c2">Fine della ricarica</text>
+<g><g><rect x="1044" y="246" width="146" height="34" class="ink"/><text x="1117" y="267.5" class="s13 w6 inv" text-anchor="middle">Al livello scelto</text></g><g><rect x="1190" y="246" width="118" height="34" class="box"/><text x="1249" y="267.5" class="s13 w5" text-anchor="middle">Dopo un tempo</text></g></g>
+<rect x="32" y="308" width="680" height="124" class="box"/>
+<line x1="52" y1="340" x2="78" y2="340" class="s1"/>
+<text x="88" y="345" class="s16 w6">Nordis E4</text>
+<text x="692" y="345" class="m s12 c3" text-anchor="end">da 10% a 80%</text>
+<text x="52" y="404" class="m s48 w6">22 min</text>
+<g><path d="M540.8,337 L544.8,341.5 L540.8,346 L536.8,341.5 Z" class="ink"/><text x="592" y="345" class="m s10 c2" text-anchor="end">calcolo</text></g>
+<text x="280" y="374" class="s14 w6">+53,9 kWh nella batteria</text>
+<text x="280" y="396" class="s13 c2">potenza media 145 kW</text>
+<text x="280" y="416" class="s13 c2">limitata dalla colonnina (150 kW)</text>
+<rect x="728" y="308" width="680" height="124" class="box"/>
+<line x1="748" y1="340" x2="774" y2="340" class="s2"/>
+<text x="784" y="345" class="s16 w6">Aurora Vela</text>
+<text x="1388" y="345" class="m s12 c3" text-anchor="end">da 10% a 80%</text>
+<text x="748" y="404" class="m s48 w6">27 min</text>
+<g><path d="M1236.8,337 L1240.8,341.5 L1236.8,346 L1232.8,341.5 Z" class="ink"/><text x="1288" y="345" class="m s10 c2" text-anchor="end">calcolo</text></g>
+<text x="976" y="374" class="s14 w6">+40,6 kWh nella batteria</text>
+<text x="976" y="396" class="s13 c2">potenza media 89 kW</text>
+<text x="976" y="416" class="s13 c2">limitata dalla curva del veicolo (max 135 kW)</text>
+<rect x="32" y="452" width="680" height="424" class="box"/>
+<text x="52" y="482" class="s15 w6">Potenza per livello di carica</text>
+<rect x="154.4" y="520" width="408.8" height="300" fill="url(#hatch)"/>
+<line x1="96" y1="520" x2="96" y2="820" class="hair"/>
+<line x1="125.2" y1="520" x2="125.2" y2="820" class="grid"/>
+<line x1="154.4" y1="520" x2="154.4" y2="820" class="grid"/>
+<line x1="183.6" y1="520" x2="183.6" y2="820" class="grid"/>
+<line x1="212.8" y1="520" x2="212.8" y2="820" class="hair"/>
+<line x1="242" y1="520" x2="242" y2="820" class="grid"/>
+<line x1="271.2" y1="520" x2="271.2" y2="820" class="grid"/>
+<line x1="300.4" y1="520" x2="300.4" y2="820" class="grid"/>
+<line x1="329.6" y1="520" x2="329.6" y2="820" class="hair"/>
+<line x1="358.8" y1="520" x2="358.8" y2="820" class="grid"/>
+<line x1="388" y1="520" x2="388" y2="820" class="grid"/>
+<line x1="417.2" y1="520" x2="417.2" y2="820" class="grid"/>
+<line x1="446.4" y1="520" x2="446.4" y2="820" class="hair"/>
+<line x1="475.6" y1="520" x2="475.6" y2="820" class="grid"/>
+<line x1="504.8" y1="520" x2="504.8" y2="820" class="grid"/>
+<line x1="534" y1="520" x2="534" y2="820" class="grid"/>
+<line x1="563.2" y1="520" x2="563.2" y2="820" class="hair"/>
+<line x1="592.4" y1="520" x2="592.4" y2="820" class="grid"/>
+<line x1="621.6" y1="520" x2="621.6" y2="820" class="grid"/>
+<line x1="650.8" y1="520" x2="650.8" y2="820" class="grid"/>
+<line x1="680" y1="520" x2="680" y2="820" class="hair"/>
+<line x1="96" y1="820" x2="680" y2="820" class="hair"/>
+<line x1="96" y1="805" x2="680" y2="805" class="grid"/>
+<line x1="96" y1="790" x2="680" y2="790" class="grid"/>
+<line x1="96" y1="775" x2="680" y2="775" class="grid"/>
+<line x1="96" y1="760" x2="680" y2="760" class="grid"/>
+<line x1="96" y1="745" x2="680" y2="745" class="hair"/>
+<line x1="96" y1="730" x2="680" y2="730" class="grid"/>
+<line x1="96" y1="715" x2="680" y2="715" class="grid"/>
+<line x1="96" y1="700" x2="680" y2="700" class="grid"/>
+<line x1="96" y1="685" x2="680" y2="685" class="grid"/>
+<line x1="96" y1="670" x2="680" y2="670" class="hair"/>
+<line x1="96" y1="655" x2="680" y2="655" class="grid"/>
+<line x1="96" y1="640" x2="680" y2="640" class="grid"/>
+<line x1="96" y1="625" x2="680" y2="625" class="grid"/>
+<line x1="96" y1="610" x2="680" y2="610" class="grid"/>
+<line x1="96" y1="595" x2="680" y2="595" class="hair"/>
+<line x1="96" y1="580" x2="680" y2="580" class="grid"/>
+<line x1="96" y1="565" x2="680" y2="565" class="grid"/>
+<line x1="96" y1="550" x2="680" y2="550" class="grid"/>
+<line x1="96" y1="535" x2="680" y2="535" class="grid"/>
+<line x1="96" y1="520" x2="680" y2="520" class="hair"/>
+<text x="96" y="840" class="m s11 c2" text-anchor="middle">0%</text>
+<text x="212.8" y="840" class="m s11 c2" text-anchor="middle">20%</text>
+<text x="329.6" y="840" class="m s11 c2" text-anchor="middle">40%</text>
+<text x="446.4" y="840" class="m s11 c2" text-anchor="middle">60%</text>
+<text x="563.2" y="840" class="m s11 c2" text-anchor="middle">80%</text>
+<text x="680" y="840" class="m s11 c2" text-anchor="middle">100%</text>
+<text x="86" y="824" class="m s11 c2" text-anchor="end">0</text>
+<text x="86" y="749" class="m s11 c2" text-anchor="end">50</text>
+<text x="86" y="674" class="m s11 c2" text-anchor="end">100</text>
+<text x="86" y="599" class="m s11 c2" text-anchor="end">150</text>
+<text x="86" y="524" class="m s11 c2" text-anchor="end">200</text>
+<text x="86" y="506" class="m s11 c3" text-anchor="end">kW</text>
+<line x1="96" y1="595" x2="680" y2="595" class="limit"/>
+<text x="676" y="587" class="m s11 c2" text-anchor="end">colonnina 150 kW</text>
+<polyline points="96,610 101.84,606.25 107.68,602.5 113.52,598.75 119.36,595 125.2,591.25 131.04,587.5 136.88,583.75 142.72,580 148.56,576.25 154.4,572.5 160.24,572.17 166.08,571.83 171.92,571.5 177.76,571.17 183.6,570.83 189.44,570.5 195.28,570.17 201.12,569.83 206.96,569.5 212.8,569.17 218.64,568.83 224.48,568.5 230.32,568.17 236.16,567.83 242,567.5 247.84,567.17 253.68,566.83 259.52,566.5 265.36,566.17 271.2,565.83 277.04,565.5 282.88,565.17 288.72,564.83 294.56,564.5 300.4,564.17 306.24,563.83 312.08,563.5 317.92,563.17 323.76,562.83 329.6,562.5 335.44,562.17 341.28,561.83 347.12,561.5 352.96,561.17 358.8,560.83 364.64,560.5 370.48,560.17 376.32,559.83 382.16,559.5 388,559.17 393.84,558.83 399.68,558.5 405.52,558.17 411.36,557.83 417.2,557.5 423.04,560.5 428.88,563.5 434.72,566.5 440.56,569.5 446.4,572.5 452.24,575.5 458.08,578.5 463.92,581.5 469.76,584.5 475.6,587.5 481.44,592 487.28,596.5 493.12,601 498.96,605.5 504.8,610 510.64,614.5 516.48,619 522.32,623.5 528.16,628 534,632.5 539.84,637 545.68,641.5 551.52,646 557.36,650.5 563.2,655 569.04,661 574.88,667 580.72,673 586.56,679 592.4,685 598.24,691 604.08,697 609.92,703 615.76,709 621.6,715 627.44,720.25 633.28,725.5 639.12,730.75 644.96,736 650.8,741.25 656.64,746.5 662.48,751.75 668.32,757 674.16,762.25 680,767.5" class="s1pot"/>
+<polyline points="96,670 101.84,667 107.68,664 113.52,661 119.36,658 125.2,655 131.04,652 136.88,649 142.72,646 148.56,643 154.4,640 160.24,638.5 166.08,637 171.92,635.5 177.76,634 183.6,632.5 189.44,631 195.28,629.5 201.12,628 206.96,626.5 212.8,625 218.64,623.5 224.48,622 230.32,620.5 236.16,619 242,617.5 247.84,619 253.68,620.5 259.52,622 265.36,623.5 271.2,625 277.04,626.5 282.88,628 288.72,629.5 294.56,631 300.4,632.5 306.24,634 312.08,635.5 317.92,637 323.76,638.5 329.6,640 335.44,643 341.28,646 347.12,649 352.96,652 358.8,655 364.64,658 370.48,661 376.32,664 382.16,667 388,670 393.84,673 399.68,676 405.52,679 411.36,682 417.2,685 423.04,688 428.88,691 434.72,694 440.56,697 446.4,700 452.24,703 458.08,706 463.92,709 469.76,712 475.6,715 481.44,718 487.28,721 493.12,724 498.96,727 504.8,730 510.64,733 516.48,736 522.32,739 528.16,742 534,745 539.84,748 545.68,751 551.52,754 557.36,757 563.2,760 569.04,761.5 574.88,763 580.72,764.5 586.56,766 592.4,767.5 598.24,769 604.08,770.5 609.92,772 615.76,773.5 621.6,775 627.44,776.5 633.28,778 639.12,779.5 644.96,781 650.8,782.5 656.64,784 662.48,785.5 668.32,787 674.16,788.5 680,790" class="s2"/>
+<polyline points="96,610 101.84,606.25 107.68,602.5 113.52,598.75 119.36,595 125.2,595 131.04,595 136.88,595 142.72,595 148.56,595 154.4,595 160.24,595 166.08,595 171.92,595 177.76,595 183.6,595 189.44,595 195.28,595 201.12,595 206.96,595 212.8,595 218.64,595 224.48,595 230.32,595 236.16,595 242,595 247.84,595 253.68,595 259.52,595 265.36,595 271.2,595 277.04,595 282.88,595 288.72,595 294.56,595 300.4,595 306.24,595 312.08,595 317.92,595 323.76,595 329.6,595 335.44,595 341.28,595 347.12,595 352.96,595 358.8,595 364.64,595 370.48,595 376.32,595 382.16,595 388,595 393.84,595 399.68,595 405.52,595 411.36,595 417.2,595 423.04,595 428.88,595 434.72,595 440.56,595 446.4,595 452.24,595 458.08,595 463.92,595 469.76,595 475.6,595 481.44,595 487.28,596.5 493.12,601 498.96,605.5 504.8,610 510.64,614.5 516.48,619 522.32,623.5 528.16,628 534,632.5 539.84,637 545.68,641.5 551.52,646 557.36,650.5 563.2,655 569.04,661 574.88,667 580.72,673 586.56,679 592.4,685 598.24,691 604.08,697 609.92,703 615.76,709 621.6,715 627.44,720.25 633.28,725.5 639.12,730.75 644.96,736 650.8,741.25 656.64,746.5 662.48,751.75 668.32,757 674.16,762.25 680,767.5" class="s1"/>
+<rect x="93" y="607" width="6" height="6" class="box" stroke-width="1.2"/>
+<rect x="151.4" y="569.5" width="6" height="6" class="box" stroke-width="1.2"/>
+<rect x="414.2" y="554.5" width="6" height="6" class="box" stroke-width="1.2"/>
+<rect x="472.6" y="584.5" width="6" height="6" class="box" stroke-width="1.2"/>
+<rect x="560.2" y="652" width="6" height="6" class="box" stroke-width="1.2"/>
+<rect x="618.6" y="712" width="6" height="6" class="box" stroke-width="1.2"/>
+<rect x="677" y="764.5" width="6" height="6" class="box" stroke-width="1.2"/>
+<path d="M96,666 l4,4 l-4,4 l-4,-4 Z" class="" fill="#FBFAF6" stroke="#2251A3" stroke-width="1.2"/>
+<path d="M154.4,636 l4,4 l-4,4 l-4,-4 Z" class="" fill="#FBFAF6" stroke="#2251A3" stroke-width="1.2"/>
+<path d="M242,613.5 l4,4 l-4,4 l-4,-4 Z" class="" fill="#FBFAF6" stroke="#2251A3" stroke-width="1.2"/>
+<path d="M329.6,636 l4,4 l-4,4 l-4,-4 Z" class="" fill="#FBFAF6" stroke="#2251A3" stroke-width="1.2"/>
+<path d="M446.4,696 l4,4 l-4,4 l-4,-4 Z" class="" fill="#FBFAF6" stroke="#2251A3" stroke-width="1.2"/>
+<path d="M563.2,756 l4,4 l-4,4 l-4,-4 Z" class="" fill="#FBFAF6" stroke="#2251A3" stroke-width="1.2"/>
+<path d="M621.6,771 l4,4 l-4,4 l-4,-4 Z" class="" fill="#FBFAF6" stroke="#2251A3" stroke-width="1.2"/>
+<path d="M680,786 l4,4 l-4,4 l-4,-4 Z" class="" fill="#FBFAF6" stroke="#2251A3" stroke-width="1.2"/>
+<text x="423.04" y="547.5" class="m s10 c3" text-anchor="middle">curva del veicolo oltre il limite</text>
+<text x="236.16" y="588" class="s12 w6">Nordis E4</text>
+<text x="224.48" y="655" class="s12 w6 blue">Aurora Vela</text>
+<rect x="52" y="856" width="6" height="6" class="box" stroke-width="1.2"/>
+<text x="64" y="862" class="m s10 c3">punto della curva (costruttore) · tra i punti: interpolazione lineare</text>
+<rect x="728" y="452" width="680" height="424" class="box"/>
+<text x="748" y="482" class="s15 w6">Energia caricata nel tempo</text>
+<line x1="792" y1="520" x2="792" y2="820" class="hair"/>
+<line x1="811.47" y1="520" x2="811.47" y2="820" class="grid"/>
+<line x1="830.93" y1="520" x2="830.93" y2="820" class="grid"/>
+<line x1="850.4" y1="520" x2="850.4" y2="820" class="grid"/>
+<line x1="869.87" y1="520" x2="869.87" y2="820" class="grid"/>
+<line x1="889.33" y1="520" x2="889.33" y2="820" class="hair"/>
+<line x1="908.8" y1="520" x2="908.8" y2="820" class="grid"/>
+<line x1="928.27" y1="520" x2="928.27" y2="820" class="grid"/>
+<line x1="947.73" y1="520" x2="947.73" y2="820" class="grid"/>
+<line x1="967.2" y1="520" x2="967.2" y2="820" class="grid"/>
+<line x1="986.67" y1="520" x2="986.67" y2="820" class="hair"/>
+<line x1="1006.13" y1="520" x2="1006.13" y2="820" class="grid"/>
+<line x1="1025.6" y1="520" x2="1025.6" y2="820" class="grid"/>
+<line x1="1045.07" y1="520" x2="1045.07" y2="820" class="grid"/>
+<line x1="1064.53" y1="520" x2="1064.53" y2="820" class="grid"/>
+<line x1="1084" y1="520" x2="1084" y2="820" class="hair"/>
+<line x1="1103.47" y1="520" x2="1103.47" y2="820" class="grid"/>
+<line x1="1122.93" y1="520" x2="1122.93" y2="820" class="grid"/>
+<line x1="1142.4" y1="520" x2="1142.4" y2="820" class="grid"/>
+<line x1="1161.87" y1="520" x2="1161.87" y2="820" class="grid"/>
+<line x1="1181.33" y1="520" x2="1181.33" y2="820" class="hair"/>
+<line x1="1200.8" y1="520" x2="1200.8" y2="820" class="grid"/>
+<line x1="1220.27" y1="520" x2="1220.27" y2="820" class="grid"/>
+<line x1="1239.73" y1="520" x2="1239.73" y2="820" class="grid"/>
+<line x1="1259.2" y1="520" x2="1259.2" y2="820" class="grid"/>
+<line x1="1278.67" y1="520" x2="1278.67" y2="820" class="hair"/>
+<line x1="1298.13" y1="520" x2="1298.13" y2="820" class="grid"/>
+<line x1="1317.6" y1="520" x2="1317.6" y2="820" class="grid"/>
+<line x1="1337.07" y1="520" x2="1337.07" y2="820" class="grid"/>
+<line x1="1356.53" y1="520" x2="1356.53" y2="820" class="grid"/>
+<line x1="1376" y1="520" x2="1376" y2="820" class="hair"/>
+<line x1="792" y1="820" x2="1376" y2="820" class="hair"/>
+<line x1="792" y1="795" x2="1376" y2="795" class="grid"/>
+<line x1="792" y1="770" x2="1376" y2="770" class="grid"/>
+<line x1="792" y1="745" x2="1376" y2="745" class="grid"/>
+<line x1="792" y1="720" x2="1376" y2="720" class="hair"/>
+<line x1="792" y1="695" x2="1376" y2="695" class="grid"/>
+<line x1="792" y1="670" x2="1376" y2="670" class="grid"/>
+<line x1="792" y1="645" x2="1376" y2="645" class="grid"/>
+<line x1="792" y1="620" x2="1376" y2="620" class="hair"/>
+<line x1="792" y1="595" x2="1376" y2="595" class="grid"/>
+<line x1="792" y1="570" x2="1376" y2="570" class="grid"/>
+<line x1="792" y1="545" x2="1376" y2="545" class="grid"/>
+<line x1="792" y1="520" x2="1376" y2="520" class="hair"/>
+<text x="792" y="840" class="m s11 c2" text-anchor="middle">0 min</text>
+<text x="889.33" y="840" class="m s11 c2" text-anchor="middle">5 min</text>
+<text x="986.67" y="840" class="m s11 c2" text-anchor="middle">10 min</text>
+<text x="1084" y="840" class="m s11 c2" text-anchor="middle">15 min</text>
+<text x="1181.33" y="840" class="m s11 c2" text-anchor="middle">20 min</text>
+<text x="1278.67" y="840" class="m s11 c2" text-anchor="middle">25 min</text>
+<text x="1376" y="840" class="m s11 c2" text-anchor="middle">30 min</text>
+<text x="782" y="824" class="m s11 c2" text-anchor="end">0</text>
+<text x="782" y="724" class="m s11 c2" text-anchor="end">20</text>
+<text x="782" y="624" class="m s11 c2" text-anchor="end">40</text>
+<text x="782" y="524" class="m s11 c2" text-anchor="end">60</text>
+<text x="782" y="506" class="m s11 c3" text-anchor="end">kWh</text>
+<line x1="1181.33" y1="520" x2="1181.33" y2="820" class="limit"/>
+<text x="1181.33" y="512" class="m s11 c2" text-anchor="middle">a 20 min</text>
+<polyline points="792,820 811.47,809.85 830.93,799.4 850.4,788.65 869.87,777.6 889.33,766.5 908.8,755.7 947.73,735 986.67,715.9 1025.6,698.85 1064.53,683.65 1103.47,670.1 1142.4,658.05 1181.33,647.3 1220.27,637.7 1259.2,629.15 1298.13,621.55 1317.6,618.05 1323.63,617" class="s2"/>
+<polyline points="792,820 830.93,795 869.87,770 908.8,745 947.73,720 986.67,695 1025.6,670 1064.53,645 1103.47,620 1122.93,607.5 1142.4,595.1 1161.87,583.45 1181.33,572.5 1200.8,562.25 1220.27,552.6 1224.74,550.5" class="s1"/>
+<rect x="1220.74" y="546.5" width="8" height="8" class="ink"/>
+<text x="1234.74" y="554.5" class="m s11 w6 ">80% · 53,9 kWh</text>
+<circle cx="1181.33" cy="572.5" r="3" class="" fill="#FBFAF6" stroke="#161616" stroke-width="1.5"/>
+<text x="1173.33" y="564.5" class="m s11 " text-anchor="end">49,5 kWh · 74%</text>
+<path d="M1323.6346666666668,612 l5,5 l-5,5 l-5,-5 Z" class="" fill="#2251A3"/>
+<text x="1313.63" y="605" class="m s11 w6 blue" text-anchor="end">80% · 40,6 kWh</text>
+<circle cx="1181.33" cy="647.5" r="3" class="" fill="#FBFAF6" stroke="#2251A3" stroke-width="1.5"/>
+<text x="1189.33" y="667.5" class="m s11 blue">34,5 kWh · 70%</text>
+<text x="748" y="862" class="m s10 c3">valori del simulatore M0.1 · stessa colonnina, partenza dal 10%</text>
+<text x="32" y="922" class="s16 w6">Con altre colonnine</text>
+<text x="210" y="922" class="m s12 c3">da 10% a 80%</text>
+<line x1="32" y1="940" x2="712" y2="940" class="hairink"/>
+<text x="48" y="962" class="m s11 c3">Colonnina</text>
+<text x="260" y="962" class="m s11 c3">Nordis E4 · +53,9 kWh</text>
+<text x="500" y="962" class="m s11 c3">Aurora Vela · +40,6 kWh</text>
+<text x="48" y="998" class="m s14 ">50 kW</text>
+<text x="260" y="998" class="m s14 w6">65 min</text>
+<text x="500" y="998" class="m s14 w6">49 min</text>
+<line x1="32" y1="1011" x2="712" y2="1011" class="hair"/>
+<rect x="32" y="1011" width="680" height="36" class="sheet"/>
+<rect x="32" y="1011" width="3" height="36" class="sigf"/>
+<text x="48" y="1034" class="m s14 w6">150 kW</text>
+<text x="260" y="1034" class="m s14 w6">22 min</text>
+<text x="500" y="1034" class="m s14 w6">27 min</text>
+<line x1="32" y1="1047" x2="712" y2="1047" class="hair"/>
+<text x="48" y="1070" class="m s14 ">350 kW</text>
+<text x="260" y="1070" class="m s14 w6">20 min</text>
+<text x="500" y="1070" class="m s14 w6">27 min</text>
+<line x1="32" y1="1083" x2="712" y2="1083" class="hair"/>
+<rect x="728" y="902" width="680" height="176" class="boxr"/>
+<text x="748" y="932" class="s15 w6">Ipotesi</text>
+<text x="1388" y="932" class="s13 w6 u" text-anchor="end">Limiti del calcolo →</text>
+<text x="748" y="966" class="m s11 c3">1</text>
+<text x="770" y="966" class="s13 c2">Curve di ricarica del costruttore (illustrative)</text>
+<text x="748" y="992" class="m s11 c3">2</text>
+<text x="770" y="992" class="s13 c2">Energia immagazzinata nella batteria: quella prelevata dalla rete è maggiore</text>
+<text x="748" y="1018" class="m s11 c3">3</text>
+<text x="770" y="1018" class="s13 c2">Nessun effetto di temperatura o preriscaldamento</text>
+<text x="748" y="1044" class="m s11 c3">4</text>
+<text x="770" y="1044" class="s13 c2">Potenza della colonnina non condivisa con altri veicoli</text>
+</svg>

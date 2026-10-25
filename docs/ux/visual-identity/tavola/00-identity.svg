@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+<title id="title">Tavola — Identity sheet</title>
+<desc id="desc">Palette, tipografia e componenti del concept Tavola.</desc>
+<style>
+.s9{font-size:9px}.s10{font-size:10px}.s11{font-size:11px}.s12{font-size:12px}.s13{font-size:13px}.s14{font-size:14px}.s15{font-size:15px}.s16{font-size:16px}.s17{font-size:17px}.s18{font-size:18px}.s19{font-size:19px}.s20{font-size:20px}.s22{font-size:22px}.s24{font-size:24px}.s26{font-size:26px}.s28{font-size:28px}.s30{font-size:30px}.s32{font-size:32px}.s36{font-size:36px}.s40{font-size:40px}.s44{font-size:44px}.s48{font-size:48px}.s52{font-size:52px}.s56{font-size:56px}.s64{font-size:64px}.s72{font-size:72px}.s80{font-size:80px}.s96{font-size:96px}.s120{font-size:120px}.s160{font-size:160px}.w3{font-weight:300}.w4{font-weight:400}.w5{font-weight:500}.w6{font-weight:600}.w7{font-weight:700}.w8{font-weight:800}.w9{font-weight:900}.tab{font-variant-numeric:tabular-nums}.u{text-decoration:underline}.it{font-style:italic}
+text{font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;fill:#161616}
+.m{font-family:'IBM Plex Mono',Consolas,'SFMono-Regular',Menlo,monospace}
+.c2{fill:#4A4741}.c3{fill:#6B675F}.sig{fill:#C8361B}.inv{fill:#FBFAF6}.blue{fill:#2251A3}
+.caps{letter-spacing:1.2px}
+.paper{fill:#F3F0E8}.sheet{fill:#FBFAF6}.ink{fill:#161616}.sigf{fill:#C8361B}
+.box{fill:#FBFAF6;stroke:#161616;stroke-width:1}
+.boxr{fill:#FBFAF6;stroke:#CFC9BC;stroke-width:1}
+.dash{fill:#FBFAF6;stroke:#161616;stroke-width:1;stroke-dasharray:4 3}
+.hair{stroke:#CFC9BC;stroke-width:1;fill:none}
+.hairink{stroke:#161616;stroke-width:1;fill:none}
+.grid{stroke:#E4DFD3;stroke-width:1;fill:none}
+.stroke{stroke:#161616;stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.thin{stroke:#161616;stroke-width:1;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.sigs{stroke:#C8361B;stroke-width:2;fill:none}
+.center{stroke:#6B675F;stroke-width:0.8;stroke-dasharray:10 3 2 3;fill:none}
+.carbody{fill:#FBFAF6;stroke:#161616;stroke-width:1.4;stroke-linejoin:round}
+.carwin{fill:none;stroke:#161616;stroke-width:1}
+.wheel{fill:#FBFAF6;stroke:#161616;stroke-width:1.4}
+.dim{stroke:#4A4741;stroke-width:0.8;fill:none}
+.s1{stroke:#161616;stroke-width:2;fill:none;stroke-linejoin:round}
+.s2{stroke:#2251A3;stroke-width:2;fill:none;stroke-dasharray:7 4;stroke-linejoin:round}
+.s1pot{stroke:#161616;stroke-width:1;fill:none;stroke-dasharray:1.5 3}
+.limit{stroke:#4A4741;stroke-width:1;stroke-dasharray:12 3 2 3;fill:none}
+</style>
+<defs>
+<pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#CFC9BC" stroke-width="1"/></pattern>
+</defs>
+<rect x="0" y="0" width="1440" height="900" class="paper"/>
+<text x="48" y="72" class="s48 w6" letter-spacing="-1">Tavola</text>
+<text x="48" y="104" class="s16 c2">Il veicolo come disegno tecnico annotato: inchiostro, linee sottili, cifre monospaziate.</text>
+<text x="48" y="160" class="m s11 c3 caps">COLORE</text>
+<rect x="48" y="172" width="120" height="72" fill="#F3F0E8" stroke="#CFC9BC"/>
+<text x="48" y="264" class="s13 w6">Carta</text>
+<text x="48" y="282" class="m s11 c2">#F3F0E8</text>
+<text x="48" y="298" class="s11 c3">sfondo</text>
+<rect x="180" y="172" width="120" height="72" fill="#FBFAF6" stroke="#CFC9BC"/>
+<text x="180" y="264" class="s13 w6">Foglio</text>
+<text x="180" y="282" class="m s11 c2">#FBFAF6</text>
+<text x="180" y="298" class="s11 c3">superfici</text>
+<rect x="312" y="172" width="120" height="72" fill="#161616" stroke="#CFC9BC"/>
+<text x="312" y="264" class="s13 w6">Inchiostro</text>
+<text x="312" y="282" class="m s11 c2">#161616</text>
+<text x="312" y="298" class="s11 c3">testo, linee, azioni</text>
+<rect x="444" y="172" width="120" height="72" fill="#4A4741" stroke="#CFC9BC"/>
+<text x="444" y="264" class="s13 w6">Grafite</text>
+<text x="444" y="282" class="m s11 c2">#4A4741</text>
+<text x="444" y="298" class="s11 c3">testo secondario</text>
+<rect x="576" y="172" width="120" height="72" fill="#6B675F" stroke="#CFC9BC"/>
+<text x="576" y="264" class="s13 w6">Grafite chiara</text>
+<text x="576" y="282" class="m s11 c2">#6B675F</text>
+<text x="576" y="298" class="s11 c3">note, assi</text>
+<rect x="708" y="172" width="120" height="72" fill="#CFC9BC" stroke="#CFC9BC"/>
+<text x="708" y="264" class="s13 w6">Filo</text>
+<text x="708" y="282" class="m s11 c2">#CFC9BC</text>
+<text x="708" y="298" class="s11 c3">divisori</text>
+<rect x="840" y="172" width="120" height="72" fill="#C8361B" stroke="#CFC9BC"/>
+<text x="840" y="264" class="s13 w6">Vermiglio</text>
+<text x="840" y="282" class="m s11 c2">#C8361B</text>
+<text x="840" y="298" class="s11 c3">focus, selezione, stato attivo</text>
+<text x="990" y="160" class="m s11 c3 caps">SERIE NEI GRAFICI</text>
+<line x1="990" y1="186" x2="1060" y2="186" class="" stroke="#161616" stroke-width="2" stroke-dasharray=""/>
+<text x="1072" y="190" class="m s11 c2">1 · #161616 · solido</text>
+<line x1="990" y1="214" x2="1060" y2="214" class="" stroke="#2251A3" stroke-width="2" stroke-dasharray="7 4"/>
+<text x="1072" y="218" class="m s11 c2">2 · #2251A3 · tratteggio</text>
+<line x1="990" y1="242" x2="1060" y2="242" class="" stroke="#C27A00" stroke-width="2" stroke-dasharray="10 3 2 3"/>
+<text x="1072" y="246" class="m s11 c2">3 · #C27A00 · punto-linea</text>
+<line x1="990" y1="270" x2="1060" y2="270" class="" stroke="#A63D7A" stroke-width="2" stroke-dasharray="2 3"/>
+<text x="1072" y="274" class="m s11 c2">4 · #A63D7A · punto</text>
+<text x="48" y="350" class="m s11 c3 caps">TIPOGRAFIA</text>
+<text x="48" y="400" class="s40 w6" letter-spacing="-0.8">Trova l’auto adatta a te.</text>
+<text x="560" y="400" class="m s11 c3">IBM Plex Sans 600 · 52/40/28</text>
+<text x="48" y="436" class="s15">Testo corrente, etichette e azioni in IBM Plex Sans.</text>
+<text x="560" y="436" class="m s11 c3">IBM Plex Sans 400–600 · 12–16</text>
+<text x="48" y="476" class="m s24 w6">22 min · +53,9 kWh · €41.500</text>
+<text x="560" y="476" class="m s11 c3">IBM Plex Mono: tutte le cifre</text>
+<text x="48" y="506" class="m s11 c3 caps">REQUISITI · PREFERENZE · CRITERIO COLLEGATO</text>
+<text x="560" y="506" class="m s11 c3">IBM Plex Mono 10–11 maiuscolo</text>
+<text x="48" y="566" class="m s11 c3 caps">COMPONENTI</text>
+<g><rect x="48" y="580" width="260" height="46" class="box" stroke-width="1"/><text x="62" y="598" class="s12 c2">Budget</text><text x="62" y="617" class="s14 w6">fino a €45.000</text><path d="M283,600.5 L288,605.5 L293,600.5" class="thin"/></g>
+<g><rect x="48" y="636" width="260" height="46" class="dash" stroke-width="1"/><text x="62" y="654" class="s12 c2">Viaggi lunghi</text><text x="62" y="673" class="s14 w6">400 km, al massimo 1 sosta</text><path d="M283,656.5 L288,661.5 L293,656.5" class="thin"/></g>
+<g><rect x="48" y="692" width="260" height="46" class="box" stroke-width="1.5"/><rect x="48" y="692" width="3" height="46" class="sigf"/><text x="62" y="710" class="s12 c2">Potenza DC massima</text><text x="62" y="729" class="s14 w6">almeno 100 kW</text><rect x="188" y="700" width="34" height="14" class="hairink" fill="none"/><text x="205" y="710.5" class="m s9 w6" text-anchor="middle">SPEC</text><path d="M283,717.5 L288,712.5 L293,717.5" class="thin"/></g>
+<g><rect x="340" y="580" width="140" height="36" class="ink"/><text x="410" y="603" class="s14 w6 inv" text-anchor="middle">Confronta →</text></g>
+<g><rect x="490" y="580" width="120" height="36" class="box"/><text x="550" y="603" class="s14 w5" text-anchor="middle">Apri scheda</text></g>
+<g><g><rect x="340" y="630" width="66" height="32" class="ink"/><text x="373" y="650.5" class="s13 w6 inv" text-anchor="middle">Schede</text></g><g><rect x="406" y="630" width="66" height="32" class="box"/><text x="439" y="650.5" class="s13 w5" text-anchor="middle">Elenco</text></g><g><rect x="472" y="630" width="92" height="32" class="box"/><text x="518" y="650.5" class="s13 w5" text-anchor="middle">Differenze</text></g></g>
+<g><rect x="340" y="684" width="12" height="12" class="hairink"/><path d="M342.64,690.24 L345.04,692.64 L349.36,687.6" class="thin"/></g>
+<text x="360" y="695" class="s13">requisito rispettato</text>
+<g><circle cx="346" cy="714" r="6" class="thin"/><line x1="343" y1="714" x2="349" y2="714" class="thin"/></g>
+<text x="360" y="719" class="s13">requisito non rispettato</text>
+<g><rect x="370.9" y="745" width="7" height="7" class="ink"/><text x="450" y="752" class="m s10 c2" text-anchor="end">costruttore</text></g>
+<g><circle cx="521" cy="748.5" r="3.4" class="thin"/><text x="560" y="752" class="m s10 c2" text-anchor="end">stima</text></g>
+<g><path d="M618.8,744 L622.8,748.5 L618.8,753 L614.8,748.5 Z" class="ink"/><text x="670" y="752" class="m s10 c2" text-anchor="end">calcolo</text></g>
+<text x="340" y="780" class="s12 c3">Fonte: glifo + parola, colonna fissa a destra dell’etichetta.</text>
+<g><rect x="700" y="580" width="260" height="130" class="paper"/><line x1="720" y1="580" x2="720" y2="710" class="grid"/><line x1="740" y1="580" x2="740" y2="710" class="grid"/><line x1="760" y1="580" x2="760" y2="710" class="grid"/><line x1="780" y1="580" x2="780" y2="710" class="grid"/><line x1="800" y1="580" x2="800" y2="710" class="grid"/><line x1="820" y1="580" x2="820" y2="710" class="grid"/><line x1="840" y1="580" x2="840" y2="710" class="grid"/><line x1="860" y1="580" x2="860" y2="710" class="grid"/><line x1="880" y1="580" x2="880" y2="710" class="grid"/><line x1="900" y1="580" x2="900" y2="710" class="grid"/><line x1="920" y1="580" x2="920" y2="710" class="grid"/><line x1="940" y1="580" x2="940" y2="710" class="grid"/><line x1="700" y1="600" x2="960" y2="600" class="grid"/><line x1="700" y1="620" x2="960" y2="620" class="grid"/><line x1="700" y1="640" x2="960" y2="640" class="grid"/><line x1="700" y1="660" x2="960" y2="660" class="grid"/><line x1="700" y1="680" x2="960" y2="680" class="grid"/><line x1="700" y1="700" x2="960" y2="700" class="grid"/><g><line x1="724.4" y1="700" x2="935.6" y2="700" class="thin"/><line x1="775.71" y1="625.86" x2="775.71" y2="708" class="center"/><line x1="884.29" y1="625.86" x2="884.29" y2="708" class="center"/><path d="M740.14,686.52 L740.14,678.1 C740.28,675.18 740.24,663.37 741.08,658.63 C741.92,653.88 742.81,649.89 745.76,646.46 C748.71,643.03 754.28,637.94 760.74,635.75 C767.19,633.56 776.74,632.44 788.82,631.86 C800.89,631.28 831.12,631.31 841.23,631.86 C851.34,632.41 851.72,632.81 856.21,635.51 C860.7,638.21 863.88,646.76 871.18,649.87 C878.48,652.97 897.86,654.33 904.88,656.2 C911.9,658.06 915.6,658.99 917.98,662.28 C920.37,665.56 920.37,675.72 920.79,678.1 L920.79,686.52 L901.51,686.52 A17.22,17.22 0 0 0 867.07,686.52 L792.93,686.52 A17.22,17.22 0 0 0 758.49,686.52 Z" class="carbody"/><path d="M756.99,650.35 C758.24,648.86 762.11,641.04 766.35,639.16 C770.6,637.28 779.08,636.63 788.82,636.24 C798.55,635.85 830.87,635.79 839.36,636.24 C847.85,636.69 849.22,637.76 852.46,639.65 C855.71,641.53 862.2,648.93 863.7,650.35 Z" class="carwin"/><path d="M813.15,635.30 L813.15,650.35" class="carwin"/><path d="M813.15,650.35 L813.15,683.71" class="carwin"/><circle cx="775.71" cy="685.02" r="14.98" class="wheel"/><circle cx="775.71" cy="685.02" r="8.24" class="thin"/><circle cx="775.71" cy="685.02" r="1.2" class="ink"/><circle cx="884.29" cy="685.02" r="14.98" class="wheel"/><circle cx="884.29" cy="685.02" r="8.24" class="thin"/><circle cx="884.29" cy="685.02" r="1.2" class="ink"/></g></g>
+<g><rect x="980" y="580" width="200" height="130" class="paper"/><line x1="1000" y1="580" x2="1000" y2="710" class="grid"/><line x1="1020" y1="580" x2="1020" y2="710" class="grid"/><line x1="1040" y1="580" x2="1040" y2="710" class="grid"/><line x1="1060" y1="580" x2="1060" y2="710" class="grid"/><line x1="1080" y1="580" x2="1080" y2="710" class="grid"/><line x1="1100" y1="580" x2="1100" y2="710" class="grid"/><line x1="1120" y1="580" x2="1120" y2="710" class="grid"/><line x1="1140" y1="580" x2="1140" y2="710" class="grid"/><line x1="1160" y1="580" x2="1160" y2="710" class="grid"/><line x1="980" y1="600" x2="1180" y2="600" class="grid"/><line x1="980" y1="620" x2="1180" y2="620" class="grid"/><line x1="980" y1="640" x2="1180" y2="640" class="grid"/><line x1="980" y1="660" x2="1180" y2="660" class="grid"/><line x1="980" y1="680" x2="1180" y2="680" class="grid"/><line x1="980" y1="700" x2="1180" y2="700" class="grid"/><g><line x1="996" y1="700" x2="1164" y2="700" class="thin"/><line x1="1038.24" y1="644.68" x2="1038.24" y2="708" class="center"/><line x1="1120.32" y1="644.68" x2="1120.32" y2="708" class="center"/><path d="M1013.76,690.5 L1013.76,683.8 C1013.87,681.37 1013.83,671.51 1014.48,667.6 C1015.13,663.68 1015.6,660.02 1018.08,657.7 C1020.56,655.38 1026.07,653.17 1031.04,652.12 C1036.01,651.07 1043.42,650.79 1051.2,650.68 C1058.98,650.57 1076.4,650.75 1082.88,651.4 C1089.36,652.05 1090.73,652.95 1094.4,655 C1098.07,657.05 1101.74,662.78 1107.36,665.08 C1112.98,667.37 1126.22,668.84 1131.84,670.3 C1137.46,671.76 1142.53,672.77 1144.8,674.8 C1147.07,676.82 1146.64,682.45 1146.96,683.8 L1146.96,690.5 L1132.7,690.5 A12.38,12.38 0 0 0 1107.94,690.5 L1050.62,690.5 A12.38,12.38 0 0 0 1025.86,690.5 Z" class="carbody"/><path d="M1023.84,663.64 C1024.99,662.54 1028.83,656.66 1032.48,655.36 C1036.13,654.06 1044.67,654.02 1051.2,653.92 C1057.73,653.82 1076.06,654.16 1081.44,654.64 C1086.82,655.12 1088.83,656.18 1091.52,657.52 C1094.21,658.86 1100.26,663.76 1101.6,664.72 Z" class="carwin"/><path d="M1062.72,653.20 L1062.72,664.72" class="carwin"/><path d="M1062.72,664.72 L1062.72,688.34" class="carwin"/><circle cx="1038.24" cy="689.34" r="10.66" class="wheel"/><circle cx="1038.24" cy="689.34" r="5.86" class="thin"/><circle cx="1038.24" cy="689.34" r="1.2" class="ink"/><circle cx="1120.32" cy="689.34" r="10.66" class="wheel"/><circle cx="1120.32" cy="689.34" r="5.86" class="thin"/><circle cx="1120.32" cy="689.34" r="1.2" class="ink"/></g></g>
+<g><rect x="1200" y="580" width="200" height="130" class="paper"/><line x1="1220" y1="580" x2="1220" y2="710" class="grid"/><line x1="1240" y1="580" x2="1240" y2="710" class="grid"/><line x1="1260" y1="580" x2="1260" y2="710" class="grid"/><line x1="1280" y1="580" x2="1280" y2="710" class="grid"/><line x1="1300" y1="580" x2="1300" y2="710" class="grid"/><line x1="1320" y1="580" x2="1320" y2="710" class="grid"/><line x1="1340" y1="580" x2="1340" y2="710" class="grid"/><line x1="1360" y1="580" x2="1360" y2="710" class="grid"/><line x1="1380" y1="580" x2="1380" y2="710" class="grid"/><line x1="1200" y1="600" x2="1400" y2="600" class="grid"/><line x1="1200" y1="620" x2="1400" y2="620" class="grid"/><line x1="1200" y1="640" x2="1400" y2="640" class="grid"/><line x1="1200" y1="660" x2="1400" y2="660" class="grid"/><line x1="1200" y1="680" x2="1400" y2="680" class="grid"/><line x1="1200" y1="700" x2="1400" y2="700" class="grid"/><g><line x1="1216" y1="700" x2="1384" y2="700" class="thin"/><line x1="1256.8" y1="637.6" x2="1256.8" y2="708" class="center"/><line x1="1343.2" y1="637.6" x2="1343.2" y2="708" class="center"/><path d="M1230.88,690.21 L1230.88,683.41 C1230.97,679.82 1230.81,664.81 1231.46,659.45 C1232.1,654.09 1232.69,649.98 1235.2,647.65 C1237.71,645.33 1238.01,644.57 1248.16,643.97 C1258.31,643.36 1292.51,643.05 1302.88,643.6 C1313.25,644.15 1312.74,645 1317.28,647.65 C1321.82,650.31 1326.86,658.36 1333.12,661.29 C1339.38,664.22 1353.75,665.53 1359.04,667.19 C1364.33,668.85 1366.78,669.92 1368.4,672.35 C1370.02,674.79 1369.62,681.75 1369.84,683.41 L1369.84,690.21 L1355.87,690.21 A12.67,12.67 0 0 0 1330.53,690.21 L1269.47,690.21 A12.67,12.67 0 0 0 1244.13,690.21 Z" class="carbody"/><path d="M1239.52,660.56 C1239.81,659.08 1240.14,651.27 1241.68,649.5 C1243.22,647.73 1242.88,647.63 1251.04,647.28 C1259.2,646.94 1294.43,646.47 1302.88,646.92 C1311.33,647.36 1311.33,648.69 1314.4,650.6 C1317.47,652.52 1324.38,659.87 1325.92,661.29 Z" class="carwin"/><path d="M1279.84,646.20 L1279.84,661.29" class="carwin"/><path d="M1279.84,661.29 L1279.84,688.05" class="carwin"/><circle cx="1256.8" cy="689.06" r="10.94" class="wheel"/><circle cx="1256.8" cy="689.06" r="6.02" class="thin"/><circle cx="1256.8" cy="689.06" r="1.2" class="ink"/><circle cx="1343.2" cy="689.06" r="10.94" class="wheel"/><circle cx="1343.2" cy="689.06" r="6.02" class="thin"/><circle cx="1343.2" cy="689.06" r="1.2" class="ink"/></g></g>
+<text x="700" y="734" class="s12 c3">Rappresentazione dei veicoli: prospetto laterale a linea, griglia, interassi in asse.</text>
+<text x="48" y="860" class="m s11 c3">Font: IBM Plex Sans e IBM Plex Mono (OFL). Fallback: Helvetica Neue / Arial, Consolas / Menlo.</text>
+</svg>

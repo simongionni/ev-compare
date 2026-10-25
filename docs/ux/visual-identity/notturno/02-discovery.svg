@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1330" viewBox="0 0 1440 1330" role="img" aria-labelledby="title desc">
+<title id="title">Notturno — Vehicle Discovery, Active Criteria</title>
+<desc id="desc">Concept Notturno applicato alla ricerca con sei criteri attivi.</desc>
+<style>
+.s9{font-size:9px}.s10{font-size:10px}.s11{font-size:11px}.s12{font-size:12px}.s13{font-size:13px}.s14{font-size:14px}.s15{font-size:15px}.s16{font-size:16px}.s17{font-size:17px}.s18{font-size:18px}.s19{font-size:19px}.s20{font-size:20px}.s22{font-size:22px}.s24{font-size:24px}.s26{font-size:26px}.s28{font-size:28px}.s30{font-size:30px}.s32{font-size:32px}.s36{font-size:36px}.s40{font-size:40px}.s44{font-size:44px}.s48{font-size:48px}.s52{font-size:52px}.s56{font-size:56px}.s64{font-size:64px}.s72{font-size:72px}.s80{font-size:80px}.s96{font-size:96px}.s120{font-size:120px}.s160{font-size:160px}.w3{font-weight:300}.w4{font-weight:400}.w5{font-weight:500}.w6{font-weight:600}.w7{font-weight:700}.w8{font-weight:800}.w9{font-weight:900}.tab{font-variant-numeric:tabular-nums}.u{text-decoration:underline}.it{font-style:italic}
+text{font-family:Barlow,Bahnschrift,'DIN Alternate','Segoe UI',Arial,sans-serif;fill:#EDE9E1}
+.n{font-family:'Barlow Semi Condensed',Bahnschrift,'DIN Alternate','Arial Narrow',Arial,sans-serif}
+.c2{fill:#B5AFA4}.c3{fill:#8E887D}.am{fill:#F2B24C}.dk{fill:#141412}
+.caps{letter-spacing:1.6px}
+.bg{fill:#141412}.panel{fill:#1C1B18}.panel2{fill:#24221F}
+.box{fill:#24221F;stroke:#4A4640;stroke-width:1}
+.boxl{fill:#1C1B18;stroke:#36332E;stroke-width:1}
+.dash{fill:none;stroke:#4A4640;stroke-width:1.2;stroke-dasharray:5 4}
+.focus{fill:#24221F;stroke:#F2B24C;stroke-width:1.5}
+.line{stroke:#36332E;stroke-width:1;fill:none}
+.line2{stroke:#4A4640;stroke-width:1;fill:none}
+.grid{stroke:#2A2824;stroke-width:1;fill:none}
+.stroke{stroke:#EDE9E1;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.strokeam{stroke:#F2B24C;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.strokedim{stroke:#8E887D;stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+</style>
+<defs>
+<radialGradient id="spot" cx="50%" cy="20%" r="75%"><stop offset="0" stop-color="#34312C"/><stop offset="0.55" stop-color="#1D1C19"/><stop offset="1" stop-color="#121210"/></radialGradient>
+<linearGradient id="rim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F4EEE3" stop-opacity="0"/><stop offset="0.35" stop-color="#F4EEE3" stop-opacity="0.85"/><stop offset="0.7" stop-color="#F4EEE3" stop-opacity="0.5"/><stop offset="1" stop-color="#F4EEE3" stop-opacity="0"/></linearGradient>
+<linearGradient id="paint" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A3731"/><stop offset="0.45" stop-color="#191816"/><stop offset="1" stop-color="#0B0B0A"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A3833"/><stop offset="1" stop-color="#1A1917"/></linearGradient>
+<radialGradient id="heroSpot" cx="72%" cy="10%" r="60%"><stop offset="0" stop-color="#36332D"/><stop offset="0.6" stop-color="#1A1916"/><stop offset="1" stop-color="#141412"/></radialGradient>
+<radialGradient id="floor" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#000000" stop-opacity="0.7"/><stop offset="1" stop-color="#000000" stop-opacity="0"/></radialGradient>
+</defs>
+<rect x="0" y="0" width="1440" height="1330" class="bg"/>
+<g><rect x="0" y="0" width="1440" height="64" class="bg"/><line x1="0" y1="64" x2="1440" y2="64" class="line"/><g><circle cx="45" cy="32" r="12" class="" fill="none" stroke="#4A4640" stroke-width="1.5"/><circle cx="45" cy="32" r="4" class="" fill="#F2B24C"/></g><text x="68" y="38" class="s18 w6">EV Compare</text><text x="220" y="38" class="s15 w6">Cerca</text><circle cx="240.5" cy="54" r="2.5" class="" fill="#F2B24C"/><text x="305" y="38" class="s15 w5 c2">Confronta</text><text x="447" y="38" class="s15 w5 c2">Strumenti tecnici</text><rect x="386" y="26" width="22" height="18" rx="9" fill="#24221F" stroke="#4A4640"/><text x="397" y="39" class="n s12 w6" text-anchor="middle">2</text><text x="1408" y="38" class="s14 c2" text-anchor="end">Fonti e metodo</text></g>
+<rect x="32" y="86" width="1376" height="50" rx="10" class="box"/>
+<circle cx="58" cy="110" r="7" class="strokedim"/>
+<line x1="63" y1="115" x2="68" y2="120" class="strokedim"/>
+<text x="80" y="117" class="s15 c3">Cerca marca o modello, oppure un’esigenza (es. “7 posti”)</text>
+<rect x="16" y="156" width="352" height="1150" rx="14" class="panel"/>
+<text x="32" y="192" class="s19 w6">Criteri attivi (6)</text>
+<text x="352" y="192" class="s13 c2" text-anchor="end">Azzera</text>
+<rect x="32" y="208" width="28" height="14" rx="4" class="box"/>
+<text x="68" y="220" class="s12 c2">Requisito: esclude</text>
+<rect x="194" y="208" width="28" height="14" rx="4" class="dash"/>
+<text x="230" y="220" class="s12 c2">Preferenza: ordina</text>
+<text x="32" y="252" class="n s11 w6 c3 caps">REQUISITI</text>
+<g><rect x="32" y="262" width="320" height="48" rx="8" class="box"/><text x="46" y="281" class="s12 c2">Budget</text><text x="46" y="300" class="s15 w6">fino a €45.000</text><path d="M327,283.5 L332,288.5 L337,283.5" class="strokedim"/></g>
+<g><rect x="32" y="318" width="320" height="48" rx="8" class="box"/><text x="46" y="337" class="s12 c2">Bagagliaio</text><text x="46" y="356" class="s15 w6">almeno 400 L</text><path d="M327,339.5 L332,344.5 L337,339.5" class="strokedim"/></g>
+<g><rect x="32" y="374" width="320" height="48" rx="8" class="focus"/><text x="46" y="393" class="s12 c2">Potenza DC massima</text><text x="46" y="412" class="s15 w6">almeno 100 kW</text><rect x="178" y="382" width="36" height="15" rx="3" fill="#36332E"/><text x="196" y="393" class="n s10 w6 c2" text-anchor="middle">SPEC</text><path d="M327,400.5 L332,395.5 L337,400.5" class="strokeam"/></g>
+<rect x="32" y="432" width="320" height="304" rx="10" class="panel2"/>
+<text x="48" y="460" class="s12 c2">Minimo</text>
+<text x="336" y="462" class="n s20 w6" text-anchor="end">100 kW</text>
+<rect x="56" y="482" width="272" height="4" rx="2" fill="#36332E"/>
+<rect x="101.33" y="482" width="226.67" height="4" rx="2" fill="#F2B24C"/>
+<circle cx="101.33" cy="484" r="9" class="" fill="#EDE9E1" stroke="#141412" stroke-width="3"/>
+<circle cx="328" cy="484" r="9" class="" fill="#EDE9E1" stroke="#141412" stroke-width="3"/>
+<text x="48" y="512" class="n s12 c3">50 kW</text>
+<text x="336" y="512" class="n s12 c3" text-anchor="end">350 kW</text>
+<text x="48" y="544" class="s12 c2">Comportamento</text>
+<g><rect x="48" y="554" width="288" height="34" rx="8" class="box"/><rect x="51" y="557" width="138" height="28" rx="6" fill="#36332E"/><rect x="112" y="583" width="16" height="2" fill="#F2B24C"/><text x="120" y="575.5" class="s13 w6" text-anchor="middle">Requisito</text><text x="264" y="575.5" class="s13 w5 c2" text-anchor="middle">Preferenza</text></g>
+<line x1="48" y1="606" x2="336" y2="606" class="line"/>
+<circle cx="57" cy="626" r="8" class="" fill="none" stroke="#8E887D"/>
+<text x="57" y="630" class="s11 w7 c2" text-anchor="middle">?</text>
+<text x="74" y="631" class="s14 w6">Cosa significa?</text>
+<text x="336" y="631" class="s13 c2" text-anchor="end">Apri ▾</text>
+<line x1="48" y1="648" x2="336" y2="648" class="line"/>
+<text x="48" y="670" class="n s11 w6 c3 caps">CRITERIO COLLEGATO</text>
+<g><rect x="277.2" y="658" width="58.8" height="16" rx="3" fill="none" stroke="#4A4640"/><text x="306.6" y="670" class="n s10 w6 c2 caps" text-anchor="middle" letter-spacing="0.8">CALCOLO</text></g>
+<text x="48" y="692" class="s15 w6">Tempo di ricarica 10→80%</text>
+<text x="48" y="710" class="s12 c2">colonnina da 150 kW, dalla curva del veicolo</text>
+<text x="48" y="728" class="s13 w6 am">+ Aggiungi</text>
+<text x="32" y="768" class="n s11 w6 c3 caps">PREFERENZE</text>
+<g><rect x="32" y="778" width="320" height="48" rx="8" class="dash"/><text x="46" y="797" class="s12 c2">Viaggi lunghi</text><text x="46" y="816" class="s15 w6">400 km, al massimo 1 sosta</text><path d="M327,799.5 L332,804.5 L337,799.5" class="strokedim"/></g>
+<g><rect x="32" y="834" width="320" height="48" rx="8" class="dash"/><text x="46" y="853" class="s12 c2">Uso quotidiano</text><text x="46" y="872" class="s15 w6">circa 60 km al giorno</text><path d="M327,855.5 L332,860.5 L337,855.5" class="strokedim"/></g>
+<g><rect x="32" y="890" width="320" height="48" rx="8" class="dash"/><text x="46" y="909" class="s12 c2">Ricarica</text><text x="46" y="928" class="s15 w6">a casa, wallbox 11 kW trifase</text><path d="M327,911.5 L332,916.5 L337,911.5" class="strokedim"/></g>
+<rect x="32" y="952" width="320" height="42" rx="8" class="box"/>
+<text x="192" y="978" class="s14 w6" text-anchor="middle">+ Aggiungi un criterio</text>
+<text x="32" y="1020" class="s12 c3">Budget · Uso · Viaggi · Ricarica · Spazio · Specifiche</text>
+<text x="392" y="190" class="s24 w6">3 veicoli rispettano tutti i requisiti</text>
+<text x="392" y="214" class="s13 c2">Ordinati per preferenze soddisfatte, poi per sosta più breve</text>
+<g><rect x="948" y="172" width="240" height="36" rx="8" class="box"/><rect x="951" y="175" width="68" height="30" rx="6" fill="#36332E"/><rect x="977" y="203" width="16" height="2" fill="#F2B24C"/><text x="985" y="194.5" class="s13 w6" text-anchor="middle">Schede</text><text x="1057" y="194.5" class="s13 w5 c2" text-anchor="middle">Elenco</text><text x="1140" y="194.5" class="s13 w5 c2" text-anchor="middle">Differenze</text></g>
+<rect x="1196" y="172" width="212" height="36" rx="8" class="box"/>
+<text x="1212" y="195" class="s13">Ordina: preferenze</text>
+<path d="M1385,187.5 L1390,192.5 L1395,187.5" class="strokedim"/>
+<rect x="392" y="230" width="1016" height="36" rx="8" class="panel"/>
+<circle cx="410" cy="248" r="3" class="" fill="#F2B24C"/>
+<text x="424" y="253" class="s13 c2">Bagagliaio almeno 400 L: da 4 a 3 compatibili. Talon S passa tra i quasi compatibili.</text>
+<text x="1394" y="253" class="s13 w6 am" text-anchor="end">Annulla</text>
+<rect x="392" y="278" width="1016" height="52" rx="10" class="boxl"/>
+<text x="410" y="309" class="s14 w6">Nel confronto (2)</text>
+<rect x="548" y="290" width="136" height="28" rx="14" class="box"/>
+<line x1="560" y1="304" x2="574" y2="304" class="" stroke="#C4841E" stroke-width="3" stroke-linecap="round"/>
+<text x="582" y="309" class="s13 w5">Nordis E4</text>
+<text x="670" y="309" class="s15 c2" text-anchor="middle">×</text>
+<rect x="694" y="290" width="136" height="28" rx="14" class="box"/>
+<line x1="706" y1="304" x2="720" y2="304" class="" stroke="#3A8EDB" stroke-width="3" stroke-linecap="round"/>
+<text x="728" y="309" class="s13 w5">Aurora Vela</text>
+<text x="816" y="309" class="s15 c2" text-anchor="middle">×</text>
+<text x="1240" y="309" class="s13 c2" text-anchor="end">Vedi le differenze</text>
+<g><rect x="1256" y="286" width="140" height="36" rx="8" fill="#F2B24C"/><text x="1326" y="309" class="s14 w7 dk" text-anchor="middle">Confronta →</text></g>
+<rect x="392" y="346" width="328" height="456" rx="14" class="panel" stroke="#4A4640"/>
+<g><rect x="392" y="346" width="328" height="148" rx="14" fill="url(#spot)"/><ellipse cx="556" cy="476.24" rx="143.27" ry="8.95" fill="url(#floor)"/><path d="M433.2,457.82 L433.2,446.31 C433.39,442.32 433.32,426.18 434.48,419.7 C435.63,413.21 436.84,407.76 440.87,403.07 C444.9,398.38 452.51,391.43 461.34,388.44 C470.17,385.44 483.21,383.91 499.72,383.11 C516.22,382.32 557.54,382.37 571.35,383.11 C585.17,383.86 585.68,384.41 591.82,388.1 C597.96,391.79 602.31,403.49 612.28,407.73 C622.26,411.97 648.74,413.83 658.34,416.37 C667.93,418.92 672.98,420.2 676.24,424.69 C679.51,429.18 679.51,443.06 680.08,446.31 L680.08,457.82 L653.73,457.82 A23.54,23.54 0 0 0 606.66,457.82 L505.34,457.82 A23.54,23.54 0 0 0 458.27,457.82 Z" class="" fill="url(#paint)"/><path d="M456.22,408.39 C457.93,406.35 463.22,395.66 469.01,393.09 C474.81,390.52 486.41,389.63 499.72,389.1 C513.02,388.57 557.19,388.48 568.79,389.1 C580.39,389.72 582.27,391.19 586.7,393.76 C591.14,396.33 600,406.44 602.05,408.39 Z" class="" fill="url(#glass)"/><path d="M532.97,387.82 L532.97,408.39" class="" stroke="#0B0B0A" stroke-width="2.84"/><path d="M434.48,419.7 C435.44,417.2 436.84,407.76 440.87,403.07 C444.9,398.38 452.51,391.43 461.34,388.44 C470.17,385.44 483.21,383.91 499.72,383.11 C516.22,382.32 557.54,382.37 571.35,383.11 C585.17,383.86 585.68,384.41 591.82,388.1 C597.96,391.79 602.31,403.49 612.28,407.73 C622.26,411.97 648.74,413.83 658.34,416.37 C667.93,418.92 673.56,423.44 676.24,424.69" class="" stroke="url(#rim)" stroke-width="1.2" fill="none"/><g><circle cx="481.81" cy="455.77" r="20.47" class="" fill="#0A0A09"/><circle cx="481.81" cy="455.77" r="12.69" class="" fill="none" stroke="#3A3732" stroke-width="1.16"/></g><g><circle cx="630.19" cy="455.77" r="20.47" class="" fill="#0A0A09"/><circle cx="630.19" cy="455.77" r="12.69" class="" fill="none" stroke="#3A3732" stroke-width="1.16"/></g></g>
+<rect x="392" y="480" width="328" height="14" fill="#1C1B18" opacity="0"/>
+<text x="412" y="526" class="s18 w6">Nordis E4</text>
+<text x="412" y="546" class="s13 c2">SUV medio · 5 posti</text>
+<text x="412" y="584" class="n s26 w6">€41.500</text>
+<text x="532" y="584" class="s12 c3">listino</text>
+<g><rect x="583" y="576" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="600" y="576" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="617" y="576" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="640" y="576" width="14" height="6" rx="1" fill="#EDE9E1" stroke="none"/><rect x="657" y="576" width="14" height="6" rx="1" fill="#EDE9E1" stroke="none"/></g>
+<text x="700" y="568" class="n s12 c2" text-anchor="end">5 di 5</text>
+<line x1="412" y1="600" x2="700" y2="600" class="line"/>
+<text x="412" y="622" class="n s11 w6 c3 caps">REQUISITI</text>
+<g><circle cx="419" cy="639" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M415.08,639.28 L417.88,642.08 L422.92,636.2" class="stroke" stroke-width="1.4"/></g>
+<text x="432" y="644" class="s13">Budget</text>
+<g><circle cx="503" cy="639" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M499.08,639.28 L501.88,642.08 L506.92,636.2" class="stroke" stroke-width="1.4"/></g>
+<text x="516" y="644" class="s13">Bagagliaio</text>
+<g><circle cx="609" cy="639" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M605.08,639.28 L607.88,642.08 L612.92,636.2" class="stroke" stroke-width="1.4"/></g>
+<text x="622" y="644" class="s13">Potenza DC</text>
+<text x="412" y="674" class="n s11 w6 c3 caps">PREFERENZE</text>
+<g><circle cx="419" cy="691" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M415.08,691.28 L417.88,694.08 L422.92,688.2" class="stroke" stroke-width="1.4"/></g>
+<text x="432" y="696" class="s13">Viaggio 400 km: 1 sosta di ~22 min</text>
+<g><rect x="654" y="684" width="46" height="16" rx="3" class="dash"/><text x="677" y="696" class="n s10 w6 c2 caps" text-anchor="middle" letter-spacing="0.8">STIMA</text></g>
+<g><circle cx="419" cy="715" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M415.08,715.28 L417.88,718.08 L422.92,712.2" class="stroke" stroke-width="1.4"/></g>
+<text x="432" y="720" class="s13">Uso quotidiano e ricarica a casa: adatta</text>
+<text x="412" y="750" class="s13 w6 am">Perché è qui ›</text>
+<text x="700" y="750" class="n s13 c2" text-anchor="end">520 L · 175 kW</text>
+<g><rect x="412" y="760" width="120" height="32" rx="8" class="box"/><text x="472" y="781" class="s14 w6" text-anchor="middle">Apri scheda</text></g>
+<rect x="540" y="760" width="160" height="32" rx="8" fill="#4A3819" stroke="#F2B24C"/>
+<path d="M553.52,776.32 L556.72,779.52 L562.48,772.8" class="strokeam"/>
+<text x="572" y="781" class="s13 w6">Nel confronto</text>
+<rect x="736" y="346" width="328" height="456" rx="14" class="panel" stroke="#4A4640"/>
+<g><rect x="736" y="346" width="328" height="148" rx="14" fill="url(#spot)"/><ellipse cx="900" cy="476.24" rx="143.27" ry="8.95" fill="url(#floor)"/><path d="M782.31,459.35 L782.31,447.46 C782.51,443.14 782.44,425.63 783.59,418.68 C784.74,411.72 785.58,405.21 789.99,401.09 C794.4,396.96 804.19,393.04 813.01,391.17 C821.84,389.3 835.02,388.81 848.83,388.61 C862.65,388.42 893.6,388.74 905.12,389.89 C916.63,391.05 919.06,392.64 925.58,396.29 C932.11,399.94 938.63,410.12 948.61,414.2 C958.59,418.28 982.12,420.88 992.1,423.47 C1002.08,426.06 1011.1,427.87 1015.13,431.47 C1019.16,435.07 1018.39,445.06 1018.97,447.46 L1018.97,459.35 L993.64,459.35 A22,22 0 0 0 949.63,459.35 L847.81,459.35 A22,22 0 0 0 803.8,459.35 Z" class="" fill="url(#paint)"/><path d="M800.22,411.64 C802.27,409.68 809.09,399.23 815.57,396.93 C822.05,394.63 837.23,394.54 848.83,394.37 C860.43,394.2 893.01,394.8 902.56,395.65 C912.11,396.5 915.69,398.38 920.47,400.77 C925.24,403.16 935.99,411.85 938.38,413.56 Z" class="" fill="url(#glass)"/><path d="M869.30,393.09 L869.30,413.56" class="" stroke="#0B0B0A" stroke-width="2.84"/><path d="M783.59,418.68 C784.55,416.04 785.58,405.21 789.99,401.09 C794.4,396.96 804.19,393.04 813.01,391.17 C821.84,389.3 835.02,388.81 848.83,388.61 C862.65,388.42 893.6,388.74 905.12,389.89 C916.63,391.05 919.06,392.64 925.58,396.29 C932.11,399.94 938.63,410.12 948.61,414.2 C958.59,418.28 982.12,420.88 992.1,423.47 C1002.08,426.06 1011.67,430.27 1015.13,431.47" class="" stroke="url(#rim)" stroke-width="1.2" fill="none"/><g><circle cx="825.81" cy="457.31" r="18.93" class="" fill="#0A0A09"/><circle cx="825.81" cy="457.31" r="11.74" class="" fill="none" stroke="#3A3732" stroke-width="1.16"/></g><g><circle cx="971.64" cy="457.31" r="18.93" class="" fill="#0A0A09"/><circle cx="971.64" cy="457.31" r="11.74" class="" fill="none" stroke="#3A3732" stroke-width="1.16"/></g></g>
+<rect x="736" y="480" width="328" height="14" fill="#1C1B18" opacity="0"/>
+<text x="756" y="526" class="s18 w6">Aurora Vela</text>
+<text x="756" y="546" class="s13 c2">Compatta · 5 posti</text>
+<text x="756" y="584" class="n s26 w6">€32.900</text>
+<text x="876" y="584" class="s12 c3">listino</text>
+<g><rect x="927" y="576" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="944" y="576" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="961" y="576" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="984" y="576" width="14" height="6" rx="1" fill="#EDE9E1" stroke="none"/><rect x="1001" y="576" width="14" height="6" rx="1" fill="#EDE9E1" stroke="none"/></g>
+<text x="1044" y="568" class="n s12 c2" text-anchor="end">5 di 5</text>
+<line x1="756" y1="600" x2="1044" y2="600" class="line"/>
+<text x="756" y="622" class="n s11 w6 c3 caps">REQUISITI</text>
+<g><circle cx="763" cy="639" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M759.08,639.28 L761.88,642.08 L766.92,636.2" class="stroke" stroke-width="1.4"/></g>
+<text x="776" y="644" class="s13">Budget</text>
+<g><circle cx="847" cy="639" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M843.08,639.28 L845.88,642.08 L850.92,636.2" class="stroke" stroke-width="1.4"/></g>
+<text x="860" y="644" class="s13">Bagagliaio</text>
+<g><circle cx="953" cy="639" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M949.08,639.28 L951.88,642.08 L956.92,636.2" class="stroke" stroke-width="1.4"/></g>
+<text x="966" y="644" class="s13">Potenza DC</text>
+<text x="756" y="674" class="n s11 w6 c3 caps">PREFERENZE</text>
+<g><circle cx="763" cy="691" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M759.08,691.28 L761.88,694.08 L766.92,688.2" class="stroke" stroke-width="1.4"/></g>
+<text x="776" y="696" class="s13">Viaggio 400 km: 1 sosta di ~28 min</text>
+<g><rect x="998" y="684" width="46" height="16" rx="3" class="dash"/><text x="1021" y="696" class="n s10 w6 c2 caps" text-anchor="middle" letter-spacing="0.8">STIMA</text></g>
+<g><circle cx="763" cy="715" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M759.08,715.28 L761.88,718.08 L766.92,712.2" class="stroke" stroke-width="1.4"/></g>
+<text x="776" y="720" class="s13">Uso quotidiano e ricarica a casa: adatta</text>
+<text x="756" y="750" class="s13 w6 am">Perché è qui ›</text>
+<text x="1044" y="750" class="n s13 c2" text-anchor="end">410 L · 135 kW</text>
+<g><rect x="756" y="760" width="120" height="32" rx="8" class="box"/><text x="816" y="781" class="s14 w6" text-anchor="middle">Apri scheda</text></g>
+<rect x="884" y="760" width="160" height="32" rx="8" fill="#4A3819" stroke="#F2B24C"/>
+<path d="M897.52,776.32 L900.72,779.52 L906.48,772.8" class="strokeam"/>
+<text x="916" y="781" class="s13 w6">Nel confronto</text>
+<rect x="1080" y="346" width="328" height="456" rx="14" class="panel" stroke="none"/>
+<g><rect x="1080" y="346" width="328" height="148" rx="14" fill="url(#spot)"/><ellipse cx="1244" cy="476.24" rx="143.27" ry="8.95" fill="url(#floor)"/><path d="M1121.2,458.84 L1121.2,446.77 C1121.35,440.38 1121.07,413.72 1122.22,404.2 C1123.37,394.67 1124.42,387.36 1128.87,383.24 C1133.32,379.11 1133.86,377.77 1151.9,376.69 C1169.93,375.61 1230.7,375.05 1249.12,376.03 C1267.54,377.02 1266.64,378.52 1274.7,383.24 C1282.76,387.95 1291.71,402.26 1302.84,407.47 C1313.97,412.68 1339.49,415 1348.89,417.95 C1358.3,420.9 1362.65,422.8 1365.52,427.12 C1368.4,431.44 1367.7,443.82 1368.08,446.77 L1368.08,458.84 L1343.27,458.84 A22.51,22.51 0 0 0 1298.24,458.84 L1189.76,458.84 A22.51,22.51 0 0 0 1144.73,458.84 Z" class="" fill="url(#paint)"/><path d="M1136.55,406.16 C1137.06,403.54 1137.66,389.66 1140.38,386.51 C1143.11,383.37 1142.52,383.19 1157.01,382.58 C1171.51,381.97 1234.11,381.14 1249.12,381.93 C1264.13,382.71 1264.13,385.07 1269.58,388.48 C1275.04,391.88 1287.32,404.94 1290.05,407.47 Z" class="" fill="url(#glass)"/><path d="M1208.18,380.65 L1208.18,407.47" class="" stroke="#0B0B0A" stroke-width="2.84"/><path d="M1122.22,404.2 C1123.22,401.05 1124.42,387.36 1128.87,383.24 C1133.32,379.11 1133.86,377.77 1151.9,376.69 C1169.93,375.61 1230.7,375.05 1249.12,376.03 C1267.54,377.02 1266.64,378.52 1274.7,383.24 C1282.76,387.95 1291.71,402.26 1302.84,407.47 C1313.97,412.68 1339.49,415 1348.89,417.95 C1358.3,420.9 1363.03,425.74 1365.52,427.12" class="" stroke="url(#rim)" stroke-width="1.2" fill="none"/><g><circle cx="1167.25" cy="456.8" r="19.44" class="" fill="#0A0A09"/><circle cx="1167.25" cy="456.8" r="12.06" class="" fill="none" stroke="#3A3732" stroke-width="1.16"/></g><g><circle cx="1320.75" cy="456.8" r="19.44" class="" fill="#0A0A09"/><circle cx="1320.75" cy="456.8" r="12.06" class="" fill="none" stroke="#3A3732" stroke-width="1.16"/></g></g>
+<rect x="1080" y="480" width="328" height="14" fill="#1C1B18" opacity="0"/>
+<text x="1100" y="526" class="s18 w6">Brisa Family</text>
+<text x="1100" y="546" class="s13 c2">Monovolume · 7 posti</text>
+<text x="1100" y="584" class="n s26 w6">€44.200</text>
+<text x="1220" y="584" class="s12 c3">listino</text>
+<g><rect x="1271" y="576" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="1288" y="576" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="1305" y="576" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="1328" y="576" width="14" height="6" rx="1" fill="#EDE9E1" stroke="none"/><rect x="1345" y="576" width="14" height="6" rx="1" fill="#EDE9E1" stroke="none"/></g>
+<text x="1388" y="568" class="n s12 c2" text-anchor="end">5 di 5</text>
+<line x1="1100" y1="600" x2="1388" y2="600" class="line"/>
+<text x="1100" y="622" class="n s11 w6 c3 caps">REQUISITI</text>
+<g><circle cx="1107" cy="639" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M1103.08,639.28 L1105.88,642.08 L1110.92,636.2" class="stroke" stroke-width="1.4"/></g>
+<text x="1120" y="644" class="s13">Budget</text>
+<g><circle cx="1191" cy="639" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M1187.08,639.28 L1189.88,642.08 L1194.92,636.2" class="stroke" stroke-width="1.4"/></g>
+<text x="1204" y="644" class="s13">Bagagliaio</text>
+<g><circle cx="1297" cy="639" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M1293.08,639.28 L1295.88,642.08 L1300.92,636.2" class="stroke" stroke-width="1.4"/></g>
+<text x="1310" y="644" class="s13">Potenza DC</text>
+<text x="1100" y="674" class="n s11 w6 c3 caps">PREFERENZE</text>
+<g><circle cx="1107" cy="691" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M1103.08,691.28 L1105.88,694.08 L1110.92,688.2" class="stroke" stroke-width="1.4"/></g>
+<text x="1120" y="696" class="s13">Viaggio 400 km: 1 sosta di ~30 min</text>
+<g><rect x="1342" y="684" width="46" height="16" rx="3" class="dash"/><text x="1365" y="696" class="n s10 w6 c2 caps" text-anchor="middle" letter-spacing="0.8">STIMA</text></g>
+<g><circle cx="1107" cy="715" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M1103.08,715.28 L1105.88,718.08 L1110.92,712.2" class="stroke" stroke-width="1.4"/></g>
+<text x="1120" y="720" class="s13">Uso quotidiano e ricarica a casa: adatta</text>
+<text x="1100" y="750" class="s13 w6 am">Perché è qui ›</text>
+<text x="1388" y="750" class="n s13 c2" text-anchor="end">720 L · 130 kW</text>
+<g><rect x="1100" y="760" width="120" height="32" rx="8" class="box"/><text x="1160" y="781" class="s14 w6" text-anchor="middle">Apri scheda</text></g>
+<g><rect x="1228" y="760" width="160" height="32" rx="8" class="box"/><text x="1308" y="781" class="s14 w6" text-anchor="middle">Aggiungi al confronto</text></g>
+<text x="392" y="852" class="s18 w6">Quasi compatibili</text>
+<text x="392" y="874" class="s13 c2">Non rispettano un requisito.</text>
+<rect x="392" y="892" width="1016" height="84" rx="12" class="dash"/>
+<g><rect x="404" y="904" width="104" height="60" rx="8" fill="url(#spot)"/><ellipse cx="456" cy="956.8" rx="45.43" ry="2.84" fill="url(#floor)"/><path d="M417.06,951.45 L417.06,947.71 C417.12,946.83 417.1,943.28 417.47,941.81 C417.83,940.34 418.34,938.87 419.5,937.9 C420.65,936.93 422.13,935.88 425.17,935.36 C428.22,934.84 434.3,934.59 439.78,934.45 C445.25,934.31 457.3,934.23 461.68,934.45 C466.06,934.67 466.79,935.06 468.98,935.9 C471.17,936.75 473.24,939.18 476.28,940.08 C479.32,940.98 486.52,941.3 489.26,941.9 C492,942.5 493.62,943.07 494.53,944.08 C495.44,945.09 495.22,947.94 495.34,948.62 L495.34,951.45 L487.31,951.45 A6.98,6.98 0 0 0 473.36,951.45 L438.64,951.45 A6.98,6.98 0 0 0 424.69,951.45 Z" class="" fill="url(#paint)"/><path d="M421.93,939.54 C422.47,939.15 423.61,937.11 425.99,936.63 C428.37,936.15 435.13,936 439.78,935.9 C444.43,935.81 457.3,935.73 460.87,935.9 C464.44,936.07 464.92,936.62 466.55,937.18 C468.17,937.73 472.17,939.7 473.04,940.08 Z" class="" fill="url(#glass)"/><path d="M451.13,935.50 L451.13,940.08" class="" stroke="#0B0B0A" stroke-width="0.9"/><path d="M417.47,941.81 C417.77,941.22 418.34,938.87 419.5,937.9 C420.65,936.93 422.13,935.88 425.17,935.36 C428.22,934.84 434.3,934.59 439.78,934.45 C445.25,934.31 457.3,934.23 461.68,934.45 C466.06,934.67 466.79,935.06 468.98,935.9 C471.17,936.75 473.24,939.18 476.28,940.08 C479.32,940.98 486.52,941.3 489.26,941.9 C492,942.5 493.74,943.75 494.53,944.08" class="" stroke="url(#rim)" stroke-width="1.2" fill="none"/><g><circle cx="431.66" cy="950.8" r="6" class="" fill="#0A0A09"/><circle cx="431.66" cy="950.8" r="3.72" class="" fill="none" stroke="#3A3732" stroke-width="1"/></g><g><circle cx="480.34" cy="950.8" r="6" class="" fill="#0A0A09"/><circle cx="480.34" cy="950.8" r="3.72" class="" fill="none" stroke="#3A3732" stroke-width="1"/></g></g>
+<text x="524" y="924" class="s16 w6">Meridian Tour</text>
+<text x="524" y="944" class="s12 c2">Station wagon · 5 posti · €46.800</text>
+<text x="524" y="964" class="s12 am w6">Apri scheda ›</text>
+<g><rect x="780" y="914" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="797" y="914" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="814" y="914" width="14" height="6" rx="1" fill="#36332E"/><rect x="837" y="914" width="14" height="6" rx="1" fill="#EDE9E1" stroke="none"/><rect x="854" y="914" width="14" height="6" rx="1" fill="#EDE9E1" stroke="none"/><rect x="871" y="914" width="14" height="6" rx="1" fill="#EDE9E1" stroke="none"/></g>
+<text x="780" y="942" class="n s11 w6 c3 caps">REQUISITO NON RISPETTATO</text>
+<g><circle cx="787" cy="958" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><line x1="783.5" y1="958" x2="790.5" y2="958" class="stroke"/></g>
+<text x="800" y="963" class="s13 w6">Budget: €46.800: €1.800 oltre il limite</text>
+<g><rect x="1076" y="906" width="208" height="32" rx="8" class="box"/><text x="1180" y="927" class="s14 w6" text-anchor="middle">Porta il budget a €47.000</text></g>
+<text x="1180" y="960" class="s12 c2" text-anchor="middle">Rendi flessibile il budget</text>
+<rect x="1302" y="916" width="16" height="16" rx="4" class="box"/>
+<text x="1326" y="929" class="s13 c2">Confronta</text>
+<rect x="392" y="988" width="1016" height="84" rx="12" class="dash"/>
+<g><rect x="404" y="1000" width="104" height="60" rx="8" fill="url(#spot)"/><ellipse cx="456" cy="1052.8" rx="45.43" ry="2.84" fill="url(#floor)"/><path d="M417.06,1047.45 L417.06,1044.04 C417.14,1043.32 416.82,1040.19 417.55,1039.22 C418.28,1038.25 419.81,1038.12 421.93,1037.56 C424.05,1036.99 428.5,1036.37 431.66,1035.45 C434.83,1034.53 439.13,1032.08 443.02,1031.42 C446.91,1030.77 454.46,1030.94 457.62,1031.07 C460.79,1031.2 461.92,1031.43 464.11,1032.3 C466.3,1033.17 468.57,1035.88 472.22,1036.86 C475.87,1037.83 485.1,1038.18 488.45,1038.78 C491.79,1039.39 493.5,1039.97 494.53,1040.89 C495.57,1041.8 495.22,1044.31 495.34,1044.92 L495.34,1047.45 L486.5,1047.45 A6.98,6.98 0 0 0 472.55,1047.45 L439.45,1047.45 A6.98,6.98 0 0 0 425.5,1047.45 Z" class="" fill="url(#paint)"/><path d="M430.85,1036.68 C432.37,1036.14 438.75,1033.21 442.21,1032.65 C445.67,1032.09 454.11,1032.33 456.81,1032.47 C459.52,1032.61 460.87,1033.12 462.49,1033.7 C464.11,1034.29 468.11,1036.43 468.98,1036.86 Z" class="" fill="url(#glass)"/><path d="M452.76,1032.07 L452.76,1036.86" class="" stroke="#0B0B0A" stroke-width="0.9"/><path d="M417.55,1039.22 C418.21,1038.97 419.81,1038.12 421.93,1037.56 C424.05,1036.99 428.5,1036.37 431.66,1035.45 C434.83,1034.53 439.13,1032.08 443.02,1031.42 C446.91,1030.77 454.46,1030.94 457.62,1031.07 C460.79,1031.2 461.92,1031.43 464.11,1032.3 C466.3,1033.17 468.57,1035.88 472.22,1036.86 C475.87,1037.83 485.1,1038.18 488.45,1038.78 C491.79,1039.39 493.62,1040.57 494.53,1040.89" class="" stroke="url(#rim)" stroke-width="1.2" fill="none"/><g><circle cx="432.48" cy="1046.8" r="6" class="" fill="#0A0A09"/><circle cx="432.48" cy="1046.8" r="3.72" class="" fill="none" stroke="#3A3732" stroke-width="1"/></g><g><circle cx="479.52" cy="1046.8" r="6" class="" fill="#0A0A09"/><circle cx="479.52" cy="1046.8" r="3.72" class="" fill="none" stroke="#3A3732" stroke-width="1"/></g></g>
+<text x="524" y="1020" class="s16 w6">Talon S</text>
+<text x="524" y="1040" class="s12 c2">Berlina sportiva · 5 posti · €44.900</text>
+<text x="524" y="1060" class="s12 am w6">Apri scheda ›</text>
+<g><rect x="780" y="1010" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="797" y="1010" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="814" y="1010" width="14" height="6" rx="1" fill="#36332E"/><rect x="837" y="1010" width="14" height="6" rx="1" fill="#EDE9E1" stroke="none"/><rect x="854" y="1010" width="14" height="6" rx="1" fill="#EDE9E1" stroke="none"/><rect x="871" y="1010" width="14" height="6" rx="1" fill="#EDE9E1" stroke="none"/></g>
+<text x="780" y="1038" class="n s11 w6 c3 caps">REQUISITO NON RISPETTATO</text>
+<g><circle cx="787" cy="1054" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><line x1="783.5" y1="1054" x2="790.5" y2="1054" class="stroke"/></g>
+<text x="800" y="1059" class="s13 w6">Bagagliaio: 360 L: 40 L sotto il minimo</text>
+<g><rect x="1076" y="1002" width="208" height="32" rx="8" class="box"/><text x="1180" y="1023" class="s14 w6" text-anchor="middle">Abbassa il minimo a 360 L</text></g>
+<text x="1180" y="1056" class="s12 c2" text-anchor="middle">Rendi flessibile il bagagliaio</text>
+<rect x="1302" y="1012" width="16" height="16" rx="4" class="box"/>
+<text x="1326" y="1025" class="s13 c2">Confronta</text>
+<text x="392" y="1120" class="s18 w6">Approfondisci</text>
+<rect x="392" y="1136" width="500" height="76" rx="12" class="boxl"/>
+<text x="414" y="1168" class="s15 w6">Grafico delle differenze</text>
+<text x="414" y="1190" class="s12 c2">Prezzo, soste e spazio dei 3 compatibili a colpo d’occhio</text>
+<text x="866" y="1180" class="s18 am" text-anchor="end">→</text>
+<rect x="908" y="1136" width="500" height="76" rx="12" class="boxl"/>
+<text x="930" y="1168" class="s15 w6">Simula un viaggio di 400 km</text>
+<text x="930" y="1190" class="s12 c2">Con i veicoli nel confronto e i tuoi criteri già impostati</text>
+<text x="1382" y="1180" class="s18 am" text-anchor="end">→</text>
+<text x="392" y="1258" class="s12 c3">Dati e veicoli illustrativi. “~” indica una stima: 110 km/h, 20 °C, colonnine da 150 kW.</text>
+<text x="392" y="1280" class="s12 w6 am">Fonti, stime e limiti dei dati →</text>
+</svg>

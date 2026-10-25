@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+<title id="title">Notturno — Identity sheet</title>
+<desc id="desc">Palette, tipografia e componenti del concept Notturno.</desc>
+<style>
+.s9{font-size:9px}.s10{font-size:10px}.s11{font-size:11px}.s12{font-size:12px}.s13{font-size:13px}.s14{font-size:14px}.s15{font-size:15px}.s16{font-size:16px}.s17{font-size:17px}.s18{font-size:18px}.s19{font-size:19px}.s20{font-size:20px}.s22{font-size:22px}.s24{font-size:24px}.s26{font-size:26px}.s28{font-size:28px}.s30{font-size:30px}.s32{font-size:32px}.s36{font-size:36px}.s40{font-size:40px}.s44{font-size:44px}.s48{font-size:48px}.s52{font-size:52px}.s56{font-size:56px}.s64{font-size:64px}.s72{font-size:72px}.s80{font-size:80px}.s96{font-size:96px}.s120{font-size:120px}.s160{font-size:160px}.w3{font-weight:300}.w4{font-weight:400}.w5{font-weight:500}.w6{font-weight:600}.w7{font-weight:700}.w8{font-weight:800}.w9{font-weight:900}.tab{font-variant-numeric:tabular-nums}.u{text-decoration:underline}.it{font-style:italic}
+text{font-family:Barlow,Bahnschrift,'DIN Alternate','Segoe UI',Arial,sans-serif;fill:#EDE9E1}
+.n{font-family:'Barlow Semi Condensed',Bahnschrift,'DIN Alternate','Arial Narrow',Arial,sans-serif}
+.c2{fill:#B5AFA4}.c3{fill:#8E887D}.am{fill:#F2B24C}.dk{fill:#141412}
+.caps{letter-spacing:1.6px}
+.bg{fill:#141412}.panel{fill:#1C1B18}.panel2{fill:#24221F}
+.box{fill:#24221F;stroke:#4A4640;stroke-width:1}
+.boxl{fill:#1C1B18;stroke:#36332E;stroke-width:1}
+.dash{fill:none;stroke:#4A4640;stroke-width:1.2;stroke-dasharray:5 4}
+.focus{fill:#24221F;stroke:#F2B24C;stroke-width:1.5}
+.line{stroke:#36332E;stroke-width:1;fill:none}
+.line2{stroke:#4A4640;stroke-width:1;fill:none}
+.grid{stroke:#2A2824;stroke-width:1;fill:none}
+.stroke{stroke:#EDE9E1;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.strokeam{stroke:#F2B24C;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.strokedim{stroke:#8E887D;stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+</style>
+<defs>
+<radialGradient id="spot" cx="50%" cy="20%" r="75%"><stop offset="0" stop-color="#34312C"/><stop offset="0.55" stop-color="#1D1C19"/><stop offset="1" stop-color="#121210"/></radialGradient>
+<linearGradient id="rim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F4EEE3" stop-opacity="0"/><stop offset="0.35" stop-color="#F4EEE3" stop-opacity="0.85"/><stop offset="0.7" stop-color="#F4EEE3" stop-opacity="0.5"/><stop offset="1" stop-color="#F4EEE3" stop-opacity="0"/></linearGradient>
+<linearGradient id="paint" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A3731"/><stop offset="0.45" stop-color="#191816"/><stop offset="1" stop-color="#0B0B0A"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A3833"/><stop offset="1" stop-color="#1A1917"/></linearGradient>
+<radialGradient id="heroSpot" cx="72%" cy="10%" r="60%"><stop offset="0" stop-color="#36332D"/><stop offset="0.6" stop-color="#1A1916"/><stop offset="1" stop-color="#141412"/></radialGradient>
+<radialGradient id="floor" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#000000" stop-opacity="0.7"/><stop offset="1" stop-color="#000000" stop-opacity="0"/></radialGradient>
+</defs>
+<rect x="0" y="0" width="1440" height="900" class="bg"/>
+<text x="48" y="76" class="s52 w6">Notturno</text>
+<text x="48" y="108" class="s16 c2">Un quadro strumenti di notte: si illumina ciò che serve ora. L’ambra indica focus e stato attivo.</text>
+<text x="48" y="160" class="n s12 w6 c3 caps">SUPERFICI E TESTO</text>
+<rect x="48" y="172" width="112" height="70" rx="8" fill="#141412" stroke="#4A4640"/>
+<text x="48" y="262" class="s13 w6">Notte</text>
+<text x="48" y="280" class="n s12 c2">#141412</text>
+<text x="48" y="296" class="s11 c3">sfondo</text>
+<rect x="172" y="172" width="112" height="70" rx="8" fill="#1C1B18" stroke="#4A4640"/>
+<text x="172" y="262" class="s13 w6">Pannello</text>
+<text x="172" y="280" class="n s12 c2">#1C1B18</text>
+<text x="172" y="296" class="s11 c3">superfici</text>
+<rect x="296" y="172" width="112" height="70" rx="8" fill="#24221F" stroke="#4A4640"/>
+<text x="296" y="262" class="s13 w6">Pannello 2</text>
+<text x="296" y="280" class="n s12 c2">#24221F</text>
+<text x="296" y="296" class="s11 c3">campi, righe attive</text>
+<rect x="420" y="172" width="112" height="70" rx="8" fill="#36332E" stroke="#4A4640"/>
+<text x="420" y="262" class="s13 w6">Filo</text>
+<text x="420" y="280" class="n s12 c2">#36332E</text>
+<text x="420" y="296" class="s11 c3">divisori</text>
+<rect x="544" y="172" width="112" height="70" rx="8" fill="#EDE9E1" stroke="#4A4640"/>
+<text x="544" y="262" class="s13 w6">Luce</text>
+<text x="544" y="280" class="n s12 c2">#EDE9E1</text>
+<text x="544" y="296" class="s11 c3">testo primario</text>
+<rect x="668" y="172" width="112" height="70" rx="8" fill="#B5AFA4" stroke="#4A4640"/>
+<text x="668" y="262" class="s13 w6">Luce media</text>
+<text x="668" y="280" class="n s12 c2">#B5AFA4</text>
+<text x="668" y="296" class="s11 c3">testo secondario</text>
+<rect x="792" y="172" width="112" height="70" rx="8" fill="#8E887D" stroke="#4A4640"/>
+<text x="792" y="262" class="s13 w6">Luce bassa</text>
+<text x="792" y="280" class="n s12 c2">#8E887D</text>
+<text x="792" y="296" class="s11 c3">note, assi</text>
+<rect x="940" y="172" width="112" height="70" rx="8" fill="#F2B24C"/>
+<text x="940" y="262" class="s13 w6">Ambra</text>
+<text x="940" y="280" class="n s12 c2">#F2B24C</text>
+<text x="940" y="296" class="s11 c3">focus, attivo, azione primaria</text>
+<text x="1100" y="160" class="n s12 w6 c3 caps">SERIE NEI GRAFICI</text>
+<line x1="1100" y1="184" x2="1140" y2="184" class="" stroke="#C4841E" stroke-width="3" stroke-linecap="round"/>
+<text x="1152" y="188" class="n s13 c2">1 · #C4841E</text>
+<line x1="1100" y1="210" x2="1140" y2="210" class="" stroke="#3A8EDB" stroke-width="3" stroke-linecap="round"/>
+<text x="1152" y="214" class="n s13 c2">2 · #3A8EDB</text>
+<line x1="1100" y1="236" x2="1140" y2="236" class="" stroke="#C45FA0" stroke-width="3" stroke-linecap="round"/>
+<text x="1152" y="240" class="n s13 c2">3 · #C45FA0</text>
+<line x1="1100" y1="262" x2="1140" y2="262" class="" stroke="#2C9A6A" stroke-width="3" stroke-linecap="round"/>
+<text x="1152" y="266" class="n s13 c2">4 · #2C9A6A</text>
+<text x="48" y="352" class="n s12 w6 c3 caps">TIPOGRAFIA</text>
+<text x="48" y="404" class="s44 w6">Trova l’auto adatta a te.</text>
+<text x="760" y="400" class="n s13 c3">Barlow 600 · 52/30/19</text>
+<text x="48" y="440" class="s16 c2">Testo ed etichette in Barlow; il secondario resta in luce bassa.</text>
+<text x="760" y="438" class="n s13 c3">Barlow 400–600 · 12–16</text>
+<text x="48" y="492" class="n s40 w6">22 min   +53,9 kWh   €41.500</text>
+<text x="760" y="486" class="n s13 c3">Barlow Semi Condensed: cifre, etichette maiuscole</text>
+<text x="48" y="556" class="n s12 w6 c3 caps">COMPONENTI</text>
+<g><rect x="48" y="570" width="280" height="48" rx="8" class="box"/><text x="62" y="589" class="s12 c2">Budget</text><text x="62" y="608" class="s15 w6">fino a €45.000</text><path d="M303,591.5 L308,596.5 L313,591.5" class="strokedim"/></g>
+<g><rect x="48" y="626" width="280" height="48" rx="8" class="dash"/><text x="62" y="645" class="s12 c2">Viaggi lunghi</text><text x="62" y="664" class="s15 w6">400 km, al massimo 1 sosta</text><path d="M303,647.5 L308,652.5 L313,647.5" class="strokedim"/></g>
+<g><rect x="48" y="682" width="280" height="48" rx="8" class="focus"/><text x="62" y="701" class="s12 c2">Potenza DC massima</text><text x="62" y="720" class="s15 w6">almeno 100 kW</text><rect x="194" y="690" width="36" height="15" rx="3" fill="#36332E"/><text x="212" y="701" class="n s10 w6 c2" text-anchor="middle">SPEC</text><path d="M303,708.5 L308,703.5 L313,708.5" class="strokeam"/></g>
+<g><rect x="360" y="570" width="150" height="38" rx="8" fill="#F2B24C"/><text x="435" y="594" class="s14 w7 dk" text-anchor="middle">Confronta →</text></g>
+<g><rect x="520" y="570" width="130" height="38" rx="8" class="box"/><text x="585" y="594" class="s14 w6" text-anchor="middle">Apri scheda</text></g>
+<g><rect x="360" y="622" width="240" height="36" rx="8" class="box"/><rect x="363" y="625" width="68" height="30" rx="6" fill="#36332E"/><rect x="389" y="653" width="16" height="2" fill="#F2B24C"/><text x="397" y="644.5" class="s13 w6" text-anchor="middle">Schede</text><text x="469" y="644.5" class="s13 w5 c2" text-anchor="middle">Elenco</text><text x="552" y="644.5" class="s13 w5 c2" text-anchor="middle">Differenze</text></g>
+<g><circle cx="367" cy="684" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><path d="M363.08,684.28 L365.88,687.08 L370.92,681.2" class="stroke" stroke-width="1.4"/></g>
+<text x="382" y="689" class="s13">rispettato</text>
+<g><circle cx="487" cy="684" r="7" class="" fill="none" stroke="#B5AFA4" stroke-width="1.2"/><line x1="483.5" y1="684" x2="490.5" y2="684" class="stroke"/></g>
+<text x="502" y="689" class="s13">non rispettato</text>
+<g><rect x="360" y="708" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="377" y="708" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="394" y="708" width="14" height="6" rx="1" fill="#EDE9E1"/><rect x="417" y="708" width="14" height="6" rx="1" fill="#EDE9E1" stroke="none"/><rect x="434" y="708" width="14" height="6" rx="1" fill="#EDE9E1" stroke="none"/></g>
+<text x="490" y="715" class="s12 c3">3 requisiti + 2 preferenze</text>
+<g><rect x="365.6" y="740" width="84.4" height="16" rx="3" fill="#36332E"/><text x="407.8" y="752" class="n s10 w6 c2 caps" text-anchor="middle" letter-spacing="0.8">COSTRUTTORE</text></g>
+<g><rect x="474" y="740" width="46" height="16" rx="3" class="dash"/><text x="497" y="752" class="n s10 w6 c2 caps" text-anchor="middle" letter-spacing="0.8">STIMA</text></g>
+<g><rect x="541.2" y="740" width="58.8" height="16" rx="3" fill="none" stroke="#4A4640"/><text x="570.6" y="752" class="n s10 w6 c2 caps" text-anchor="middle" letter-spacing="0.8">CALCOLO</text></g>
+<g><rect x="720" y="570" width="330" height="170" rx="12" fill="url(#spot)"/><ellipse cx="885" cy="719.6" rx="144.14" ry="9.01" fill="url(#floor)"/><path d="M761.45,701.07 L761.45,689.48 C761.64,685.47 761.58,669.24 762.73,662.71 C763.89,656.19 765.12,650.7 769.17,645.98 C773.22,641.27 780.88,634.27 789.76,631.26 C798.64,628.25 811.77,626.71 828.37,625.91 C844.97,625.1 886.54,625.15 900.44,625.91 C914.34,626.66 914.86,627.21 921.04,630.93 C927.21,634.64 931.59,646.4 941.63,650.67 C951.67,654.93 978.31,656.81 987.96,659.37 C997.61,661.93 1002.7,663.22 1005.98,667.73 C1009.26,672.25 1009.26,686.22 1009.84,689.48 L1009.84,701.07 L983.33,701.07 A23.68,23.68 0 0 0 935.97,701.07 L834.03,701.07 A23.68,23.68 0 0 0 786.67,701.07 Z" class="" fill="url(#paint)"/><path d="M784.61,651.34 C786.33,649.29 791.65,638.53 797.48,635.95 C803.32,633.36 814.99,632.46 828.37,631.93 C841.76,631.39 886.2,631.3 897.87,631.93 C909.54,632.55 911.43,634.03 915.89,636.61 C920.35,639.2 929.27,649.37 931.33,651.34 Z" class="" fill="url(#glass)"/><path d="M861.83,630.64 L861.83,651.34" class="" stroke="#0B0B0A" stroke-width="2.86"/><path d="M762.73,662.71 C763.7,660.2 765.12,650.7 769.17,645.98 C773.22,641.27 780.88,634.27 789.76,631.26 C798.64,628.25 811.77,626.71 828.37,625.91 C844.97,625.1 886.54,625.15 900.44,625.91 C914.34,626.66 914.86,627.21 921.04,630.93 C927.21,634.64 931.59,646.4 941.63,650.67 C951.67,654.93 978.31,656.81 987.96,659.37 C997.61,661.93 1003.28,666.48 1005.98,667.73" class="" stroke="url(#rim)" stroke-width="1.2" fill="none"/><g><circle cx="810.35" cy="699.01" r="20.59" class="" fill="#0A0A09"/><circle cx="810.35" cy="699.01" r="12.77" class="" fill="none" stroke="#3A3732" stroke-width="1.17"/></g><g><circle cx="959.65" cy="699.01" r="20.59" class="" fill="#0A0A09"/><circle cx="959.65" cy="699.01" r="12.77" class="" fill="none" stroke="#3A3732" stroke-width="1.17"/></g></g>
+<g><rect x="1066" y="570" width="160" height="80" rx="8" fill="url(#spot)"/><ellipse cx="1146" cy="640.4" rx="69.89" ry="4.37" fill="url(#floor)"/><path d="M1088.59,632.16 L1088.59,626.36 C1088.69,624.25 1088.65,615.71 1089.22,612.32 C1089.78,608.93 1090.18,605.75 1092.34,603.74 C1094.49,601.73 1099.26,599.82 1103.57,598.9 C1107.87,597.99 1114.3,597.75 1121.04,597.66 C1127.78,597.56 1142.88,597.72 1148.5,598.28 C1154.11,598.84 1155.3,599.62 1158.48,601.4 C1161.66,603.18 1164.84,608.15 1169.71,610.14 C1174.58,612.13 1186.06,613.4 1190.93,614.66 C1195.8,615.92 1200.19,616.8 1202.16,618.56 C1204.13,620.31 1203.75,625.19 1204.03,626.36 L1204.03,632.16 L1191.68,632.16 A10.73,10.73 0 0 0 1170.21,632.16 L1120.54,632.16 A10.73,10.73 0 0 0 1099.08,632.16 Z" class="" fill="url(#paint)"/><path d="M1097.33,608.89 C1098.33,607.93 1101.65,602.84 1104.82,601.71 C1107.98,600.59 1115.38,600.55 1121.04,600.46 C1126.7,600.38 1142.59,600.67 1147.25,601.09 C1151.91,601.5 1153.65,602.42 1155.98,603.58 C1158.31,604.75 1163.56,608.99 1164.72,609.82 Z" class="" fill="url(#glass)"/><path d="M1131.02,599.84 L1131.02,609.82" class="" stroke="#0B0B0A" stroke-width="1.39"/><path d="M1089.22,612.32 C1089.68,611.03 1090.18,605.75 1092.34,603.74 C1094.49,601.73 1099.26,599.82 1103.57,598.9 C1107.87,597.99 1114.3,597.75 1121.04,597.66 C1127.78,597.56 1142.88,597.72 1148.5,598.28 C1154.11,598.84 1155.3,599.62 1158.48,601.4 C1161.66,603.18 1164.84,608.15 1169.71,610.14 C1174.58,612.13 1186.06,613.4 1190.93,614.66 C1195.8,615.92 1200.48,617.97 1202.16,618.56" class="" stroke="url(#rim)" stroke-width="1.2" fill="none"/><g><circle cx="1109.81" cy="631.16" r="9.24" class="" fill="#0A0A09"/><circle cx="1109.81" cy="631.16" r="5.73" class="" fill="none" stroke="#3A3732" stroke-width="1"/></g><g><circle cx="1180.94" cy="631.16" r="9.24" class="" fill="#0A0A09"/><circle cx="1180.94" cy="631.16" r="5.73" class="" fill="none" stroke="#3A3732" stroke-width="1"/></g></g>
+<g><rect x="1066" y="660" width="160" height="80" rx="8" fill="url(#spot)"/><ellipse cx="1146" cy="730.4" rx="69.89" ry="4.37" fill="url(#floor)"/><path d="M1086.1,721.91 L1086.1,716.02 C1086.17,712.91 1086.03,699.9 1086.6,695.26 C1087.16,690.61 1087.67,687.05 1089.84,685.03 C1092.01,683.02 1092.27,682.36 1101.07,681.84 C1109.87,681.31 1139.51,681.04 1148.5,681.52 C1157.48,682 1157.04,682.73 1160.98,685.03 C1164.91,687.33 1169.28,694.31 1174.7,696.85 C1180.13,699.39 1192.58,700.53 1197.17,701.97 C1201.75,703.4 1203.88,704.33 1205.28,706.44 C1206.68,708.55 1206.34,714.59 1206.53,716.02 L1206.53,721.91 L1194.42,721.91 A10.98,10.98 0 0 0 1172.46,721.91 L1119.54,721.91 A10.98,10.98 0 0 0 1097.58,721.91 Z" class="" fill="url(#paint)"/><path d="M1093.58,696.21 C1093.83,694.94 1094.12,688.16 1095.46,686.63 C1096.79,685.1 1096.5,685.01 1103.57,684.71 C1110.64,684.42 1141.17,684.01 1148.5,684.39 C1155.82,684.78 1155.82,685.93 1158.48,687.59 C1161.14,689.25 1167.13,695.62 1168.46,696.85 Z" class="" fill="url(#glass)"/><path d="M1128.53,683.77 L1128.53,696.85" class="" stroke="#0B0B0A" stroke-width="1.39"/><path d="M1086.6,695.26 C1087.08,693.72 1087.67,687.05 1089.84,685.03 C1092.01,683.02 1092.27,682.36 1101.07,681.84 C1109.87,681.31 1139.51,681.04 1148.5,681.52 C1157.48,682 1157.04,682.73 1160.98,685.03 C1164.91,687.33 1169.28,694.31 1174.7,696.85 C1180.13,699.39 1192.58,700.53 1197.17,701.97 C1201.75,703.4 1204.06,705.77 1205.28,706.44" class="" stroke="url(#rim)" stroke-width="1.2" fill="none"/><g><circle cx="1108.56" cy="720.92" r="9.48" class="" fill="#0A0A09"/><circle cx="1108.56" cy="720.92" r="5.88" class="" fill="none" stroke="#3A3732" stroke-width="1"/></g><g><circle cx="1183.44" cy="720.92" r="9.48" class="" fill="#0A0A09"/><circle cx="1183.44" cy="720.92" r="5.88" class="" fill="none" stroke="#3A3732" stroke-width="1"/></g></g>
+<g><rect x="1240" y="570" width="160" height="80" rx="8" fill="url(#spot)"/><ellipse cx="1320" cy="640.4" rx="69.89" ry="4.37" fill="url(#floor)"/><path d="M1260.1,632.16 L1260.1,626.92 C1260.21,625.81 1259.72,621 1260.84,619.51 C1261.97,618.01 1264.33,617.82 1267.58,616.95 C1270.84,616.08 1277.69,615.13 1282.56,613.71 C1287.43,612.3 1294.04,608.52 1300.03,607.51 C1306.02,606.5 1317.63,606.77 1322.5,606.97 C1327.36,607.18 1329.11,607.53 1332.48,608.86 C1335.85,610.19 1339.34,614.37 1344.96,615.87 C1350.58,617.37 1364.77,617.9 1369.92,618.83 C1375.07,619.76 1377.69,620.65 1379.28,622.07 C1380.87,623.48 1380.34,627.34 1380.53,628.27 L1380.53,632.16 L1366.92,632.16 A10.73,10.73 0 0 0 1345.46,632.16 L1294.54,632.16 A10.73,10.73 0 0 0 1273.08,632.16 Z" class="" fill="url(#paint)"/><path d="M1281.31,615.6 C1283.64,614.77 1293.46,610.26 1298.78,609.4 C1304.11,608.54 1317.09,608.91 1321.25,609.13 C1325.41,609.35 1327.49,610.12 1329.98,611.02 C1332.48,611.92 1338.64,615.22 1339.97,615.87 Z" class="" fill="url(#glass)"/><path d="M1315.01,608.51 L1315.01,615.87" class="" stroke="#0B0B0A" stroke-width="1.39"/><path d="M1260.84,619.51 C1261.86,619.12 1264.33,617.82 1267.58,616.95 C1270.84,616.08 1277.69,615.13 1282.56,613.71 C1287.43,612.3 1294.04,608.52 1300.03,607.51 C1306.02,606.5 1317.63,606.77 1322.5,606.97 C1327.36,607.18 1329.11,607.53 1332.48,608.86 C1335.85,610.19 1339.34,614.37 1344.96,615.87 C1350.58,617.37 1364.77,617.9 1369.92,618.83 C1375.07,619.76 1377.88,621.58 1379.28,622.07" class="" stroke="url(#rim)" stroke-width="1.2" fill="none"/><g><circle cx="1283.81" cy="631.16" r="9.24" class="" fill="#0A0A09"/><circle cx="1283.81" cy="631.16" r="5.73" class="" fill="none" stroke="#3A3732" stroke-width="1"/></g><g><circle cx="1356.19" cy="631.16" r="9.24" class="" fill="#0A0A09"/><circle cx="1356.19" cy="631.16" r="5.73" class="" fill="none" stroke="#3A3732" stroke-width="1"/></g></g>
+<g><rect x="1240" y="660" width="160" height="80" rx="8" fill="url(#spot)"/><ellipse cx="1320" cy="730.4" rx="69.89" ry="4.37" fill="url(#floor)"/><path d="M1260.1,722.16 L1260.1,716.42 C1260.19,715.06 1260.16,709.6 1260.72,707.34 C1261.28,705.07 1262.06,702.82 1263.84,701.33 C1265.62,699.84 1267.9,698.21 1272.58,697.41 C1277.26,696.62 1286.62,696.22 1295.04,696.02 C1303.46,695.81 1322,695.68 1328.74,696.02 C1335.48,696.35 1336.6,696.95 1339.97,698.25 C1343.34,699.55 1346.52,703.3 1351.2,704.68 C1355.88,706.06 1366.96,706.55 1371.17,707.48 C1375.38,708.4 1377.88,709.28 1379.28,710.83 C1380.68,712.38 1380.34,716.77 1380.53,717.82 L1380.53,722.16 L1368.17,722.16 A10.73,10.73 0 0 0 1346.71,722.16 L1293.29,722.16 A10.73,10.73 0 0 0 1271.83,722.16 Z" class="" fill="url(#paint)"/><path d="M1267.58,703.84 C1268.42,703.25 1270.16,700.12 1273.82,699.37 C1277.48,698.62 1287.88,698.4 1295.04,698.25 C1302.2,698.1 1322,697.99 1327.49,698.25 C1332.98,698.51 1333.73,699.35 1336.22,700.21 C1338.72,701.07 1344.88,704.08 1346.21,704.68 Z" class="" fill="url(#glass)"/><path d="M1312.51,697.63 L1312.51,704.68" class="" stroke="#0B0B0A" stroke-width="1.39"/><path d="M1260.72,707.34 C1261.19,706.44 1262.06,702.82 1263.84,701.33 C1265.62,699.84 1267.9,698.21 1272.58,697.41 C1277.26,696.62 1286.62,696.22 1295.04,696.02 C1303.46,695.81 1322,695.68 1328.74,696.02 C1335.48,696.35 1336.6,696.95 1339.97,698.25 C1343.34,699.55 1346.52,703.3 1351.2,704.68 C1355.88,706.06 1366.96,706.55 1371.17,707.48 C1375.38,708.4 1378.06,710.33 1379.28,710.83" class="" stroke="url(#rim)" stroke-width="1.2" fill="none"/><g><circle cx="1282.56" cy="721.16" r="9.24" class="" fill="#0A0A09"/><circle cx="1282.56" cy="721.16" r="5.73" class="" fill="none" stroke="#3A3732" stroke-width="1"/></g><g><circle cx="1357.44" cy="721.16" r="9.24" class="" fill="#0A0A09"/><circle cx="1357.44" cy="721.16" r="5.73" class="" fill="none" stroke="#3A3732" stroke-width="1"/></g></g>
+<text x="720" y="770" class="s12 c3">Veicoli: fotografia low-key in studio. Qui un segnaposto disegnato con gradienti di luce.</text>
+<text x="48" y="868" class="n s12 c3">Font: Barlow e Barlow Semi Condensed (OFL). Fallback: Bahnschrift, DIN Alternate, Segoe UI / Arial.</text>
+</svg>

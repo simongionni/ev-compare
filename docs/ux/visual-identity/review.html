@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EV Compare — Revisione identità visiva</title>
+    <link rel="stylesheet" href="review/review.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="top-title">
+        <strong>EV Compare</strong>
+        <span>Identità visiva · M0.2</span>
+        <span class="meta" id="meta"></span>
+      </div>
+      <nav class="tabs" aria-label="Sezioni">
+        <a href="#panoramica">Panoramica</a>
+        <a href="#scenari">Scenari a confronto</a>
+        <span class="tabs-group" id="concept-tabs"></span>
+        <a href="#identita">Identità</a>
+        <a href="#valutazione">Punti di forza e limiti</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="view-panoramica" class="view" hidden>
+        <div class="concepts" id="overview"></div>
+      </section>
+
+      <section id="view-scenari" class="view" hidden>
+        <div class="toolbar">
+          <div
+            class="seg"
+            id="scenario-picker"
+            role="group"
+            aria-label="Scenario"
+          ></div>
+          <label
+            >Zoom
+            <select id="zoom">
+              <option value="fit">Adatta alla colonna</option>
+              <option value="0.5">50%</option>
+              <option value="0.75">75%</option>
+              <option value="1">100%</option>
+            </select>
+          </label>
+          <label class="check"
+            ><input type="checkbox" id="sync" checked /> Scorrimento
+            sincronizzato</label
+          >
+        </div>
+        <div class="columns" id="columns"></div>
+      </section>
+
+      <section id="view-concept" class="view" hidden>
+        <div id="concept-detail"></div>
+      </section>
+
+      <section id="view-identita" class="view" hidden>
+        <div id="identity"></div>
+      </section>
+
+      <section id="view-valutazione" class="view" hidden>
+        <div class="assessment" id="assessment"></div>
+        <p class="note">
+          Il confronto critico completo è in
+          <a href="comparison.md">comparison.md</a>. Le osservazioni UX non
+          incorporate sono in <a href="ux-notes.md">ux-notes.md</a>.
+        </p>
+      </section>
+    </main>
+
+    <div
+      class="viewer"
+      id="viewer"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="viewer-title"
+    >
+      <div class="viewer-bar">
+        <button
+          type="button"
+          data-act="prev-concept"
+          title="Concept precedente (←)"
+        >
+          ‹
+        </button>
+        <strong id="viewer-title"></strong>
+        <button
+          type="button"
+          data-act="next-concept"
+          title="Concept successivo (→)"
+        >
+          ›
+        </button>
+        <span class="viewer-hint">↑ ↓ scenario · ← → concept</span>
+        <span class="spacer"></span>
+        <div class="seg" role="group" aria-label="Zoom">
+          <button type="button" data-zoom="fit">Adatta</button>
+          <button type="button" data-zoom="1">100%</button>
+          <button type="button" data-zoom="2">200%</button>
+        </div>
+        <a id="viewer-open" target="_blank" rel="noopener">Apri SVG</a>
+        <button type="button" data-act="close" title="Chiudi (Esc)">
+          Chiudi
+        </button>
+      </div>
+      <div class="viewer-stage" id="viewer-stage">
+        <img id="viewer-img" alt="" />
+      </div>
+    </div>
+
+    <script src="review/manifest.js"></script>
+    <script src="review/assets.js"></script>
+    <script src="review/review.js"></script>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1628" viewBox="0 0 1440 1628" role="img" aria-labelledby="title desc">
+<title id="title">Livrea — Comparison, Selected Vehicles</title>
+<desc id="desc">Concept Livrea applicato al confronto con criteri.</desc>
+<style>
+.s9{font-size:9px}.s10{font-size:10px}.s11{font-size:11px}.s12{font-size:12px}.s13{font-size:13px}.s14{font-size:14px}.s15{font-size:15px}.s16{font-size:16px}.s17{font-size:17px}.s18{font-size:18px}.s19{font-size:19px}.s20{font-size:20px}.s22{font-size:22px}.s24{font-size:24px}.s26{font-size:26px}.s28{font-size:28px}.s30{font-size:30px}.s32{font-size:32px}.s36{font-size:36px}.s40{font-size:40px}.s44{font-size:44px}.s48{font-size:48px}.s52{font-size:52px}.s56{font-size:56px}.s64{font-size:64px}.s72{font-size:72px}.s80{font-size:80px}.s96{font-size:96px}.s120{font-size:120px}.s160{font-size:160px}.w3{font-weight:300}.w4{font-weight:400}.w5{font-weight:500}.w6{font-weight:600}.w7{font-weight:700}.w8{font-weight:800}.w9{font-weight:900}.tab{font-variant-numeric:tabular-nums}.u{text-decoration:underline}.it{font-style:italic}
+text{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;fill:#0F0F10}
+.d{font-family:'Archivo Black','Arial Black',Archivo,sans-serif;font-weight:900}
+.c2{fill:#3D3D42}.c3{fill:#66666D}.inv{fill:#FFFFFF}
+.l1{fill:#2448D8}.l2{fill:#EF6A1F}.l3{fill:#11A37A}.l4{fill:#C23A8A}
+.caps{letter-spacing:1.4px}
+.page{fill:#F6F5F1}.white{fill:#FFFFFF}.ink{fill:#0F0F10}.stone{fill:#ECEBE6}
+.card{fill:#FFFFFF;stroke:#DCDBD6;stroke-width:1}
+.field{fill:#FFFFFF;stroke:#0F0F10;stroke-width:2}
+.dash{fill:none;stroke:#0F0F10;stroke-width:2;stroke-dasharray:6 4}
+.dashw{fill:none;stroke:#FFFFFF;stroke-width:1.5;stroke-dasharray:6 4}
+.rule{stroke:#DCDBD6;stroke-width:1;fill:none}
+.ruleink{stroke:#0F0F10;stroke-width:2;fill:none}
+.stroke{stroke:#0F0F10;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.strokew{stroke:#FFFFFF;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.grid{stroke:#ECEBE6;stroke-width:1;fill:none}
+</style>
+<defs></defs>
+<rect x="0" y="0" width="1440" height="1628" class="page"/>
+<g><rect x="0" y="0" width="1440" height="64" class="ink"/><g><rect x="32" y="24" width="18" height="18" rx="3" fill="#2448D8"/><rect x="42" y="20" width="18" height="18" rx="3" fill="#EF6A1F"/></g><text x="70" y="39" class="d s18 inv">EV Compare</text><text x="220" y="39" class="s15 w5 inv">Cerca</text><text x="305" y="39" class="s15 w8 inv">Confronta</text><rect x="305" y="58" width="77.4" height="6" fill="#FFFFFF"/><text x="447" y="39" class="s15 w5 inv">Strumenti tecnici</text><g><circle cx="404" cy="34" r="10" class="" fill="#2448D8"/><text x="404" y="37.96" class="d s11" text-anchor="middle" style="fill:#FFFFFF">1</text></g><g><circle cx="426" cy="34" r="10" class="" fill="#EF6A1F"/><text x="426" y="37.96" class="d s11" text-anchor="middle" style="fill:#0F0F10">2</text></g><text x="1408" y="39" class="s14 inv" text-anchor="end">Fonti e metodo</text></g>
+<rect x="0" y="64" width="1440" height="48" class="white"/>
+<text x="32" y="94" class="s14 w8 u">‹ Ricerca</text>
+<text x="112" y="94" class="s13 c2">6 criteri · 3 compatibili</text>
+<text x="1408" y="94" class="s14 w8 u" text-anchor="end">Modifica criteri</text>
+<rect x="412" y="132" width="312" height="1300" fill="#E8ECFB"/>
+<rect x="736" y="132" width="312" height="1300" fill="#FDEEE4"/>
+<text x="32" y="176" class="d s36">Confronto</text>
+<text x="32" y="202" class="s14 c2">2 veicoli</text>
+<text x="32" y="246" class="s12 w6 c2">Righe</text>
+<g><rect x="32" y="256" width="208" height="36" rx="18" class="field"/><text x="68" y="278.6" class="s13 w6" text-anchor="middle">Tutte</text><rect x="107" y="259" width="130" height="30" rx="15" class="ink"/><text x="172" y="278.6" class="s13 w8 inv" text-anchor="middle">Solo differenze</text></g>
+<text x="32" y="316" class="s12 w6 c2">Vista</text>
+<g><rect x="32" y="326" width="180" height="36" rx="18" class="field"/><rect x="35" y="329" width="86" height="30" rx="15" class="ink"/><text x="78" y="348.6" class="s13 w8 inv" text-anchor="middle">Tabella</text><text x="168" y="348.6" class="s13 w6" text-anchor="middle">Grafico</text></g>
+<rect x="412" y="132" width="312" height="248" fill="#2448D8"/>
+<text x="432" y="178" class="d s40" style="fill:#FFFFFF">01</text>
+<g><path d="M527.68,192.99 L527.68,184.71 C527.82,181.84 527.77,170.24 528.6,165.58 C529.43,160.91 530.3,156.99 533.2,153.62 C536.1,150.24 541.57,145.24 547.92,143.09 C554.27,140.94 563.65,139.84 575.52,139.26 C587.39,138.69 617.1,138.73 627.04,139.26 C636.98,139.8 637.34,140.2 641.76,142.85 C646.18,145.51 649.3,153.91 656.48,156.96 C663.66,160.01 682.7,161.35 689.6,163.18 C696.5,165.01 700.13,165.93 702.48,169.16 C704.83,172.39 704.83,182.38 705.24,184.71 L705.24,192.99 L686.29,192.99 A16.93,16.93 0 0 0 652.43,192.99 L579.57,192.99 A16.93,16.93 0 0 0 545.71,192.99 Z" class="" fill="#FFFFFF"/><path d="M544.24,157.44 C545.47,155.98 549.27,148.29 553.44,146.44 C557.61,144.59 565.95,143.95 575.52,143.57 C585.09,143.19 616.86,143.12 625.2,143.57 C633.54,144.02 634.89,145.07 638.08,146.92 C641.27,148.77 647.65,156.04 649.12,157.44 Z" class="" fill="#3D3D42" opacity="1"/><path d="M599.44,142.65 L599.44,157.44" class="" stroke="#FFFFFF" stroke-width="3.07"/><g><circle cx="562.64" cy="191.52" r="14.72" class="" fill="#0F0F10"/><circle cx="562.64" cy="191.52" r="6.18" class="" fill="#ECEBE6"/></g><g><circle cx="669.36" cy="191.52" r="14.72" class="" fill="#0F0F10"/><circle cx="669.36" cy="191.52" r="6.18" class="" fill="#ECEBE6"/></g></g>
+<text x="432" y="262" class="d s22" style="fill:#FFFFFF">Nordis E4</text>
+<text x="432" y="284" class="s13 w5" style="fill:#FFFFFF">SUV medio · 5 posti</text>
+<text x="432" y="324" class="d s28" style="fill:#FFFFFF">€41.500</text>
+<text x="432" y="360" class="s13 w8 u" style="fill:#FFFFFF">Apri scheda ›</text>
+<text x="642" y="360" class="s13 u" text-anchor="end" style="fill:#FFFFFF">Sostituisci</text>
+<text x="704" y="360" class="s13 u" text-anchor="end" style="fill:#FFFFFF">Rimuovi</text>
+<rect x="736" y="132" width="312" height="248" fill="#EF6A1F"/>
+<text x="756" y="178" class="d s40" style="fill:#0F0F10">02</text>
+<g><path d="M855.36,194.1 L855.36,185.54 C855.5,182.44 855.45,169.84 856.28,164.84 C857.11,159.84 857.71,155.16 860.88,152.19 C864.05,149.22 871.09,146.41 877.44,145.06 C883.79,143.71 893.26,143.36 903.2,143.22 C913.14,143.08 935.4,143.31 943.68,144.14 C951.96,144.97 953.71,146.12 958.4,148.74 C963.09,151.36 967.78,158.69 974.96,161.62 C982.14,164.55 999.06,166.43 1006.24,168.29 C1013.42,170.15 1019.9,171.45 1022.8,174.04 C1025.7,176.63 1025.15,183.81 1025.56,185.54 L1025.56,194.1 L1007.34,194.1 A15.82,15.82 0 0 0 975.7,194.1 L902.46,194.1 A15.82,15.82 0 0 0 870.82,194.1 Z" class="" fill="#3D3D42"/><path d="M868.24,159.78 C869.71,158.37 874.62,150.86 879.28,149.2 C883.94,147.54 894.86,147.48 903.2,147.36 C911.54,147.24 934.97,147.67 941.84,148.28 C948.71,148.89 951.29,150.24 954.72,151.96 C958.15,153.68 965.88,159.93 967.6,161.16 Z" class="" fill="#ECEBE6" opacity="1"/><path d="M917.92,146.44 L917.92,161.16" class="" stroke="#3D3D42" stroke-width="3.07"/><g><circle cx="886.64" cy="192.62" r="13.62" class="" fill="#0F0F10"/><circle cx="886.64" cy="192.62" r="5.72" class="" fill="#ECEBE6"/></g><g><circle cx="991.52" cy="192.62" r="13.62" class="" fill="#0F0F10"/><circle cx="991.52" cy="192.62" r="5.72" class="" fill="#ECEBE6"/></g></g>
+<text x="756" y="262" class="d s22" style="fill:#0F0F10">Aurora Vela</text>
+<text x="756" y="284" class="s13 w5" style="fill:#0F0F10">Compatta · 5 posti</text>
+<text x="756" y="324" class="d s28" style="fill:#0F0F10">€32.900</text>
+<text x="756" y="360" class="s13 w8 u" style="fill:#0F0F10">Apri scheda ›</text>
+<text x="966" y="360" class="s13 u" text-anchor="end" style="fill:#0F0F10">Sostituisci</text>
+<text x="1028" y="360" class="s13 u" text-anchor="end" style="fill:#0F0F10">Rimuovi</text>
+<rect x="1072" y="132" width="336" height="248" rx="6" class="dash"/>
+<text x="1096" y="166" class="s16 w8">+ Aggiungi un veicolo</text>
+<rect x="1096" y="180" width="288" height="44" rx="22" class="field"/>
+<circle cx="1120" cy="202" r="7" class="stroke"/>
+<line x1="1125" y1="207" x2="1130" y2="212" class="stroke"/>
+<text x="1140" y="207" class="s14 c3">Cerca un modello</text>
+<text x="1096" y="254" class="s10 w8 c3 caps">DAI TUOI RISULTATI</text>
+<text x="1096" y="282" class="s15 w8">Brisa Family</text>
+<text x="1206" y="282" class="s13 c2">€44.200</text>
+<circle cx="1372" cy="277" r="13" class="ink"/>
+<text x="1372" y="282" class="s16 w8 inv" text-anchor="middle">+</text>
+<text x="1096" y="316" class="s15 w8">Talon S</text>
+<text x="1206" y="316" class="s13 c2">quasi compatibile</text>
+<circle cx="1372" cy="311" r="13" class="ink"/>
+<text x="1372" y="316" class="s16 w8 inv" text-anchor="middle">+</text>
+<text x="32" y="436" class="d s24">Con i tuoi criteri</text>
+<text x="32" y="468" class="s11 w8 c3 caps">REQUISITI</text>
+<g><text x="32" y="500" class="s14 w5">Budget fino a €45.000</text><g><circle cx="440" cy="495" r="8" class="" fill="#0F0F10"/><path d="M435.52,495.32 L438.72,498.52 L444.48,491.8" class="" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text x="456" y="500" class="s15 w8">€41.500</text><g><circle cx="764" cy="495" r="8" class="" fill="#0F0F10"/><path d="M759.52,495.32 L762.72,498.52 L768.48,491.8" class="" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text x="780" y="500" class="s15 w8">€32.900</text><line x1="32" y1="516" x2="1408" y2="516" class="rule"/></g>
+<g><text x="32" y="540" class="s14 w5">Bagagliaio almeno 400 L</text><g><circle cx="440" cy="535" r="8" class="" fill="#0F0F10"/><path d="M435.52,535.32 L438.72,538.52 L444.48,531.8" class="" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text x="456" y="540" class="s15 w8">520 L</text><g><circle cx="764" cy="535" r="8" class="" fill="#0F0F10"/><path d="M759.52,535.32 L762.72,538.52 L768.48,531.8" class="" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text x="780" y="540" class="s15 w8">410 L</text><text x="837" y="540" class="s12 w6 c2">10 L sopra il minimo</text><line x1="32" y1="556" x2="1408" y2="556" class="rule"/></g>
+<g><text x="32" y="580" class="s14 w5">Potenza DC massima almeno 100 kW</text><g><circle cx="440" cy="575" r="8" class="" fill="#0F0F10"/><path d="M435.52,575.32 L438.72,578.52 L444.48,571.8" class="" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text x="456" y="580" class="s15 w8">175 kW</text><g><circle cx="764" cy="575" r="8" class="" fill="#0F0F10"/><path d="M759.52,575.32 L762.72,578.52 L768.48,571.8" class="" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text x="780" y="580" class="s15 w8">135 kW</text><line x1="32" y1="596" x2="1408" y2="596" class="rule"/></g>
+<text x="32" y="620" class="s11 w8 c3 caps">PREFERENZE</text>
+<g><text x="32" y="652" class="s14 w5">Viaggio di 400 km, max 1 sosta</text><g><rect x="348.5" y="639" width="47.5" height="18" rx="9" fill="none" stroke="#3D3D42" stroke-width="2" stroke-dasharray="5 3"/><text x="372.25" y="652.6" class="s10 w7" text-anchor="middle" style="fill:#0F0F10">stima</text></g><g><circle cx="440" cy="647" r="8" class="" fill="#0F0F10"/><path d="M435.52,647.32 L438.72,650.52 L444.48,643.8" class="" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text x="456" y="652" class="s15 w8">1 sosta di ~22 min</text><g><circle cx="764" cy="647" r="8" class="" fill="#0F0F10"/><path d="M759.52,647.32 L762.72,650.52 L768.48,643.8" class="" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text x="780" y="652" class="s15 w8">1 sosta di ~28 min</text><line x1="32" y1="668" x2="1408" y2="668" class="rule"/></g>
+<g><text x="32" y="692" class="s14 w5">Circa 60 km al giorno</text><g><rect x="348.5" y="679" width="47.5" height="18" rx="9" fill="none" stroke="#3D3D42" stroke-width="2" stroke-dasharray="5 3"/><text x="372.25" y="692.6" class="s10 w7" text-anchor="middle" style="fill:#0F0F10">stima</text></g><g><circle cx="440" cy="687" r="8" class="" fill="#0F0F10"/><path d="M435.52,687.32 L438.72,690.52 L444.48,683.8" class="" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text x="456" y="692" class="s15 w8">ricarica ogni ~7 giorni</text><g><circle cx="764" cy="687" r="8" class="" fill="#0F0F10"/><path d="M759.52,687.32 L762.72,690.52 L768.48,683.8" class="" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text x="780" y="692" class="s15 w8">ricarica ogni ~6 giorni</text><line x1="32" y1="708" x2="1408" y2="708" class="rule"/></g>
+<g><text x="32" y="732" class="s14 w5">Ricarica a casa, wallbox 11 kW trifase</text><g><rect x="335.9" y="719" width="60.1" height="18" rx="9" fill="none" stroke="#3D3D42" stroke-width="2"/><text x="365.95" y="732.6" class="s10 w7" text-anchor="middle" style="fill:#0F0F10">calcolo</text></g><g><circle cx="440" cy="727" r="8" class="" fill="#0F0F10"/><path d="M435.52,727.32 L438.72,730.52 L444.48,723.8" class="" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text x="456" y="732" class="s15 w8">20→100% in 5 h 36</text><g><circle cx="764" cy="727" r="8" class="" fill="#0F0F10"/><path d="M759.52,727.32 L762.72,730.52 L768.48,723.8" class="" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text x="780" y="732" class="s15 w8">20→100% in 4 h 13</text><line x1="32" y1="748" x2="1408" y2="748" class="rule"/></g>
+<text x="32" y="800" class="d s24">Altre differenze</text>
+<g><text x="32" y="838" class="s14 w5">Autonomia in autostrada, 110 km/h</text><g><rect x="348.5" y="825" width="47.5" height="18" rx="9" fill="none" stroke="#3D3D42" stroke-width="2" stroke-dasharray="5 3"/><text x="372.25" y="838.6" class="s10 w7" text-anchor="middle" style="fill:#0F0F10">stima</text></g><text x="432" y="838" class="s15 w8">~380 km</text><text x="507.8" y="838" class="s12 w6 c2">+80 km</text><rect x="432" y="846" width="236.36" height="6" rx="3" fill="#2448D8"/><text x="756" y="838" class="s15 w8">~300 km</text><rect x="756" y="846" width="186.6" height="6" rx="3" fill="#EF6A1F"/><line x1="32" y1="860" x2="1408" y2="860" class="rule"/></g>
+<g><text x="32" y="886" class="s14 w5">Ricarica 10→80%, colonnina 150 kW</text><g><rect x="335.9" y="873" width="60.1" height="18" rx="9" fill="none" stroke="#3D3D42" stroke-width="2"/><text x="365.95" y="886.6" class="s10 w7" text-anchor="middle" style="fill:#0F0F10">calcolo</text></g><text x="432" y="886" class="s15 w8">22 min · +53,9 kWh</text><rect x="432" y="894" width="192.59" height="6" rx="3" fill="#2448D8"/><text x="756" y="886" class="s15 w8">27 min · +40,6 kWh</text><rect x="756" y="894" width="236.36" height="6" rx="3" fill="#EF6A1F"/><line x1="32" y1="908" x2="1408" y2="908" class="rule"/></g>
+<g><text x="32" y="934" class="s14 w5">Consumo in autostrada</text><g><rect x="348.5" y="921" width="47.5" height="18" rx="9" fill="none" stroke="#3D3D42" stroke-width="2" stroke-dasharray="5 3"/><text x="372.25" y="934.6" class="s10 w7" text-anchor="middle" style="fill:#0F0F10">stima</text></g><text x="432" y="934" class="s15 w8">20,3 kWh/100 km</text><rect x="432" y="942" width="236.36" height="6" rx="3" fill="#2448D8"/><text x="756" y="934" class="s15 w8">19,3 kWh/100 km</text><rect x="756" y="942" width="224.72" height="6" rx="3" fill="#EF6A1F"/><line x1="32" y1="956" x2="1408" y2="956" class="rule"/></g>
+<text x="32" y="1006" class="d s24">Dettagli</text>
+<text x="1408" y="1006" class="s13 w6 c2" text-anchor="end">7 caratteristiche uguali nascoste</text>
+<line x1="32" y1="1020" x2="1408" y2="1020" class="ruleink"/>
+<text x="32" y="1050" class="s17 w8">Autonomia e consumi</text>
+<g><rect x="245.4" y="1036" width="96" height="20" rx="10" fill="#0F0F10"/><text x="293.4" y="1050.6" class="s11 w7" text-anchor="middle" style="fill:#FFFFFF">4 differenze</text></g>
+<circle cx="1396" cy="1045" r="12" class="ink"/>
+<line x1="1390" y1="1045" x2="1402" y2="1045" class="strokew"/>
+<g><text x="32" y="1090" class="s14 w5">Autonomia WLTP</text><g><rect x="310.7" y="1077" width="85.3" height="18" rx="9" fill="#3D3D42"/><text x="353.35" y="1090.6" class="s10 w7" text-anchor="middle" style="fill:#FFFFFF">costruttore</text></g><text x="432" y="1090" class="s15 w8">520 km</text><text x="756" y="1090" class="s15 w8">410 km</text><line x1="32" y1="1106" x2="1408" y2="1106" class="rule"/></g>
+<g><text x="32" y="1128" class="s14 w5">Autonomia in autostrada, 110 km/h</text><g><rect x="348.5" y="1115" width="47.5" height="18" rx="9" fill="none" stroke="#3D3D42" stroke-width="2" stroke-dasharray="5 3"/><text x="372.25" y="1128.6" class="s10 w7" text-anchor="middle" style="fill:#0F0F10">stima</text></g><text x="432" y="1128" class="s15 w8">~380 km</text><text x="756" y="1128" class="s15 w8">~300 km</text><line x1="32" y1="1144" x2="1408" y2="1144" class="rule"/></g>
+<g><text x="32" y="1166" class="s14 w5">Autonomia in autostrada, 0 °C</text><g><rect x="348.5" y="1153" width="47.5" height="18" rx="9" fill="none" stroke="#3D3D42" stroke-width="2" stroke-dasharray="5 3"/><text x="372.25" y="1166.6" class="s10 w7" text-anchor="middle" style="fill:#0F0F10">stima</text></g><text x="432" y="1166" class="s15 w8">~300 km</text><text x="756" y="1166" class="s15 w8">~235 km</text><line x1="32" y1="1182" x2="1408" y2="1182" class="rule"/></g>
+<g><text x="32" y="1204" class="s14 w5">Batteria utile</text><g><rect x="310.7" y="1191" width="85.3" height="18" rx="9" fill="#3D3D42"/><text x="353.35" y="1204.6" class="s10 w7" text-anchor="middle" style="fill:#FFFFFF">costruttore</text></g><text x="432" y="1204" class="s15 w8">77 kWh</text><text x="756" y="1204" class="s15 w8">58 kWh</text><line x1="32" y1="1220" x2="1408" y2="1220" class="rule"/></g>
+<text x="32" y="1258" class="s17 w8">Ricarica</text>
+<g><rect x="127.2" y="1244" width="96" height="20" rx="10" fill="none" stroke="#0F0F10" stroke-width="2"/><text x="175.2" y="1258.6" class="s11 w7" text-anchor="middle" style="fill:#0F0F10">5 differenze</text></g>
+<text x="1366" y="1258" class="s13 w8 u" text-anchor="end">Simula la ricarica →</text>
+<circle cx="1396" cy="1253" r="12" class="" fill="none" stroke="#0F0F10" stroke-width="2"/>
+<line x1="1390" y1="1253" x2="1402" y2="1253" class="stroke"/>
+<line x1="1396" y1="1247" x2="1396" y2="1259" class="stroke"/>
+<line x1="32" y1="1274" x2="1408" y2="1274" class="rule"/>
+<text x="32" y="1302" class="s17 w8">Spazio e praticità</text>
+<g><rect x="231.2" y="1288" width="96" height="20" rx="10" fill="none" stroke="#0F0F10" stroke-width="2"/><text x="279.2" y="1302.6" class="s11 w7" text-anchor="middle" style="fill:#0F0F10">4 differenze</text></g>
+<circle cx="1396" cy="1297" r="12" class="" fill="none" stroke="#0F0F10" stroke-width="2"/>
+<line x1="1390" y1="1297" x2="1402" y2="1297" class="stroke"/>
+<line x1="1396" y1="1291" x2="1396" y2="1303" class="stroke"/>
+<line x1="32" y1="1318" x2="1408" y2="1318" class="rule"/>
+<text x="32" y="1346" class="s17 w8">Prestazioni</text>
+<g><rect x="158.4" y="1332" width="96" height="20" rx="10" fill="none" stroke="#0F0F10" stroke-width="2"/><text x="206.4" y="1346.6" class="s11 w7" text-anchor="middle" style="fill:#0F0F10">3 differenze</text></g>
+<circle cx="1396" cy="1341" r="12" class="" fill="none" stroke="#0F0F10" stroke-width="2"/>
+<line x1="1390" y1="1341" x2="1402" y2="1341" class="stroke"/>
+<line x1="1396" y1="1335" x2="1396" y2="1347" class="stroke"/>
+<line x1="32" y1="1362" x2="1408" y2="1362" class="rule"/>
+<text x="32" y="1390" class="s17 w8">Dimensioni e pesi</text>
+<g><rect x="220.8" y="1376" width="96" height="20" rx="10" fill="none" stroke="#0F0F10" stroke-width="2"/><text x="268.8" y="1390.6" class="s11 w7" text-anchor="middle" style="fill:#0F0F10">6 differenze</text></g>
+<circle cx="1396" cy="1385" r="12" class="" fill="none" stroke="#0F0F10" stroke-width="2"/>
+<line x1="1390" y1="1385" x2="1402" y2="1385" class="stroke"/>
+<line x1="1396" y1="1379" x2="1396" y2="1391" class="stroke"/>
+<line x1="32" y1="1406" x2="1408" y2="1406" class="rule"/>
+<text x="32" y="1476" class="d s24">Simulazioni</text>
+<rect x="32" y="1492" width="676" height="84" rx="6" class="ink"/>
+<text x="56" y="1526" class="d s18 inv">Ricarica a parità di condizioni</text>
+<text x="56" y="1550" class="s13 inv">Stessa colonnina, stesso intervallo di carica</text>
+<text x="684" y="1540" class="s14 w8 u inv" text-anchor="end">Apri →</text>
+<rect x="733" y="1493" width="674" height="82" rx="6" class="dash"/>
+<text x="756" y="1526" class="d s18 ">Viaggio di 400 km</text>
+<text x="756" y="1550" class="s13 c2">Soste e tempo totale con lo stesso percorso</text>
+<text x="1384" y="1540" class="s14 w8 u " text-anchor="end">Apri →</text>
+<g><rect x="1252" y="1500" width="121.6" height="18" rx="3" fill="#FFFFFF" stroke="#D63371" stroke-width="1"/><text x="1260" y="1512.5" style="font-family:Arial,Helvetica,sans-serif;font-size:10px;font-weight:700;fill:#D63371;letter-spacing:0">NON IMPLEMENTATO</text></g>
+<text x="32" y="1600" class="s12 c3">Dati tecnici: costruttore (illustrativi). Autonomia, consumi e soste: stime EV Compare. Tempi di ricarica: calcolo con il simulatore.</text>
+<text x="32" y="1620" class="s12 w8 u">Fonti, metodo e limiti →</text>
+</svg>

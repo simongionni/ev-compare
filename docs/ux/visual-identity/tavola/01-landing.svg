@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="880" viewBox="0 0 1440 880" role="img" aria-labelledby="title desc">
+<title id="title">Tavola — Landing Page</title>
+<desc id="desc">Concept Tavola applicato alla landing consolidata.</desc>
+<style>
+.s9{font-size:9px}.s10{font-size:10px}.s11{font-size:11px}.s12{font-size:12px}.s13{font-size:13px}.s14{font-size:14px}.s15{font-size:15px}.s16{font-size:16px}.s17{font-size:17px}.s18{font-size:18px}.s19{font-size:19px}.s20{font-size:20px}.s22{font-size:22px}.s24{font-size:24px}.s26{font-size:26px}.s28{font-size:28px}.s30{font-size:30px}.s32{font-size:32px}.s36{font-size:36px}.s40{font-size:40px}.s44{font-size:44px}.s48{font-size:48px}.s52{font-size:52px}.s56{font-size:56px}.s64{font-size:64px}.s72{font-size:72px}.s80{font-size:80px}.s96{font-size:96px}.s120{font-size:120px}.s160{font-size:160px}.w3{font-weight:300}.w4{font-weight:400}.w5{font-weight:500}.w6{font-weight:600}.w7{font-weight:700}.w8{font-weight:800}.w9{font-weight:900}.tab{font-variant-numeric:tabular-nums}.u{text-decoration:underline}.it{font-style:italic}
+text{font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;fill:#161616}
+.m{font-family:'IBM Plex Mono',Consolas,'SFMono-Regular',Menlo,monospace}
+.c2{fill:#4A4741}.c3{fill:#6B675F}.sig{fill:#C8361B}.inv{fill:#FBFAF6}.blue{fill:#2251A3}
+.caps{letter-spacing:1.2px}
+.paper{fill:#F3F0E8}.sheet{fill:#FBFAF6}.ink{fill:#161616}.sigf{fill:#C8361B}
+.box{fill:#FBFAF6;stroke:#161616;stroke-width:1}
+.boxr{fill:#FBFAF6;stroke:#CFC9BC;stroke-width:1}
+.dash{fill:#FBFAF6;stroke:#161616;stroke-width:1;stroke-dasharray:4 3}
+.hair{stroke:#CFC9BC;stroke-width:1;fill:none}
+.hairink{stroke:#161616;stroke-width:1;fill:none}
+.grid{stroke:#E4DFD3;stroke-width:1;fill:none}
+.stroke{stroke:#161616;stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.thin{stroke:#161616;stroke-width:1;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.sigs{stroke:#C8361B;stroke-width:2;fill:none}
+.center{stroke:#6B675F;stroke-width:0.8;stroke-dasharray:10 3 2 3;fill:none}
+.carbody{fill:#FBFAF6;stroke:#161616;stroke-width:1.4;stroke-linejoin:round}
+.carwin{fill:none;stroke:#161616;stroke-width:1}
+.wheel{fill:#FBFAF6;stroke:#161616;stroke-width:1.4}
+.dim{stroke:#4A4741;stroke-width:0.8;fill:none}
+.s1{stroke:#161616;stroke-width:2;fill:none;stroke-linejoin:round}
+.s2{stroke:#2251A3;stroke-width:2;fill:none;stroke-dasharray:7 4;stroke-linejoin:round}
+.s1pot{stroke:#161616;stroke-width:1;fill:none;stroke-dasharray:1.5 3}
+.limit{stroke:#4A4741;stroke-width:1;stroke-dasharray:12 3 2 3;fill:none}
+</style>
+<defs>
+<pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#CFC9BC" stroke-width="1"/></pattern>
+</defs>
+<rect x="0" y="0" width="1440" height="880" class="paper"/>
+<g><rect x="0" y="0" width="1440" height="64" class="paper"/><line x1="0" y1="64" x2="1440" y2="64" class="hairink"/><g><rect x="32" y="19" width="26" height="26" class="hairink"/><circle cx="45" cy="34" r="6" class="thin"/><line x1="35" y1="40" x2="55" y2="40" class="thin"/><line x1="45" y1="23" x2="45" y2="27" class="thin"/></g><text x="68" y="38" class="s17 w6">EV Compare</text><text x="220" y="38" class="s15 w5">Cerca</text><text x="305" y="38" class="s15 w5">Confronta</text><text x="447" y="38" class="s15 w5">Strumenti tecnici</text><text x="1408" y="38" class="s14 c2" text-anchor="end">Fonti e metodo</text></g>
+<text x="120" y="152" class="s52 w6" letter-spacing="-1.2">Trova l’auto elettrica</text>
+<text x="120" y="212" class="s52 w6" letter-spacing="-1.2">adatta a te.</text>
+<text x="120" y="258" class="s26 c2">E capisci perché.</text>
+<g><line x1="838" y1="263.2" x2="1282" y2="263.2" class="thin"/><line x1="938.2" y1="104.32" x2="938.2" y2="271.2" class="center"/><line x1="1181.8" y1="104.32" x2="1181.8" y2="271.2" class="center"/><path d="M858.4,232.96 L858.4,214.06 C858.72,207.51 858.61,181.03 860.5,170.38 C862.39,159.73 864.38,150.78 871,143.08 C877.62,135.38 890.11,123.97 904.6,119.06 C919.09,114.14 940.51,111.63 967.6,110.32 C994.69,109.01 1062.52,109.09 1085.2,110.32 C1107.88,111.55 1108.72,112.45 1118.8,118.51 C1128.88,124.57 1136.02,143.76 1152.4,150.72 C1168.78,157.69 1212.25,160.74 1228,164.92 C1243.75,169.1 1252.05,171.2 1257.4,178.57 C1262.76,185.94 1262.76,208.74 1263.7,214.06 L1263.7,232.96 L1220.44,232.96 A38.64,38.64 0 0 0 1143.16,232.96 L976.84,232.96 A38.64,38.64 0 0 0 899.56,232.96 Z" class="carbody"/><path d="M896.2,151.82 C899,148.47 907.68,130.92 917.2,126.7 C926.72,122.48 945.76,121.02 967.6,120.15 C989.44,119.27 1061.96,119.13 1081,120.15 C1100.04,121.17 1103.12,123.57 1110.4,127.79 C1117.68,132.01 1132.24,148.61 1135.6,151.82 Z" class="carwin"/><path d="M1022.20,118.05 L1022.20,151.82" class="carwin"/><path d="M1022.20,151.82 L1022.20,226.66" class="carwin"/><circle cx="938.2" cy="229.6" r="33.6" class="wheel"/><circle cx="938.2" cy="229.6" r="18.48" class="thin"/><circle cx="938.2" cy="229.6" r="1.2" class="ink"/><circle cx="1181.8" cy="229.6" r="33.6" class="wheel"/><circle cx="1181.8" cy="229.6" r="18.48" class="thin"/><circle cx="1181.8" cy="229.6" r="1.2" class="ink"/></g>
+<g><line x1="872" y1="168" x2="820" y2="140" class="dim"/><circle cx="872" cy="168" r="2.2" class="ink"/><line x1="688" y1="140" x2="820" y2="140" class="dim"/><text x="688" y="118" class="s11 c2">Bagagliaio</text><rect x="688" y="127" width="7" height="7" class="ink"/><text x="700" y="134.5" class="m s14 w6">520 L</text></g>
+<g><line x1="1000" y1="240" x2="1000" y2="302" class="dim"/><circle cx="1000" cy="240" r="2.2" class="ink"/><line x1="868" y1="302" x2="1000" y2="302" class="dim"/><text x="868" y="280" class="s11 c2">Batteria utile</text><rect x="868" y="289" width="7" height="7" class="ink"/><text x="880" y="296.5" class="m s14 w6">77 kWh</text></g>
+<g><line x1="1246" y1="196" x2="1288" y2="140" class="dim"/><circle cx="1246" cy="196" r="2.2" class="ink"/><line x1="1288" y1="140" x2="1420" y2="140" class="dim"/><text x="1288" y="118" class="s11 c2">Potenza DC massima</text><rect x="1288" y="127" width="7" height="7" class="ink"/><text x="1300" y="134.5" class="m s14 w6">175 kW</text></g>
+<text x="1408" y="300" class="m s10 c3" text-anchor="end">Nordis E4 · dati del costruttore, illustrativi</text>
+<rect x="120" y="336" width="588" height="300" class="box"/>
+<rect x="732" y="336" width="588" height="300" class="box"/>
+<text x="144" y="376" class="m s12 c3">01</text>
+<text x="176" y="376" class="s20 w6">Cerco un modello</text>
+<rect x="144" y="396" width="444" height="48" class="box" stroke-width="1.5"/>
+<circle cx="166" cy="418" r="6.5" class="thin"/>
+<line x1="171" y1="423" x2="176" y2="428" class="thin"/>
+<text x="188" y="426" class="s16">Nor</text>
+<line x1="219" y1="408" x2="219" y2="432" class="stroke"/>
+<g><rect x="596" y="396" width="88" height="48" class="ink"/><text x="640" y="425" class="s14 w6 inv" text-anchor="middle">Cerca</text></g>
+<rect x="144" y="452" width="540" height="164" class="boxr"/>
+<text x="160" y="476" class="m s10 c3 caps">MODELLI</text>
+<text x="160" y="502" class="s14 w6">Nordis E4</text>
+<text x="248" y="502" class="s13 c2">SUV medio</text>
+<text x="668" y="502" class="s13 u" text-anchor="end">Apri la scheda ›</text>
+<text x="160" y="530" class="s14 w6">Nordis E2</text>
+<text x="248" y="530" class="s13 c2">Compatta</text>
+<text x="668" y="530" class="s13 u" text-anchor="end">Apri la scheda ›</text>
+<line x1="160" y1="542" x2="668" y2="542" class="hair"/>
+<text x="160" y="564" class="m s10 c3 caps">MARCHE</text>
+<text x="160" y="588" class="s14 w6">Tutti i modelli Nordis (3)</text>
+<text x="668" y="588" class="s13 u" text-anchor="end">Vedi i risultati ›</text>
+<text x="160" y="608" class="s13 c2">Cerca “Nor” in tutto il catalogo</text>
+<text x="756" y="376" class="m s12 c3">02</text>
+<text x="788" y="376" class="s20 w6">Parto dalle mie esigenze</text>
+<rect x="756" y="400" width="86.4" height="34" class="box"/>
+<text x="770" y="422" class="m s14 w6">+</text>
+<text x="786" y="422" class="s13 w5">Budget</text>
+<rect x="850.4" y="400" width="182.6" height="34" class="box"/>
+<text x="864.4" y="422" class="m s14 w6">+</text>
+<text x="880.4" y="422" class="s13 w5">Percorso quotidiano</text>
+<rect x="1041" y="400" width="138.2" height="34" class="box"/>
+<text x="1055" y="422" class="m s14 w6">+</text>
+<text x="1071" y="422" class="s13 w5">Viaggi lunghi</text>
+<rect x="1187.2" y="400" width="101.2" height="34" class="box"/>
+<text x="1201.2" y="422" class="m s14 w6">+</text>
+<text x="1217.2" y="422" class="s13 w5">Ricarica</text>
+<rect x="756" y="444" width="145.6" height="34" class="box"/>
+<text x="770" y="466" class="m s14 w6">+</text>
+<text x="786" y="466" class="s13 w5">Spazio e posti</text>
+<rect x="909.6" y="444" width="182.6" height="34" class="dash"/>
+<text x="923.6" y="466" class="m s14 w6">+</text>
+<text x="939.6" y="466" class="s13 w5">Specifiche tecniche</text>
+<g><rect x="756" y="508" width="300" height="46" class="ink"/><text x="906" y="536" class="s14 w6 inv" text-anchor="middle">Apri la ricerca per esigenze →</text></g>
+<text x="120" y="680" class="s15 w6">Vai direttamente a</text>
+<line x1="120" y1="696" x2="1320" y2="696" class="hairink"/>
+<line x1="120" y1="800" x2="1320" y2="800" class="hairink"/>
+<text x="120" y="732" class="s16 w6">Confronta veicoli</text>
+<text x="120" y="756" class="s13 c2">Fino a 4 modelli, fianco a fianco.</text>
+<text x="120" y="784" class="s13 w6 u">Apri il confronto →</text>
+<line x1="520" y1="696" x2="520" y2="800" class="hair"/>
+<text x="544" y="732" class="s16 w6">Strumenti tecnici</text>
+<text x="544" y="756" class="s13 c2">Ricarica, consumi e autonomia.</text>
+<text x="544" y="784" class="s13 w6 u">Apri gli strumenti →</text>
+<line x1="920" y1="696" x2="920" y2="800" class="hair"/>
+<text x="944" y="732" class="s16 w6">Fonti e metodo</text>
+<text x="944" y="756" class="s13 c2">Da dove vengono dati e stime.</text>
+<text x="944" y="784" class="s13 w6 u">Leggi il metodo →</text>
+<line x1="0" y1="826" x2="1440" y2="826" class="hair"/>
+<text x="120" y="856" class="s12 c3">Dati e veicoli illustrativi · Fonti e metodo · Contatti</text>
+</svg>

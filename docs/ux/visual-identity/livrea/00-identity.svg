@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+<title id="title">Livrea — Identity sheet</title>
+<desc id="desc">Palette, tipografia e componenti del concept Livrea.</desc>
+<style>
+.s9{font-size:9px}.s10{font-size:10px}.s11{font-size:11px}.s12{font-size:12px}.s13{font-size:13px}.s14{font-size:14px}.s15{font-size:15px}.s16{font-size:16px}.s17{font-size:17px}.s18{font-size:18px}.s19{font-size:19px}.s20{font-size:20px}.s22{font-size:22px}.s24{font-size:24px}.s26{font-size:26px}.s28{font-size:28px}.s30{font-size:30px}.s32{font-size:32px}.s36{font-size:36px}.s40{font-size:40px}.s44{font-size:44px}.s48{font-size:48px}.s52{font-size:52px}.s56{font-size:56px}.s64{font-size:64px}.s72{font-size:72px}.s80{font-size:80px}.s96{font-size:96px}.s120{font-size:120px}.s160{font-size:160px}.w3{font-weight:300}.w4{font-weight:400}.w5{font-weight:500}.w6{font-weight:600}.w7{font-weight:700}.w8{font-weight:800}.w9{font-weight:900}.tab{font-variant-numeric:tabular-nums}.u{text-decoration:underline}.it{font-style:italic}
+text{font-family:Archivo,'Helvetica Neue',Arial,sans-serif;fill:#0F0F10}
+.d{font-family:'Archivo Black','Arial Black',Archivo,sans-serif;font-weight:900}
+.c2{fill:#3D3D42}.c3{fill:#66666D}.inv{fill:#FFFFFF}
+.l1{fill:#2448D8}.l2{fill:#EF6A1F}.l3{fill:#11A37A}.l4{fill:#C23A8A}
+.caps{letter-spacing:1.4px}
+.page{fill:#F6F5F1}.white{fill:#FFFFFF}.ink{fill:#0F0F10}.stone{fill:#ECEBE6}
+.card{fill:#FFFFFF;stroke:#DCDBD6;stroke-width:1}
+.field{fill:#FFFFFF;stroke:#0F0F10;stroke-width:2}
+.dash{fill:none;stroke:#0F0F10;stroke-width:2;stroke-dasharray:6 4}
+.dashw{fill:none;stroke:#FFFFFF;stroke-width:1.5;stroke-dasharray:6 4}
+.rule{stroke:#DCDBD6;stroke-width:1;fill:none}
+.ruleink{stroke:#0F0F10;stroke-width:2;fill:none}
+.stroke{stroke:#0F0F10;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.strokew{stroke:#FFFFFF;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.grid{stroke:#ECEBE6;stroke-width:1;fill:none}
+</style>
+<defs></defs>
+<rect x="0" y="0" width="1440" height="900" class="page"/>
+<text x="48" y="80" class="d s56" letter-spacing="-2">Livrea</text>
+<text x="48" y="112" class="s16 c2">Ogni veicolo nel confronto indossa un colore che lo segue ovunque. Inchiostro e bianco per l’interfaccia.</text>
+<text x="48" y="164" class="s11 w8 c3 caps">INTERFACCIA</text>
+<rect x="48" y="176" width="120" height="72" rx="4" fill="#0F0F10" stroke="#DCDBD6"/>
+<text x="48" y="268" class="s13 w8">Inchiostro</text>
+<text x="48" y="286" class="s11 c2">#0F0F10</text>
+<text x="48" y="302" class="s11 c3">testo, azioni</text>
+<rect x="180" y="176" width="120" height="72" rx="4" fill="#FFFFFF" stroke="#DCDBD6"/>
+<text x="180" y="268" class="s13 w8">Bianco</text>
+<text x="180" y="286" class="s11 c2">#FFFFFF</text>
+<text x="180" y="302" class="s11 c3">superfici</text>
+<rect x="312" y="176" width="120" height="72" rx="4" fill="#F6F5F1" stroke="#DCDBD6"/>
+<text x="312" y="268" class="s13 w8">Pagina</text>
+<text x="312" y="286" class="s11 c2">#F6F5F1</text>
+<text x="312" y="302" class="s11 c3">sfondo</text>
+<rect x="444" y="176" width="120" height="72" rx="4" fill="#ECEBE6" stroke="#DCDBD6"/>
+<text x="444" y="268" class="s13 w8">Pietra</text>
+<text x="444" y="286" class="s11 c2">#ECEBE6</text>
+<text x="444" y="302" class="s11 c3">campi, immagini neutre</text>
+<rect x="576" y="176" width="120" height="72" rx="4" fill="#3D3D42" stroke="#DCDBD6"/>
+<text x="576" y="268" class="s13 w8">Grafite</text>
+<text x="576" y="286" class="s11 c2">#3D3D42</text>
+<text x="576" y="302" class="s11 c3">testo secondario</text>
+<text x="740" y="164" class="s11 w8 c3 caps">LIVREE (SOLO IDENTITÀ DEI VEICOLI)</text>
+<rect x="740" y="176" width="154" height="72" rx="4" fill="#2448D8"/>
+<text x="754" y="222" class="d s32" style="fill:#FFFFFF">1</text>
+<rect x="844" y="186" width="40" height="52" rx="3" fill="#E8ECFB"/>
+<text x="740" y="268" class="s13 w8">1 · Cobalto</text>
+<text x="740" y="286" class="s11 c2">#2448D8 · tinta #E8ECFB</text>
+<text x="740" y="302" class="s11 c3">testo bianco</text>
+<rect x="906" y="176" width="154" height="72" rx="4" fill="#EF6A1F"/>
+<text x="920" y="222" class="d s32" style="fill:#0F0F10">2</text>
+<rect x="1010" y="186" width="40" height="52" rx="3" fill="#FDEEE4"/>
+<text x="906" y="268" class="s13 w8">2 · Mandarino</text>
+<text x="906" y="286" class="s11 c2">#EF6A1F · tinta #FDEEE4</text>
+<text x="906" y="302" class="s11 c3">testo inchiostro</text>
+<rect x="1072" y="176" width="154" height="72" rx="4" fill="#11A37A"/>
+<text x="1086" y="222" class="d s32" style="fill:#0F0F10">3</text>
+<rect x="1176" y="186" width="40" height="52" rx="3" fill="#E3F4EE"/>
+<text x="1072" y="268" class="s13 w8">3 · Smeraldo</text>
+<text x="1072" y="286" class="s11 c2">#11A37A · tinta #E3F4EE</text>
+<text x="1072" y="302" class="s11 c3">testo inchiostro</text>
+<rect x="1238" y="176" width="154" height="72" rx="4" fill="#C23A8A"/>
+<text x="1252" y="222" class="d s32" style="fill:#FFFFFF">4</text>
+<rect x="1342" y="186" width="40" height="52" rx="3" fill="#F8E7F1"/>
+<text x="1238" y="268" class="s13 w8">4 · Magenta</text>
+<text x="1238" y="286" class="s11 c2">#C23A8A · tinta #F8E7F1</text>
+<text x="1238" y="302" class="s11 c3">testo bianco</text>
+<text x="48" y="352" class="s11 w8 c3 caps">TIPOGRAFIA</text>
+<text x="48" y="410" class="d s48" letter-spacing="-1.5">Trova l’auto adatta a te.</text>
+<text x="820" y="404" class="s12 c3">Archivo Black · 72/36/24 · cifre grandi</text>
+<text x="48" y="448" class="s16 w5">Testo, etichette e azioni in Archivo, pesi 500–800.</text>
+<text x="820" y="446" class="s12 c3">Archivo · 12–18</text>
+<text x="48" y="500" class="d s40">22 min  €41.500  3</text>
+<text x="820" y="492" class="s12 c3">I numeri principali sono il titolo</text>
+<text x="48" y="566" class="s11 w8 c3 caps">COMPONENTI</text>
+<rect x="48" y="580" width="300" height="244" rx="6" class="ink"/>
+<g><rect x="64" y="596" width="268" height="50" rx="6" fill="#FFFFFF" stroke="none" stroke-width="0"/><text x="80" y="616" class="s12 w6 c2">Budget</text><text x="80" y="636" class="s15 w8 ">fino a €45.000</text><path d="M305,618.5 L310,623.5 L315,618.5" class="" stroke="#0F0F10" stroke-width="2" fill="none"/></g>
+<g><rect x="64.75" y="656.75" width="266.5" height="48.5" rx="6" class="dashw"/><text x="80" y="676" class="s12 w6 inv">Viaggi lunghi</text><text x="80" y="696" class="s15 w8 inv">400 km, al massimo 1 sosta</text><path d="M305,678.5 L310,683.5 L315,678.5" class="" stroke="#FFFFFF" stroke-width="2" fill="none"/></g>
+<g><rect x="64" y="716" width="268" height="50" rx="6" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3"/><text x="80" y="736" class="s12 w6 c2">Potenza DC massima</text><text x="80" y="756" class="s15 w8 ">almeno 100 kW</text><g><rect x="220" y="725" width="40" height="16" rx="8" fill="#0F0F10"/><text x="240" y="737.6" class="s9 w8" text-anchor="middle" style="fill:#FFFFFF">SPEC</text></g><path d="M305,743.5 L310,738.5 L315,743.5" class="" stroke="#0F0F10" stroke-width="2" fill="none"/></g>
+<text x="64" y="806" class="s12 inv">Requisito: pieno · Preferenza: tratteggio</text>
+<g><rect x="380" y="580" width="150" height="40" rx="20" fill="#0F0F10"/><text x="455" y="604.6" class="s15 w8" text-anchor="middle" style="fill:#FFFFFF">Confronta →</text></g>
+<g><rect x="540" y="580" width="130" height="40" rx="20" fill="none" stroke="#0F0F10" stroke-width="2"/><text x="605" y="604.6" class="s14 w8" text-anchor="middle" style="fill:#0F0F10">Apri scheda</text></g>
+<g><rect x="380" y="636" width="276" height="40" rx="20" class="field"/><rect x="383" y="639" width="80" height="34" rx="17" class="ink"/><text x="423" y="660.6" class="s13 w8 inv" text-anchor="middle">Schede</text><text x="506" y="660.6" class="s13 w6" text-anchor="middle">Elenco</text><text x="601" y="660.6" class="s13 w6" text-anchor="middle">Differenze</text></g>
+<rect x="380" y="696" width="76" height="24" rx="12" class="ink"/>
+<path d="M389.08,708.28 L391.88,711.08 L396.92,705.2" class="strokew"/>
+<text x="404" y="712" class="s12 w7 inv">Budget</text>
+<rect x="462" y="696" width="104" height="24" rx="12" class="ink"/>
+<path d="M471.08,708.28 L473.88,711.08 L478.92,705.2" class="strokew"/>
+<text x="486" y="712" class="s12 w7 inv">Bagagliaio</text>
+<g><circle cx="388" cy="744" r="7" class="" fill="#0F0F10"/><path d="M384.08,744.28 L386.88,747.08 L391.92,741.2" class="" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="402" y="748" class="s12 w6">preferenza soddisfatta</text>
+<g><circle cx="388" cy="768" r="7" class="" fill="none" stroke="#0F0F10" stroke-width="2"/><line x1="384" y1="768" x2="392" y2="768" class="stroke"/></g>
+<text x="402" y="772" class="s12 w6">requisito non rispettato</text>
+<g><rect x="394.7" y="793" width="85.3" height="18" rx="9" fill="#3D3D42"/><text x="437.35" y="806.6" class="s10 w7" text-anchor="middle" style="fill:#FFFFFF">costruttore</text></g>
+<g><rect x="512.5" y="793" width="47.5" height="18" rx="9" fill="none" stroke="#3D3D42" stroke-width="2" stroke-dasharray="5 3"/><text x="536.25" y="806.6" class="s10 w7" text-anchor="middle" style="fill:#0F0F10">stima</text></g>
+<g><rect x="589.9" y="793" width="60.1" height="18" rx="9" fill="none" stroke="#3D3D42" stroke-width="2"/><text x="619.95" y="806.6" class="s10 w7" text-anchor="middle" style="fill:#0F0F10">calcolo</text></g>
+<rect x="720" y="580" width="180" height="26" rx="13" fill="#2448D8"/>
+<g><circle cx="736" cy="593" r="8" class="" fill="#2448D8"/><text x="736" y="596.6" class="d s10" text-anchor="middle" style="fill:#FFFFFF">1</text></g>
+<text x="752" y="598" class="s13 w8" style="fill:#FFFFFF">Nordis E4</text>
+<rect x="910" y="580" width="180" height="26" rx="13" fill="#EF6A1F"/>
+<g><circle cx="926" cy="593" r="8" class="" fill="#EF6A1F"/><text x="926" y="596.6" class="d s10" text-anchor="middle" style="fill:#0F0F10">2</text></g>
+<text x="942" y="598" class="s13 w8" style="fill:#0F0F10">Aurora Vela</text>
+<rect x="720" y="624" width="214" height="120" rx="6" fill="#E8ECFB"/>
+<g><path d="M741.56,691.26 L741.56,683.25 C741.69,680.48 741.65,669.25 742.45,664.74 C743.25,660.23 744.1,656.43 746.9,653.17 C749.7,649.91 755,645.07 761.14,642.99 C767.28,640.91 776.36,639.84 787.84,639.29 C799.32,638.73 828.07,638.77 837.68,639.29 C847.29,639.81 847.65,640.19 851.92,642.76 C856.19,645.33 859.22,653.46 866.16,656.41 C873.1,659.36 891.53,660.66 898.2,662.43 C904.88,664.2 908.39,665.09 910.66,668.21 C912.93,671.34 912.93,681 913.33,683.25 L913.33,691.26 L895,691.26 A16.38,16.38 0 0 0 862.24,691.26 L791.76,691.26 A16.38,16.38 0 0 0 759,691.26 Z" class="" fill="#2448D8"/><path d="M757.58,656.87 C758.77,655.46 762.45,648.02 766.48,646.23 C770.51,644.44 778.58,643.82 787.84,643.45 C797.1,643.08 827.83,643.02 835.9,643.45 C843.97,643.89 845.27,644.9 848.36,646.69 C851.45,648.48 857.62,655.52 859.04,656.87 Z" class="" fill="#E8ECFB" opacity="0.85"/><path d="M810.98,642.56 L810.98,656.87" class="" stroke="#2448D8" stroke-width="2.97"/><g><circle cx="775.38" cy="689.84" r="14.24" class="" fill="#0F0F10"/><circle cx="775.38" cy="689.84" r="5.98" class="" fill="#ECEBE6"/></g><g><circle cx="878.62" cy="689.84" r="14.24" class="" fill="#0F0F10"/><circle cx="878.62" cy="689.84" r="5.98" class="" fill="#ECEBE6"/></g></g>
+<g><circle cx="740" cy="644" r="11" class="" fill="#2448D8"/><text x="740" y="648.32" class="d s12" text-anchor="middle" style="fill:#FFFFFF">1</text></g>
+<rect x="950" y="624" width="214" height="120" rx="6" fill="#FDEEE4"/>
+<g><path d="M975.12,692.33 L975.12,684.05 C975.25,681.05 975.21,668.87 976.01,664.03 C976.81,659.19 977.39,654.66 980.46,651.79 C983.53,648.92 990.34,646.2 996.48,644.89 C1002.62,643.59 1011.79,643.25 1021.4,643.12 C1031.01,642.98 1052.55,643.2 1060.56,644 C1068.57,644.81 1070.26,645.92 1074.8,648.46 C1079.34,650.99 1083.88,658.08 1090.82,660.91 C1097.76,663.75 1114.14,665.57 1121.08,667.37 C1128.02,669.17 1134.3,670.43 1137.1,672.93 C1139.9,675.43 1139.37,682.39 1139.77,684.05 L1139.77,692.33 L1122.15,692.33 A15.31,15.31 0 0 0 1091.53,692.33 L1020.69,692.33 A15.31,15.31 0 0 0 990.07,692.33 Z" class="" fill="#EF6A1F"/><path d="M987.58,659.13 C989,657.77 993.75,650.5 998.26,648.9 C1002.77,647.3 1013.33,647.24 1021.4,647.12 C1029.47,647 1052.13,647.42 1058.78,648.01 C1065.43,648.6 1067.92,649.91 1071.24,651.57 C1074.56,653.23 1082.04,659.28 1083.7,660.47 Z" class="" fill="#FDEEE4" opacity="0.85"/><path d="M1035.64,646.23 L1035.64,660.47" class="" stroke="#EF6A1F" stroke-width="2.97"/><g><circle cx="1005.38" cy="690.91" r="13.17" class="" fill="#0F0F10"/><circle cx="1005.38" cy="690.91" r="5.53" class="" fill="#ECEBE6"/></g><g><circle cx="1106.84" cy="690.91" r="13.17" class="" fill="#0F0F10"/><circle cx="1106.84" cy="690.91" r="5.53" class="" fill="#ECEBE6"/></g></g>
+<g><circle cx="970" cy="644" r="11" class="" fill="#EF6A1F"/><text x="970" y="648.32" class="d s12" text-anchor="middle" style="fill:#0F0F10">2</text></g>
+<rect x="1180" y="624" width="214" height="120" rx="6" fill="#ECEBE6"/>
+<g><path d="M1201.56,691.98 L1201.56,683.57 C1201.67,679.13 1201.47,660.59 1202.27,653.96 C1203.07,647.33 1203.8,642.24 1206.9,639.37 C1210,636.5 1210.37,635.57 1222.92,634.82 C1235.47,634.06 1277.74,633.68 1290.56,634.36 C1303.38,635.04 1302.75,636.09 1308.36,639.37 C1313.97,642.65 1320.2,652.61 1327.94,656.23 C1335.68,659.86 1353.44,661.47 1359.98,663.52 C1366.52,665.58 1369.55,666.9 1371.55,669.9 C1373.55,672.91 1373.06,681.52 1373.33,683.57 L1373.33,691.98 L1356.06,691.98 A15.66,15.66 0 0 0 1324.74,691.98 L1249.26,691.98 A15.66,15.66 0 0 0 1217.94,691.98 Z" class="" fill="#3D3D42"/><path d="M1212.24,655.32 C1212.6,653.5 1213.01,643.84 1214.91,641.65 C1216.81,639.46 1216.39,639.34 1226.48,638.92 C1236.57,638.49 1280.12,637.92 1290.56,638.46 C1301,639.01 1301,640.65 1304.8,643.02 C1308.6,645.39 1317.14,654.47 1319.04,656.23 Z" class="" fill="#ECEBE6" opacity="1"/><path d="M1262.08,637.57 L1262.08,656.23" class="" stroke="#3D3D42" stroke-width="2.97"/><g><circle cx="1233.6" cy="690.55" r="13.53" class="" fill="#0F0F10"/><circle cx="1233.6" cy="690.55" r="5.68" class="" fill="#ECEBE6"/></g><g><circle cx="1340.4" cy="690.55" r="13.53" class="" fill="#0F0F10"/><circle cx="1340.4" cy="690.55" r="5.68" class="" fill="#ECEBE6"/></g></g>
+<text x="720" y="772" class="s12 c3">Veicoli: sagome piatte nel colore di livrea; fuori dal confronto in grafite.</text>
+<text x="48" y="868" class="s11 c3">Font: Archivo e Archivo Black (OFL). Fallback: Arial Black, Helvetica Neue / Arial.</text>
+</svg>
