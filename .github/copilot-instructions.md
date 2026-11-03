@@ -4,7 +4,7 @@
 
 This repository is a Next.js app for comparing electric-vehicle charging scenarios. The codebase is still intentionally incremental: the app shell is in `src/app`, the EV/domain model lives in `src/domain`, and pure charging/energy calculations live in `src/calculations`.
 
-The project is built around explicit validation and typed result objects instead of throwing exceptions for expected invalid input. The current implementation focuses on charging-domain primitives and calculation helpers; UI work remains minimal and route-centric.
+The project is built around explicit validation and typed result objects instead of throwing exceptions for expected invalid input. The current implementation focuses on charging-domain primitives and calculation helpers (milestone M0.1, complete). The frontend architecture and the first vertical slice are approved and documented but not implemented; the app is still the bootstrap landing page.
 
 ## Commands
 
@@ -52,7 +52,7 @@ The important design pattern is separation of concerns:
 - Keep type definitions close to the business model; examples include `ChargingCurvePoint`, `VehicleChargingSpec`, `ChargingStation`, and `TerminationCondition` in `src/domain/charging.ts`.
 - Tests use Vitest (`describe`, `it`, `expect`) and mirror the source layout. If you add a new calculation or factory, add the corresponding test next to it.
 - Use the repo's existing TypeScript path alias (`@/*`) for imports instead of relative paths when consuming modules from elsewhere in the app.
-- This project intentionally uses plain HTML and TypeScript without a CSS framework; keep styling minimal unless a broader UI plan is introduced.
+- Styling follows ADR 0001 (CSS Modules consuming central CSS custom properties) and the Livrea Consolidated visual identity; no CSS framework is used. See [Frontend work](#frontend-work).
 - ESLint is configured with Next.js rules and Prettier handles formatting; don't introduce unrelated config churn.
 
 ## Working style for this repo
@@ -61,14 +61,18 @@ The important design pattern is separation of concerns:
 - Favor small, testable modules over large pages or service layers.
 - Maintain the existing structure rather than creating new top-level architectural layers without a clear need.
 
+## Frontend work
+
+Before UX, visual or frontend work, read the documents listed in [`claude.md`](../claude.md); they are authoritative and are not repeated here. In short:
+
+- Visual identity: [Livrea Consolidated](../docs/ux/visual-identity/livrea-consolidated/README.md) is the selected identity. Its consolidated decisions are the baseline; its provisional decisions are starting points to verify.
+- Stack and state rules: [ADR 0001](../docs/decisions/0001-frontend-architecture.md). Do not add libraries outside its stack or replace any part of it. Install packages only when the work that needs them starts.
+- State: the URL owns shareable scenarios, local React state owns temporary and transient interaction, Redux Toolkit (through `react-redux`) only state that is genuinely shared, and calculated results are derived from inputs, not stored ([ADR 0001 — State management](../docs/decisions/0001-frontend-architecture.md#4-state-management)).
+- Engine: the M0.1 engine (`src/domain/`, `src/calculations/`) stays independent of the frontend. Do not change its behaviour for the UI and do not reimplement its mathematics in UI code ([ADR 0001 — Open questions](../docs/decisions/0001-frontend-architecture.md#9-open-questions), question 3).
+- Scope: build only what the current milestone specification requires, currently the [first vertical slice](../docs/milestones/m0.2-first-vertical-slice.md). Items listed as open in the ADR or the specification are undecided: raise them, do not settle them silently.
+
 ## Relevant repo notes from the README
 
-The README states that this is an educational EV-charging comparison app with a planned future data source from OpenEV Data. It also notes that the project uses:
-
-- Next.js App Router
-- strict TypeScript
-- plain HTML without a CSS framework
-- ESLint + Prettier
-- Vitest in its default Node environment
+The README states that this is an educational EV-charging comparison app with a planned future data source from OpenEV Data. Installed today: Next.js App Router, strict TypeScript, ESLint + Prettier, Vitest in its default Node environment. The rest of the approved stack is not installed yet.
 
 No placeholder domain code is intended to be added as a catch-all; build features incrementally in the existing domain/calculation structure.

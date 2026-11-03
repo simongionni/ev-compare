@@ -13,7 +13,7 @@ Selected on 2026-10-25, after three iterations. The selection covers the colour 
 | Rationale of the selection                          | [`livrea-consolidation.md`](livrea-consolidation.md)                                                      |
 | Screens and identity sheet                          | [`review.html#concept/livrea-consolidated`](review.html#concept/livrea-consolidated)                      |
 
-The consolidated UX wireframes ([`../wireframes/`](../wireframes/)) remain the baseline for content, structure and flows; Livrea Consolidated defines how they look. The [Product Vision](../../product-vision.md) and the [Design Principles](../design-principles.md) are unchanged. The next step, the choice of the UI stack, is outside this directory.
+The consolidated UX wireframes ([`../wireframes/`](../wireframes/)) remain the baseline for content, structure and flows; Livrea Consolidated defines how they look. The [Product Vision](../../product-vision.md) and the [Design Principles](../design-principles.md) are unchanged. The frontend stack chosen after the selection is recorded outside this directory, in [ADR 0001](../../decisions/0001-frontend-architecture.md).
 
 ## Exploration history
 

@@ -20,12 +20,12 @@ charging sessions ending at a target state of charge or after a duration.
   [first vertical slice](docs/milestones/m0.2-first-vertical-slice.md), Discovery → Vehicle
   Analysis → DC simulation.
 
-No product UI exists yet: the web app is still the initial landing page. Vehicle data
-integration (OpenEV Data) is not implemented.
+No product UI exists yet: the web app is still the initial landing page. The stack packages
+beyond Next.js, React and TypeScript are not installed yet; each is added by the implementation
+work that first needs it. Vehicle data integration (OpenEV Data) is not implemented.
 
 Milestone M0.2 has closed its visual identity exploration: Livrea Consolidated is the selected
-visual identity ([`docs/ux/visual-identity/`](docs/ux/visual-identity/README.md)). The UI stack
-has not been chosen yet.
+visual identity ([`docs/ux/visual-identity/`](docs/ux/visual-identity/README.md)).
 
 ## Documentation
 
@@ -61,8 +61,9 @@ Open http://localhost:3000. On Windows, use `npm.cmd` if PowerShell blocks `npm.
 
 Next.js App Router with React and strict TypeScript; plain HTML without a CSS
 framework. The approved frontend stack (Base UI, CSS Modules with CSS custom properties,
-visx, Redux Toolkit) is recorded in [ADR 0001](docs/decisions/0001-frontend-architecture.md)
-and is not installed yet. ESLint uses Next.js rules, with formatting handled by Prettier.
+visx, Redux Toolkit with `react-redux`) is recorded in
+[ADR 0001](docs/decisions/0001-frontend-architecture.md) and is not installed yet. ESLint uses
+Next.js rules, with formatting handled by Prettier.
 Vitest uses its default Node environment; `vitest.config.ts` only adds
 `vite-tsconfig-paths` to resolve the `@/` import alias.
 The npm lockfile records the installed dependency versions.

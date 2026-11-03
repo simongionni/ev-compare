@@ -21,7 +21,8 @@ Before any frontend implementation work, also read:
 
 Rules that are easy to miss:
 
-- Do not add libraries outside the ADR 0001 stack, and do not replace any part of it.
-- Do not change M0.1 engine behaviour (`src/domain/`, `src/calculations/`) to suit the UI.
+- Do not add libraries outside the ADR 0001 stack, and do not replace any part of it. Install packages only when the work that needs them starts.
+- State ownership follows ADR 0001 §4: the URL owns shareable scenarios, local React state owns temporary interaction, Redux Toolkit (through `react-redux`) only genuinely shared state; calculated results are derived, not stored.
+- Do not change M0.1 engine behaviour (`src/domain/`, `src/calculations/`) to suit the UI, and do not reimplement its mathematics in UI code. Values the engine does not expose are ADR 0001 open question 3.
 - Items listed as open in the ADR or the specification are undecided: raise them, do not settle them silently.
 - Build only what the current specification requires.

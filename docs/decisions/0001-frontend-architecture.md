@@ -1,11 +1,12 @@
 # ADR 0001 — Frontend architecture
 
-| Field   | Value                                                                     |
-| ------- | ------------------------------------------------------------------------- |
-| Status  | Accepted                                                                  |
-| Date    | 2026-11-03                                                                |
-| Applies | Milestone M0.2 onwards: every frontend change                             |
-| Related | [First vertical slice](../milestones/m0.2-first-vertical-slice.md) (M0.2) |
+| Field   | Value                                                                      |
+| ------- | -------------------------------------------------------------------------- |
+| Status  | Accepted                                                                   |
+| Date    | 2026-11-03                                                                 |
+| Applies | Milestone M0.2 onwards: every frontend change                              |
+| Related | [First vertical slice](../milestones/m0.2-first-vertical-slice.md) (M0.2)  |
+| Revised | 2026-11-03: `react-redux` approved; open questions before the slice listed |
 
 This record formalises decisions that were already discussed and approved. It does not
 introduce new ones. Wherever a detail has not been decided, it is listed under
@@ -45,7 +46,7 @@ the conflict must be reported.
 | Design tokens            | CSS Custom Properties             | None defined                 |
 | Design system            | Proprietary EV Compare components | None                         |
 | Technical charts         | visx                              | Not installed                |
-| Shared application state | Redux Toolkit                     | Not installed                |
+| Shared application state | Redux Toolkit, with `react-redux` | Not installed                |
 | Shareable scenarios      | URL                               | —                            |
 | Calculation engine       | M0.1, independent of the frontend | Implemented                  |
 | Tests (existing)         | Vitest                            | Installed, Node environment  |
@@ -62,8 +63,10 @@ Rules:
 
 Packaging notes to verify at installation time (they do not change the stack):
 
-- Redux Toolkit is used from React through its official binding, `react-redux`. It is not
-  listed separately in the approved stack; see [open question 1](#9-open-questions).
+- Redux Toolkit is used from React through its official binding, `react-redux`, which is part of
+  the approved Redux Toolkit decision. Both are installed together, only when Redux is actually
+  introduced (see [Decision 6](#decision-6--redux-toolkit)); approving the binding does not mean
+  creating a store or slices in advance.
 - visx is distributed as separate `@visx/*` packages; install only those a chart uses.
 - Check the current npm package name of Base UI and the declared React 19 support of Base UI,
   visx and Redux Toolkit against the installed React version.
@@ -104,7 +107,9 @@ flowchart TD
 Constraints:
 
 - **The M0.1 engine stays independent** of React, Redux, Next.js, visx and every other frontend
-  technology. Frontend needs never justify changing engine behaviour.
+  technology. Frontend needs never justify changing engine behaviour, and the frontend never
+  reimplements engine mathematics. Values the engine does not expose are handled as described
+  in [open question 3](#9-open-questions).
 - **Selection logic is testable without Redux.** Rules that change the comparison selection are
   plain functions; a reducer may call them, not contain them.
 - **Raw data enters through the M0.1 factories**, as [limitations](../charging/limitations.md#constraints-for-future-extensions)
@@ -292,6 +297,10 @@ border, icon and shape themselves. Callers do not repeatedly decide presentation
 instance, a provenance tag receives `costruttore`, `stima` or `calcolo` and renders the matching
 symbol (■, ○, ◆) and label.
 
+The provenance kind says where a value comes from. Whether the value is real or illustrative is a
+separate property, not a fourth kind; the first vertical slice states how its fictional catalogue
+expresses it ([Data](../milestones/m0.2-first-vertical-slice.md#4-data)).
+
 ### Charts
 
 visx is used for technical visualisations. Charts preserve the Livrea Consolidated principles:
@@ -346,17 +355,26 @@ discussion.
 
 ## 9. Open questions
 
-1. **`react-redux`.** Redux Toolkit needs its React binding, which the approved table does not
-   list. Confirm that it is part of the Redux Toolkit decision before installing it.
+1. **`react-redux`: resolved.** Approved as the official binding that integrates Redux Toolkit
+   with React ([Technology stack](#2-technology-stack)). It is installed only when Redux is
+   introduced. The numbering of the remaining questions is kept because other documents refer
+   to it.
 2. **Store scope.** Which state Redux owns. In particular, where the comparison selection lives
    while the user is outside the comparison view (the comparison URL owns it inside the view).
 3. **Values not exposed by M0.1.** The wireframes show the effective power at a SoC (curve capped
    by vehicle and station maximum), the limiting factor of a session and an energy-over-time
    series. M0.1 applies the cap inside `dcChargingTime` and exports only `powerAtSoc` (uncapped).
-   Whether to add exported pure functions to the engine (without changing existing behaviour) or
-   to compute these elsewhere needs a decision.
+   Which of these values the engine exposes, through which functions and contracts, and when,
+   needs a decision.
+
+   Orientation (approved): extending the M0.1 public API is admissible with pure functions that
+   are backward compatible and tested, when they expose information that already belongs to the
+   calculation logic. Duplicating the engine's mathematics in the frontend is not acceptable.
+   This orientation does not authorise changing the engine now.
+
 4. **URL format**: encoding, versioning, handling of partially invalid scenarios.
-5. **History policy**: commit points of temporary state, push vs replace.
+5. **History policy**: commit points of temporary state, when the URL is rewritten, push vs
+   replace.
 6. **Origin context representation** (URL, history state, both).
 7. **Comparison capacity** beyond four vehicles and the behaviour of a full selection.
 8. **UI component and end-to-end test strategy** and tools.
@@ -366,14 +384,24 @@ discussion.
 11. **Responsive layout and dark theme**: not designed.
 12. **Directory locations** for application logic, scenario codecs, the store and tokens.
 
+### To decide before implementing the first vertical slice
+
+These must be discussed and approved before the corresponding part of the
+[first vertical slice](../milestones/m0.2-first-vertical-slice.md#9-open-questions) is built.
+None is settled by this record.
+
+| Question                                                                    | Where it is described                                                                      |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Composition of the dedicated single-vehicle DC simulation screen            | Slice, open question 1                                                                     |
+| Role of the simulator embedded in the Ricarica section of Vehicle Analysis  | Slice, open question 2                                                                     |
+| Values the chart needs that M0.1 does not expose, including effective power | Open question 3 above; slice, open question 3                                              |
+| SoC control granularity and handling of an empty interval                   | Slice, open question 4                                                                     |
+| Synchronisation of parameter changes, URL and browser history               | [Decision 2](#decision-2--reactive-updates), open question 5 above; slice, open question 6 |
+
 ## 10. Notes on existing documentation
 
-Found while preparing this record; not changed here.
-
-- The [visual identity index](../ux/visual-identity/README.md) and the
-  [Livrea Consolidated README](../ux/visual-identity/livrea-consolidated/README.md) still describe
-  Livrea Consolidated as "a proposal to validate, not an approved identity". This ADR records its
-  selection; those pages should be updated in a visual-identity change.
-- [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md) still describes the
-  project as plain HTML without a styling plan.
-- `src/app/layout.tsx` declares `lang="en"`, while all product copy is Italian.
+- The visual identity pages and [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md),
+  noted here when this record was first written, have since been aligned with it.
+- `src/app/layout.tsx` declares `lang="en"`, while all product copy is Italian. Not changed; the
+  first vertical slice requires the document language to match the copy (acceptance criterion
+  11.5).
