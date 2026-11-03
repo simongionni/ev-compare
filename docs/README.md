@@ -1,7 +1,8 @@
 # EV Compare documentation
 
-Technical documentation for contributors. The codebase is the source of truth; these pages
-describe the implementation as it exists on the `dev` branch.
+Technical documentation for contributors. The codebase is the source of truth; the technical
+pages describe the implementation as it exists on the `dev` branch. Decision records and
+milestone specifications describe approved intent; their status says whether it is implemented.
 
 ## Charging domain and simulation engine (milestone M0.1)
 
@@ -14,6 +15,28 @@ describe the implementation as it exists on the `dev` branch.
 | [Assumptions and limitations](charging/limitations.md) | Physical simplifications, numerical accuracy, open questions, technical debt |
 | [Testing](charging/testing.md)                         | Test organization, covered behavior, commands                                |
 
-## Other directories
+## Architecture decision records
 
-- `docs/decisions/` is reserved for architecture decision records. None exist yet.
+| Record                                                                  | Status   | Contents                                                                                       |
+| ----------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------- |
+| [0001 — Frontend architecture](decisions/0001-frontend-architecture.md) | Accepted | Stack, separation of responsibilities, state management, design system, charts, open questions |
+
+## Milestones
+
+| Page                                                                   | Status                   | Contents                                                                                   |
+| ---------------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------ |
+| [M0.2 — First vertical slice](milestones/m0.2-first-vertical-slice.md) | Defined, not implemented | Discovery → Vehicle Analysis → DC simulation: scope, data, navigation, acceptance criteria |
+
+## Product, UX and visual identity
+
+These pages describe intent and design, not implemented features.
+
+| Page                                                                                | Contents                                                                                                            |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| [Product Vision](product-vision.md)                                                 | Product requirements and principles                                                                                 |
+| [UX Design Principles](ux/design-principles.md)                                     | Rules for UX, visual and frontend work                                                                              |
+| [User flows](ux/user-flow-overview.md)                                              | High-level activities and navigation                                                                                |
+| [Discovery wireframes](ux/wireframes/consolidated-iteration-1/README.md)            | Landing and search                                                                                                  |
+| [Vehicle Analysis wireframes](ux/wireframes/vehicle-analysis-iteration-1/README.md) | Single-vehicle page                                                                                                 |
+| [Comparison wireframes](ux/wireframes/vehicle-comparison/README.md)                 | Comparison and technical exploration                                                                                |
+| [Visual identity](ux/visual-identity/README.md)                                     | Explored concepts; [Livrea Consolidated](ux/visual-identity/livrea-consolidated/README.md) is the selected identity |
