@@ -23,6 +23,10 @@ charging sessions ending at a target state of charge or after a duration.
 No product UI exists yet: the web app is still the initial landing page. Vehicle data
 integration (OpenEV Data) is not implemented.
 
+Milestone M0.2 has closed its visual identity exploration: Livrea Consolidated is the selected
+visual identity ([`docs/ux/visual-identity/`](docs/ux/visual-identity/README.md)). The UI stack
+has not been chosen yet.
+
 ## Documentation
 
 Technical documentation is in [`docs/`](docs/README.md). Start with the

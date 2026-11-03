@@ -2,6 +2,8 @@
 
 _A night instrument panel: what matters now is lit._
 
+> Exploration history (M0.2). Not continued after iteration 1. The selected visual identity of EV Compare is [Livrea Consolidated](../livrea-consolidated/README.md).
+
 ![Landing](01-landing.svg)
 
 | Screen                              | File                                     |

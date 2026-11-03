@@ -1,20 +1,43 @@
-# Visual identity exploration (M0.2)
+# Visual identity (M0.2)
 
-Visual identity concepts applied to the same consolidated UX scenarios, to choose a direction before the UI stack and the first vertical slice. No concept is a recommendation.
+Visual identity concepts applied to the same consolidated UX scenarios, to choose a direction before the UI stack and the first vertical slice. The exploration is closed: **Livrea Consolidated is the selected visual identity of EV Compare** and the baseline for frontend implementation. The five earlier concepts are kept as the history of the exploration; they are not alternatives under evaluation.
 
-## Iteration 3 — synthesis
+## Selected identity — Livrea Consolidated
 
-One concept that combines the two Livrea evolutions: Refined's structure, lightness, components, tables and Schibsted Grotesk, with Expressive's vehicle palette and yellow in a redesigned colour system (ink for actions, yellow for the user's scenario, vehicle colours with numbers, signals with icons). A proposal to validate, not an approved identity. Critical comparison: [`livrea-consolidation.md`](livrea-consolidation.md).
+Selected on 2026-10-25, after three iterations. The selection covers the colour system, Schibsted Grotesk as the type family, the visual hierarchy, the component style, the language of technical visualisations, the principles of vehicle representation, yellow for scenario parameters, and the separation of interface, vehicle and signal colours.
+
+| What                                                | Where                                                                                                     |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Consolidated and provisional decisions, future work | [`livrea-consolidated/README.md` — Decision status](livrea-consolidated/README.md#decision-status)        |
+| Artefacts to use during frontend implementation     | [`livrea-consolidated/README.md` — Artefacts](livrea-consolidated/README.md#artefacts-for-implementation) |
+| Rationale of the selection                          | [`livrea-consolidation.md`](livrea-consolidation.md)                                                      |
+| Screens and identity sheet                          | [`review.html#concept/livrea-consolidated`](review.html#concept/livrea-consolidated)                      |
+
+The consolidated UX wireframes ([`../wireframes/`](../wireframes/)) remain the baseline for content, structure and flows; Livrea Consolidated defines how they look. The [Product Vision](../../product-vision.md) and the [Design Principles](../design-principles.md) are unchanged. The next step, the choice of the UI stack, is outside this directory.
+
+## Exploration history
+
+| Iteration | Concepts                          | Outcome                                                            | Comparison                                           |
+| --------- | --------------------------------- | ------------------------------------------------------------------ | ---------------------------------------------------- |
+| 1         | Tavola, Livrea, Notturno          | Livrea chosen for further work; parts of Tavola reused             | [`comparison.md`](comparison.md)                     |
+| 2         | Livrea Refined, Livrea Expressive | Neither selected on its own; their strengths merged in a synthesis | [`livrea-evolution.md`](livrea-evolution.md)         |
+| 3         | Livrea Consolidated               | Selected                                                           | [`livrea-consolidation.md`](livrea-consolidation.md) |
+
+All artefacts of the three iterations are kept unchanged.
+
+### Iteration 3 — synthesis
+
+One concept that combines the two Livrea evolutions: Refined's structure, lightness, components, tables and Schibsted Grotesk, with Expressive's vehicle palette and yellow in a redesigned colour system (ink for actions, yellow for the user's scenario, vehicle colours with numbers, signals with icons). Selected as the visual identity of EV Compare. Critical comparison: [`livrea-consolidation.md`](livrea-consolidation.md).
 
 | Concept                 | Idea                                                                                                                                                                      | Docs                                                    |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | **Livrea Consolidated** | Refined's layout and type; Cobalto, Mandarino, Smeraldo, Magenta as numbered vehicle marks; near-black ink for actions; yellow for scenario parameters and their effects. | [`livrea-consolidated/`](livrea-consolidated/README.md) |
 
-The identity sheet includes two studies of yellow intensity (A discreet, B characterising) on identical components; B is applied to the screens.
+The identity sheet includes two studies of yellow intensity (A discreet, B characterising) on identical components; B is applied to the screens and is the starting point for implementation (provisional).
 
-## Iteration 2 — evolutions of Livrea
+### Iteration 2 — evolutions of Livrea
 
-Livrea was chosen for further work. Two evolutions keep its vivid palette and the colour identity of compared vehicles, introduce real vehicle photography (placeholders for now), give colour room for states and signals, and borrow Tavola's tables and chart precision. Critical comparison: [`livrea-evolution.md`](livrea-evolution.md).
+Livrea was chosen for further work. Kept as history; both variants were merged into Livrea Consolidated. Two evolutions keep its vivid palette and the colour identity of compared vehicles, introduce real vehicle photography (placeholders for now), give colour room for states and signals, and borrow Tavola's tables and chart precision. Critical comparison: [`livrea-evolution.md`](livrea-evolution.md).
 
 | Concept               | Idea                                                                                                                                                          | Docs                                                |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
@@ -23,7 +46,7 @@ Livrea was chosen for further work. Two evolutions keep its vivid palette and th
 
 Related: [`photography.md`](photography.md) (why the images are placeholders and how real images should be sourced), [`fonts/`](fonts/README.md) (embedded fonts and licences).
 
-## Iteration 1 — three directions
+### Iteration 1 — three directions
 
 Kept unchanged as history. Comparison: [`comparison.md`](comparison.md).
 
@@ -37,9 +60,11 @@ Kept unchanged as history. Comparison: [`comparison.md`](comparison.md).
 
 Open [`review.html`](review.html) in a browser (double-click works; no server needed). It shows:
 
-- an overview of all concepts, grouped by iteration, latest first; the latest concept carries a yellow "Ultima iterazione" label;
+- the selected identity first, with links to its screens, identity sheet, decisions and documentation; a tab "Identità selezionata" opens it from anywhere;
+- "Decisioni": consolidated and provisional decisions, future work, and the history of decisions per iteration, each with its comparison document and its screens side by side;
+- an overview of all concepts as exploration history, grouped by iteration, latest first, each with its outcome; the selected concept carries a yellow "Identità selezionata" label;
 - the same scenario side by side for any selection of concepts, with presets (Refined ↔ Expressive ↔ Consolidated, the default; Famiglia Livrea; Iterazione 2; Iterazione 1; Tutti), zoom (fit, 50 %, 75 %, 100 %) and synchronised scrolling; `review.html#scenari/sintesi` opens the iteration 3 comparison directly, `review.html#scenari/livrea` the whole Livrea family;
-- every screen of a concept;
+- every screen of a concept; earlier concepts are marked as history, with a link to the selected identity;
 - a full-screen viewer (fit, 100 %, 200 %; ← → move through the concepts being compared, ↑ ↓ change scenario, Esc closes);
 - identity sheets (palette and colour rules, type, components, vehicle representation, chart series);
 - strengths and limits per concept.
@@ -117,6 +142,11 @@ They contain **no photographs**: the scenario vehicles are fictional, so every i
 Iteration 1 vehicle drawings are generic body styles generated in `_source/lib.mjs`, not real models; Notturno's photographs are gradient placeholders.
 
 ## Checks
+
+Selection (closing M0.2):
+
+- Documentation only: no SVG, wireframe, source module, font or `assets.js` changed.
+- Review page exercised in headless Chrome: selected identity on the overview and in its tab, "Decisioni" view and its history links, `#scenari/sintesi`, `Tutti` with six columns, zoom, synchronised scrolling, viewer navigation and zoom, concept pages of all six concepts, identity sheets, assessment, no broken images and no script errors.
 
 Iteration 3:
 

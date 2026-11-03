@@ -1,6 +1,6 @@
 # UX notes from the visual identity exploration
 
-The concepts keep the information architecture, content and flows of the consolidated wireframes. This page lists the presentation choices that go slightly beyond restyling, and the UX questions the exploration raised. None of them changes the baseline wireframes; each needs a decision before it is adopted.
+The concepts keep the information architecture, content and flows of the consolidated wireframes. This page lists the presentation choices that go slightly beyond restyling, and the UX questions the exploration raised. None of them changes the baseline wireframes; each needs a decision before it is adopted. With the selection of Livrea Consolidated, the iteration 3 additions below are part of its screens; the questions still open are classified in [Decision status](livrea-consolidated/README.md#decision-status).
 
 ## Presentation additions in the concepts
 

@@ -2,6 +2,8 @@
 
 Critical comparison of [Livrea](livrea/README.md) (iteration 1) and its two evolutions, [Livrea Refined](livrea-refined/README.md) and [Livrea Expressive](livrea-expressive/README.md), applied to the same five artefacts. The first iteration's comparison of all three directions stays in [`comparison.md`](comparison.md). No variant is declared the winner.
 
+_Kept as history. Neither variant was selected on its own; both were merged into [Livrea Consolidated](livrea-consolidated/README.md), the selected visual identity (rationale in [`livrea-consolidation.md`](livrea-consolidation.md))._
+
 Ratings are relative within these three (● strongest, ◐ adequate, ○ weakest).
 
 | Criterion                  | Livrea | Refined | Expressive |
