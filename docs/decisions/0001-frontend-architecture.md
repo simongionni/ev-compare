@@ -1,12 +1,13 @@
 # ADR 0001 — Frontend architecture
 
-| Field   | Value                                                                      |
-| ------- | -------------------------------------------------------------------------- |
-| Status  | Accepted                                                                   |
-| Date    | 2026-11-03                                                                 |
-| Applies | Milestone M0.2 onwards: every frontend change                              |
-| Related | [First vertical slice](../milestones/m0.2-first-vertical-slice.md) (M0.2)  |
-| Revised | 2026-11-03: `react-redux` approved; open questions before the slice listed |
+| Field   | Value                                                                                                                                      |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Status  | Accepted                                                                                                                                   |
+| Date    | 2026-11-03                                                                                                                                 |
+| Applies | Milestone M0.2 onwards: every frontend change                                                                                              |
+| Related | [First vertical slice](../milestones/m0.2-first-vertical-slice.md) (M0.2)                                                                  |
+| Revised | 2026-11-03: `react-redux` approved; open questions before the slice listed                                                                 |
+| Revised | 2026-11-03: effective DC power API extension, URL and history policy, and the slice's DC simulation UX and SoC rules approved and recorded |
 
 This record formalises decisions that were already discussed and approved. It does not
 introduce new ones. Wherever a detail has not been decided, it is listed under
@@ -108,8 +109,14 @@ Constraints:
 
 - **The M0.1 engine stays independent** of React, Redux, Next.js, visx and every other frontend
   technology. Frontend needs never justify changing engine behaviour, and the frontend never
-  reimplements engine mathematics. Values the engine does not expose are handled as described
-  in [open question 3](#9-open-questions).
+  reimplements engine mathematics. The one approved extension of its public API is described in
+  [Extension of the M0.1 public API](#extension-of-the-m01-public-api-effective-dc-power); other
+  values the engine does not expose are handled as described in
+  [open question 3](#9-open-questions).
+- **Interface-only constraints stay out of the engine.** Rules that exist only because of how a
+  control works (SoC granularity, controls that keep the initial SoC from passing the final one)
+  belong to the UI and to the scenario models. M0.1 invariants and validation are not tightened to
+  enforce them.
 - **Selection logic is testable without Redux.** Rules that change the comparison selection are
   plain functions; a reducer may call them, not contain them.
 - **Raw data enters through the M0.1 factories**, as [limitations](../charging/limitations.md#constraints-for-future-extensions)
@@ -119,6 +126,42 @@ Constraints:
 
 The table names existing and bootstrap-planned directories. Locations marked "open" are decided
 by the first implementation that needs them and recorded in that change.
+
+### Extension of the M0.1 public API: effective DC power
+
+**Approved (2026-11-03).** The M0.1 public API gains one pure function that returns the
+**effective DC power at a given SoC**: the vehicle's curve power at that SoC (as `powerAtSoc`
+computes it) capped by the vehicle's DC maximum (`DCChargingCapability.maxPowerKw`) and by the
+station's maximum (`DCChargingStation.maxPowerKw`). It is the power `dcChargingTime` already
+integrates at each step. M0.1 models no other DC limit (no voltage or current model,
+[limitations](../charging/limitations.md)); if the engine gains one, the function follows it.
+
+It exists so the frontend can draw the power actually received (first vertical slice: DC
+simulation chart and Ricarica preview) without reimplementing the cap.
+
+Requirements:
+
+- It belongs to `src/calculations/` (domain and calculation layer), never to frontend code.
+- It reuses the existing logic: `powerAtSoc` for the curve and the cap that `dcChargingTime`
+  applies. There is one implementation of the cap, not a second copy. If `dcChargingTime` is
+  refactored to call the new function, its results and its existing tests stay unchanged.
+- It takes the validated domain types and follows the existing conventions: one input object
+  with named, unit-suffixed fields; `CalculationResult` with typed errors; no exceptions for
+  invalid input.
+- It is pure, synchronous and deterministic.
+- Existing public functions, types and results are unchanged (backward compatible).
+- It has Vitest tests covering at least: power limited by the curve alone, power limited by the
+  vehicle maximum, power limited by the station maximum, and invalid input.
+- It is documented in [`docs/charging/public-api.md`](../charging/public-api.md) in the change
+  that adds it.
+
+Left to the implementation, within the requirements above: name, module, exact signature and
+input shape, which errors are returned and in which order, and behaviour at SoC values outside
+the curve's range or outside [0, 100]. The choices are recorded in the public API documentation.
+
+Not approved by this decision: a limiting factor for a session or a SoC, an energy-over-time
+series, range estimates, or any other function the first vertical slice does not need. They stay
+under [open question 3](#9-open-questions).
 
 ## 4. State management
 
@@ -163,8 +206,38 @@ Five events are distinct and need not happen at the same time:
 Example: dragging a slider may update results continuously, but must not create a history entry
 for every intermediate value.
 
-Not decided: when temporary state becomes committed (on release, after a pause, on every change),
-and which changes push a history entry rather than replacing the current one.
+**Policy (approved 2026-11-03):**
+
+| Event                                  | Results                           | URL                               | Browser history |
+| -------------------------------------- | --------------------------------- | --------------------------------- | --------------- |
+| Dragging a slider (for example SoC)    | Updated during the interaction    | Not updated while dragging        | No new entry    |
+| Releasing the slider                   | Keep the value reached            | Updated to the committed value    | `replace`       |
+| Selecting a discrete option (station)  | Updated immediately               | Updated                           | `replace`       |
+| Navigating between pages or activities | Scenario of the destination shown | Navigation to the destination URL | `push`          |
+
+Principles:
+
+1. The committed scenario is the one the URL represents.
+2. Values during a drag are temporary interaction state, owned by local React state.
+3. During the interaction, results may be derived from the temporary values.
+4. When the interaction ends, the new scenario is committed to the URL.
+5. Changing parameters never creates a history entry per change.
+6. A shared URL rebuilds the scenario without any session memory (see
+   [Decision 1](#decision-1--shareable-scenarios-in-the-url)).
+7. Navigation between Discovery, Vehicle Analysis and the DC simulation preserves the context
+   each needs (see [Decision 4](#decision-4--navigation-continuity)).
+
+Applying the policy to inputs the table does not name:
+
+- A slider change made in one step, without dragging (a keyboard step, a click on the track), is
+  committed at once, like a release: URL updated with `replace`.
+- Continuous text input, such as the search query, follows principle 5: no history entry per
+  keystroke. Whether the URL is rewritten on each keystroke or after a pause is an
+  implementation choice.
+
+Left to the implementation: the concrete synchronisation mechanism (router calls, how local
+state is reset when the URL changes from outside, for example on Back), provided it follows the
+table and the principles.
 
 ### Decision 3 — Comparison selection
 
@@ -308,6 +381,9 @@ visx is used for technical visualisations. Charts preserve the Livrea Consolidat
 - declared curve points are distinguishable from linear interpolation between them;
 - the station limit is represented (dashed line with plate, hatched region above it, unreachable
   part of the curve dotted);
+- the power actually received comes from the engine's effective DC power
+  ([extension](#extension-of-the-m01-public-api-effective-dc-power)), never from a cap recomputed
+  in the chart;
 - markers and colours come from the vehicle slot;
 - labels and technical values are correct, with units;
 - interactions are accessible.
@@ -351,7 +427,11 @@ discussion.
 - An evolvable URL format must be designed with compatibility in mind from the first scenario,
   even though its concrete schema is deferred.
 - Charts and components that need values the engine does not expose (see open question 3) cannot
-  compute them in the UI without duplicating engine logic.
+  compute them in the UI without duplicating engine logic. Effective DC power is now an approved
+  engine extension; the other values still need a decision before any UI uses them.
+- The URL is rewritten after each committed change but not during a drag, so for the length of a
+  drag the displayed results are ahead of the URL. A URL copied mid-drag holds the last committed
+  scenario.
 
 ## 9. Open questions
 
@@ -361,20 +441,26 @@ discussion.
    to it.
 2. **Store scope.** Which state Redux owns. In particular, where the comparison selection lives
    while the user is outside the comparison view (the comparison URL owns it inside the view).
-3. **Values not exposed by M0.1.** The wireframes show the effective power at a SoC (curve capped
-   by vehicle and station maximum), the limiting factor of a session and an energy-over-time
-   series. M0.1 applies the cap inside `dcChargingTime` and exports only `powerAtSoc` (uncapped).
-   Which of these values the engine exposes, through which functions and contracts, and when,
-   needs a decision.
+3. **Values not exposed by M0.1: partially resolved.** The wireframes show the effective power at
+   a SoC (curve capped by vehicle and station maximum), the limiting factor of a session and an
+   energy-over-time series. M0.1 applies the cap inside `dcChargingTime` and exports only
+   `powerAtSoc` (uncapped).
 
    Orientation (approved): extending the M0.1 public API is admissible with pure functions that
    are backward compatible and tested, when they expose information that already belongs to the
    calculation logic. Duplicating the engine's mathematics in the frontend is not acceptable.
-   This orientation does not authorise changing the engine now.
+
+   Resolved: the **effective DC power at a SoC** is exposed through a new function
+   ([Extension of the M0.1 public API](#extension-of-the-m01-public-api-effective-dc-power));
+   its exact contract is defined by the implementation.
+
+   Still open: whether and how the engine exposes the limiting factor and an energy-over-time
+   series. Neither is needed by the first vertical slice; no function for them is authorised.
 
 4. **URL format**: encoding, versioning, handling of partially invalid scenarios.
-5. **History policy**: commit points of temporary state, when the URL is rewritten, push vs
-   replace.
+5. **History policy: resolved.** Commit points, URL rewriting and push versus replace are set by
+   the policy in [Decision 2](#decision-2--reactive-updates). Only the synchronisation mechanism
+   is left to the implementation.
 6. **Origin context representation** (URL, history state, both).
 7. **Comparison capacity** beyond four vehicles and the behaviour of a full selection.
 8. **UI component and end-to-end test strategy** and tools.
@@ -386,17 +472,21 @@ discussion.
 
 ### To decide before implementing the first vertical slice
 
-These must be discussed and approved before the corresponding part of the
-[first vertical slice](../milestones/m0.2-first-vertical-slice.md#9-open-questions) is built.
-None is settled by this record.
+These had to be approved before the corresponding part of the
+[first vertical slice](../milestones/m0.2-first-vertical-slice.md#9-open-questions) was built.
+All were resolved on 2026-11-03.
 
-| Question                                                                    | Where it is described                                                                      |
-| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Composition of the dedicated single-vehicle DC simulation screen            | Slice, open question 1                                                                     |
-| Role of the simulator embedded in the Ricarica section of Vehicle Analysis  | Slice, open question 2                                                                     |
-| Values the chart needs that M0.1 does not expose, including effective power | Open question 3 above; slice, open question 3                                              |
-| SoC control granularity and handling of an empty interval                   | Slice, open question 4                                                                     |
-| Synchronisation of parameter changes, URL and browser history               | [Decision 2](#decision-2--reactive-updates), open question 5 above; slice, open question 6 |
+| Question                                                                    | Status   | Where the decision is recorded                                                                                                                                    |
+| --------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Composition of the dedicated single-vehicle DC simulation screen            | Resolved | [Slice, DC simulation](../milestones/m0.2-first-vertical-slice.md#dc-simulation); slice, open question 1                                                          |
+| Role of the simulator embedded in the Ricarica section of Vehicle Analysis  | Resolved | [Slice, Vehicle Analysis](../milestones/m0.2-first-vertical-slice.md#vehicle-analysis); slice, open question 2                                                    |
+| Values the chart needs that M0.1 does not expose, including effective power | Resolved | [Extension of the M0.1 public API](#extension-of-the-m01-public-api-effective-dc-power); open question 3 above (other values still open)                          |
+| SoC control granularity and handling of an empty interval                   | Resolved | [Slice, state of charge range](../milestones/m0.2-first-vertical-slice.md#state-of-charge-range); slice, open question 4                                          |
+| Synchronisation of parameter changes, URL and browser history               | Resolved | [Decision 2](#decision-2--reactive-updates), open question 5 above; [slice, architecture](../milestones/m0.2-first-vertical-slice.md#6-architecture-in-the-slice) |
+
+The questions still open that touch the slice are listed in the slice's
+[open questions](../milestones/m0.2-first-vertical-slice.md#9-open-questions) and, for this record,
+open questions 2, 4, 6, 8, 9, 10 and 12 above.
 
 ## 10. Notes on existing documentation
 
@@ -405,3 +495,9 @@ None is settled by this record.
 - `src/app/layout.tsx` declares `lang="en"`, while all product copy is Italian. Not changed; the
   first vertical slice requires the document language to match the copy (acceptance criterion
   11.5).
+- The [Vehicle Analysis wireframes](../ux/wireframes/vehicle-analysis-iteration-1/README.md) embed
+  an interactive charging simulator in the Ricarica section. The approved decision for the first
+  vertical slice (2026-11-03) supersedes that point: the Ricarica section shows a non-configurable
+  preview, meant to help understand the vehicle and invite exploration, and the simulator is a
+  distinct view reachable directly by URL. The wireframe SVGs were not redrawn; their README notes
+  the change.

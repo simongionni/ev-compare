@@ -10,6 +10,8 @@ Low-fidelity desktop wireframes (1440 px, grayscale) for analysing a single vehi
 
 The page is organised by practical questions (range, charging, space), with the charging simulator inside the "Ricarica" section and the full specification sheet on request.
 
+Superseded on one point: in the [first vertical slice](../../../milestones/m0.2-first-vertical-slice.md#vehicle-analysis) of M0.2, "Ricarica" shows a non-configurable preview (10→80%, 150 kW) and the interactive simulator is a dedicated view opened with "Apri nel simulatore →". These SVGs were not redrawn.
+
 ## Where the user came from
 
 Only the context bar changes. The rest of the page is the same.
