@@ -1,0 +1,103 @@
+/* Geometry from photo() in docs/ux/visual-identity/_source/livrea-consolidated.mjs. */
+.photo {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(
+        var(--color-placeholder-floor-top),
+        var(--color-placeholder-floor-bottom)
+      )
+      bottom / 100% 34% no-repeat,
+    linear-gradient(
+      var(--color-placeholder-wall-top),
+      var(--color-placeholder-wall-bottom)
+    );
+}
+
+/* Soft ground shadow where the car will stand: centred at 80 % of the height. */
+.shadow {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  width: 72%;
+  height: 14%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    closest-side,
+    var(--color-placeholder-shadow),
+    var(--color-placeholder-shadow-fade)
+  );
+}
+
+/* Four crop marks, 12 px long, 10 px from the edges. */
+.crop {
+  --crop-inset: 10px;
+  --crop-length: 12px;
+  --crop-line: 1.1px;
+
+  position: absolute;
+  inset: var(--crop-inset);
+  background:
+    linear-gradient(
+        var(--color-placeholder-crop),
+        var(--color-placeholder-crop)
+      )
+      top left / var(--crop-length) var(--crop-line),
+    linear-gradient(
+        var(--color-placeholder-crop),
+        var(--color-placeholder-crop)
+      )
+      top left / var(--crop-line) var(--crop-length),
+    linear-gradient(
+        var(--color-placeholder-crop),
+        var(--color-placeholder-crop)
+      )
+      top right / var(--crop-length) var(--crop-line),
+    linear-gradient(
+        var(--color-placeholder-crop),
+        var(--color-placeholder-crop)
+      )
+      top right / var(--crop-line) var(--crop-length),
+    linear-gradient(
+        var(--color-placeholder-crop),
+        var(--color-placeholder-crop)
+      )
+      bottom left / var(--crop-length) var(--crop-line),
+    linear-gradient(
+        var(--color-placeholder-crop),
+        var(--color-placeholder-crop)
+      )
+      bottom left / var(--crop-line) var(--crop-length),
+    linear-gradient(
+        var(--color-placeholder-crop),
+        var(--color-placeholder-crop)
+      )
+      bottom right / var(--crop-length) var(--crop-line),
+    linear-gradient(
+        var(--color-placeholder-crop),
+        var(--color-placeholder-crop)
+      )
+      bottom right / var(--crop-line) var(--crop-length);
+  background-repeat: no-repeat;
+}
+
+.label {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  max-width: calc(100% - 28px);
+  overflow: hidden;
+  padding: 0 var(--space-12);
+  border-radius: var(--radius-pill);
+  background: var(--color-placeholder-label);
+  font-size: 0.625rem; /* 10 px, as drawn */
+  line-height: 22px;
+  color: var(--color-text-secondary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.labelKind {
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-caps);
+}

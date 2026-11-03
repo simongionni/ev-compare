@@ -1,0 +1,57 @@
+.page {
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: 1.375rem var(--layout-gutter) var(--space-48); /* field at 86 px from the top */
+}
+
+.results {
+  margin-top: var(--space-32);
+}
+
+.title {
+  font-size: var(--font-size-26);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-heading);
+}
+
+.subtitle {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-14);
+  color: var(--color-text-secondary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: var(--space-16);
+  margin-top: var(--space-24);
+}
+
+.item {
+  display: flex;
+}
+
+.item > * {
+  flex: 1;
+}
+
+/* Ink link style for an in-page action: weight 600, underline. */
+.showAll {
+  margin-top: var(--space-16);
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-action);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.notice {
+  margin-top: var(--space-40);
+  font-size: var(--font-size-12);
+  color: var(--color-text-note);
+}

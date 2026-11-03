@@ -1,0 +1,31 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  font-size: var(--font-size-11);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  color: var(--color-provenance);
+  white-space: nowrap;
+}
+
+.glyph {
+  flex: none;
+  width: 7px;
+  height: 7px;
+}
+
+.glyph[data-kind="costruttore"] {
+  border-radius: var(--radius-glyph);
+  background: var(--color-provenance);
+}
+
+.glyph[data-kind="stima"] {
+  border: 1.3px solid var(--color-provenance);
+  border-radius: 50%;
+}
+
+.glyph[data-kind="calcolo"] {
+  background: var(--color-provenance);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}

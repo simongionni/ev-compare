@@ -1,11 +1,7 @@
+import { redirect } from "next/navigation";
+import { DISCOVERY_PATH } from "@/presentation/routes";
+
+// The landing page is outside the first vertical slice: the root opens Discovery.
 export default function Home() {
-  return (
-    <main>
-      <h1>EV Compare</h1>
-      <p>
-        An educational project for exploring and comparing electric vehicles.
-      </p>
-      <p>Project scaffold ready. Features will be developed incrementally.</p>
-    </main>
-  );
+  redirect(DISCOVERY_PATH);
 }
