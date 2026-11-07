@@ -56,6 +56,7 @@ type ChargingSessionSimulation = {
 | `resolveEffectiveAcPower`      | `calculations/charging/acPower`               | `number /* kW */`, assumes valid input                             |
 | `acChargingTime`               | `calculations/charging/acChargingTime`        | `CalculationResult<number /* h */, ChargingCalculationError>`      |
 | `powerAtSoc`                   | `calculations/charging/dcCurve`               | `CalculationResult<number /* kW */, DcCurveError>`                 |
+| `effectiveDcPowerAtSoc`        | `calculations/charging/dcPower`               | `CalculationResult<number /* kW */, EffectiveDcPowerError>`        |
 | `dcChargingTime`               | `calculations/charging/dcChargingTime`        | `CalculationResult<number /* h */, ChargingCalculationError>`      |
 
 Inputs are single objects with named, unit-suffixed fields, for example:
@@ -81,6 +82,54 @@ acChargingTime({
 takes a `DCChargingCapability` and a `DCChargingStation`. Both require `fromSocPercent ≤
 toSocPercent`.
 
+### Effective DC power at an SoC
+
+[`@/calculations/charging/dcPower`](../../src/calculations/charging/dcPower.ts)
+
+```ts
+function effectiveDcPowerAtSoc(input: {
+  socPercent: number;
+  vehicle: DCChargingCapability;
+  station: DCChargingStation;
+}): CalculationResult<number /* kW */, EffectiveDcPowerError>;
+
+type EffectiveDcPowerError =
+  | { type: "invalidPower"; value: number }
+  | { type: "invalidSoc"; field: "socPercent"; value: number };
+```
+
+The result is the curve power at `socPercent`, capped by the vehicle and station maximums:
+
+```text
+min(powerAtSoc(vehicle.chargingCurve, socPercent), vehicle.maxPowerKw, station.maxPowerKw)
+```
+
+The function accepts SoC in the inclusive range [0, 100]. It returns `invalidSoc` with
+`field: "socPercent"` for a non-finite or out-of-range SoC, and `invalidPower` for a vehicle
+limit, station limit or resulting effective power that is not finite or is not positive. Checks
+run in this order: vehicle limit, station limit, SoC, curve power/effective power. Thus an invalid
+vehicle limit wins when several inputs are invalid.
+
+`powerAtSoc` remains the lower-level interpolation helper: it accepts any finite SoC and holds
+the nearest curve endpoint outside the curve's declared range. `effectiveDcPowerAtSoc` narrows
+that to the battery SoC domain [0, 100], while still holding the nearest endpoint when the curve
+itself covers only part of that range. `dcChargingTime` calls `effectiveDcPowerAtSoc` at every
+integration midpoint, so consumers and the time integration use the same cap implementation.
+
+```ts
+import { effectiveDcPowerAtSoc } from "@/calculations/charging/dcPower";
+
+const power = effectiveDcPowerAtSoc({
+  socPercent: 60,
+  vehicle: dc.value,
+  station: hpc.value,
+});
+
+if (power.ok) {
+  console.log(power.value); // effective battery power in kW
+}
+```
+
 ## Factories
 
 [`@/domain/chargingFactories`](../../src/domain/chargingFactories.ts):
@@ -94,16 +143,16 @@ Calculation and session errors are defined in
 [`src/calculations/charging/error.ts`](../../src/calculations/charging/error.ts).
 `ChargingSessionError` is the union of all of them.
 
-| `type`                   | Fields                                      | Raised when                                                                                                                                                           |
-| ------------------------ | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `invalidBatteryCapacity` | `value`                                     | Capacity not finite or ≤ 0                                                                                                                                            |
-| `invalidSoc`             | `field`, `value`                            | SoC not finite or outside [0, 100]. `field` is `fromSocPercent` or `toSocPercent` (in a session: initial and target SoC respectively); `socPercent` from `powerAtSoc` |
-| `invalidSocRange`        | `message`, `fromSocPercent`, `toSocPercent` | Start SoC above end SoC in a forward function                                                                                                                         |
-| `invalidPower`           | `value`                                     | A power limit, curve power or effective power not finite or ≤ 0                                                                                                       |
-| `invalidEnergy`          | `value`                                     | Energy not finite or < 0 (`timeForEnergyAtConstantPower`)                                                                                                             |
-| `invalidPhases`          | `value`                                     | AC vehicle or station phases not an integer in [1, 3]                                                                                                                 |
-| `dcChargingNotSupported` | —                                           | DC station and `vehicle.dc` absent                                                                                                                                    |
-| `invalidDuration`        | `value`                                     | Duration not finite or < 0                                                                                                                                            |
+| `type`                   | Fields                                      | Raised when                                                                                                                                                                                       |
+| ------------------------ | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `invalidBatteryCapacity` | `value`                                     | Capacity not finite or ≤ 0                                                                                                                                                                        |
+| `invalidSoc`             | `field`, `value`                            | SoC invalid for the called function. `field` is `fromSocPercent` or `toSocPercent` (in a session: initial and target SoC respectively); `socPercent` from `powerAtSoc` or `effectiveDcPowerAtSoc` |
+| `invalidSocRange`        | `message`, `fromSocPercent`, `toSocPercent` | Start SoC above end SoC in a forward function                                                                                                                                                     |
+| `invalidPower`           | `value`                                     | A power limit, curve power or effective power not finite or ≤ 0                                                                                                                                   |
+| `invalidEnergy`          | `value`                                     | Energy not finite or < 0 (`timeForEnergyAtConstantPower`)                                                                                                                                         |
+| `invalidPhases`          | `value`                                     | AC vehicle or station phases not an integer in [1, 3]                                                                                                                                             |
+| `dcChargingNotSupported` | —                                           | DC station and `vehicle.dc` absent                                                                                                                                                                |
+| `invalidDuration`        | `value`                                     | Duration not finite or < 0                                                                                                                                                                        |
 
 `simulateChargingSession` never calls a forward function with a decreasing range or with an
 energy derived from invalid SoC values, so `invalidSocRange`, `invalidEnergy` and the

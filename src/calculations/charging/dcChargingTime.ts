@@ -5,7 +5,7 @@ import type {
 import type { CalculationResult } from "@/calculations/result";
 import type { ChargingCalculationError } from "@/calculations/charging/error";
 import { energyDeltaForSocChange } from "@/calculations/charging/energy";
-import { powerAtSoc } from "@/calculations/charging/dcCurve";
+import { effectiveDcPowerAtSoc } from "@/calculations/charging/dcPower";
 import { timeForEnergyAtConstantPower } from "@/calculations/charging/time";
 
 /**
@@ -87,8 +87,6 @@ export function dcChargingTime({
     }
   }
 
-  const maxPowerKw = Math.min(vehicle.maxPowerKw, station.maxPowerKw);
-
   const socSpanPercent = toSocPercent - fromSocPercent;
   const stepCount = Math.ceil(socSpanPercent / MAX_SOC_STEP_PERCENT);
   const stepSocPercent = socSpanPercent / stepCount;
@@ -97,18 +95,19 @@ export function dcChargingTime({
   let totalHours = 0;
 
   for (let step = 0; step < stepCount; step++) {
-    const curvePowerKw = powerAtSoc({
-      curve: vehicle.chargingCurve,
+    const effectivePowerKw = effectiveDcPowerAtSoc({
       socPercent: fromSocPercent + (step + 0.5) * stepSocPercent,
+      vehicle,
+      station,
     });
 
-    if (!curvePowerKw.ok) {
-      return curvePowerKw;
+    if (!effectivePowerKw.ok) {
+      return effectivePowerKw;
     }
 
     const stepHours = timeForEnergyAtConstantPower({
       energyKwh: stepEnergyKwh,
-      powerKw: Math.min(curvePowerKw.value, maxPowerKw),
+      powerKw: effectivePowerKw.value,
     });
 
     if (!stepHours.ok) {

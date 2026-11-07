@@ -32,6 +32,10 @@ export type DcCurveError = {
   value: number;
 };
 
+export type EffectiveDcPowerError =
+  | Extract<TimeCalculationError, { type: "invalidPower" }>
+  | DcCurveError;
+
 export type AcPowerError = {
   type: "invalidPhases";
   value: number;

@@ -84,10 +84,26 @@ cover only part of the range (for example 10–80%), and holding the endpoints a
 The function rejects a non-finite SoC but deliberately accepts any finite SoC. It relies on the
 factory for curve ordering; the lookup is a linear scan.
 
+## Effective DC power
+
+[`effectiveDcPowerAtSoc`](../../src/calculations/charging/dcPower.ts) exposes the power that the
+battery receives at a valid battery SoC:
+
+```text
+P_eff(s) = min(P(s), P_vehicle,max, P_station,max)
+```
+
+It accepts `s` in [0, 100] and validates the vehicle and station limits individually before
+combining them. The distinction from `powerAtSoc` is intentional: the interpolation helper
+accepts any finite coordinate, while this public charging calculation accepts only a battery
+SoC. A curve may still cover less than 0–100%; within the battery range, its nearest endpoint is
+held as described above.
+
 ## DC charging time
 
 [`dcChargingTime`](../../src/calculations/charging/dcChargingTime.ts) integrates time over
-energy, with the curve power capped by both limits:
+energy, calling `effectiveDcPowerAtSoc` at each integration midpoint so that the public power API
+and the time calculation share one implementation of the cap:
 
 ```text
 P_eff(s) = min(P(s), P_vehicle,max, P_station,max)

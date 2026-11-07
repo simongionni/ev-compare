@@ -16,6 +16,7 @@ tests/
 │       ├── acPower.test.ts
 │       ├── acChargingTime.test.ts
 │       ├── dcCurve.test.ts
+│       ├── dcPower.test.ts
 │       ├── dcChargingTime.test.ts
 │       ├── chargingSession.test.ts
 │       └── error.types.ts             Compile-time tests for calculation errors
@@ -27,7 +28,8 @@ tests/
 
 There are two kinds of test:
 
-- **`*.test.ts`** are runtime tests run by Vitest. There are 182 tests in 10 files.
+- **`*.test.ts`** are runtime tests run by Vitest. The charging engine and domain have 205 tests
+  in 11 files (including the smoke test).
 - **`*.types.ts`** are compile-time tests. They assign valid and invalid literals to the public
   types and mark the invalid ones with `// @ts-expect-error`. Vitest does not run them; they are
   checked by `npm run typecheck` (tsconfig includes `**/*.ts`). If an invalid assignment starts
@@ -58,6 +60,7 @@ There are two kinds of test:
 | Energy and time     | Formulas; invalid capacity, SoC, power and energy, including non-finite values                                                                                                                                                                             |
 | AC power and time   | Phase combinations; vehicle and station limits validated individually; invalid phases                                                                                                                                                                      |
 | Curve interpolation | Interior interpolation, endpoint holding, non-finite SoC                                                                                                                                                                                                   |
+| Effective DC power  | Curve, vehicle and station limits; interpolation; curve and battery-range boundaries; invalid SoC and power; error precedence                                                                                                                              |
 | DC time             | Flat, linear and multi-segment curves against analytic results; vehicle and station caps; empty and full ranges; invalid limits, including `Infinity` hidden behind a valid limit                                                                          |
 | Session             | AC and DC target and duration sessions; consistency between target and duration; full battery; boundaries (0 duration, target equal to or below initial, 100% target); `dcChargingNotSupported`; invalid SoC, duration, capacity, station power and phases |
 
