@@ -26,12 +26,18 @@ charging sessions ending at a target state of charge or after a duration.
     and main data, and the Ricarica preview: the reference DC scenario (10 % → 80 %, 150 kW)
     calculated by M0.1 with a visx power-by-SoC chart. Vehicles without charging data show what
     the catalogue documents and no calculation.
-  - **Not implemented yet:** the dedicated DC simulation. "Apri nel simulatore →" leads to a
-    provisional page (`/veicoli/<id>/simulazione-dc`) marked as not implemented.
+  - **Increment 3 — implemented, review pending:** the dedicated DC simulation
+    (`/veicoli/<id>/simulazione-dc`): station power (50, 150, 350 kW) and SoC range, time and
+    stored energy from M0.1, an inspectable power-by-SoC chart (pointer and keyboard), the
+    scenario in a shareable URL rewritten in place (no history entry per change), and the return
+    link "‹ <vehicle name>" to the analysis, keeping its origin. Vehicles without charging data
+    show the missing data and no simulation.
+  - The milestone's acceptance criteria have not yet been verified as a whole.
 
-Of the stack packages beyond Next.js, React and TypeScript, only the visx packages the chart uses
-are installed (`@visx/scale`, `@visx/shape`, `@visx/group`, `@visx/axis`); the others are added by
-the implementation work that first needs them. Vehicle data integration (OpenEV Data) is not
+Of the stack packages beyond Next.js, React and TypeScript, the visx packages the chart uses
+(`@visx/scale`, `@visx/shape`, `@visx/group`, `@visx/axis`) and Base UI (`@base-ui/react`, for the
+simulator's slider and radio group) are installed; the others are added by the implementation work
+that first needs them. Vehicle data integration (OpenEV Data) is not
 implemented: the catalogue is fictional and illustrative.
 
 Milestone M0.2 has closed its visual identity exploration: Livrea Consolidated is the selected

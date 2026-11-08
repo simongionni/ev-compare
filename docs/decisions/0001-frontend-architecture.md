@@ -46,13 +46,13 @@ the conflict must be reported.
 | Framework                | Next.js 16 (App Router)           | Installed (16.x)                                                    |
 | UI                       | React 19                          | Installed (19.2.x)                                                  |
 | Language                 | TypeScript, `strict`              | Installed (6.x)                                                     |
-| Accessible primitives    | Base UI                           | Not installed                                                       |
+| Accessible primitives    | Base UI                           | Installed (`@base-ui/react` 1.x): Slider, RadioGroup                |
 | Styling                  | CSS Modules                       | In use                                                              |
 | Design tokens            | CSS Custom Properties             | Defined in `src/styles/tokens.css`                                  |
 | Design system            | Proprietary EV Compare components | First components in `src/components/`                               |
 | Technical charts         | visx                              | `@visx/scale`, `@visx/shape`, `@visx/group`, `@visx/axis` installed |
 | Shared application state | Redux Toolkit, with `react-redux` | Not installed                                                       |
-| Shareable scenarios      | URL                               | Search scenario and origin context                                  |
+| Shareable scenarios      | URL                               | Search scenario, origin context, DC simulation scenario             |
 | Calculation engine       | M0.1, independent of the frontend | Implemented, with the effective DC power extension                  |
 | Tests (existing)         | Vitest                            | Installed, Node environment                                         |
 
