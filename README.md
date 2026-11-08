@@ -26,7 +26,7 @@ charging sessions ending at a target state of charge or after a duration.
     and main data, and the Ricarica preview: the reference DC scenario (10 % → 80 %, 150 kW)
     calculated by M0.1 with a visx power-by-SoC chart. Vehicles without charging data show what
     the catalogue documents and no calculation.
-  - **Increment 3 — implemented, review pending:** the dedicated DC simulation
+  - **Increment 3 — implemented, final technical acceptance pending:** the dedicated DC simulation
     (`/veicoli/<id>/simulazione-dc`): station power (50, 150, 350 kW) and SoC range, time and
     stored energy from M0.1, an inspectable power-by-SoC chart (pointer and keyboard), the
     scenario in a shareable URL rewritten in place (no history entry per change), and the return
@@ -79,9 +79,9 @@ PowerShell blocks `npm.ps1`.
 
 Next.js App Router with React and strict TypeScript; CSS Modules with CSS custom properties,
 no CSS framework. The approved frontend stack is recorded in
-[ADR 0001](docs/decisions/0001-frontend-architecture.md); Base UI and Redux Toolkit with
-`react-redux` are not installed yet, and visx only with the packages the chart uses. ESLint uses Next.js rules, with formatting handled by
-Prettier.
+[ADR 0001](docs/decisions/0001-frontend-architecture.md); Base UI (`@base-ui/react`) is installed,
+visx only with the packages the chart uses, and Redux Toolkit with `react-redux` is not installed
+yet. ESLint uses Next.js rules, with formatting handled by Prettier.
 Vitest uses its default Node environment; `vitest.config.ts` only adds
 `vite-tsconfig-paths` to resolve the `@/` import alias.
 The npm lockfile records the installed dependency versions.
@@ -95,12 +95,14 @@ lint plugins do not yet support ESLint 10 or TypeScript 7.
 | `src/domain/`       | M0.1 charging domain model and factories                                                    |
 | `src/calculations/` | M0.1 charging engine                                                                        |
 | `src/data/`         | Illustrative vehicle catalogue: raw data, validation through the M0.1 factories, provenance |
-| `src/scenarios/`    | URL scenario models and their parsing and serialisation (search, origin context)            |
-| `src/application/`  | Application logic as pure functions (search, Ricarica preview, chart series)                |
+| `src/scenarios/`    | URL scenario models and their parsing and serialisation (search, origin, DC simulation)     |
+| `src/application/`  | Application logic as pure functions (search, Ricarica preview, DC simulation, chart series) |
 | `src/presentation/` | Display formatting, error messages and route paths                                          |
 | `src/styles/`       | Livrea Consolidated design tokens (`tokens.css`) and global base styles                     |
 | `src/components/`   | EV Compare components, each with its CSS Module                                             |
-| `src/app/`          | Routes: `/cerca`, `/veicoli/[vehicleId]`, the provisional simulator page, the font          |
+| `src/app/`          | Routes: `/cerca`, `/veicoli/[vehicleId]`, its DC simulator (`/simulazione-dc`), the font    |
 
 Tests mirror the source layout under `tests/`. These locations answer, for the first increment,
-the directories left open by ADR 0001 (open question 12).
+the directories left open by ADR 0001 (open question 12). `scripts/verify-dc-simulator-url.mjs` is
+a browser verification of the DC simulator run by hand against a production build; the strategy
+for UI tests is still open (ADR 0001 open question 8).
