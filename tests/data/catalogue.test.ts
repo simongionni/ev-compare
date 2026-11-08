@@ -1,9 +1,11 @@
 import { describe, expect, test } from "vitest";
 import {
+  acCapability,
   CATALOGUE_SPECIFICATION_PROVENANCE,
   createCatalogue,
   findVehicle,
   peakDcPowerKw,
+  usableCapacityKwh,
   vehicleName,
   type RawCatalogueVehicle,
 } from "@/data/catalogue";
@@ -103,6 +105,31 @@ describe("illustrative catalogue", () => {
   test("findVehicle returns undefined for an unknown identifier", () => {
     expect(findVehicle(catalogue, "unknown")).toBeUndefined();
   });
+
+  test("only Nordis E4 has a documented version", () => {
+    expect(
+      catalogue.filter((v) => v.version !== undefined).map((v) => v.id),
+    ).toEqual(["nordis-e4"]);
+    expect(findVehicle(catalogue, "nordis-e4")?.version).toEqual({
+      name: "Long Range",
+      drivetrain: "rear",
+    });
+  });
+
+  test("capacity and AC capability exist only with complete charging data", () => {
+    const rows = catalogue.map((v) => [
+      v.id,
+      usableCapacityKwh(v),
+      acCapability(v),
+    ]);
+    expect(rows).toEqual([
+      ["aurora-vela", 58, { maxPowerKw: 11, phases: 3 }],
+      ["nordis-e4", 77, { maxPowerKw: 11, phases: 3 }],
+      ["brisa-family", undefined, undefined],
+      ["talon-s", undefined, undefined],
+      ["meridian-tour", undefined, undefined],
+    ]);
+  });
 });
 
 describe("createCatalogue validation", () => {
@@ -138,6 +165,23 @@ describe("createCatalogue validation", () => {
       ok: false,
       error: { type: "invalidName", vehicleId: "test-car", field },
     });
+  });
+
+  test.each(["", " Long Range"])("rejects the version name %j", (name) => {
+    expect(
+      createCatalogue([peakOnly({ version: { name, drivetrain: "rear" } })]),
+    ).toEqual({
+      ok: false,
+      error: { type: "invalidVersionName", vehicleId: "test-car", value: name },
+    });
+  });
+
+  test("keeps a valid version without sharing the raw object", () => {
+    const version = { name: "Long Range", drivetrain: "rear" } as const;
+    const result = createCatalogue([peakOnly({ version })]);
+    if (!result.ok) throw new Error(JSON.stringify(result.error));
+    expect(result.value[0].version).toEqual(version);
+    expect(result.value[0].version).not.toBe(version);
   });
 
   test.each([0, 2.5, 10, Number.NaN])("rejects %d seats", (seats) => {

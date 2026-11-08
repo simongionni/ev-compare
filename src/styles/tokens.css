@@ -25,10 +25,12 @@
   --livrea-filo: #cbc6bc; /* field and control borders, dividers */
   --livrea-filo-tenue: #e6e2da; /* card hairlines */
   --livrea-velo: #f1eee7; /* hover rows, neutral fills */
+  --livrea-griglia: #efece6; /* chart gridlines */
 
   /* ---- Palette: your-scenario family (yellow intensity B is applied to the screens) ---- */
   --livrea-giallo-targa: #ffd23f;
   --livrea-giallo-tenue: #fff4c7;
+  --livrea-giallo-fascia: #fffae8; /* interval band in charts (tier 2) */
 
   /* ---- Palette: vehicles family (always with the slot number or marker shape) ---- */
   --livrea-cobalto: #2548e0;
@@ -55,6 +57,25 @@
   ); /* actions, links, active navigation */
   --color-on-action: var(--livrea-bianco);
   --color-focus: var(--livrea-inchiostro);
+
+  /* ---- Roles: your scenario (yellow always comes with ink) ---- */
+  --color-scenario: var(--livrea-giallo-targa);
+  --color-scenario-band: var(--livrea-giallo-fascia);
+
+  /* ---- Roles: signals (always with an icon and words) ---- */
+  --color-signal-info: var(--livrea-inchiostro-2);
+  --color-signal-info-surface: var(--livrea-velo);
+  --color-signal-critical: var(--livrea-critico);
+  --color-signal-critical-surface: var(--livrea-critico-tenue);
+
+  /* ---- Roles: technical charts ---- */
+  --color-chart-grid: var(--livrea-griglia);
+  --color-chart-axis: var(--livrea-filo);
+  --color-chart-hatch: var(--livrea-filo);
+  --color-chart-label: var(--livrea-inchiostro-3);
+  /* A vehicle outside the comparison is neutral: ink, never a slot colour. */
+  --color-vehicle-neutral: var(--livrea-inchiostro);
+  --color-vehicle-neutral-secondary: var(--livrea-inchiostro-2);
 
   /* ---- Roles: data provenance (neutral ink, the glyph shape carries the kind) ---- */
   --color-provenance: var(--livrea-inchiostro-2);
@@ -84,9 +105,13 @@
   --font-size-13: 0.8125rem;
   --font-size-14: 0.875rem;
   --font-size-15: 0.9375rem;
+  --font-size-16: 1rem;
   --font-size-18: 1.125rem;
+  --font-size-20: 1.25rem;
   --font-size-24: 1.5rem;
   --font-size-26: 1.625rem;
+  --font-size-32: 2rem;
+  --font-size-52: 3.25rem;
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -97,6 +122,8 @@
   --line-height-text: 1.4;
 
   --letter-spacing-heading: -0.025rem; /* -0.4 px at 26 px */
+  --letter-spacing-title: -0.0375rem; /* -0.6 px at 32 px */
+  --letter-spacing-display: -0.0625rem; /* -1 px at 52 px */
   --letter-spacing-caps: 0.06875rem; /* 1.1 px */
 
   /* ---- Spacing (px values of the 1440 px screens) ---- */
@@ -116,11 +143,14 @@
   --layout-gutter: var(--space-32);
   --layout-max-width: 90rem; /* 1440 px */
   --header-height: 4rem;
+  --context-bar-height: 2.875rem; /* 46 px */
 
   /* ---- Borders and radii ---- */
   --border-hairline: 1px;
   --border-focus: 2px;
   --radius-card: 0.875rem; /* 14 px, result cards */
+  --radius-panel: 1rem; /* 16 px, charging panels */
+  --radius-plate: 0.375rem; /* 6 px, yellow plates */
   --radius-pill: 999px; /* buttons and fields */
   --radius-mark: 0.15625rem; /* 2.5 px, logo bars */
   --radius-glyph: 1px;

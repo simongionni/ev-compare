@@ -1,0 +1,56 @@
+/* Signals of Livrea Consolidated (infoIcon, critical): icon and words, no tint for attention. */
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+  padding: var(--space-16) var(--space-20);
+  border-radius: var(--radius-card);
+  font-size: var(--font-size-14);
+  color: var(--color-text-secondary);
+}
+
+.notice[data-kind="information"] {
+  background: var(--color-signal-info-surface);
+}
+
+.notice[data-kind="critical"] {
+  background: var(--color-signal-critical-surface);
+}
+
+.icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.125rem;
+  border-radius: 50%;
+  font-size: var(--font-size-11);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: var(--color-on-action);
+}
+
+.notice[data-kind="information"] .icon {
+  background: var(--color-signal-info);
+}
+
+.notice[data-kind="critical"] .icon {
+  background: var(--color-signal-critical);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.title {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.notice[data-kind="critical"] .title {
+  color: var(--color-signal-critical);
+}

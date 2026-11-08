@@ -1,0 +1,156 @@
+/* The Ricarica section of the Vehicle Analysis wireframe without its controls: conditions on the
+   left, results and chart on the right; chart language of Livrea Consolidated 04-charging.svg. */
+.section {
+  margin-top: var(--space-48);
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-24);
+}
+
+.title {
+  font-size: var(--font-size-26);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-heading);
+}
+
+/* Ink link with an arrow: weight 600, no underline (Livrea Consolidated, link style). */
+.simulatorLink {
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}
+
+.simulatorLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.header + * {
+  margin-top: var(--space-16);
+}
+
+.panel {
+  display: grid;
+  grid-template-columns: 17.5rem 1fr;
+  border: var(--border-hairline) solid var(--color-border-card);
+  border-radius: var(--radius-panel);
+  background: var(--color-surface);
+}
+
+.conditions {
+  padding: var(--space-24);
+  border-right: var(--border-hairline) solid var(--color-border-card);
+}
+
+.kicker {
+  font-size: var(--font-size-11);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-text-note);
+}
+
+.conditionList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  margin-top: var(--space-16);
+}
+
+.conditionList dt {
+  font-size: var(--font-size-12);
+  color: var(--color-text-secondary);
+}
+
+.conditionList dd {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-15);
+  font-weight: var(--font-weight-semibold);
+}
+
+.output {
+  min-width: 0;
+  padding: var(--space-24) var(--space-32) var(--space-24);
+}
+
+.resultRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-24);
+}
+
+.result {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--space-32);
+  align-items: center;
+}
+
+.time {
+  grid-row: 1 / 3;
+  font-size: var(--font-size-52);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  letter-spacing: var(--letter-spacing-display);
+}
+
+.interval {
+  align-self: end;
+  font-size: var(--font-size-15);
+  font-weight: var(--font-weight-semibold);
+}
+
+.energy {
+  align-self: start;
+  margin-top: var(--space-2);
+  font-size: var(--font-size-14);
+  color: var(--color-text-secondary);
+}
+
+.resultTag {
+  padding-top: var(--space-4);
+}
+
+.chartTitle {
+  margin: var(--space-32) 0 var(--space-12);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+}
+
+.assumptionsTitle {
+  margin-top: var(--space-32);
+  padding-top: var(--space-24);
+  border-top: var(--border-hairline) solid var(--color-border-card);
+}
+
+/* The "Ipotesi" list of 04-charging.svg: small dots in note ink, secondary text. */
+.assumptions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin-top: var(--space-12);
+  font-size: var(--font-size-13);
+  color: var(--color-text-secondary);
+}
+
+.assumptions li {
+  position: relative;
+  padding-left: var(--space-16);
+}
+
+.assumptions li::before {
+  content: "";
+  position: absolute;
+  top: 0.5em;
+  left: 2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-text-note);
+}

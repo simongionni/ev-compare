@@ -1,5 +1,6 @@
 import type { CalculationResult } from "@/calculations/result";
 import type {
+  ACChargingCapability,
   DCChargingCapability,
   RawACChargingCapability,
   RawDCChargingCapability,
@@ -20,6 +21,14 @@ export type VehicleId = string;
 
 export type BodyType =
   "compact" | "midSizeSuv" | "mpv" | "sportsSedan" | "estate";
+
+export type Drivetrain = "front" | "rear" | "allWheel";
+
+/** The version a vehicle's data describes, when the source documents one. */
+export type VehicleVersion = {
+  readonly name: string;
+  readonly drivetrain: Drivetrain;
+};
 
 /**
  * Charging data of a vehicle as written in the catalogue source.
@@ -45,6 +54,7 @@ export type RawCatalogueVehicle = {
   bodyType: BodyType;
   seats: number;
   listPriceEur: number;
+  version?: VehicleVersion;
   charging: RawCatalogueCharging;
 };
 
@@ -65,6 +75,7 @@ export type CatalogueVehicle = {
   readonly bodyType: BodyType;
   readonly seats: number;
   readonly listPriceEur: number;
+  readonly version?: VehicleVersion;
   readonly charging: CatalogueCharging;
 };
 
@@ -75,6 +86,7 @@ export type CatalogueValidationError =
   | { type: "invalidId"; index: number; value: string }
   | { type: "duplicateId"; index: number; value: string }
   | { type: "invalidName"; vehicleId: string; field: "make" | "model" }
+  | { type: "invalidVersionName"; vehicleId: string; value: string }
   | { type: "invalidSeats"; vehicleId: string; value: number }
   | { type: "invalidListPrice"; vehicleId: string; value: number }
   | { type: "invalidUsableCapacity"; vehicleId: string; value: number }
@@ -101,6 +113,9 @@ const VEHICLE_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const MAX_SEATS = 9;
 
 const isPositiveFinite = (value: number) => Number.isFinite(value) && value > 0;
+
+const isTrimmedText = (value: string) =>
+  value.trim() !== "" && value === value.trim();
 
 function createCharging(
   vehicleId: string,
@@ -193,7 +208,7 @@ export function createCatalogue(
     seenIds.add(item.id);
 
     for (const field of ["make", "model"] as const) {
-      if (item[field].trim() === "" || item[field] !== item[field].trim()) {
+      if (!isTrimmedText(item[field])) {
         return {
           ok: false,
           error: { type: "invalidName", vehicleId: item.id, field },
@@ -223,6 +238,17 @@ export function createCatalogue(
       };
     }
 
+    if (item.version !== undefined && !isTrimmedText(item.version.name)) {
+      return {
+        ok: false,
+        error: {
+          type: "invalidVersionName",
+          vehicleId: item.id,
+          value: item.version.name,
+        },
+      };
+    }
+
     const charging = createCharging(item.id, item.charging);
     if (!charging.ok) {
       return charging;
@@ -235,6 +261,14 @@ export function createCatalogue(
       bodyType: item.bodyType,
       seats: item.seats,
       listPriceEur: item.listPriceEur,
+      ...(item.version === undefined
+        ? {}
+        : {
+            version: {
+              name: item.version.name,
+              drivetrain: item.version.drivetrain,
+            },
+          }),
       charging: charging.value,
     });
   }
@@ -252,6 +286,24 @@ export function peakDcPowerKw(vehicle: CatalogueVehicle): number {
   return vehicle.charging.kind === "complete"
     ? vehicle.charging.spec.dc.maxPowerKw
     : vehicle.charging.dcMaxPowerKw;
+}
+
+/** Usable battery capacity, when the catalogue documents it (complete charging data only). */
+export function usableCapacityKwh(
+  vehicle: CatalogueVehicle,
+): number | undefined {
+  return vehicle.charging.kind === "complete"
+    ? vehicle.charging.spec.usableBatteryCapacityKwh
+    : undefined;
+}
+
+/** AC charging capability, when the catalogue documents it (complete charging data only). */
+export function acCapability(
+  vehicle: CatalogueVehicle,
+): ACChargingCapability | undefined {
+  return vehicle.charging.kind === "complete"
+    ? vehicle.charging.spec.ac
+    : undefined;
 }
 
 export function findVehicle(

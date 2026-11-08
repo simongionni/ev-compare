@@ -21,11 +21,17 @@ charging sessions ending at a target state of charge or after a duration.
   - **Increment 1 — implemented:** design tokens and Schibsted Grotesk, the illustrative
     catalogue, the search scenario in the URL, and Discovery (`/cerca`): direct search by make
     or model, results in price order, empty state.
-  - **Not implemented yet:** Vehicle Analysis (`/veicoli/<id>` is a provisional page marked as
-    not implemented), the DC simulation and its chart.
+  - **Increment 2 — implemented:** Vehicle Analysis (`/veicoli/<id>`): context bar ("‹ Risultati"
+    back to the same search when opened from Discovery, "‹ Cerca" when opened directly), identity
+    and main data, and the Ricarica preview: the reference DC scenario (10 % → 80 %, 150 kW)
+    calculated by M0.1 with a visx power-by-SoC chart. Vehicles without charging data show what
+    the catalogue documents and no calculation.
+  - **Not implemented yet:** the dedicated DC simulation. "Apri nel simulatore →" leads to a
+    provisional page (`/veicoli/<id>/simulazione-dc`) marked as not implemented.
 
-The stack packages beyond Next.js, React and TypeScript are not installed yet; each is added by
-the implementation work that first needs it. Vehicle data integration (OpenEV Data) is not
+Of the stack packages beyond Next.js, React and TypeScript, only the visx packages the chart uses
+are installed (`@visx/scale`, `@visx/shape`, `@visx/group`, `@visx/axis`); the others are added by
+the implementation work that first needs them. Vehicle data integration (OpenEV Data) is not
 implemented: the catalogue is fictional and illustrative.
 
 Milestone M0.2 has closed its visual identity exploration: Livrea Consolidated is the selected
@@ -46,7 +52,8 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:3000 (it opens Discovery at `/cerca`). On Windows, use `npm.cmd` if
+Open http://localhost:3000 (it opens Discovery at `/cerca`). A vehicle's analysis is at
+`/veicoli/<id>`, for example http://localhost:3000/veicoli/nordis-e4. On Windows, use `npm.cmd` if
 PowerShell blocks `npm.ps1`.
 
 ## Commands
@@ -66,8 +73,8 @@ PowerShell blocks `npm.ps1`.
 
 Next.js App Router with React and strict TypeScript; CSS Modules with CSS custom properties,
 no CSS framework. The approved frontend stack is recorded in
-[ADR 0001](docs/decisions/0001-frontend-architecture.md); Base UI, visx and Redux Toolkit with
-`react-redux` are not installed yet. ESLint uses Next.js rules, with formatting handled by
+[ADR 0001](docs/decisions/0001-frontend-architecture.md); Base UI and Redux Toolkit with
+`react-redux` are not installed yet, and visx only with the packages the chart uses. ESLint uses Next.js rules, with formatting handled by
 Prettier.
 Vitest uses its default Node environment; `vitest.config.ts` only adds
 `vite-tsconfig-paths` to resolve the `@/` import alias.
@@ -82,12 +89,12 @@ lint plugins do not yet support ESLint 10 or TypeScript 7.
 | `src/domain/`       | M0.1 charging domain model and factories                                                    |
 | `src/calculations/` | M0.1 charging engine                                                                        |
 | `src/data/`         | Illustrative vehicle catalogue: raw data, validation through the M0.1 factories, provenance |
-| `src/scenarios/`    | URL scenario models and their parsing and serialisation (search)                            |
-| `src/application/`  | Application logic as pure functions (search matching and ordering)                          |
-| `src/presentation/` | Display formatting and route paths                                                          |
+| `src/scenarios/`    | URL scenario models and their parsing and serialisation (search, origin context)            |
+| `src/application/`  | Application logic as pure functions (search, Ricarica preview, chart series)                |
+| `src/presentation/` | Display formatting, error messages and route paths                                          |
 | `src/styles/`       | Livrea Consolidated design tokens (`tokens.css`) and global base styles                     |
 | `src/components/`   | EV Compare components, each with its CSS Module                                             |
-| `src/app/`          | Routes: `/cerca` (Discovery), `/veicoli/[vehicleId]` (provisional), the self-hosted font    |
+| `src/app/`          | Routes: `/cerca`, `/veicoli/[vehicleId]`, the provisional simulator page, the font          |
 
 Tests mirror the source layout under `tests/`. These locations answer, for the first increment,
 the directories left open by ADR 0001 (open question 12).

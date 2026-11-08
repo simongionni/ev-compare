@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { resolveVehicleAnalysis } from "@/application/vehicleAnalysis";
 import { findVehicle, vehicleName } from "@/data/catalogue";
 import { catalogue } from "@/data/vehicles";
-import { formatBodyAndSeats } from "@/presentation/format";
-import { PageNotice } from "@/components/PageNotice/PageNotice";
-
-/*
- * PROVISIONAL destination of "Apri scheda". Vehicle Analysis is the next increment of the first
- * vertical slice; this page only proves that the stable identifier resolves to the vehicle and
- * that unknown identifiers end in a not-found state. Its content is not the analysis.
- */
+import { searchParamsFromRecord } from "@/scenarios/originContext";
+import { VehicleAnalysisView } from "./VehicleAnalysisView";
 
 export async function generateMetadata({
   params,
@@ -19,20 +14,24 @@ export async function generateMetadata({
   return { title: vehicle ? vehicleName(vehicle) : "Veicolo non trovato" };
 }
 
+/**
+ * Vehicle Analysis. Rendered per request: the origin context ("‹ Risultati" or "‹ Cerca") comes
+ * from the URL of each request; results and chart series are derived from the vehicle each time.
+ */
 export default async function VehiclePage({
   params,
+  searchParams,
 }: PageProps<"/veicoli/[vehicleId]">) {
   const { vehicleId } = await params;
-  const vehicle = findVehicle(catalogue, vehicleId);
+  const analysis = resolveVehicleAnalysis(
+    catalogue,
+    vehicleId,
+    searchParamsFromRecord(await searchParams),
+  );
 
-  if (vehicle === undefined) {
+  if (analysis === undefined) {
     notFound();
   }
 
-  return (
-    <PageNotice title={vehicleName(vehicle)} provisional>
-      <p>{formatBodyAndSeats(vehicle.bodyType, vehicle.seats)}</p>
-      <p>Scheda del veicolo non ancora implementata.</p>
-    </PageNotice>
-  );
+  return <VehicleAnalysisView analysis={analysis} />;
 }

@@ -292,7 +292,7 @@ Constraints:
 - The return path is a product behaviour (the context bar of the wireframes), not only the
   browser's Back button; both must behave consistently.
 
-Not decided: how the origin context is represented (URL, history state, or both).
+Origin context representation: the URL, approved on 2026-11-08 (open question 6).
 
 ### Decision 5 — Derived data and calculations
 
@@ -461,7 +461,11 @@ discussion.
 5. **History policy: resolved.** Commit points, URL rewriting and push versus replace are set by
    the policy in [Decision 2](#decision-2--reactive-updates). Only the synchronisation mechanism
    is left to the implementation.
-6. **Origin context representation** (URL, history state, both).
+6. **Origin context representation: resolved (2026-11-08).** The URL carries it: a vehicle page
+   opened from Discovery has the origin parameter and the search scenario
+   (`/veicoli/<id>?da=cerca&q=…`); the canonical vehicle URL without them is direct access
+   ("‹ Cerca"). Links to the simulator forward the same parameters. Model and codec:
+   `src/scenarios/originContext.ts`. Parameter names are not a definitive URL schema (question 4).
 7. **Comparison capacity** beyond four vehicles and the behaviour of a full selection.
 8. **UI component and end-to-end test strategy** and tools.
 9. **Token organisation**: file location, naming (Livrea names such as Inchiostro, or role

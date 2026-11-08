@@ -100,7 +100,10 @@ export function DiscoveryView({ catalogue }: { catalogue: Catalogue }) {
           <ul className={styles.grid}>
             {results.map((vehicle) => (
               <li key={vehicle.id} className={styles.item}>
-                <VehicleCard vehicle={vehicle} />
+                <VehicleCard
+                  vehicle={vehicle}
+                  origin={{ kind: "search", search: scenario }}
+                />
               </li>
             ))}
           </ul>

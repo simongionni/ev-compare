@@ -1,0 +1,118 @@
+/* Composition of the Vehicle Analysis wireframes (photo 640 × 360 left, identity right),
+   in the Livrea Consolidated language. */
+.page {
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: var(--space-24) var(--layout-gutter) var(--space-48);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 40rem 1fr;
+  gap: var(--space-40);
+  align-items: start;
+}
+
+.photo {
+  height: 22.5rem;
+  border-radius: var(--radius-card);
+}
+
+.identity {
+  padding-top: var(--space-12);
+}
+
+.name {
+  font-size: var(--font-size-32);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-title);
+}
+
+.kind {
+  margin-top: var(--space-8);
+  font-size: var(--font-size-15);
+  color: var(--color-text-secondary);
+}
+
+.version {
+  margin-top: var(--space-16);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-medium);
+}
+
+.data {
+  margin-top: var(--space-24);
+}
+
+.priceRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  column-gap: var(--space-12);
+  padding-bottom: var(--space-16);
+  border-bottom: var(--border-hairline) solid var(--color-border-card);
+}
+
+.price {
+  font-size: var(--font-size-26);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
+
+.priceNote {
+  margin-left: var(--space-12);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-note);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: var(--space-16) 0;
+  border-bottom: var(--border-hairline) solid var(--color-border-card);
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--space-16);
+}
+
+.fact:first-child {
+  padding-left: 0;
+}
+
+.fact + .fact {
+  border-left: var(--border-hairline) solid var(--color-border-card);
+}
+
+.factLabel {
+  font-size: var(--font-size-12);
+  color: var(--color-text-secondary);
+}
+
+.factValue {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
+
+.factTag {
+  margin-top: var(--space-8);
+}
+
+.factMissing {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-14);
+  line-height: 1.6;
+  color: var(--color-text-note);
+}
+
+.notice {
+  margin-top: var(--space-40);
+  font-size: var(--font-size-12);
+  color: var(--color-text-note);
+}

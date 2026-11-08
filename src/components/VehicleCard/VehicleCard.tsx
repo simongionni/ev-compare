@@ -10,16 +10,24 @@ import {
   formatPowerKw,
   formatPriceEur,
 } from "@/presentation/format";
-import { vehiclePath } from "@/presentation/routes";
+import { vehicleHref } from "@/presentation/routes";
+import type { OriginContext } from "@/scenarios/originContext";
 import { DataProvenanceTag } from "@/components/DataProvenanceTag/DataProvenanceTag";
 import { PhotoPlaceholder } from "@/components/PhotoPlaceholder/PhotoPlaceholder";
 import styles from "./VehicleCard.module.css";
 
 /**
  * Discovery result card of a vehicle outside the comparison (neutral: no slot colour).
- * Shows the data of the Initial State wireframe that the first slice covers.
+ * Shows the data of the Initial State wireframe that the first slice covers. The link to the
+ * analysis carries `origin`, so the analysis can lead back to the same results.
  */
-export function VehicleCard({ vehicle }: { vehicle: CatalogueVehicle }) {
+export function VehicleCard({
+  vehicle,
+  origin,
+}: {
+  vehicle: CatalogueVehicle;
+  origin: OriginContext;
+}) {
   const name = vehicleName(vehicle);
   const titleId = `vehicle-${vehicle.id}`;
   const provenance = CATALOGUE_SPECIFICATION_PROVENANCE;
@@ -59,7 +67,7 @@ export function VehicleCard({ vehicle }: { vehicle: CatalogueVehicle }) {
           </div>
         </dl>
 
-        <Link href={vehiclePath(vehicle.id)} className={styles.open}>
+        <Link href={vehicleHref(vehicle.id, origin)} className={styles.open}>
           Apri scheda<span className="visually-hidden"> di {name}</span>
         </Link>
       </div>

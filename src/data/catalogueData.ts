@@ -12,6 +12,8 @@ import type { RawCatalogueVehicle } from "@/data/catalogue";
  *   (docs/ux/wireframes/consolidated-iteration-1/).
  * - Usable capacity, AC capability and DC curve of Nordis E4 and Aurora Vela: comparison
  *   wireframe README, "Charging data (illustrative)" (docs/ux/wireframes/vehicle-comparison/).
+ * - Version of Nordis E4 ("Long Range", rear-wheel drive): Vehicle Analysis wireframes
+ *   (docs/ux/wireframes/vehicle-analysis-iteration-1/). No other vehicle has a documented version.
  *
  * Vehicles without documented charging data carry only their peak DC power. Nordis E2 is not
  * included: the wireframes document no price, seats or DC power for it.
@@ -50,6 +52,7 @@ export const RAW_CATALOGUE: readonly RawCatalogueVehicle[] = [
     bodyType: "midSizeSuv",
     seats: 5,
     listPriceEur: 41_500,
+    version: { name: "Long Range", drivetrain: "rear" },
     charging: {
       kind: "complete",
       usableBatteryCapacityKwh: 77,
