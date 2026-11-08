@@ -1,11 +1,19 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Radio } from "@base-ui/react/radio";
 import { RadioGroup } from "@base-ui/react/radio-group";
 import { Slider } from "@base-ui/react/slider";
 import { simulateDcCharging } from "@/application/dcSimulation";
+import {
+  isPointerGestureEvent,
+  observeUrlDuringDrag,
+  pendingForUrl,
+  startDrag,
+  type DragGesture,
+  type PendingScenario,
+} from "@/application/dcSimulatorInteraction";
 import {
   usableCapacityKwh,
   vehicleName,
@@ -18,7 +26,6 @@ import {
   MAX_SOC_PERCENT,
   MIN_SOC_PERCENT,
   resolveDcSimulationScenario,
-  serializeDcSimulationScenario,
   SOC_STEP_PERCENT,
   type DcSimulationScenario,
 } from "@/scenarios/dcSimulationScenario";
@@ -88,37 +95,41 @@ export function DcSimulatorView({ vehicle, origin }: DcSimulatorViewProps) {
   );
 }
 
-/** A scenario shown ahead of the URL, valid only while the URL still holds `base`. */
-type PendingScenario = {
-  readonly scenario: DcSimulationScenario;
-  readonly base: string;
-};
-
 function Simulator({
   vehicle,
   origin,
   vehicleName,
 }: DcSimulatorViewProps & { vehicleName: string }) {
   // Committed scenario: owned by the URL (ADR 0001, Decision 1).
-  const committed = resolveDcSimulationScenario(useSearchParams());
-  const committedKey = serializeDcSimulationScenario(
-    committed.scenario,
-  ).toString();
+  const searchParams = useSearchParams();
+  const urlParams = searchParams.toString();
+  const committed = resolveDcSimulationScenario(searchParams);
 
   // Temporary interaction state (a thumb being dragged, or a commit the URL does not reflect
-  // yet). It is tied to the committed scenario it started from: once the URL changes, for
-  // instance on commit or with Back/Forward, the URL wins again.
+  // yet). It belongs to the URL it started from: once the URL changes, for instance on commit or
+  // with Back/Forward, the URL wins again and the temporary state is gone for good.
   const [pending, setPending] = useState<PendingScenario | null>(null);
-  const scenario =
-    pending !== null && pending.base === committedKey
-      ? pending.scenario
-      : committed.scenario;
+  const currentPending = pendingForUrl(pending, urlParams);
+  if (currentPending !== pending) setPending(currentPending);
+  const scenario = currentPending?.scenario ?? committed.scenario;
+
+  // A change of URL makes the rest of a pointer gesture obsolete, while the slider keeps reporting
+  // it until the pointer is released.
+  const drag = useRef<DragGesture | null>(null);
+  useEffect(() => {
+    drag.current = observeUrlDuringDrag(drag.current, window.location.search);
+  }, [urlParams]);
 
   // Results and chart are derived from the scenario on every render, never stored.
   const result = simulateDcCharging(vehicle, scenario);
 
   function show(next: DcSimulationScenario) {
-    setPending({ scenario: next, base: committedKey });
+    setPending({ scenario: next, urlParams });
+  }
+
+  function isObsoleteDrag(event: Event) {
+    drag.current = observeUrlDuringDrag(drag.current, window.location.search);
+    return isPointerGestureEvent(event.type) && drag.current?.obsolete === true;
   }
 
   /** Commits a scenario: the URL is rewritten in place, with no new history entry. */
@@ -205,11 +216,20 @@ function Simulator({
                 ? "swap"
                 : "none"
             }
-            onValueChange={(value) => {
+            onValueChange={(value, details) => {
+              if (isObsoleteDrag(details.event)) {
+                details.cancel();
+                setPending(null);
+                return;
+              }
               const next = withRange(value);
               if (next !== undefined) show(next);
             }}
-            onValueCommitted={(value) => {
+            onValueCommitted={(value, details) => {
+              if (isObsoleteDrag(details.event)) {
+                setPending(null);
+                return;
+              }
               const next = withRange(value);
               if (next !== undefined) commit(next);
             }}
@@ -223,7 +243,12 @@ function Simulator({
                 {formatSocPercent(scenario.targetSocPercent)}
               </span>
             </div>
-            <Slider.Control className={styles.sliderControl}>
+            <Slider.Control
+              className={styles.sliderControl}
+              onPointerDownCapture={() => {
+                drag.current = startDrag(window.location.search);
+              }}
+            >
               <Slider.Track className={styles.sliderTrack}>
                 <Slider.Indicator className={styles.sliderIndicator} />
                 <Slider.Thumb
