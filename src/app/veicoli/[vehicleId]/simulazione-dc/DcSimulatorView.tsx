@@ -1,7 +1,7 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Radio } from "@base-ui/react/radio";
 import { RadioGroup } from "@base-ui/react/radio-group";
 import { Slider } from "@base-ui/react/slider";
@@ -10,6 +10,7 @@ import {
   isPointerGestureEvent,
   observeUrlDuringDrag,
   pendingForUrl,
+  readSimulatorUrl,
   startDrag,
   type DragGesture,
   type PendingScenario,
@@ -25,11 +26,10 @@ import {
   isDcStationPowerKw,
   MAX_SOC_PERCENT,
   MIN_SOC_PERCENT,
-  resolveDcSimulationScenario,
   SOC_STEP_PERCENT,
   type DcSimulationScenario,
+  type ResolvedDcSimulationScenario,
 } from "@/scenarios/dcSimulationScenario";
-import type { OriginContext } from "@/scenarios/originContext";
 import { dcSimulationErrorMessage } from "@/presentation/chargingErrors";
 import {
   formatDurationHours,
@@ -45,10 +45,40 @@ import { DcPowerChart } from "@/components/DcPowerChart/DcPowerChart";
 import { SignalNotice } from "@/components/SignalNotice/SignalNotice";
 import styles from "./DcSimulatorView.module.css";
 
-type DcSimulatorViewProps = {
-  vehicle: CatalogueVehicle;
-  origin: OriginContext;
-};
+/** The browser reports URL changes the router may not see, where it can (Navigation API). */
+function subscribeToUrl(onChange: () => void) {
+  window.navigation?.addEventListener("currententrychange", onChange);
+  return () => {
+    window.navigation?.removeEventListener("currententrychange", onChange);
+  };
+}
+
+/**
+ * The URL's raw query string, as `location.search` has it. `useSearchParams` normalises it, so it
+ * cannot tell apart two encodings of the same parameters; it still re-renders this hook on every
+ * router URL change, encoding included, which is what keeps it current without the Navigation API.
+ *
+ * While the browser is already on another page and the router has not rendered it yet, the old
+ * page keeps the query string the router gives it, not the next page's.
+ */
+function useUrlSearch(): string {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  const routerSearch = () => {
+    const search = searchParams.toString();
+    return search === "" ? "" : `?${search}`;
+  };
+
+  return useSyncExternalStore(
+    subscribeToUrl,
+    () =>
+      window.location.pathname === pathname
+        ? window.location.search
+        : routerSearch(),
+    routerSearch,
+  );
+}
 
 /**
  * The dedicated DC simulation of one vehicle (M0.2 slice, DC simulation): station power and SoC
@@ -56,9 +86,13 @@ type DcSimulatorViewProps = {
  * section of the Vehicle Analysis wireframe, Comparison — Technical Exploration and Livrea
  * Consolidated 04-charging.svg, adapted to a single, neutral vehicle.
  */
-export function DcSimulatorView({ vehicle, origin }: DcSimulatorViewProps) {
+export function DcSimulatorView({ vehicle }: { vehicle: CatalogueVehicle }) {
   const name = vehicleName(vehicle);
   const capacity = usableCapacityKwh(vehicle);
+
+  // Committed scenario and origin context: owned by the URL (ADR 0001, Decision 1).
+  const urlSearch = useUrlSearch();
+  const { committed, origin } = readSimulatorUrl(urlSearch);
 
   return (
     <>
@@ -75,7 +109,12 @@ export function DcSimulatorView({ vehicle, origin }: DcSimulatorViewProps) {
         </header>
 
         {vehicle.charging.kind === "complete" ? (
-          <Simulator vehicle={vehicle} origin={origin} vehicleName={name} />
+          <Simulator
+            vehicle={vehicle}
+            vehicleName={name}
+            urlSearch={urlSearch}
+            committed={committed}
+          />
         ) : (
           <SignalNotice
             kind="information"
@@ -97,19 +136,20 @@ export function DcSimulatorView({ vehicle, origin }: DcSimulatorViewProps) {
 
 function Simulator({
   vehicle,
-  origin,
   vehicleName,
-}: DcSimulatorViewProps & { vehicleName: string }) {
-  // Committed scenario: owned by the URL (ADR 0001, Decision 1).
-  const searchParams = useSearchParams();
-  const urlParams = searchParams.toString();
-  const committed = resolveDcSimulationScenario(searchParams);
-
+  urlSearch,
+  committed,
+}: {
+  vehicle: CatalogueVehicle;
+  vehicleName: string;
+  urlSearch: string;
+  committed: ResolvedDcSimulationScenario;
+}) {
   // Temporary interaction state (a thumb being dragged, or a commit the URL does not reflect
   // yet). It belongs to the URL it started from: once the URL changes, for instance on commit or
   // with Back/Forward, the URL wins again and the temporary state is gone for good.
   const [pending, setPending] = useState<PendingScenario | null>(null);
-  const currentPending = pendingForUrl(pending, urlParams);
+  const currentPending = pendingForUrl(pending, urlSearch);
   if (currentPending !== pending) setPending(currentPending);
   const scenario = currentPending?.scenario ?? committed.scenario;
 
@@ -118,13 +158,13 @@ function Simulator({
   const drag = useRef<DragGesture | null>(null);
   useEffect(() => {
     drag.current = observeUrlDuringDrag(drag.current, window.location.search);
-  }, [urlParams]);
+  }, [urlSearch]);
 
   // Results and chart are derived from the scenario on every render, never stored.
   const result = simulateDcCharging(vehicle, scenario);
 
   function show(next: DcSimulationScenario) {
-    setPending({ scenario: next, urlParams });
+    setPending({ scenario: next, search: urlSearch });
   }
 
   function isObsoleteDrag(event: Event) {
@@ -132,9 +172,13 @@ function Simulator({
     return isPointerGestureEvent(event.type) && drag.current?.obsolete === true;
   }
 
-  /** Commits a scenario: the URL is rewritten in place, with no new history entry. */
+  /**
+   * Commits a scenario: the URL is rewritten in place, with no new history entry. The origin is
+   * whatever the URL says at this moment, which may be ahead of the last render.
+   */
   function commit(next: DcSimulationScenario) {
     show(next);
+    const { origin } = readSimulatorUrl(window.location.search);
     window.history.replaceState(
       null,
       "",
@@ -188,7 +232,12 @@ function Simulator({
               value={scenario.stationMaxPowerKw}
               onValueChange={(value) => {
                 if (typeof value === "number" && isDcStationPowerKw(value)) {
-                  commit({ ...scenario, stationMaxPowerKw: value });
+                  const search = window.location.search;
+                  const current =
+                    search === urlSearch
+                      ? scenario
+                      : readSimulatorUrl(search).committed.scenario;
+                  commit({ ...current, stationMaxPowerKw: value });
                 }
               }}
             >

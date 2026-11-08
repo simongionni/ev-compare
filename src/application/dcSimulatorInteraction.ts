@@ -1,28 +1,57 @@
-import type { DcSimulationScenario } from "@/scenarios/dcSimulationScenario";
+import {
+  resolveDcSimulationScenario,
+  type DcSimulationScenario,
+  type ResolvedDcSimulationScenario,
+} from "@/scenarios/dcSimulationScenario";
+import {
+  DIRECT_ORIGIN,
+  parseOriginContext,
+  type OriginContext,
+} from "@/scenarios/originContext";
 
 /**
- * How the simulator's temporary interaction state stays subordinate to the URL (ADR 0001,
- * Decision 2). Temporary state belongs to the URL state it started from, compared by the URL's own
- * parameters and never by the scenario they resolve to: different URLs can resolve to the same
- * scenario (a missing parameter, an invalid URL falling back to the defaults).
+ * How the simulator's state stays subordinate to the URL (ADR 0001, Decision 2). Everything the
+ * simulator knows about the URL comes from one raw query string (`location.search`). Temporary
+ * state belongs to the query string it started from, compared as text and never by the scenario
+ * or the parameters it resolves to: different query strings can resolve to the same scenario (a
+ * missing parameter, an invalid URL falling back to the defaults, an equivalent encoding).
  */
+
+/** What a simulator URL says: the committed scenario and where the page was opened from. */
+export type SimulatorUrlState = {
+  readonly committed: ResolvedDcSimulationScenario;
+  readonly origin: OriginContext;
+};
+
+/**
+ * Reads a raw query string. Origin parameters that are not a valid origin open the page as a
+ * direct visit, as in Vehicle Analysis: the return link then leads to the canonical vehicle URL.
+ */
+export function readSimulatorUrl(search: string): SimulatorUrlState {
+  const params = new URLSearchParams(search);
+  const origin = parseOriginContext(params);
+  return {
+    committed: resolveDcSimulationScenario(params),
+    origin: origin.ok ? origin.value : DIRECT_ORIGIN,
+  };
+}
 
 /** A scenario shown ahead of the URL (a thumb being dragged, a commit not yet reflected). */
 export type PendingScenario = {
   readonly scenario: DcSimulationScenario;
-  /** The URL's parameters when it was shown: `URLSearchParams.toString()`. */
-  readonly urlParams: string;
+  /** The URL's raw query string when it was shown. */
+  readonly search: string;
 };
 
 /**
- * The pending scenario, if it still belongs to the URL's current parameters. Anything else is
+ * The pending scenario, if it still belongs to the URL's current query string. Anything else is
  * dropped: the caller forgets it, so returning to its URL later does not bring it back.
  */
 export function pendingForUrl(
   pending: PendingScenario | null,
-  urlParams: string,
+  search: string,
 ): PendingScenario | null {
-  return pending?.urlParams === urlParams ? pending : null;
+  return pending?.search === search ? pending : null;
 }
 
 /** A pointer gesture on the SoC slider: from the press until the pointer is released. */
@@ -38,9 +67,9 @@ export function startDrag(search: string): DragGesture {
 }
 
 /**
- * The gesture after looking at the URL. `location.search` is read at the time of the event: unlike
- * the router's state, it is already up to date when a release follows a URL change immediately.
- * Obsolescence is final: a gesture stays obsolete if the URL later returns to where it started.
+ * The gesture after looking at the URL. `location.search` is read at the time of the event: it may
+ * be ahead of the last render when a release follows a URL change immediately. Obsolescence is
+ * final: a gesture stays obsolete if the URL later returns to where it started.
  */
 export function observeUrlDuringDrag(
   drag: DragGesture | null,
