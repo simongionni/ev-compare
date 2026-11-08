@@ -8,6 +8,7 @@
 | Related | [First vertical slice](../milestones/m0.2-first-vertical-slice.md) (M0.2)                                                                  |
 | Revised | 2026-11-03: `react-redux` approved; open questions before the slice listed                                                                 |
 | Revised | 2026-11-03: effective DC power API extension, URL and history policy, and the slice's DC simulation UX and SoC rules approved and recorded |
+| Revised | 2026-11-08: origin context in the URL approved by the product owner (open question 6); repository state brought up to date                 |
 
 This record formalises decisions that were already discussed and approved. It does not
 introduce new ones. Wherever a detail has not been decided, it is listed under
@@ -22,8 +23,11 @@ introduce new ones. Wherever a detail has not been decided, it is listed under
 - **The UX of M0.2 is consolidated**: high-level flows, desktop wireframes for Discovery,
   Vehicle Analysis and Comparison.
 - **Livrea Consolidated is the selected visual identity** of the product.
-- **The web app is still the bootstrap landing page** (`src/app/`). No frontend feature,
-  styling system, state management or chart exists yet.
+- **When this record was written, the web app was still the bootstrap landing page**
+  (`src/app/`), with no frontend feature, styling system, state management or chart. The
+  [first vertical slice](../milestones/m0.2-first-vertical-slice.md) is now being implemented;
+  its status is tracked in the slice and in the [README](../../README.md), not here. The
+  "In the repository today" column below records only which parts of the stack are present.
 
 Authoritative sources. This ADR does not override them; where it seems to, the source wins and
 the conflict must be reported.
@@ -37,20 +41,20 @@ the conflict must be reported.
 
 ## 2. Technology stack
 
-| Area                     | Technology                        | In the repository today      |
-| ------------------------ | --------------------------------- | ---------------------------- |
-| Framework                | Next.js 16 (App Router)           | Installed (16.3.x)           |
-| UI                       | React 19                          | Installed (19.2.x)           |
-| Language                 | TypeScript, `strict`              | Installed (6.x)              |
-| Accessible primitives    | Base UI                           | Not installed                |
-| Styling                  | CSS Modules                       | Supported by Next.js, unused |
-| Design tokens            | CSS Custom Properties             | None defined                 |
-| Design system            | Proprietary EV Compare components | None                         |
-| Technical charts         | visx                              | Not installed                |
-| Shared application state | Redux Toolkit, with `react-redux` | Not installed                |
-| Shareable scenarios      | URL                               | —                            |
-| Calculation engine       | M0.1, independent of the frontend | Implemented                  |
-| Tests (existing)         | Vitest                            | Installed, Node environment  |
+| Area                     | Technology                        | In the repository today (2026-11-08)                                |
+| ------------------------ | --------------------------------- | ------------------------------------------------------------------- |
+| Framework                | Next.js 16 (App Router)           | Installed (16.x)                                                    |
+| UI                       | React 19                          | Installed (19.2.x)                                                  |
+| Language                 | TypeScript, `strict`              | Installed (6.x)                                                     |
+| Accessible primitives    | Base UI                           | Not installed                                                       |
+| Styling                  | CSS Modules                       | In use                                                              |
+| Design tokens            | CSS Custom Properties             | Defined in `src/styles/tokens.css`                                  |
+| Design system            | Proprietary EV Compare components | First components in `src/components/`                               |
+| Technical charts         | visx                              | `@visx/scale`, `@visx/shape`, `@visx/group`, `@visx/axis` installed |
+| Shared application state | Redux Toolkit, with `react-redux` | Not installed                                                       |
+| Shareable scenarios      | URL                               | Search scenario and origin context                                  |
+| Calculation engine       | M0.1, independent of the frontend | Implemented, with the effective DC power extension                  |
+| Tests (existing)         | Vitest                            | Installed, Node environment                                         |
 
 Rules:
 
@@ -78,11 +82,11 @@ Packaging notes to verify at installation time (they do not change the stack):
 | --------------------------------------- | -------------------------------------------------- | ------------------------------------------------- |
 | Domain models and rules                 | `src/domain/` (existing)                           | React, Next.js, Redux, visx, browser APIs         |
 | Calculation engines                     | `src/calculations/` (existing, M0.1)               | React, Next.js, Redux, visx, browser APIs         |
-| Vehicle catalogue access                | `src/data/` (planned at bootstrap)                 | React components, Redux                           |
+| Vehicle catalogue access                | `src/data/`                                        | React components, Redux                           |
 | Application logic and state transitions | Pure TypeScript functions; location open           | React, Redux (testable without either)            |
 | Shared state                            | Redux Toolkit store; location open                 | Domain rules implemented inside reducers          |
 | Routing and scenario serialisation      | Routes in `src/app/`; scenario codec location open | Codec: React, Redux                               |
-| Presentation components                 | `src/components/` (planned at bootstrap)           | Calculation internals; arbitrary colour values    |
+| Presentation components                 | `src/components/`                                  | Calculation internals; arbitrary colour values    |
 | Design tokens and styling               | Central CSS Custom Properties + CSS Modules        | Values duplicated in components                   |
 | Technical visualisations                | visx-based components                              | Mathematical logic (they receive computed series) |
 
@@ -124,7 +128,7 @@ Constraints:
 - **No speculative layers.** Do not add services, repositories, adapters or abstraction layers for
   features that do not exist. A layer is introduced by the first feature that needs it.
 
-The table names existing and bootstrap-planned directories. Locations marked "open" are decided
+The table names the directories that exist. Locations marked "open" are decided
 by the first implementation that needs them and recorded in that change.
 
 ### Extension of the M0.1 public API: effective DC power
@@ -292,7 +296,8 @@ Constraints:
 - The return path is a product behaviour (the context bar of the wireframes), not only the
   browser's Back button; both must behave consistently.
 
-Origin context representation: the URL, approved on 2026-11-08 (open question 6).
+Origin context representation: the URL, approved by the product owner on 2026-11-08 (open
+question 6).
 
 ### Decision 5 — Derived data and calculations
 
@@ -461,7 +466,8 @@ discussion.
 5. **History policy: resolved.** Commit points, URL rewriting and push versus replace are set by
    the policy in [Decision 2](#decision-2--reactive-updates). Only the synchronisation mechanism
    is left to the implementation.
-6. **Origin context representation: resolved (2026-11-08).** The URL carries it: a vehicle page
+6. **Origin context representation: resolved.** Approved by the product owner on 2026-11-08,
+   during increment 2 of the first vertical slice. The URL carries it: a vehicle page
    opened from Discovery has the origin parameter and the search scenario
    (`/veicoli/<id>?da=cerca&q=…`); the canonical vehicle URL without them is direct access
    ("‹ Cerca"). Links to the simulator forward the same parameters. Model and codec:
@@ -490,15 +496,15 @@ All were resolved on 2026-11-03.
 
 The questions still open that touch the slice are listed in the slice's
 [open questions](../milestones/m0.2-first-vertical-slice.md#9-open-questions) and, for this record,
-open questions 2, 4, 6, 8, 9, 10 and 12 above.
+open questions 2, 4, 8, 9, 10 and 12 above.
 
 ## 10. Notes on existing documentation
 
 - The visual identity pages and [`.github/copilot-instructions.md`](../../.github/copilot-instructions.md),
   noted here when this record was first written, have since been aligned with it.
-- `src/app/layout.tsx` declares `lang="en"`, while all product copy is Italian. Not changed; the
-  first vertical slice requires the document language to match the copy (acceptance criterion
-  11.5).
+- `src/app/layout.tsx` declared `lang="en"` when this record was written, while all product copy
+  is Italian. It now declares `lang="it"`, as the first vertical slice requires (acceptance
+  criterion 11.5).
 - The [Vehicle Analysis wireframes](../ux/wireframes/vehicle-analysis-iteration-1/README.md) embed
   an interactive charging simulator in the Ricarica section. The approved decision for the first
   vertical slice (2026-11-03) supersedes that point: the Ricarica section shows a non-configurable
