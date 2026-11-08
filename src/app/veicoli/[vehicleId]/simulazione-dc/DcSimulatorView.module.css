@@ -1,0 +1,268 @@
+/* Dedicated DC simulation: conditions across the top, then the result and assumptions beside the
+   chart. Livrea Consolidated 04-charging.svg and Comparison — Technical Exploration, adapted to
+   one neutral vehicle. Yellow marks the scenario (station option, SoC range) and its effects. */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: var(--space-32) var(--layout-gutter) var(--space-48);
+}
+
+.title {
+  font-size: var(--font-size-32);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-title);
+}
+
+.version {
+  margin-top: var(--space-8);
+  font-size: var(--font-size-14);
+  color: var(--color-text-secondary);
+}
+
+.card {
+  border: var(--border-hairline) solid var(--color-border-card);
+  border-radius: var(--radius-panel);
+  background: var(--color-surface);
+}
+
+.kicker {
+  font-size: var(--font-size-11);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-text-note);
+}
+
+.cardTitle {
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ---- Conditions ---- */
+.conditions {
+  composes: card;
+  padding: var(--space-20) var(--space-24) var(--space-24);
+}
+
+.conditionRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-24) var(--space-48);
+  margin-top: var(--space-16);
+}
+
+.condition {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.conditionLabel {
+  font-size: var(--font-size-13);
+  color: var(--color-text-secondary);
+}
+
+.fixedCondition {
+  display: flex;
+  align-items: center;
+  min-height: 2.25rem;
+  font-size: var(--font-size-15);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Station options: pill segments; the chosen one is a yellow plate with an ink outline. */
+.options {
+  display: inline-flex;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border: var(--border-hairline) solid var(--color-border-control);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+}
+
+.option {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0 var(--space-16);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  cursor: pointer;
+  user-select: none;
+}
+
+.option:hover {
+  background: var(--color-surface-hover);
+}
+
+.option[data-checked] {
+  border-color: var(--color-text);
+  background: var(--color-scenario);
+  font-weight: var(--font-weight-bold);
+}
+
+.option:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* SoC range: yellow fill between ink handles (yellow intensity B). */
+.socCondition {
+  width: 18rem;
+}
+
+.socHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-16);
+}
+
+.socValue {
+  font-size: var(--font-size-15);
+  font-weight: var(--font-weight-bold);
+}
+
+.sliderControl {
+  display: flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0 var(--space-8);
+  touch-action: none;
+  user-select: none;
+}
+
+.sliderTrack {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--color-border-card);
+}
+
+.sliderIndicator {
+  border-radius: var(--radius-pill);
+  background: var(--color-scenario);
+}
+
+.sliderThumb {
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 2px solid var(--color-text);
+  border-radius: 50%;
+  background: var(--color-surface);
+  cursor: grab;
+}
+
+.sliderThumb[data-dragging] {
+  cursor: grabbing;
+}
+
+.sliderThumb:has(:focus-visible) {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* ---- Result, chart, assumptions ---- */
+.body {
+  display: grid;
+  grid-template-columns: 22rem minmax(0, 1fr);
+  grid-template-areas:
+    "result chart"
+    "assumptions chart";
+  grid-template-rows: auto 1fr;
+  gap: var(--space-24);
+  align-items: start;
+}
+
+.result {
+  composes: card;
+  grid-area: result;
+  padding: var(--space-20) var(--space-24) var(--space-24);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+}
+
+.resultValues {
+  margin-top: var(--space-16);
+}
+
+.time {
+  font-size: var(--font-size-52);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  letter-spacing: var(--letter-spacing-display);
+}
+
+.energy {
+  margin-top: var(--space-16);
+  font-size: var(--font-size-15);
+  font-weight: var(--font-weight-semibold);
+}
+
+.resultConditions {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-14);
+  color: var(--color-text-secondary);
+}
+
+.chart {
+  composes: card;
+  grid-area: chart;
+  min-width: 0;
+  padding: var(--space-20) var(--space-24) var(--space-24);
+}
+
+.chart .cardTitle {
+  margin-bottom: var(--space-16);
+}
+
+.assumptions {
+  composes: card;
+  grid-area: assumptions;
+  padding: var(--space-20) var(--space-24) var(--space-24);
+}
+
+/* The "Ipotesi" list of 04-charging.svg: small dots in note ink, secondary text. */
+.assumptionList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin-top: var(--space-12);
+  font-size: var(--font-size-13);
+  color: var(--color-text-secondary);
+}
+
+.assumptionList li {
+  position: relative;
+  padding-left: var(--space-16);
+}
+
+.assumptionList li::before {
+  content: "";
+  position: absolute;
+  top: 0.5em;
+  left: 2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-text-note);
+}
+
+.notice {
+  font-size: var(--font-size-13);
+  color: var(--color-text-note);
+}

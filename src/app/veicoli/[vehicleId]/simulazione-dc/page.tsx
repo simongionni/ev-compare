@@ -7,18 +7,26 @@ import {
   parseOriginContext,
   searchParamsFromRecord,
 } from "@/scenarios/originContext";
-import { vehicleHref } from "@/presentation/routes";
-import { PageNotice } from "@/components/PageNotice/PageNotice";
+import { DcSimulatorView } from "./DcSimulatorView";
 
-/*
- * PROVISIONAL destination of "Apri nel simulatore →". The dedicated DC simulation is the next
- * increment of the first vertical slice; this page simulates nothing. It only proves that the
- * link resolves to the same vehicle and that the origin context survives the round trip back to
- * the analysis. The copy of its return link is M0.2 open question 7.
+export async function generateMetadata({
+  params,
+}: PageProps<"/veicoli/[vehicleId]/simulazione-dc">): Promise<Metadata> {
+  const { vehicleId } = await params;
+  const vehicle = findVehicle(catalogue, vehicleId);
+  return {
+    title: vehicle
+      ? `Simulazione ricarica DC · ${vehicleName(vehicle)}`
+      : "Veicolo non trovato",
+  };
+}
+
+/**
+ * Dedicated DC simulation of a vehicle. Rendered per request: the origin context and the
+ * simulation scenario come from the URL of each request, so a shared URL rebuilds the page with
+ * no previous navigation. The scenario is then followed on the client, where the controls
+ * rewrite it in place (ADR 0001, Decision 2).
  */
-
-export const metadata: Metadata = { title: "Simulazione ricarica DC" };
-
 export default async function DcSimulationPage({
   params,
   searchParams,
@@ -30,20 +38,14 @@ export default async function DcSimulationPage({
     notFound();
   }
 
+  // Origin parameters that are not a valid origin open the page as a direct visit, as in
+  // Vehicle Analysis: the return link then leads to the canonical vehicle URL ("‹ Cerca" there).
   const origin = parseOriginContext(searchParamsFromRecord(await searchParams));
-  const name = vehicleName(vehicle);
 
   return (
-    <PageNotice
-      title="Simulazione ricarica DC"
-      provisional
-      back={{
-        label: name,
-        href: vehicleHref(vehicle.id, origin.ok ? origin.value : DIRECT_ORIGIN),
-      }}
-    >
-      <p>{name}</p>
-      <p>Simulatore non ancora implementato.</p>
-    </PageNotice>
+    <DcSimulatorView
+      vehicle={vehicle}
+      origin={origin.ok ? origin.value : DIRECT_ORIGIN}
+    />
   );
 }

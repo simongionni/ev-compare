@@ -3,6 +3,7 @@ import {
   contextBarLink,
   dcSimulationHref,
   DISCOVERY_PATH,
+  simulationReturnLink,
   vehicleHref,
   vehiclePath,
 } from "@/presentation/routes";
@@ -11,6 +12,12 @@ import {
   parseOriginContext,
   type OriginContext,
 } from "@/scenarios/originContext";
+import {
+  DEFAULT_DC_SIMULATION_SCENARIO,
+  parseDcSimulationScenario,
+  resolveDcSimulationScenario,
+  type DcSimulationScenario,
+} from "@/scenarios/dcSimulationScenario";
 import {
   parseSearchScenario,
   searchScenarioHref,
@@ -108,4 +115,87 @@ describe("the search scenario survives the round trip", () => {
       });
     },
   );
+});
+
+describe("DC simulation URLs", () => {
+  const scenario: DcSimulationScenario = {
+    stationMaxPowerKw: 50,
+    initialSocPercent: 20,
+    targetSocPercent: 90,
+  };
+
+  test("direct access: no parameters, so the default scenario and no origin", () => {
+    const href = dcSimulationHref("nordis-e4", DIRECT_ORIGIN);
+    expect(href).toBe("/veicoli/nordis-e4/simulazione-dc");
+    expect(resolveDcSimulationScenario(paramsOf(href))).toEqual({
+      scenario: DEFAULT_DC_SIMULATION_SCENARIO,
+    });
+    expect(parseOriginContext(paramsOf(href))).toEqual({
+      ok: true,
+      value: DIRECT_ORIGIN,
+    });
+  });
+
+  test("a scenario URL keeps the origin and restores the scenario", () => {
+    const href = dcSimulationHref("nordis-e4", fromSearch("Nordis"), scenario);
+    expect(href).toBe(
+      "/veicoli/nordis-e4/simulazione-dc?da=cerca&q=Nordis&colonnina=50&inizio=20&fine=90",
+    );
+    expect(parseDcSimulationScenario(paramsOf(href))).toEqual({
+      ok: true,
+      value: scenario,
+    });
+    expect(parseOriginContext(paramsOf(href))).toEqual({
+      ok: true,
+      value: fromSearch("Nordis"),
+    });
+  });
+
+  test("a shared scenario URL opened directly needs nothing else", () => {
+    const href = dcSimulationHref("aurora-vela", DIRECT_ORIGIN, scenario);
+    expect(href).toBe(
+      "/veicoli/aurora-vela/simulazione-dc?colonnina=50&inizio=20&fine=90",
+    );
+    expect(resolveDcSimulationScenario(paramsOf(href))).toEqual({ scenario });
+  });
+});
+
+describe("simulationReturnLink (‹ vehicle name)", () => {
+  test("opened directly: the canonical analysis of the same vehicle", () => {
+    expect(
+      simulationReturnLink("nordis-e4", "Nordis E4", DIRECT_ORIGIN),
+    ).toEqual({ label: "Nordis E4", href: "/veicoli/nordis-e4" });
+  });
+
+  test("opened from Discovery: the analysis keeps its way back to the search", () => {
+    const link = simulationReturnLink(
+      "nordis-e4",
+      "Nordis E4",
+      fromSearch("Nordis"),
+    );
+    expect(link).toEqual({
+      label: "Nordis E4",
+      href: "/veicoli/nordis-e4?da=cerca&q=Nordis",
+    });
+    const analysisOrigin = parseOriginContext(paramsOf(link.href));
+    if (!analysisOrigin.ok) throw new Error(JSON.stringify(analysisOrigin));
+    expect(contextBarLink(analysisOrigin.value)).toEqual({
+      label: "Risultati",
+      href: "/cerca?q=Nordis",
+    });
+  });
+
+  test("the scenario does not leak into the analysis URL", () => {
+    // The simulator's own origin is parsed from a URL that also holds the scenario.
+    const simulatorHref = dcSimulationHref(
+      "nordis-e4",
+      fromSearch("Nordis"),
+      DEFAULT_DC_SIMULATION_SCENARIO,
+    );
+    const origin = parseOriginContext(paramsOf(simulatorHref));
+    if (!origin.ok) throw new Error(JSON.stringify(origin));
+    expect(
+      simulationReturnLink("nordis-e4", "Nordis E4", origin.value).href,
+    ).toBe("/veicoli/nordis-e4?da=cerca&q=Nordis");
+  });
 });

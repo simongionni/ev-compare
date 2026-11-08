@@ -1,4 +1,5 @@
 import type { ChargingPreviewError } from "@/application/chargingPreview";
+import type { DcSimulationError } from "@/application/dcSimulation";
 import type { ChargingSessionError } from "@/calculations/charging/error";
 
 function engineErrorMessage(error: ChargingSessionError): string {
@@ -31,6 +32,20 @@ export function chargingPreviewErrorMessage(
   switch (error.type) {
     case "invalidStation":
       return "La potenza della colonnina di riferimento non è valida.";
+    case "simulation":
+    case "chart":
+      return engineErrorMessage(error.error);
+  }
+}
+
+/**
+ * A message for each error of the dedicated DC simulation, by error type (M0.2 acceptance 4.4):
+ * never a raw object.
+ */
+export function dcSimulationErrorMessage(error: DcSimulationError): string {
+  switch (error.type) {
+    case "invalidStation":
+      return "La potenza della colonnina non è valida.";
     case "simulation":
     case "chart":
       return engineErrorMessage(error.error);

@@ -6,6 +6,7 @@ import {
   usableCapacityKwh,
   vehicleName,
 } from "@/data/catalogue";
+import { contextBarLink } from "@/presentation/routes";
 import {
   formatAcCapability,
   formatBodyAndSeats,
@@ -54,7 +55,14 @@ export function VehicleAnalysisView({
 
   return (
     <>
-      <ContextBar origin={origin} />
+      <ContextBar
+        back={contextBarLink(origin)}
+        context={
+          origin.kind === "search" && origin.search.query !== ""
+            ? `Ricerca “${origin.search.query}”`
+            : undefined
+        }
+      />
       <main className={styles.page}>
         <section className={styles.hero} aria-labelledby="vehicle-title">
           <PhotoPlaceholder model={name} className={styles.photo} />

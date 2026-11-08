@@ -1,6 +1,10 @@
 import { expect, test } from "vitest";
 import type { ChargingPreviewError } from "@/application/chargingPreview";
-import { chargingPreviewErrorMessage } from "@/presentation/chargingErrors";
+import type { DcSimulationError } from "@/application/dcSimulation";
+import {
+  chargingPreviewErrorMessage,
+  dcSimulationErrorMessage,
+} from "@/presentation/chargingErrors";
 
 test.each<[ChargingPreviewError, string]>([
   [
@@ -30,5 +34,36 @@ test.each<[ChargingPreviewError, string]>([
   "a message for each error type, never a raw object: %j",
   (error, message) => {
     expect(chargingPreviewErrorMessage(error)).toBe(message);
+  },
+);
+
+test.each<[DcSimulationError, string]>([
+  [
+    { type: "invalidStation", error: { type: "invalidMaxPower", value: 0 } },
+    "La potenza della colonnina non è valida.",
+  ],
+  [
+    {
+      type: "simulation",
+      error: {
+        type: "invalidSoc",
+        field: "toSocPercent",
+        value: 120,
+      },
+    },
+    "Il livello di carica non è valido.",
+  ],
+  [
+    { type: "simulation", error: { type: "dcChargingNotSupported" } },
+    "Il veicolo non supporta la ricarica in corrente continua.",
+  ],
+  [
+    { type: "chart", error: { type: "invalidPower", value: -1 } },
+    "Una potenza di ricarica non è valida.",
+  ],
+])(
+  "simulator: a message for each error type, never a raw object: %j",
+  (error, message) => {
+    expect(dcSimulationErrorMessage(error)).toBe(message);
   },
 );

@@ -125,3 +125,68 @@
   height: 12px;
   overflow: visible;
 }
+
+/* The drawing and, when the chart is inspectable, the layer on its plot area. */
+.plotArea {
+  position: relative;
+}
+
+/* An empty interval: the chosen SoC as a yellow point with an ink outline. */
+.intervalPoint {
+  fill: var(--color-scenario);
+  stroke: var(--color-text);
+  stroke-width: 2;
+}
+
+/* Inspection: neutral crosshair and tooltip (04-charging.svg hover state). */
+.inspection {
+  position: absolute;
+  cursor: crosshair;
+  touch-action: pan-y;
+  border-radius: var(--radius-glyph);
+}
+
+.inspection:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.crosshair {
+  stroke: var(--color-chart-label);
+  stroke-width: 1;
+}
+
+.inspectedReceived {
+  fill: var(--color-vehicle-neutral);
+  stroke: var(--color-surface);
+  stroke-width: 1.5;
+}
+
+.inspectedCurve {
+  fill: var(--color-surface);
+  stroke: var(--color-vehicle-neutral-secondary);
+  stroke-width: 1.5;
+}
+
+.tooltip {
+  fill: var(--color-surface);
+  stroke: var(--color-border-control);
+  stroke-width: 1;
+}
+
+.tooltipTitle {
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-bold);
+  fill: var(--color-text);
+}
+
+.tooltipText {
+  font-size: var(--font-size-12);
+  fill: var(--color-text-secondary);
+}
+
+.tooltipValue {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-semibold);
+  fill: var(--color-text);
+}

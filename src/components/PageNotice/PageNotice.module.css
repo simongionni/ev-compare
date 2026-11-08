@@ -28,10 +28,6 @@
   color: var(--color-text-secondary);
 }
 
-.box[data-provisional] {
-  border: 1.2px dashed var(--color-border-control);
-}
-
 .title {
   font-size: var(--font-size-26);
   font-weight: var(--font-weight-bold);
