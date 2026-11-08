@@ -295,33 +295,37 @@ export function DcPowerChart({ series, vehicleName }: DcPowerChartProps) {
         </ul>
       </figcaption>
 
-      <table className="visually-hidden">
-        <caption>
-          Potenza di ricarica di {vehicleName} ai punti dichiarati, con{" "}
-          {stationLabel}
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">Livello di carica</th>
-            <th scope="col">Curva del veicolo</th>
-            <th scope="col">Potenza ricevuta</th>
-          </tr>
-        </thead>
-        <tbody>
-          {series.declaredPoints.map((point) => {
-            const received = receivedAt.get(point.socPercent);
-            return (
-              <tr key={point.socPercent}>
-                <th scope="row">{formatSocPercent(point.socPercent)}</th>
-                <td>{formatPowerKw(point.powerKw)}</td>
-                <td>
-                  {received === undefined ? "—" : formatPowerKw(received)}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      {/* The caption lives in the table wrapper box, outside the box that
+          clipping applies to on a <table>: hide a block container instead. */}
+      <div className="visually-hidden">
+        <table>
+          <caption>
+            Potenza di ricarica di {vehicleName} ai punti dichiarati, con{" "}
+            {stationLabel}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Livello di carica</th>
+              <th scope="col">Curva del veicolo</th>
+              <th scope="col">Potenza ricevuta</th>
+            </tr>
+          </thead>
+          <tbody>
+            {series.declaredPoints.map((point) => {
+              const received = receivedAt.get(point.socPercent);
+              return (
+                <tr key={point.socPercent}>
+                  <th scope="row">{formatSocPercent(point.socPercent)}</th>
+                  <td>{formatPowerKw(point.powerKw)}</td>
+                  <td>
+                    {received === undefined ? "—" : formatPowerKw(received)}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </figure>
   );
 }
