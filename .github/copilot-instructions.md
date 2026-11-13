@@ -4,7 +4,7 @@
 
 This repository is a Next.js app for comparing electric-vehicle charging scenarios. The codebase is still intentionally incremental: the app shell is in `src/app`, the EV/domain model lives in `src/domain`, and pure charging/energy calculations live in `src/calculations`.
 
-The project is built around explicit validation and typed result objects instead of throwing exceptions for expected invalid input. The current implementation focuses on charging-domain primitives and calculation helpers (milestone M0.1, complete). The frontend architecture and the first vertical slice are approved and documented but not implemented; the app is still the bootstrap landing page.
+The project is built around explicit validation and typed result objects instead of throwing exceptions for expected invalid input. Milestone M0.1 (complete) provides the charging-domain primitives and calculation helpers. Milestone M0.2 (complete) implements the first vertical slice of the frontend on top of them: Discovery (`/cerca`), Vehicle Analysis (`/veicoli/<id>`) and the DC simulation (`/veicoli/<id>/simulazione-dc`). The README describes the current status and source layout.
 
 ## Commands
 
@@ -29,6 +29,7 @@ The app runs on http://localhost:3000 after `npm run dev`.
 - `src/domain/`: Core domain types and validation factories for charging models (for example, charging capabilities, stations, and session definitions).
 - `src/calculations/`: Pure calculation functions that transform domain values into numeric results, usually returning a typed `CalculationResult`.
 - `src/calculations/result.ts`: shared success/error union used across calculation modules.
+- `src/data/`, `src/scenarios/`, `src/application/`, `src/presentation/`, `src/components/`, `src/styles/`: the M0.2 frontend layers (illustrative catalogue, URL scenarios, application logic, display formatting, components, design tokens); see the README's source layout.
 - `tests/`: Behavior tests that mirror the source structure (`tests/domain`, `tests/calculations`).
 
 The important design pattern is separation of concerns:
@@ -73,6 +74,6 @@ Before UX, visual or frontend work, read the documents listed in [`claude.md`](.
 
 ## Relevant repo notes from the README
 
-The README states that this is an educational EV-charging comparison app with a planned future data source from OpenEV Data. Installed today: Next.js App Router, strict TypeScript, ESLint + Prettier, Vitest in its default Node environment. The rest of the approved stack is not installed yet.
+The README states that this is an educational EV-charging comparison app with a planned future data source from OpenEV Data. Installed today: Next.js App Router, strict TypeScript, ESLint + Prettier, Vitest in its default Node environment, Base UI (`@base-ui/react`) and the visx packages the chart uses. Redux Toolkit and `react-redux` are not installed yet.
 
 No placeholder domain code is intended to be added as a catch-all; build features incrementally in the existing domain/calculation structure.

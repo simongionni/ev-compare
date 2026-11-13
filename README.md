@@ -10,13 +10,14 @@ is the intended future vehicle-data source.
 `src/domain/` and `src/calculations/`. It covers AC and DC charging, DC charging curves and
 charging sessions ending at a target state of charge or after a duration.
 
-**M0.2 — in progress.**
+**M0.2 — complete** (2026-11-13), accepted with non-blocking caveats recorded in the
+[milestone](docs/milestones/m0.2-first-vertical-slice.md#10-acceptance).
 
 - Done (documentation only): UX flows, desktop wireframes for Discovery, Vehicle Analysis and
   Comparison, and the visual identity, with Livrea Consolidated selected.
 - Decided: the frontend stack and state-management rules
   ([ADR 0001](docs/decisions/0001-frontend-architecture.md)).
-- In progress: the [first vertical slice](docs/milestones/m0.2-first-vertical-slice.md),
+- Done: the [first vertical slice](docs/milestones/m0.2-first-vertical-slice.md),
   Discovery → Vehicle Analysis → DC simulation.
   - **Increment 1 — implemented:** design tokens and Schibsted Grotesk, the illustrative
     catalogue, the search scenario in the URL, and Discovery (`/cerca`): direct search by make
@@ -26,13 +27,14 @@ charging sessions ending at a target state of charge or after a duration.
     and main data, and the Ricarica preview: the reference DC scenario (10 % → 80 %, 150 kW)
     calculated by M0.1 with a visx power-by-SoC chart. Vehicles without charging data show what
     the catalogue documents and no calculation.
-  - **Increment 3 — implemented, final technical acceptance pending:** the dedicated DC simulation
+  - **Increment 3 — implemented:** the dedicated DC simulation
     (`/veicoli/<id>/simulazione-dc`): station power (50, 150, 350 kW) and SoC range, time and
     stored energy from M0.1, an inspectable power-by-SoC chart (pointer and keyboard), the
     scenario in a shareable URL rewritten in place (no history entry per change), and the return
     link "‹ <vehicle name>" to the analysis, keeping its origin. Vehicles without charging data
     show the missing data and no simulation.
-  - The milestone's acceptance criteria have not yet been verified as a whole.
+  - The final review verified the milestone's acceptance criteria as a whole and raised no
+    actionable finding.
 
 Of the stack packages beyond Next.js, React and TypeScript, the visx packages the chart uses
 (`@visx/scale`, `@visx/shape`, `@visx/group`, `@visx/axis`) and Base UI (`@base-ui/react`, for the

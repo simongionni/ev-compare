@@ -23,9 +23,9 @@ milestone specifications describe approved intent; their status says whether it 
 
 ## Milestones
 
-| Page                                                                   | Status                                                                                             | Contents                                                                                   |
-| ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| [M0.2 — First vertical slice](milestones/m0.2-first-vertical-slice.md) | In progress (increments 1, 2 and 3 implemented; final technical acceptance of increment 3 pending) | Discovery → Vehicle Analysis → DC simulation: scope, data, navigation, acceptance criteria |
+| Page                                                                   | Status                                                                            | Contents                                                                                               |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| [M0.2 — First vertical slice](milestones/m0.2-first-vertical-slice.md) | Completed (increments 1, 2 and 3 implemented; accepted with non-blocking caveats) | Discovery → Vehicle Analysis → DC simulation: scope, data, navigation, acceptance criteria, acceptance |
 
 ## Product, UX and visual identity
 
