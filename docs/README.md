@@ -27,6 +27,13 @@ milestone specifications describe approved intent; their status says whether it 
 | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | [M0.2 — First vertical slice](milestones/m0.2-first-vertical-slice.md) | Completed (increments 1, 2 and 3 implemented; accepted with non-blocking caveats) | Discovery → Vehicle Analysis → DC simulation: scope, data, navigation, acceptance criteria, acceptance |
 
+## Maintenance
+
+| Page                                                   | Status   | Contents                                                                        |
+| ------------------------------------------------------ | -------- | ------------------------------------------------------------------------------- |
+| [Technical debt register](technical-debt.md)           | Current  | Debt, tooling problems and test gaps verified at the M0.2 baseline, with status |
+| [Post-M0.2 maintenance plan](maintenance/post-m0.2.md) | Proposed | Work packages TD-01 to TD-04, sequence, decisions requiring approval            |
+
 ## Product, UX and visual identity
 
 These pages describe intent and design, not implemented features.
