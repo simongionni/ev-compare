@@ -29,10 +29,10 @@ milestone specifications describe approved intent; their status says whether it 
 
 ## Maintenance
 
-| Page                                                   | Status   | Contents                                                                        |
-| ------------------------------------------------------ | -------- | ------------------------------------------------------------------------------- |
-| [Technical debt register](technical-debt.md)           | Current  | Debt, tooling problems and test gaps verified at the M0.2 baseline, with status |
-| [Post-M0.2 maintenance plan](maintenance/post-m0.2.md) | Proposed | Work packages TD-01 to TD-04, sequence, decisions requiring approval            |
+| Page                                                   | Status                    | Contents                                                                        |
+| ------------------------------------------------------ | ------------------------- | ------------------------------------------------------------------------------- |
+| [Technical debt register](technical-debt.md)           | Current                   | Debt, tooling problems and test gaps verified at the M0.2 baseline, with status |
+| [Post-M0.2 maintenance plan](maintenance/post-m0.2.md) | Approved, not implemented | Work packages TD-01 to TD-04, sequence, decisions taken and open                |
 
 ## Product, UX and visual identity
 
