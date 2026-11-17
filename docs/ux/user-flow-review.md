@@ -18,7 +18,7 @@ La struttura generale è buona. Non serve rifarla da capo: servono interventi su
 
 - **Elementi interessati:** `B {Da dove vuoi iniziare?}`, i rami verso `C`, `D1` e `D2`, e i collegamenti `G → C/D1/D2`.
 - **Motivazione:**
-  - Il primo passo dopo l'ingresso è una domanda, mentre la Vision chiede che *"the primary interface should expose meaningful search and filtering capabilities, without requiring preliminary interaction"* (§4, §3.1).
+  - Il primo passo dopo l'ingresso è una domanda, mentre la Vision chiede che _"the primary interface should expose meaningful search and filtering capabilities, without requiring preliminary interaction"_ (§4, §3.1).
   - I tre rami fanno sembrare la ricerca per nome, quella per bisogni e quella tecnica come alternative da scegliere in anticipo. Il `.md` dice il contrario ("criteria can be combined").
   - Il ciclo `G → C/D1/D2` rafforza questa separazione: per correggere la ricerca si torna a scegliere un ramo.
 - **Correzione:** eliminare `B`. L'ingresso porta direttamente a uno spazio di ricerca dove testo, bisogni pratici e filtri tecnici sono criteri combinabili, raccolti in un solo nodo. L'accesso diretto agli strumenti tecnici resta come seconda porta d'ingresso.
@@ -40,7 +40,7 @@ La struttura generale è buona. Non serve rifarla da capo: servono interventi su
   - L'unica strada verso il confronto passa dalla scheda veicolo. Il `.md` ammette l'aggiunta dai risultati, ma il diagramma non la mostra.
   - `M {Hai abbastanza veicoli?}` presenta come decisione dell'utente quella che è una regola dell'interfaccia (servono almeno due veicoli).
   - Dal confronto non si può aprire la scheda di un veicolo, né togliere un veicolo dal confronto.
-  - La Vision mette il confronto tra le funzioni disponibili subito (§3.1) e chiede di poter *"return to their original comparison"* (§4.5).
+  - La Vision mette il confronto tra le funzioni disponibili subito (§3.1) e chiede di poter _"return to their original comparison"_ (§4.5).
 - **Correzione:**
   - Introdurre un nodo `Gestisci la selezione per il confronto` (aggiungi o rimuovi), raggiungibile dai risultati, dalla scheda e dal confronto stesso.
   - Eliminare `M`; la regola dei due veicoli diventa l'etichetta di un collegamento.
@@ -62,7 +62,7 @@ La struttura generale è buona. Non serve rifarla da capo: servono interventi su
 
 - **Elementi interessati:** `K`, `I → K → L`, `J → K → L`.
 - **Motivazione:**
-  - `K` sta *prima* dell'aggiunta al confronto, come se andasse attraversato.
+  - `K` sta _prima_ dell'aggiunta al confronto, come se andasse attraversato.
   - Fonti, stime e limiti riguardano anche i risultati, il confronto e soprattutto le simulazioni, che si basano su ipotesi di modello.
   - Manca il "perché questo veicolo è compatibile" proprio nel punto in cui il sistema raccomanda, cioè nei risultati ottenuti da bisogni pratici (§3.6).
 - **Correzione:**
@@ -75,7 +75,7 @@ La struttura generale è buona. Non serve rifarla da capo: servono interventi su
 - **Motivazione:**
   - La regola da fissare a livello concettuale è questa: **una spiegazione contestuale non fa lasciare l'attività in corso**, quindi non ha bisogno di un ritorno.
   - Le simulazioni invece si aprono e si chiudono, e quando si chiudono riportano al punto di partenza con filtri, selezione e scenario intatti.
-  - Il nodo `U` che porta a tre destinazioni non chiarisce che si torna *al punto da cui si era partiti*.
+  - Il nodo `U` che porta a tre destinazioni non chiarisce che si torna _al punto da cui si era partiti_.
   - Chi entra direttamente negli strumenti non ha un punto di partenza, ma deve poter usare il risultato: aprire la scheda o aggiungere il veicolo al confronto.
 - **Correzione:**
   - `T1` senza ritorno, con la nota "si apre nel contesto corrente".
@@ -115,25 +115,25 @@ La struttura generale è buona. Non serve rifarla da capo: servono interventi su
 5. Rendere `K` trasversale e aggiungere il "perché è compatibile" nei risultati (problema 5).
 6. Separare la spiegazione nel contesto corrente dalla simulazione con ritorno all'origine (problema 6).
 7. Rendere il dettaglio uniforme: un solo nodo per le simulazioni, P/Q/R come lenti parallele, spiegazioni dai criteri (problema 7).
-8. Allineare il `.md`: oggi la sezione "Review against the Product Vision" dichiara proprietà che il diagramma non ha, per esempio *"Non-linear navigation"*.
+8. Allineare il `.md`: oggi la sezione "Review against the Product Vision" dichiara proprietà che il diagramma non ha, per esempio _"Non-linear navigation"_.
 
 ## E. Decisioni di prodotto da prendere prima dei wireframe
 
 Delle otto domande aperte nel `.md`, solo quattro bloccano i wireframe. Le altre (contenuti dei bisogni pratici, provenienza dei dati, limite di veicoli, persistenza tra visite, differenze regionali) si possono decidere dopo.
 
 1. **Cosa si vede all'ingresso**
-   - *Catalogo completo con criteri accanto:* l'utente capisce subito cosa offre il prodotto e può esplorare anche senza una domanda precisa, ma all'inizio la lista è poco pertinente.
-   - *Spazio di ricerca vuoto:* la ricerca è più mirata, ma c'è il rischio che diventi di fatto un "prima dimmi cosa cerchi".
+   - _Catalogo completo con criteri accanto:_ l'utente capisce subito cosa offre il prodotto e può esplorare anche senza una domanda precisa, ma all'inizio la lista è poco pertinente.
+   - _Spazio di ricerca vuoto:_ la ricerca è più mirata, ma c'è il rischio che diventi di fatto un "prima dimmi cosa cerchi".
 2. **I bisogni pratici filtrano o ordinano per compatibilità?** (riprende la domanda 3)
-   - *Solo filtro:* più semplice e trasparente, ma non distingue un veicolo appena accettabile da uno molto adatto.
-   - *Indicatore di compatibilità:* più utile, ma richiede di spiegare i criteri per ogni veicolo e di permettere di modificarli. Influisce sulla struttura di `E` e di `R`.
+   - _Solo filtro:_ più semplice e trasparente, ma non distingue un veicolo appena accettabile da uno molto adatto.
+   - _Indicatore di compatibilità:_ più utile, ma richiede di spiegare i criteri per ogni veicolo e di permettere di modificarli. Influisce sulla struttura di `E` e di `R`.
 3. **Com'è fatta la selezione per il confronto**
-   - *Selezione sempre visibile in ogni contesto:* rende il confronto davvero centrale e facilita la continuità tra attività.
-   - *Selezione costruita dentro la vista di confronto:* più semplice, ma rimanda il confronto alla fine del percorso. Influisce sulla struttura di quasi ogni schermata.
+   - _Selezione sempre visibile in ogni contesto:_ rende il confronto davvero centrale e facilita la continuità tra attività.
+   - _Selezione costruita dentro la vista di confronto:_ più semplice, ma rimanda il confronto alla fine del percorso. Influisce sulla struttura di quasi ogni schermata.
 4. **Strumento aperto senza veicolo** (riprende la domanda 6)
-   - *Esempio generico:* si inizia subito, ma va presentato chiaramente come esempio.
-   - *Scelta del veicolo:* aggiunge un passaggio.
-   - *Inserimento manuale delle caratteristiche:* l'opzione più flessibile per l'esperto, ma la più difficile per chi è alle prime armi.
+   - _Esempio generico:_ si inizia subito, ma va presentato chiaramente come esempio.
+   - _Scelta del veicolo:_ aggiunge un passaggio.
+   - _Inserimento manuale delle caratteristiche:_ l'opzione più flessibile per l'esperto, ma la più difficile per chi è alle prime armi.
    - Una combinazione è possibile: si parte dall'esempio e il veicolo si può cambiare in qualunque momento.
 
 ## F. Diagramma revisionato

@@ -45,8 +45,7 @@ The important design pattern is separation of concerns:
 
   ```ts
   type CalculationResult<T, E> =
-    | { ok: true; value: T }
-    | { ok: false; error: E };
+    { ok: true; value: T } | { ok: false; error: E };
   ```
 
 - Domain factory functions validate raw input and return structured errors such as `{ type: "invalidMaxPower", value: raw.maxPowerKw }`.

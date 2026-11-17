@@ -2,10 +2,10 @@
 
 Low-fidelity desktop wireframes (1440 px, grayscale) for entry and search. Pink numbered circles are review annotations.
 
-| File | Scenario |
-| --- | --- |
-| [`Landing Page.svg`](Landing%20Page.svg) | Entry: search a known model or start from needs |
-| [`Vehicle Discovery — Initial State.svg`](Vehicle%20Discovery%20—%20Initial%20State.svg) | Search without criteria: neutral results in price order |
+| File                                                                                         | Scenario                                                                                |
+| -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [`Landing Page.svg`](Landing%20Page.svg)                                                     | Entry: search a known model or start from needs                                         |
+| [`Vehicle Discovery — Initial State.svg`](Vehicle%20Discovery%20—%20Initial%20State.svg)     | Search without criteria: neutral results in price order                                 |
 | [`Vehicle Discovery — Active Criteria.svg`](Vehicle%20Discovery%20—%20Active%20Criteria.svg) | Search with six criteria: requirements, preferences, near matches, comparison selection |
 
 ## Criteria model

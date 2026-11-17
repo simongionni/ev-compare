@@ -2,13 +2,13 @@
 
 Low-fidelity desktop wireframes (1440 px, grayscale) for comparing two or more vehicles. Pink numbered circles and the "NON IMPLEMENTATO" marker are review annotations, not UI.
 
-| File | Scenario |
-| --- | --- |
-| [`Comparison — Selected Vehicles.svg`](Comparison%20—%20Selected%20Vehicles.svg) | Comparison built while exploring: Nordis E4 and Aurora Vela, search criteria kept |
-| [`Comparison — No Criteria.svg`](Comparison%20—%20No%20Criteria.svg) | Same two vehicles, no criteria: neutral comparison |
-| [`Comparison — Empty State.svg`](Comparison%20—%20Empty%20State.svg) | Direct access from navigation or landing, no vehicles selected |
-| [`Comparison — Technical Exploration.svg`](Comparison%20—%20Technical%20Exploration.svg) | Charging compared under shared conditions |
-| [`Comparison — Four Vehicles Check.svg`](Comparison%20—%20Four%20Vehicles%20Check.svg) | Layout check with four vehicles (header and first rows only) |
+| File                                                                                     | Scenario                                                                          |
+| ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| [`Comparison — Selected Vehicles.svg`](Comparison%20—%20Selected%20Vehicles.svg)         | Comparison built while exploring: Nordis E4 and Aurora Vela, search criteria kept |
+| [`Comparison — No Criteria.svg`](Comparison%20—%20No%20Criteria.svg)                     | Same two vehicles, no criteria: neutral comparison                                |
+| [`Comparison — Empty State.svg`](Comparison%20—%20Empty%20State.svg)                     | Direct access from navigation or landing, no vehicles selected                    |
+| [`Comparison — Technical Exploration.svg`](Comparison%20—%20Technical%20Exploration.svg) | Charging compared under shared conditions                                         |
+| [`Comparison — Four Vehicles Check.svg`](Comparison%20—%20Four%20Vehicles%20Check.svg)   | Layout check with four vehicles (header and first rows only)                      |
 
 ## Architecture
 
@@ -34,8 +34,8 @@ Alternatives considered:
 - **No winner, no aggregate score.** Differences are stated as values. Vehicles appear in selection order.
 - **No personalised assessment without criteria** (A2, B).
 - **Source of every non-obvious value.** Tags in a fixed column at the edge of the label column: `costruttore` (manufacturer data), `stima` (EV Compare estimate, future models), `calcolo` (M0.1 charging engine).
-- **Numbers.** Engine results carry no "~": times are rounded to the minute, energy to 0.1 kWh. "~" marks estimates only (range, consumption, trip stops).
-- **Peak DC power is a technical value, not charging speed.** It appears as "Potenza DC massima". Charging is compared by time *and* stored energy for a stated scenario.
+- **Numbers.** Engine results carry no "~~": times are rounded to the minute, energy to 0.1 kWh. "~~" marks estimates only (range, consumption, trip stops).
+- **Peak DC power is a technical value, not charging speed.** It appears as "Potenza DC massima". Charging is compared by time _and_ stored energy for a stated scenario.
 - **Trip stops and charging times are different quantities.** "1 sosta di ~22 min" (`stima`, future trip model) never shares a row with "Ricarica 10→80%, colonnina 150 kW" (`calcolo`).
 - **AC scenarios state the station.** "Wallbox 11 kW trifase". On a single-phase 7.4 kW station the engine models 3.67 kW for these three-phase vehicles, so the phases change the result.
 - **Comparable simulations only.** Both vehicles always share station, SoC range and termination condition.
@@ -63,10 +63,10 @@ The two-vehicle layout is unchanged.
 
 DC curves (SoC %, kW). The table values were verified with `simulateChargingSession` from the M0.1 engine.
 
-| Vehicle | Usable capacity | Curve points | 10→80% at 150 kW | Energy | 20 min from 10% |
-| --- | --- | --- | --- | --- | --- |
-| Nordis E4 | 77 kWh | 0/140, 10/165, 55/175, 65/155, 80/110, 90/70, 100/35 | 22 min (22.2) | 53.9 kWh | 49.5 kWh, 74% |
-| Aurora Vela | 58 kWh | 0/100, 10/120, 25/135, 40/120, 60/80, 80/40, 90/30, 100/20 | 27 min (27.3) | 40.6 kWh | 34.5 kWh, 70% |
+| Vehicle     | Usable capacity | Curve points                                               | 10→80% at 150 kW | Energy   | 20 min from 10% |
+| ----------- | --------------- | ---------------------------------------------------------- | ---------------- | -------- | --------------- |
+| Nordis E4   | 77 kWh          | 0/140, 10/165, 55/175, 65/155, 80/110, 90/70, 100/35       | 22 min (22.2)    | 53.9 kWh | 49.5 kWh, 74%   |
+| Aurora Vela | 58 kWh          | 0/100, 10/120, 25/135, 40/120, 60/80, 80/40, 90/30, 100/20 | 27 min (27.3)    | 40.6 kWh | 34.5 kWh, 70%   |
 
 10→80% at other stations: Nordis E4 65 min at 50 kW and 20 min at 350 kW; Aurora Vela 49 min at 50 kW and 27 min at 350 kW (vehicle-limited).
 

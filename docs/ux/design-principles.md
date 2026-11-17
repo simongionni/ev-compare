@@ -14,7 +14,7 @@ If an interaction requires extensive explanation, first reconsider the interacti
 
 Do not add explanatory text merely to demonstrate that the product is accessible, flexible or beginner-friendly.
 
-Avoid statements describing what users are *not* required to do, such as "No questionnaire required".
+Avoid statements describing what users are _not_ required to do, such as "No questionnaire required".
 
 Use contextual explanations when they provide genuinely useful information, especially about EV concepts, calculations, assumptions or limitations.
 
@@ -32,7 +32,7 @@ For example, prefer:
 
 **Trova l'auto elettrica adatta a te.**
 
-*E capisci perché.*
+_E capisci perché._
 
 over a single compound sentence.
 
