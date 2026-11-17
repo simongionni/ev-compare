@@ -51,12 +51,12 @@ Criteria are defined in [TD-04](maintenance/post-m0.2.md#td-04--debt-governance)
 ## Summary
 
 Statuses as of 2026-11-17. "Scheduled" means assigned by the approved plan. DEBT-02 is open
-because no fix exists within the stack: it is blocked upstream (decision D12). DEBT-03 through
-DEBT-06 and DEBT-08 were resolved by TD-02; DEBT-07 remains open at P3 under D5.
+because no fix exists within the stack: it is blocked upstream (decision D12). DEBT-01,
+DEBT-03 through DEBT-06 and DEBT-08 are resolved; DEBT-07 remains open at P3 under D5.
 
 | ID      | Title                                                                | Cat.  | Prio. | Status    | WP or activity      |
 | ------- | -------------------------------------------------------------------- | ----- | ----- | --------- | ------------------- |
-| DEBT-01 | `CalculationResult` owned by the calculations layer                  | C1    | P2    | scheduled | TD-01               |
+| DEBT-01 | `CalculationResult` owned by the calculations layer                  | C1    | P2    | resolved  | TD-01               |
 | DEBT-02 | Vitest fails when the drive letter is lower case                     | C2    | P1    | open      | Blocked upstream    |
 | DEBT-03 | Line endings: no `.gitattributes`, Windows-only drift                | C2    | P1    | resolved  | TD-02               |
 | DEBT-04 | Prettier content drift                                               | C2    | P2    | resolved  | TD-02               |
@@ -79,9 +79,10 @@ DEBT-06 and DEBT-08 were resolved by TD-02; DEBT-07 remains open at P3 under D5.
 | DEBT-21 | No defined public surface of the engine                              | C4/C1 | P3    | open      | —                   |
 | DEBT-22 | Stale status text in agent and decision documents                    | C1    | P3    | open      | —                   |
 
-DEBT-01 and DEBT-03 to DEBT-11 are in the post-M0.2 phase (DEBT-11 only for its basic smoke
-test). DEBT-02 stays open until an upstream correction is available; TD-02 keeps a diagnostic
-check for it. The others stay open until their trigger occurs or a decision assigns them.
+DEBT-01 and DEBT-03 through DEBT-06 and DEBT-08 are resolved. DEBT-07 and DEBT-09 to DEBT-11
+remain in the post-M0.2 phase (DEBT-11 only for its basic smoke test). DEBT-02 stays open until an
+upstream correction is available; TD-02 keeps a diagnostic check for it. The others stay open
+until their trigger occurs or a decision assigns them.
 
 ## Entries
 
@@ -107,8 +108,10 @@ check for it. The others stay open until their trigger occurs or a decision assi
   scope of M0.3.
 - **Resolution trigger.** Within the post-M0.2 phase, once TD-02 has made the affected files
   formatting-clean.
-- **Status.** scheduled (D1–D3 approved). Work package:
-  [TD-01](maintenance/post-m0.2.md#td-01--dependency-direction).
+- **Status.** resolved by `69ef0c3` (TD-01). `CalculationResult` is declared in
+  `src/domain/result.ts`, the original calculations import path remains as a compatibility
+  re-export, approved scenario and data imports point to the domain, and ESLint enforces the
+  domain boundary.
 
 ### DEBT-02 — Vitest fails when the drive letter is lower case
 

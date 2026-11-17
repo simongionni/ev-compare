@@ -5,7 +5,9 @@ defines the symbol.
 
 ## Result type
 
-[`src/calculations/result.ts`](../../src/calculations/result.ts)
+[`src/domain/result.ts`](../../src/domain/result.ts) declares the type. Existing consumers may
+continue importing it from [`@/calculations/result`](../../src/calculations/result.ts), which is a
+type-only compatibility re-export.
 
 ```ts
 type CalculationResult<T, E> = { ok: true; value: T } | { ok: false; error: E };

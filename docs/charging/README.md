@@ -68,9 +68,10 @@ src/
 ├── domain/
 │   ├── charging.ts             Domain types (raw and validated)
 │   ├── chargingErrors.ts       Factory validation error types
-│   └── chargingFactories.ts    Factories: raw input -> validated domain value
+│   ├── chargingFactories.ts    Factories: raw input -> validated domain value
+│   └── result.ts               CalculationResult<T, E>
 └── calculations/
-    ├── result.ts               CalculationResult<T, E>
+    ├── result.ts               Compatibility re-export of CalculationResult<T, E>
     └── charging/
         ├── energy.ts                 Energy for an SoC change
         ├── time.ts                   Time for an energy at constant power
@@ -106,7 +107,8 @@ flowchart TD
     Time["time.ts"]
     Domain["domain/charging.ts<br/>(types)"]
     Factories["domain/chargingFactories.ts"]
-    Result["calculations/result.ts"]
+    Result["domain/result.ts<br/>CalculationResult&lt;T, E&gt;"]
+    Compatibility["calculations/result.ts<br/>(type-only compatibility re-export)"]
 
     Session --> AC
     Session --> DC
@@ -120,12 +122,14 @@ flowchart TD
     DC --> Time
     Factories --> Domain
     Factories --> Result
+    Compatibility -.types.-> Result
     Session -.types.-> Domain
 ```
 
-Calculations import domain **types** only; they never call the factories. The factories import
-`CalculationResult` from `calculations/result.ts` (see the open question on this dependency
-direction in [limitations](limitations.md#open-questions-and-technical-debt)).
+Calculations import domain **types** only; they never call the factories. `CalculationResult` is
+declared in `domain/result.ts`; the factories import it directly, while
+`calculations/result.ts` preserves the original engine import path as a type-only compatibility
+re-export. The domain layer has no dependency on calculations, and ESLint enforces that boundary.
 
 ## Data flow of a session
 

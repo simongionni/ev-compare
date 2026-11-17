@@ -91,9 +91,9 @@ These were found while documenting the implementation. None has been changed in 
 6. **Unreachable error variants** in `ChargingSessionError` (see the
    [error catalogue](public-api.md#error-catalogue)).
 7. **Mixed time units.** Session input is in minutes, every output is in hours.
-8. **Dependency direction.** `domain/chargingFactories.ts` imports `CalculationResult` from
-   `calculations/result.ts`, so the domain depends on the calculations package for a generic
-   type that both layers use.
+8. **Dependency direction (resolved by TD-01).** `CalculationResult` is declared in
+   `domain/result.ts`; `calculations/result.ts` is a compatibility re-export, and an ESLint guard
+   prevents the domain layer from importing calculations.
 9. **No aggregate validation.** There is no factory for `VehicleChargingSpec` or
    `ChargingSession`. Their fields are validated only when a calculation uses them, so an
    invalid DC capability on a vehicle goes unnoticed in an AC session.
