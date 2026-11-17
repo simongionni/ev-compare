@@ -86,6 +86,32 @@ Before relying on a documented directory or dependency, inspect the current tree
 `package.json`: some architectural locations were deliberately left to the first implementation,
 and some approved packages are intentionally not installed yet.
 
+### Automated dependency guards
+
+ESLint's core `no-restricted-imports` rule enforces the established static-import boundaries for
+the source areas where ADR 0001 and the current implementation define them precisely:
+
+| Importing area      | Imports rejected by ESLint                                                                                         |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `src/domain/`       | Calculations and every higher source area; React, Next.js, Redux, Base UI and visx                                 |
+| `src/calculations/` | Data, scenarios, application, presentation, components, routes and styles; React, Next.js, Redux, Base UI and visx |
+| `src/scenarios/`    | Application, presentation, components, routes and styles; React, Next.js, Redux, Base UI and visx                  |
+| `src/data/`         | Components and routes; Redux                                                                                       |
+| `src/application/`  | Components and routes; React and Redux                                                                             |
+
+The rules cover static runtime imports, type-only imports and re-exports written with either the
+`@/` alias or a canonical relative path made from one or more `../` segments. An import not
+rejected by ESLint is not automatically an approved dependency: `src/presentation/`,
+`src/components/` and `src/app/` have no additional layer rule because legitimate lower-layer
+consumption must remain possible and their finer boundaries are not settled precisely enough.
+
+Code review must still enforce requirements that import matching cannot prove, including browser
+global use, dynamic imports or CommonJS `require`, transitive dependencies, use of the documented
+calculation API rather than internals, absence of duplicated charging mathematics, catalogue
+validation through M0.1 factories, and correct ownership of state and derived values. Non-canonical
+relative traversal and aliases other than `@/` are also outside the guard; do not use them to evade
+the architecture.
+
 ## Testing and verification
 
 Add focused Vitest coverage for new domain, calculation, scenario, data-validation, or
