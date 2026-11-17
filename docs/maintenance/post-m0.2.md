@@ -2,12 +2,12 @@
 
 | Field     | Value                                                                                                    |
 | --------- | -------------------------------------------------------------------------------------------------------- |
-| Status    | **Approved with amendments** on 2026-11-14 after independent review. TD-02 in progress (§3)              |
+| Status    | **Approved with amendments** on 2026-11-14 after independent review. TD-02 complete (§3)                 |
 | Date      | Proposed 2026-11-13; revised 2026-11-14                                                                  |
 | Baseline  | `dev` at `c6ee4d9` (M0.2 closure)                                                                        |
 | Register  | [Technical debt register](../technical-debt.md)                                                          |
 | Scope     | Four work packages, TD-01 to TD-04, and an accessibility smoke test. No feature work, no M0.3 definition |
-| Decisions | [§5](#5-decisions): D1–D10 and D12 approved, some with conditions; D11 rejected                          |
+| Decisions | [§5](#5-decisions): D1–D10, D12, O1 and O2 approved, some with conditions; D11 rejected                  |
 
 M0.1 and M0.2 are complete and stay closed. This phase repays the debt that makes the
 repository's checks unreliable or its layering inaccurate, and decides how the UI will be tested.
@@ -161,16 +161,17 @@ approved.
 
 | Item        | Steps                               | Scope                                                                   | Status                                                                                                                                                                                                 |
 | ----------- | ----------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| TD-02       | 2a–2j                               | Whole work package                                                      | **In progress, not closed.** Increments 1–4 complete; Increment 5 not started                                                                                                                          |
+| TD-02       | 2a–2j                               | Whole work package                                                      | **Completed on 2026-11-17.** Increments 1–5 implemented and verified; DEBT-02 and DEBT-07 remain open under D12 and D5                                                                                 |
 | Increment 1 | 2b                                  | Drive-letter investigation                                              | **Concluded on 2026-11-14 without a code change**: cause found, no reliable fix within the stack                                                                                                       |
 | Increment 2 | 2a, 2c, 2d                          | Line endings and Prettier normalisation                                 | **Completed on 2026-11-17**: DEBT-03 and DEBT-04 resolved by `9a26a2d`, `233a89e` and `3bdeb5c`                                                                                                        |
 | Increment 3 | 2e, 2f                              | ESLint warnings and vacuous assertions                                  | **Completed on 2026-11-17**: DEBT-05 and DEBT-06 resolved by `c0bbf0b` and `e65a8cd`                                                                                                                   |
 | Increment 4 | 2g (conditional), 2h, 2j (optional) | Remaining configuration, aggregate quality gate, optional blame hygiene | **Completed on 2026-11-17**: 2g deferred under D5; 2h implemented by `7bac9a1`; 2j implemented by `88c5932`                                                                                            |
-| Increment 5 | 2i                                  | GitHub Actions CI                                                       | Not started                                                                                                                                                                                            |
+| Increment 5 | 2i                                  | GitHub Actions CI                                                       | **Completed on 2026-11-17** by `68a02e2`; both jobs passed in [CI run 44182405822](https://github.com/simongionni/ev-compare/actions/runs/44182405822)                                                 |
 | DEBT-02     | —                                   | —                                                                       | **Open, P1, blocked upstream** (D12). Not resolved, not an accepted limitation                                                                                                                         |
 | DEBT-03     | 2a                                  | —                                                                       | **Resolved** by `9a26a2d`; renormalisation changed no previously tracked index content                                                                                                                 |
 | DEBT-04     | 2c, 2d                              | —                                                                       | **Resolved** by `233a89e` and `3bdeb5c`; 29-file clean-LF inventory formatted reproducibly                                                                                                             |
 | DEBT-07     | 2g                                  | —                                                                       | **Open, P3, deferred**: D5's drive-letter condition remains unmet; reassess after an upstream correction                                                                                               |
+| DEBT-08     | 2h, 2i                              | —                                                                       | **Resolved** by `7bac9a1` and `68a02e2`; the aggregate gate and cross-platform CI are operational                                                                                                      |
 | D5          | 2g                                  | —                                                                       | Still conditional; its drive-letter condition is not met. Increment 1 showed that native `resolve.tsconfigPaths` does not fix DEBT-02, so removing `vite-tsconfig-paths` is not an automatic follow-up |
 
 Findings of increment 1:
@@ -228,6 +229,25 @@ Findings of increment 4:
   nonzero status and does not start later checks.
 - TD-02 remains in progress. Increment 5 still owns CI; DEBT-08 therefore remains in progress.
 
+Findings of increment 5:
+
+- `68a02e2` added `.github/workflows/ci.yml` with pull-request and `dev`/`master` push triggers,
+  read-only contents permission, Node.js 24, `npm ci`, and immutable action pins: `actions/checkout`
+  v7.0.1 at `3d3c42e5aac5ba805825da76410c181273ba90b1` and `actions/setup-node` v7.1.0 at
+  `949feb2413d6458794dcd2491c4babbbce0c15c1`.
+- [CI run 44182405822](https://github.com/simongionni/ev-compare/actions/runs/44182405822),
+  triggered by the push to `dev`, passed both jobs. Linux ran the complete aggregate gate. Windows
+  formatting and the required upper-case run passed 473 tests from
+  `D:\a\ev-compare\ev-compare`.
+- The independent Windows diagnostic printed `d:\a\ev-compare\ev-compare` from Node's actual
+  `process.cwd()`, reproduced DEBT-02's 26-file collection failure, and remained non-blocking. No
+  required check has `continue-on-error`.
+- O1 was applied: `master` branch protection requires `Linux quality gate` and `Windows tests`;
+  force pushes and deletion are disabled. `dev` remains unprotected, accepts direct pushes and
+  runs CI after each push. A failing required check therefore blocks a `master` merge.
+- All TD-02 acceptance criteria are met. TD-02 and DEBT-08 are closed; DEBT-02 stays open at P1
+  under D12 and DEBT-07 stays open at P3 under D5.
+
 #### Analysis at baseline
 
 | Check                  | Result                                                                                                                                                                              |
@@ -272,8 +292,8 @@ its parent; a semantic commit is reviewed line by line.
 - **Required checks and merge gating:** both jobs are required status checks for pull requests
   into `master`. Required checks are a repository setting on GitHub (branch protection or a
   ruleset), configured by the repository owner; the workflow file alone does not enforce them.
-  Whether `dev` is also protected, and whether direct pushes to `dev` continue, is open
-  (decision O1 in §5).
+  O1 is implemented with branch protection on `master`; `dev` remains unprotected and accepts
+  direct pushes, which trigger CI after the fact.
 - **Out of TD-02:** the Playwright job, added by TD-03.
 
 #### Scope and files
@@ -322,7 +342,7 @@ otherwise (DEBT-02).
 
 #### Acceptance criteria
 
-These are the closure criteria of TD-02. They are not met yet; TD-02 is in progress.
+These closure criteria were met on 2026-11-17; TD-02 is complete.
 
 - `npm run format:check` passes on Windows and on an LF checkout.
 - `npm run lint` reports 0 errors and 0 warnings and fails on any warning; no rule is disabled
@@ -390,7 +410,8 @@ TD-03 has two steps:
   to simulate external changes: `history.pushState`/`replaceState`, `history.back`/`forward`, a
   patched `navigation.addEventListener`, and `window.navigation` removed by an init script.
 
-- No CI yet; TD-02 adds it.
+- TD-02's basic CI is operational. TD-03 adds the separately approved end-to-end job to that
+  workflow.
 
 #### Alternatives
 
@@ -628,17 +649,22 @@ Taken by the product owner on 2026-11-14, after TD-02 step 2b:
    drive-letter variants are verified.
 9. DEBT-07 is tracked independently; D5 stays conditional and its conditions are not met.
 
+### Taken on 2026-11-17
+
+| ID  | Decision                                     | Outcome                                                                                                                                      |
+| --- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| O1  | Branch protection and direct pushes to `dev` | **Approved and applied**: `master` requires both CI jobs; `dev` remains unprotected, permits direct pushes and runs CI after each push       |
+| O2  | Version pinning policy for GitHub Actions    | **Approved and applied**: every action reference uses a full immutable commit SHA, with the corresponding release version recorded beside it |
+
 ### Still open
 
-| ID  | Decision                                                                                                      | Needed by               |
-| --- | ------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| O1  | Branch protection: required checks on `master` only or also on `dev`; whether direct pushes to `dev` continue | TD-02 (CI)              |
-| O2  | Version pinning policy for GitHub Actions (major tag or commit SHA)                                           | TD-02 (CI)              |
-| O3  | Text of the ADR 0001 revision for open question 8, including whether the end-to-end job is a required check   | TD-03 decision step     |
-| O4  | Location of the end-to-end tests and of the traceability matrix                                               | TD-03 implementation    |
-| O5  | Whether results that lack an accessible structure get one (a UI change) or a `data-testid`                    | TD-03 implementation    |
-| O6  | Whether M0.3 UI implementation needs the complete Playwright migration or only the approved ADR decision      | M0.3 specification      |
-| O7  | Cross-browser coverage (Firefox, WebKit): if and when                                                         | Future product decision |
+| ID  | Decision                                                                                                    | Needed by               |
+| --- | ----------------------------------------------------------------------------------------------------------- | ----------------------- |
+| O3  | Text of the ADR 0001 revision for open question 8, including whether the end-to-end job is a required check | TD-03 decision step     |
+| O4  | Location of the end-to-end tests and of the traceability matrix                                             | TD-03 implementation    |
+| O5  | Whether results that lack an accessible structure get one (a UI change) or a `data-testid`                  | TD-03 implementation    |
+| O6  | Whether M0.3 UI implementation needs the complete Playwright migration or only the approved ADR decision    | M0.3 specification      |
+| O7  | Cross-browser coverage (Firefox, WebKit): if and when                                                       | Future product decision |
 
 ## 6. Closure of the phase
 

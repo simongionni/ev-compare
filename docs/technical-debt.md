@@ -1,10 +1,10 @@
 # Technical debt register
 
-| Field      | Value                                                                                                             |
-| ---------- | ----------------------------------------------------------------------------------------------------------------- |
-| Baseline   | `dev` at `c6ee4d9` (M0.2 closure), verified on 2026-11-13; corrections verified on 2026-11-14                     |
-| Governance | [Post-M0.2 maintenance plan, TD-04](maintenance/post-m0.2.md#td-04--debt-governance)                              |
-| Plan       | [Post-M0.2 maintenance plan](maintenance/post-m0.2.md): approved with amendments on 2026-11-14; TD-02 in progress |
+| Field      | Value                                                                                                          |
+| ---------- | -------------------------------------------------------------------------------------------------------------- |
+| Baseline   | `dev` at `c6ee4d9` (M0.2 closure), verified on 2026-11-13; corrections verified on 2026-11-14                  |
+| Governance | [Post-M0.2 maintenance plan, TD-04](maintenance/post-m0.2.md#td-04--debt-governance)                           |
+| Plan       | [Post-M0.2 maintenance plan](maintenance/post-m0.2.md): approved with amendments on 2026-11-14; TD-02 complete |
 
 This register collects, in one place, the technical debt of the repository. It does not replace
 the documents where debt was first recorded: those entries stay as they are, and each register
@@ -52,7 +52,7 @@ Criteria are defined in [TD-04](maintenance/post-m0.2.md#td-04--debt-governance)
 
 Statuses as of 2026-11-17. "Scheduled" means assigned by the approved plan. DEBT-02 is open
 because no fix exists within the stack: it is blocked upstream (decision D12). DEBT-03 through
-DEBT-06 were resolved by TD-02 Increments 2 and 3.
+DEBT-06 and DEBT-08 were resolved by TD-02; DEBT-07 remains open at P3 under D5.
 
 | ID      | Title                                                                | Cat.  | Prio. | Status    | WP or activity      |
 | ------- | -------------------------------------------------------------------- | ----- | ----- | --------- | ------------------- |
@@ -62,8 +62,8 @@ DEBT-06 were resolved by TD-02 Increments 2 and 3.
 | DEBT-04 | Prettier content drift                                               | C2    | P2    | resolved  | TD-02               |
 | DEBT-05 | ESLint `no-unused-vars` in compile-time tests                        | C2    | P2    | resolved  | TD-02               |
 | DEBT-06 | Conditional assertions that can pass vacuously                       | C3    | P2    | resolved  | TD-02               |
-| DEBT-07 | Vitest configuration warnings and an invalid optional peer           | C2    | P3    | scheduled | TD-02               |
-| DEBT-08 | No aggregate check command and no CI                                 | C2    | P2    | scheduled | TD-02               |
+| DEBT-07 | Vitest configuration warnings and an invalid optional peer           | C2    | P3    | open      | Deferred under D5   |
+| DEBT-08 | No aggregate check command and no CI                                 | C2    | P2    | resolved  | TD-02               |
 | DEBT-09 | UI component and end-to-end test strategy undecided                  | C4/C3 | P2    | scheduled | TD-03 (decision)    |
 | DEBT-10 | Browser verification is a manual script outside the test suite       | C3    | P2    | scheduled | TD-03               |
 | DEBT-11 | Accessible names and announcements not verified with a screen reader | C3    | P2    | scheduled | Accessibility smoke |
@@ -140,8 +140,8 @@ check for it. The others stay open until their trigger occurs or a decision assi
 - **Resolution trigger.** An upstream correction becomes available. Before resolving, verify
   `npm test` from both drive-letter variants, locally and in the Windows CI job.
 - **Status.** open, blocked upstream (D12). TD-02 step 2b ended on 2026-11-14 without a code
-  change. TD-02 is still in progress; it may close after its remaining increments with this entry
-  still open. The Windows CI job keeps a non-blocking lower-case
+  change. TD-02 closed on 2026-11-17 with this entry still open. The Windows CI job keeps a
+  non-blocking lower-case
   diagnostic run. See [TD-02, progress](maintenance/post-m0.2.md#progress).
 
 ### DEBT-03 — Line endings: no `.gitattributes`, Windows-only drift
@@ -249,22 +249,27 @@ acPower,constantPowerCharging,energy,error,time}.ts`, `src/domain/{charging,char
   so `vitest.config.ts`, `vite-tsconfig-paths` and the lockfile were kept unchanged. Reassess after
   an upstream correction makes it possible to verify both drive-letter variants.
 
-### DEBT-08 — Aggregate check implemented; no CI
+### DEBT-08 — Aggregate check and CI
 
-- **Description.** `npm run check` now runs the repository checks in order and stops on failure,
-  but there is no workflow under `.github/`; checks are not yet automatic on pushes or pull
-  requests.
+- **Description.** At baseline there was no aggregate command or CI. `npm run check` now runs the
+  repository checks in order and stops on failure, and `.github/workflows/ci.yml` runs the checks
+  automatically on pull requests and pushes to `dev` and `master`.
 - **Sources.** Not documented as debt. AGENTS.md, testing and verification.
 - **Category.** C2.
-- **Impact.** Checks are not repeated automatically on pull requests; results depend on who ran
-  what, where.
+- **Impact.** Resolved: formatting, lint, typecheck, tests and build now run as one Linux gate;
+  Windows formatting and the canonical-path test suite provide a second required signal.
 - **Risk of deferring.** Medium: grows with every contributor or agent.
 - **Priority.** P2.
 - **Resolution trigger.** Once DEBT-03 to DEBT-06 make the checks deterministic and green, with
   Vitest run from the canonical upper-case path on Windows while DEBT-02 is open.
-- **Status.** in progress. TD-02 Increment 4 implemented D6's aggregate command and zero-warning
-  lint gate in `7bac9a1`; Increment 5 still owns D8's basic CI. Do not resolve this entry until CI
-  is implemented. The end-to-end job is added later by TD-03.
+- **Status.** resolved on 2026-11-17. TD-02 Increment 4 implemented D6's aggregate command and
+  zero-warning lint gate in `7bac9a1`; Increment 5 added the cross-platform workflow in `68a02e2`.
+  [CI run 44182405822](https://github.com/simongionni/ev-compare/actions/runs/44182405822)
+  passed both jobs after the push to `dev`: Linux passed `npm run check`; Windows formatting and
+  the required upper-case run passed 473 tests. The diagnostic proved Node used
+  `d:\a\ev-compare\ev-compare`, reproduced DEBT-02 and remained non-blocking. `master` branch
+  protection requires `Linux quality gate` and `Windows tests`; `dev` permits direct pushes. The
+  end-to-end job remains assigned to TD-03.
 
 ### DEBT-09 — UI component and end-to-end test strategy undecided
 

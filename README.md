@@ -81,6 +81,26 @@ PowerShell blocks `npm.ps1`.
 `npm run check` stops at the first failure and runs formatting, zero-warning lint, type checking,
 the Vitest suite and the production build, in that order.
 
+## Continuous integration
+
+The [CI workflow](.github/workflows/ci.yml) runs on every pull request and on pushes to `dev` and
+`master`, using Node.js 24 and `npm ci`:
+
+- **Linux quality gate** runs `npm run check` on `ubuntu-latest`.
+- **Windows tests** runs the formatting check and the required Vitest suite from the canonical
+  upper-case drive path on `windows-latest`.
+
+Both jobs are required status checks for merges into the protected `master` branch. Direct pushes
+to `dev` remain allowed and trigger CI after the push. The Windows job also runs Vitest from the
+same workspace with a genuine lower-case drive letter and prints Node's `process.cwd()`. This
+temporary, non-blocking diagnostic tracks [DEBT-02](docs/technical-debt.md#debt-02--vitest-fails-when-the-drive-letter-is-lower-case);
+its expected upstream failure does not weaken either required check.
+
+The first operational run, [CI run 44182405822](https://github.com/simongionni/ev-compare/actions/runs/44182405822),
+passed both jobs on 2026-11-17. It recorded `D:\a\ev-compare\ev-compare` for the required Windows
+run (473 tests passed) and `d:\a\ev-compare\ev-compare` for the diagnostic (all 26 test files
+failed during collection with the known defect while the Windows job remained successful).
+
 ## Line endings
 
 Git stores text files with LF line endings. `.gitattributes` enforces the same checkout form on

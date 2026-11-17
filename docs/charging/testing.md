@@ -80,6 +80,30 @@ There are two kinds of test:
 `npm run check` stops at the first failure and runs `format:check`, zero-warning `lint`,
 `typecheck`, `test` and `build`, in that order.
 
+## Continuous integration
+
+The GitHub Actions workflow runs on every pull request and on pushes to `dev` and `master`. Its
+stable required-check names are:
+
+- **Linux quality gate** (`ubuntu-latest`): Node.js 24, `npm ci`, then `npm run check`;
+- **Windows tests** (`windows-latest`): Node.js 24, `npm ci`, `npm run format:check`, then the
+  required `npm test` from the canonical upper-case drive path.
+
+Both checks are required for merges into protected `master`. Direct pushes to `dev` remain
+allowed and trigger the same workflow. The workflow has read-only repository-content permission
+and pins `actions/checkout` v7.0.1 and `actions/setup-node` v7.1.0 to full commit SHAs.
+
+The Windows job has a second, independent `npm test` step for DEBT-02. It changes to the same
+workspace through `cmd.exe` using a lower-case drive letter, prints and validates Node's actual
+`process.cwd()`, and is the only step marked `continue-on-error`. This is a temporary diagnostic,
+not acceptance or resolution of DEBT-02; formatting and the upper-case test run remain blocking.
+
+[CI run 44182405822](https://github.com/simongionni/ev-compare/actions/runs/44182405822)
+verified the workflow on a push to `dev`: Linux passed the aggregate gate; Windows formatting and
+the upper-case run passed 473 tests from `D:\a\ev-compare\ev-compare`; the diagnostic ran from
+`d:\a\ev-compare\ev-compare`, reproduced the known 26-file collection failure, and did not fail
+the Windows job.
+
 On Windows PowerShell, use `npm.cmd` if script execution blocks `npm.ps1`.
 
 On Windows, run Vitest from the upper-case drive path (`C:\…`). From a lower-case path (`c:\…`,
