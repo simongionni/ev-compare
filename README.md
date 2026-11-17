@@ -174,5 +174,7 @@ lint plugins do not yet support ESLint 10 or TypeScript 7.
 
 Tests mirror the source layout under `tests/`. These locations answer, for the first increment,
 the directories left open by ADR 0001 (open question 12). `scripts/verify-dc-simulator-url.mjs` is
-a browser verification of the DC simulator run by hand against a production build; the strategy
-for UI tests is still open (ADR 0001 open question 8).
+a browser verification of the DC simulator run by hand against a production build. ADR 0001 open
+question 8 is resolved: Playwright Test with Chromium and Firefox is approved for browser
+end-to-end tests, but it is not installed or operational and the legacy script remains until
+reviewed migration parity.

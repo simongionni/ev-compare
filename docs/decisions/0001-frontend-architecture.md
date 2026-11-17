@@ -9,6 +9,7 @@
 | Revised | 2026-11-03: `react-redux` approved; open questions before the slice listed                                                                 |
 | Revised | 2026-11-03: effective DC power API extension, URL and history policy, and the slice's DC simulation UX and SoC rules approved and recorded |
 | Revised | 2026-11-08: origin context in the URL approved by the product owner (open question 6); repository state brought up to date                 |
+| Revised | 2026-11-18: TD-03 testing strategy approved (open question 8); Chromium and Firefox are the initial Playwright browser projects            |
 
 This record formalises decisions that were already discussed and approved. It does not
 introduce new ones. Wherever a detail has not been decided, it is listed under
@@ -41,21 +42,21 @@ the conflict must be reported.
 
 ## 2. Technology stack
 
-| Area                     | Technology                        | In the repository today (2026-11-17)                                |
-| ------------------------ | --------------------------------- | ------------------------------------------------------------------- |
-| Framework                | Next.js 16 (App Router)           | Installed (16.x)                                                    |
-| UI                       | React 19                          | Installed (19.2.x)                                                  |
-| Language                 | TypeScript, `strict`              | Installed (6.x)                                                     |
-| Accessible primitives    | Base UI                           | Installed (`@base-ui/react` 1.x): Slider, RadioGroup                |
-| Styling                  | CSS Modules                       | In use                                                              |
-| Design tokens            | CSS Custom Properties             | Defined in `src/styles/tokens.css`                                  |
-| Design system            | Proprietary EV Compare components | First components in `src/components/`                               |
-| Technical charts         | visx                              | `@visx/scale`, `@visx/shape`, `@visx/group`, `@visx/axis` installed |
-| Shared application state | Redux Toolkit, with `react-redux` | Not installed                                                       |
-| Shareable scenarios      | URL                               | Search scenario, origin context, DC simulation scenario             |
-| Calculation engine       | M0.1, independent of the frontend | Implemented, with the effective DC power extension                  |
-| Pure TypeScript tests    | Vitest                            | Installed, Node environment; 473 tests                              |
-| Browser end-to-end tests | Playwright Test, Chromium first   | Proposed by TD-03; not installed or operational                     |
+| Area                     | Technology                          | In the repository today (2026-11-17)                                |
+| ------------------------ | ----------------------------------- | ------------------------------------------------------------------- |
+| Framework                | Next.js 16 (App Router)             | Installed (16.x)                                                    |
+| UI                       | React 19                            | Installed (19.2.x)                                                  |
+| Language                 | TypeScript, `strict`                | Installed (6.x)                                                     |
+| Accessible primitives    | Base UI                             | Installed (`@base-ui/react` 1.x): Slider, RadioGroup                |
+| Styling                  | CSS Modules                         | In use                                                              |
+| Design tokens            | CSS Custom Properties               | Defined in `src/styles/tokens.css`                                  |
+| Design system            | Proprietary EV Compare components   | First components in `src/components/`                               |
+| Technical charts         | visx                                | `@visx/scale`, `@visx/shape`, `@visx/group`, `@visx/axis` installed |
+| Shared application state | Redux Toolkit, with `react-redux`   | Not installed                                                       |
+| Shareable scenarios      | URL                                 | Search scenario, origin context, DC simulation scenario             |
+| Calculation engine       | M0.1, independent of the frontend   | Implemented, with the effective DC power extension                  |
+| Pure TypeScript tests    | Vitest                              | Installed, Node environment; 473 tests                              |
+| Browser end-to-end tests | Playwright Test, Chromium + Firefox | Approved by TD-03; not installed or operational                     |
 
 Rules:
 
@@ -64,10 +65,10 @@ Rules:
 - No library beyond this table is introduced, and no part of the stack is replaced. A need that
   the stack cannot meet is reported, not solved by adding a dependency.
 - Packages are installed in the implementation session that first needs them, not in advance.
-- The proposed browser-testing strategy is defined in [Testing](#7-testing). It introduces no
-  separate React component-test framework. Playwright Test is not part of the implemented stack
-  unless and until this TD-03 revision is independently reviewed and approved; approval would
-  authorise a later implementation step, not install the package or activate CI by itself.
+- The approved browser-testing strategy is defined in [Testing](#7-testing). It introduces no
+  separate React component-test framework. Approval makes Playwright Test part of the architecture
+  and authorises the separate TD-03 implementation step; it does not mean that the package, suite
+  or CI job is installed or operational.
 
 Packaging notes to verify at installation time (they do not change the stack):
 
@@ -416,10 +417,10 @@ discussion.
 
 ## 7. Testing
 
-> **TD-03 proposed revision (2026-11-17):** this section is a decision draft pending independent
-> review and product-owner approval (O3). It records neither an installed Playwright dependency
-> nor an operational end-to-end suite or CI job. The existing browser script remains in use until
-> the reviewed parity gate below is met. DEBT-09 and DEBT-10 remain open.
+> **TD-03 revision approved (2026-11-18):** this section records the approved testing architecture.
+> It records neither an installed Playwright dependency nor an operational end-to-end suite or CI
+> job. The existing browser script remains in use until the reviewed parity gate below is met.
+> DEBT-09 is resolved by this decision; the implementation debt DEBT-10 remains open.
 
 ### Test levels
 
@@ -427,9 +428,9 @@ discussion.
   validation, scenario codecs, application rules and presentation helpers. It runs in the Node
   environment. New pure modules continue to receive focused tests that mirror the source layout.
 - **Browser-level behaviour:** Playwright Test is adopted for end-to-end tests against a
-  production Next.js build, with Chromium as the initial browser baseline. Firefox and WebKit are
-  possible future projects, but adding either is an explicit future product decision (O7), not
-  part of this revision.
+  production Next.js build. Chromium and Firefox are both initial browser projects and supported
+  test targets from the start of TD-03 implementation. WebKit is deferred to a future explicit
+  decision.
 - **React component testing:** no separate component-test framework is introduced at this stage.
   The current application keeps behaviour that can be isolated in pure functions under Vitest;
   its material UI risks are integration behaviours that need the real application and browser.
@@ -451,6 +452,16 @@ use browser-context evaluation to create that external condition and then assert
 result. Coverage includes the current Navigation API path and the application's fallback when
 that API is unavailable; browser setup may remove the API before the page loads for the fallback
 scenario. These are end-to-end conditions, not a second implementation of the application rules.
+
+Chromium and Firefox use one behavioural traceability matrix and are held to the same intended
+user-visible behaviour for History API operations, URL synchronisation, Back/Forward, pointer and
+keyboard interaction, and observable application readiness. Tests account for engine-specific
+event timing and API availability without weakening the expected outcome. Where an API such as
+the Navigation API differs or is unavailable, each browser project tests the path it supports and
+the appropriate application fallback. A required Firefox scenario is not skipped merely to make
+the suite pass. If an intended behaviour cannot be reproduced consistently across the two
+engines, the discrepancy is recorded as a potential application compatibility defect and handled
+through a separate decision; this testing decision does not silently redefine the behaviour.
 
 A component-test framework is not justified by the current application: it cannot faithfully
 cover async Server Components or App Router transitions without replacing application behaviour
@@ -492,7 +503,7 @@ Before migration begins, prepare a traceability matrix that inventories:
   reactive results, history entry policy, chart interaction, URL reproducibility and navigation
   continuity;
 - the expected Playwright test or tests for each row, or an explicit rationale for leaving the
-  row uncovered.
+  row uncovered, with expected Chromium and Firefox coverage recorded in the same matrix.
 
 The matrix is reviewed before migration starts and again before the old script is retired. The
 154 checks reported by the script are implementation-level assertions, not the parity measure:
@@ -509,23 +520,24 @@ The implementation step adds an end-to-end job to the existing GitHub Actions tr
 separate from both the Linux quality gate and Windows tests, and has these constraints:
 
 - run on Linux with the pinned Node.js version used by the workflow;
-- install Playwright's Chromium and its required system dependencies reproducibly, with caching
-  only where it is safe and keyed to the dependency and browser versions;
+- install Playwright's Chromium and Firefox with their required system dependencies reproducibly,
+  with caching only where it is safe and keyed to the dependency and browser versions;
 - use Playwright's `webServer` lifecycle to serve the production Next.js build, never the
   development server;
 - upload the HTML report and, on failure, the configured traces and screenshots as artefacts;
 - run automatically for the pull-request and `dev`/`master` push events already covered by CI.
 
-The recommended merge policy for O3 is staged. While migration is incomplete, the job should run
-and remain visible but must not become a required status check: doing so would gate merges on
-coverage that has not yet reached reviewed parity and on timing-sensitive drag, navigation and
-history tests whose reliability has not been demonstrated in CI. After the parity review, a
-representative period of reliable CI runs and correction of material flakes, making the job
-required for merges into `master` is recommended because these browser behaviours are not covered
-by either existing required job. Retries may help diagnose genuinely timing-sensitive failures
-but must not conceal instability. Branch-protection activation is a repository-owner action and
-requires explicit product-owner approval; this ADR revision and its later implementation do not
-activate it.
+The approved O3 merge policy is staged. Once implementation begins and while migration is
+incomplete, the job runs both browser projects and remains visible but is not a required status
+check: making it required then would gate merges on coverage that has not yet reached reviewed
+parity and on timing-sensitive drag, navigation and history tests whose reliability has not been
+demonstrated in CI. After the parity review, a representative period of reliable Chromium and
+Firefox CI runs and correction of material flakes, making the job required for merges into
+`master` is the intended direction because these browser behaviours are not covered by either
+existing required job. That activation is a repository-owner action and requires a separate
+explicit product-owner approval. The end-to-end job is not marked `continue-on-error`; retries may
+help diagnose genuinely timing-sensitive failures but must not conceal instability. The existing
+Linux and Windows required checks remain unchanged.
 
 ## 8. Consequences and trade-offs
 
@@ -580,15 +592,15 @@ activate it.
    ("‹ Cerca"). Links to the simulator forward the same parameters. Model and codec:
    `src/scenarios/originContext.ts`. Parameter names are not a definitive URL schema (question 4).
 7. **Comparison capacity** beyond four vehicles and the behaviour of a full selection.
-8. **UI component and end-to-end test strategy: proposed resolution, pending approval.** TD-03
-   proposes that Vitest remain responsible for pure TypeScript logic and that Playwright Test
-   cover browser-level end-to-end behaviour against a production build, initially in Chromium.
-   No React component-test framework is introduced. The selector, traceability, parity,
-   retirement and CI gates are specified in [Testing](#7-testing). Playwright is not installed,
-   the suite and CI job do not exist, and the legacy browser script remains current coverage.
-   Product-owner approval of O3 is required before this question is resolved and before the
-   implementation step begins. O4 and O5 remain implementation decisions; O6 belongs to the M0.3
-   specification; Firefox and WebKit remain open under O7.
+8. **UI component and end-to-end test strategy: resolved.** Approved by the product owner on
+   2026-11-18. Vitest remains responsible for pure TypeScript logic. Playwright Test covers
+   browser-level end-to-end behaviour against a production build, with Chromium and Firefox as
+   the initial browser projects; WebKit is deferred to a future explicit decision. No React
+   component-test framework is introduced. The selector, cross-browser traceability, parity,
+   retirement and staged CI gates are specified in [Testing](#7-testing). The approved
+   architecture is not yet implemented: Playwright is not installed, the suite and CI job do not
+   exist, and the legacy browser script remains current coverage until reviewed migration parity.
+   O4 and O5 remain implementation decisions; O6 belongs to the M0.3 specification.
 9. **Token organisation**: file location, naming (Livrea names such as Inchiostro, or role
    names), and how the A/B yellow intensity is expressed.
 10. **Font delivery** of Schibsted Grotesk (OFL), for example `next/font` or self-hosting.

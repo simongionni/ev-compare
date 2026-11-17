@@ -1,10 +1,10 @@
 # Technical debt register
 
-| Field      | Value                                                                                                          |
-| ---------- | -------------------------------------------------------------------------------------------------------------- |
-| Baseline   | `dev` at `c6ee4d9` (M0.2 closure), verified on 2026-11-13; corrections verified on 2026-11-14                  |
-| Governance | [Post-M0.2 maintenance plan, TD-04](maintenance/post-m0.2.md#td-04--debt-governance)                           |
-| Plan       | [Post-M0.2 maintenance plan](maintenance/post-m0.2.md): approved with amendments on 2026-11-14; TD-02 complete |
+| Field      | Value                                                                                                                    |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Baseline   | `dev` at `c6ee4d9` (M0.2 closure), verified on 2026-11-13; corrections verified on 2026-11-14                            |
+| Governance | [Post-M0.2 maintenance plan, TD-04](maintenance/post-m0.2.md#td-04--debt-governance)                                     |
+| Plan       | [Post-M0.2 maintenance plan](maintenance/post-m0.2.md): approved with amendments; TD-02 and TD-03 decision step complete |
 
 This register collects, in one place, the technical debt of the repository. It does not replace
 the documents where debt was first recorded: those entries stay as they are, and each register
@@ -50,9 +50,9 @@ Criteria are defined in [TD-04](maintenance/post-m0.2.md#td-04--debt-governance)
 
 ## Summary
 
-Statuses as of 2026-11-17. "Scheduled" means assigned by the approved plan. DEBT-02 is open
+Statuses as of 2026-11-18. "Scheduled" means assigned by the approved plan. DEBT-02 is open
 because no fix exists within the stack: it is blocked upstream (decision D12). DEBT-01,
-DEBT-03 through DEBT-06 and DEBT-08 are resolved; DEBT-07 remains open at P3 under D5.
+DEBT-03 through DEBT-06, DEBT-08 and DEBT-09 are resolved; DEBT-07 remains open at P3 under D5.
 
 | ID      | Title                                                                | Cat.  | Prio. | Status    | WP or activity      |
 | ------- | -------------------------------------------------------------------- | ----- | ----- | --------- | ------------------- |
@@ -64,7 +64,7 @@ DEBT-03 through DEBT-06 and DEBT-08 are resolved; DEBT-07 remains open at P3 und
 | DEBT-06 | Conditional assertions that can pass vacuously                       | C3    | P2    | resolved  | TD-02               |
 | DEBT-07 | Vitest configuration warnings and an invalid optional peer           | C2    | P3    | open      | Deferred under D5   |
 | DEBT-08 | No aggregate check command and no CI                                 | C2    | P2    | resolved  | TD-02               |
-| DEBT-09 | UI component and end-to-end test strategy undecided                  | C4/C3 | P2    | scheduled | TD-03 (decision)    |
+| DEBT-09 | UI component and end-to-end test strategy undecided                  | C4/C3 | P2    | resolved  | TD-03 (decision)    |
 | DEBT-10 | Browser verification is a manual script outside the test suite       | C3    | P2    | scheduled | TD-03               |
 | DEBT-11 | Accessible names and announcements not verified with a screen reader | C3    | P2    | scheduled | Accessibility smoke |
 | DEBT-12 | Marginal URL synchronisation limits of the DC simulator              | C1    | P3    | open      | —                   |
@@ -79,7 +79,7 @@ DEBT-03 through DEBT-06 and DEBT-08 are resolved; DEBT-07 remains open at P3 und
 | DEBT-21 | No defined public surface of the engine                              | C4/C1 | P3    | open      | —                   |
 | DEBT-22 | Stale status text in agent and decision documents                    | C1    | P3    | open      | —                   |
 
-DEBT-01 and DEBT-03 through DEBT-06 and DEBT-08 are resolved. DEBT-07 and DEBT-09 to DEBT-11
+DEBT-01, DEBT-03 through DEBT-06, DEBT-08 and DEBT-09 are resolved. DEBT-07, DEBT-10 and DEBT-11
 remain in the post-M0.2 phase (DEBT-11 only for its basic smoke test). DEBT-02 stays open until an
 upstream correction is available; TD-02 keeps a diagnostic check for it. The others stay open
 until their trigger occurs or a decision assigns them.
@@ -276,8 +276,9 @@ acPower,constantPowerCharging,energy,error,time}.ts`, `src/domain/{charging,char
 
 ### DEBT-09 — UI component and end-to-end test strategy undecided
 
-- **Description.** No tool or approach has been chosen for testing React components and
-  end-to-end flows. ADR 0001 §7 forbids adding a test library until the strategy is decided.
+- **Description.** At the M0.2 baseline, no tool or approach had been chosen for testing React
+  components and end-to-end flows. ADR 0001 §7 prohibited adding a test library until the
+  strategy was decided.
 - **Sources.** [ADR 0001, §7 and open question 8](decisions/0001-frontend-architecture.md#9-open-questions);
   [milestone M0.2, non-blocking debt](milestones/m0.2-first-vertical-slice.md#non-blocking-technical-debt);
   README, source layout.
@@ -288,9 +289,11 @@ acPower,constantPowerCharging,energy,error,time}.ts`, `src/domain/{charging,char
 - **Priority.** P2.
 - **Resolution trigger.** Before any further UI is implemented. M0.3 may be specified in parallel,
   but its UI implementation does not start before the testing-strategy ADR decision is approved.
-- **Status.** scheduled. D10 approved in principle (Playwright Test, Chromium first, no
-  component-test framework); ADR 0001 is not revised yet. That revision is TD-03's separately
-  reviewed decision step: [TD-03](maintenance/post-m0.2.md#td-03--ui-and-end-to-end-testing-strategy).
+- **Status.** resolved on 2026-11-18 by the approved ADR 0001 revision: Vitest remains responsible
+  for pure TypeScript logic; Playwright Test covers production-build end-to-end behaviour in
+  Chromium and Firefox; no component-test framework is introduced. This resolves the strategy
+  decision only. Playwright is not installed and DEBT-10 remains open until automation reaches
+  reviewed parity: [TD-03](maintenance/post-m0.2.md#td-03--ui-and-end-to-end-testing-strategy).
 
 ### DEBT-10 — Browser verification is a manual script outside the test suite
 
@@ -317,10 +320,10 @@ acPower,constantPowerCharging,energy,error,time}.ts`, `src/domain/{charging,char
 - **Resolution trigger.** Every Next.js update (re-run by hand until automated); automation in
   TD-03 after its ADR decision.
 - **Status.** scheduled (D9, D10 approved with restrictions). Work package: TD-03.
-- **Scope note.** This entry is about **automation**. That the checks run in Chromium only (M0.2
-  caveat, item 2) is a question of **cross-browser coverage**: Chromium is the initial automated
-  baseline, and whether to cover Firefox or WebKit is a future, explicit product decision
-  ([Outside the register](#open-decisions-that-are-not-debt-c4)), not a commitment of TD-03.
+- **Scope note.** This entry is about **automation**. The legacy checks still run in Chromium only
+  (M0.2 caveat, item 2), but O7 requires the Playwright replacement to support Chromium and
+  Firefox from the start. WebKit remains deferred
+  ([Outside the register](#open-decisions-that-are-not-debt-c4)).
 
 ### DEBT-11 — Accessible names and announcements not verified with a screen reader
 
@@ -524,13 +527,13 @@ ADR 0001 open questions 2 (store scope), 3 (limiting factor and energy-over-time
 format), 7 (comparison capacity), 9 (token organisation), 10 (font delivery), 11 (responsive layout
 and dark theme) and 12 (directory locations, partly answered by the README); M0.2 slice open
 questions 5 (search matching rules) and 8 (illustrative qualifier on provenance tags). They are
-decided when the feature that needs them is specified. Open question 8 of the ADR is the only one
-in this phase (DEBT-09).
+decided when the feature that needs them is specified. Open question 8 of the ADR was resolved by
+the approved TD-03 decision on 2026-11-18 (DEBT-09).
 
-**Cross-browser coverage.** Browser checks run in Chromium only
+**Cross-browser coverage.** The legacy browser checks run in Chromium only
 ([M0.2 non-blocking debt](milestones/m0.2-first-vertical-slice.md#non-blocking-technical-debt),
-item 2). Chromium is the initial automated baseline of TD-03. Covering Firefox or WebKit is a
-future product decision, to be taken explicitly; nothing in this phase commits to it.
+item 2). O7 now requires Chromium and Firefox as the initial Playwright projects. WebKit is
+deferred to a future explicit decision.
 
 ### Future features (C6)
 

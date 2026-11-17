@@ -2,12 +2,12 @@
 
 | Field     | Value                                                                                                    |
 | --------- | -------------------------------------------------------------------------------------------------------- |
-| Status    | **Approved with amendments** on 2026-11-14 after independent review. TD-02 complete (§3)                 |
-| Date      | Proposed 2026-11-13; revised 2026-11-14                                                                  |
+| Status    | **Approved with amendments**. TD-02 complete; TD-03 decision step approved (§3)                          |
+| Date      | Proposed 2026-11-13; revised 2026-11-14 and 2026-11-18                                                   |
 | Baseline  | `dev` at `c6ee4d9` (M0.2 closure)                                                                        |
 | Register  | [Technical debt register](../technical-debt.md)                                                          |
 | Scope     | Four work packages, TD-01 to TD-04, and an accessibility smoke test. No feature work, no M0.3 definition |
-| Decisions | [§5](#5-decisions): D1–D10, D12, O1 and O2 approved, some with conditions; D11 rejected                  |
+| Decisions | [§5](#5-decisions): D1–D10, D12, O1–O3 and O7 approved, some with conditions; D11 rejected               |
 
 M0.1 and M0.2 are complete and stay closed. This phase repays the debt that makes the
 repository's checks unreliable or its layering inaccurate, and decides how the UI will be tested.
@@ -56,9 +56,9 @@ Order:
 3. **TD-01 — dependency direction**, as soon as TD-02 has made `src/domain/chargingFactories.ts`
    and `src/calculations/result.ts` formatting-clean, so the refactor diff contains no formatting.
    It does not need the rest of TD-02.
-4. **TD-03 — UI and end-to-end testing.** Its decision step (the ADR 0001 revision) can start at
-   any time and is reviewed separately. Its implementation follows TD-02, because it relies on
-   deterministic checks and adds a job to the CI that TD-02 creates.
+4. **TD-03 — UI and end-to-end testing.** Its decision step (the ADR 0001 revision) was approved
+   on 2026-11-18. Its pending implementation follows TD-02, because it relies on deterministic
+   checks and adds a job to the CI that TD-02 creates.
 
 In parallel, outside the work packages:
 
@@ -373,14 +373,15 @@ These closure criteria were met on 2026-11-17; TD-02 is complete.
 
 ### TD-03 — UI and end-to-end testing strategy
 
-**Register:** DEBT-09, DEBT-10. **Decisions:** D10 approved in principle; D9 approved with
-restrictions.
+**Register:** DEBT-09, DEBT-10. **Decisions:** D9 and D10, followed by O3 and O7, approved with
+the recorded restrictions and implementation gates.
 
 TD-03 has two steps:
 
-1. **Decision step.** An ADR 0001 revision that resolves open question 8, reviewed and approved
-   separately before any package is installed. ADR 0001 is not revised by this plan.
-2. **Implementation step.** After the revision is approved and TD-02 is closed.
+1. **Decision step — approved 2026-11-18.** The separately reviewed ADR 0001 revision resolves
+   open question 8. Its approval resolves DEBT-09 but does not install Playwright or implement the
+   suite or CI job.
+2. **Implementation step — pending.** Begins only after the approved revision and TD-02 closure.
 
 #### Current state
 
@@ -428,15 +429,16 @@ TD-03 has two steps:
 1. **Playwright Test for end-to-end tests**, against a production build, as the only new test
    tool. **No component-test framework** is introduced. Logic stays in pure functions tested by
    Vitest.
-2. **Automation is separate from cross-browser coverage.** The initial automated baseline is
-   Chromium only. Covering Firefox or WebKit is a future, explicit product decision; Playwright
-   keeps it possible but this plan does not commit to it.
+2. **Initial cross-browser baseline (O7).** Chromium and Firefox are both supported Playwright
+   projects from the start of implementation. They share one behavioural traceability matrix.
+   WebKit is deferred to a future explicit decision.
 3. **Behavioural traceability matrix first.** Before any migration, a matrix maps every behaviour
    and edge case verified by `scripts/verify-dc-simulator-url.mjs`, and every M0.2 acceptance
-   criterion that concerns browser behaviour, to its planned Playwright coverage (test name), or
-   records why it is not covered. Parity is measured in behaviours and edge cases, not in the
-   literal count of 154 checks. The matrix is reviewed before migration starts and again at
-   parity.
+   criterion that concerns browser behaviour, to its planned Playwright coverage (test name) in
+   Chromium and Firefox, or records why it is not covered. Browser-specific API differences map
+   to the supported or fallback path; a required Firefox scenario is not omitted merely to obtain
+   a passing suite. Parity is measured in behaviours and edge cases, not in the literal count of
+   154 checks. The matrix is reviewed before migration starts and again at parity.
 4. **Same build for both suites.** During migration, the old script and the new suite run against
    the same production build, and their results are compared.
 5. **Retirement.** The script is removed only after reviewed coverage parity against the matrix.
@@ -448,38 +450,46 @@ TD-03 has two steps:
    `__reactProps` probe are replaced, for example by accessible structure and Playwright's
    auto-waiting on observable state. Simulated external URL changes stay as explicit
    `page.evaluate` or `page.addInitScript` steps.
-7. **CI.** TD-03 adds an end-to-end job to the TD-02 workflow: browser setup (Playwright's
-   Chromium with its system dependencies on Linux, cached between runs), a production build
-   started through `webServer`, and failure artefacts (trace, screenshot and HTML report uploaded
-   when a test fails). Whether the job is a required check is decided with the ADR revision.
+7. **CI (O3).** TD-03 adds an end-to-end job to the TD-02 workflow: reproducible setup of
+   Playwright's Chromium and Firefox with their system dependencies on Linux (cached where
+   appropriate), a production build started through `webServer`, and failure artefacts (trace,
+   screenshot and HTML report uploaded when a test fails). The job runs automatically but is not
+   a required status check during migration and is not marked `continue-on-error`. Making it
+   required after reviewed parity and demonstrated CI stability is the intended direction, but
+   needs separate explicit product-owner approval. Existing Linux and Windows required checks do
+   not change.
 8. **Out of scope:** screen-reader and keyboard verification by a person
    ([accessibility smoke test](#accessibility-smoke-test)).
 
 #### Scope and files
 
-Decision step: the ADR 0001 revision (§2 stack table, §7 testing, open question 8), reviewed
-separately. Implementation step: `package.json` and `package-lock.json` (`@playwright/test`),
-`playwright.config.ts`, the end-to-end test directory (location to confirm), `.gitignore`
-(reports and traces), the end-to-end job in `.github/workflows/ci.yml`, the traceability matrix
-(in the testing documentation), component files only for approved `data-testid` attributes,
-`README.md`, the testing documentation, and the register.
+Decision step (complete): the separately reviewed ADR 0001 revision (§2 stack table, §7 testing,
+open question 8). Implementation step (pending): `package.json` and `package-lock.json`
+(`@playwright/test`), `playwright.config.ts`, the end-to-end test directory (location to confirm),
+`.gitignore` (reports and traces), the end-to-end job in `.github/workflows/ci.yml`, the
+traceability matrix (in the testing documentation), component files only for approved
+`data-testid` attributes, `README.md`, the testing documentation, and the register.
 
 #### Risks
 
 - A new dependency with large browser binaries on CI (cacheable).
 - Flaky tests around drag and history timing; Playwright's auto-waiting reduces but does not
   remove this.
+- Chromium and Firefox can differ in History and Navigation API support, pointer-event sequencing,
+  slider dragging and readiness timing. Tests assert the same intended behaviour through the
+  supported or fallback path; a discrepancy is a potential application compatibility defect, not
+  a reason to silently skip Firefox.
 - Locators by Italian accessible names break when copy changes; that is intended, since copy is
   part of the accepted behaviour, but it couples tests to wording.
 - Replacing class-name selectors may show that some results lack an accessible structure; adding
   one would be a UI change outside TD-03 and needs a decision.
-- Local runs on branded Chrome or Edge and CI runs on Playwright's Chromium may differ slightly.
+- Local branded browsers and Playwright's CI browser builds may differ slightly.
 
 #### Tests
 
 - The matrix is complete and reviewed before migration.
 - The old script and the new suite both pass against the same production build.
-- The suite passes on Chromium locally on Windows and in CI.
+- The suite passes on Chromium and Firefox locally on Windows and in CI.
 - The existing Vitest suite and `npm run check` are unaffected.
 
 #### Acceptance criteria
@@ -489,8 +499,8 @@ separately. Implementation step: `package.json` and `package-lock.json` (`@playw
 - No CSS class or React-internal selectors; every `data-testid` is justified and documented.
 - The suite runs with one npm script and in CI, with failure artefacts.
 - The script is retired only after the parity review.
-- The README and testing documentation describe how to run the suite; DEBT-09 and DEBT-10 are
-  resolved.
+- The approved ADR resolves DEBT-09. The README and testing documentation describe how to run the
+  implemented suite; DEBT-10 is resolved only after automation and reviewed parity.
 
 #### Stop conditions
 
@@ -615,20 +625,20 @@ ADR decision and for the accessibility smoke test. This plan does not define M0.
 
 ### Taken on 2026-11-14
 
-| ID  | Decision                                                                                                                       | Outcome                                                                                                                             |
-| --- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| D1  | Authorise behaviour-neutral changes to closed M0.1 files: type move (TD-01), formatting (TD-02 2c), test assertions (TD-02 2f) | **Approved**, within the review's scope and compatibility constraints; separate commits; drift re-inventoried before implementation |
-| D2  | Extend TD-01 to the type imports in `src/scenarios/` and `src/data/` (A+)                                                      | **Approved**                                                                                                                        |
-| D3  | Add a `no-restricted-imports` guard for `src/domain/`                                                                          | **Approved**                                                                                                                        |
-| D4  | Format the product and UX documents with Prettier (rather than excluding them)                                                 | **Approved**                                                                                                                        |
-| D5  | Replace `vite-tsconfig-paths` with Vite's native `resolve.tsconfigPaths`                                                       | **Conditionally approved**: only if alias resolution, typecheck and tests stay correct and the drive-letter issue is resolved       |
-| D6  | Zero-warning lint gate and an aggregate `check` command (format, lint, typecheck, tests, build)                                | **Approved**                                                                                                                        |
-| D7  | Governance rules of TD-04                                                                                                      | **Approved in the revised, proportionate form**                                                                                     |
-| D8  | Basic GitHub Actions CI in TD-02: full checks on Linux, formatting and Vitest on Windows, on every pull request                | **Approved**; Playwright added later by TD-03                                                                                       |
-| D9  | `data-testid` where accessible semantic locators are insufficient                                                              | **Approved with restrictions**: mainly for geometry-dependent interactions; each use documented                                     |
-| D10 | Playwright Test for end-to-end tests, Chromium first, no component-test framework; migration and retirement of the script      | **Approved in principle**; formalised by TD-03's separately reviewed ADR revision; traceability matrix and parity review required   |
-| D11 | Accept DEBT-12 as an accepted limitation                                                                                       | **Rejected**: DEBT-12 stays open at P3 with its triggers                                                                            |
-| D12 | How to proceed when no in-stack fix for DEBT-02 exists (was O8)                                                                | **Approved**: see [below](#d12--debt-02-blocked-upstream)                                                                           |
+| ID  | Decision                                                                                                                                     | Outcome                                                                                                                                                                                        |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| D1  | Authorise behaviour-neutral changes to closed M0.1 files: type move (TD-01), formatting (TD-02 2c), test assertions (TD-02 2f)               | **Approved**, within the review's scope and compatibility constraints; separate commits; drift re-inventoried before implementation                                                            |
+| D2  | Extend TD-01 to the type imports in `src/scenarios/` and `src/data/` (A+)                                                                    | **Approved**                                                                                                                                                                                   |
+| D3  | Add a `no-restricted-imports` guard for `src/domain/`                                                                                        | **Approved**                                                                                                                                                                                   |
+| D4  | Format the product and UX documents with Prettier (rather than excluding them)                                                               | **Approved**                                                                                                                                                                                   |
+| D5  | Replace `vite-tsconfig-paths` with Vite's native `resolve.tsconfigPaths`                                                                     | **Conditionally approved**: only if alias resolution, typecheck and tests stay correct and the drive-letter issue is resolved                                                                  |
+| D6  | Zero-warning lint gate and an aggregate `check` command (format, lint, typecheck, tests, build)                                              | **Approved**                                                                                                                                                                                   |
+| D7  | Governance rules of TD-04                                                                                                                    | **Approved in the revised, proportionate form**                                                                                                                                                |
+| D8  | Basic GitHub Actions CI in TD-02: full checks on Linux, formatting and Vitest on Windows, on every pull request                              | **Approved**; Playwright added later by TD-03                                                                                                                                                  |
+| D9  | `data-testid` where accessible semantic locators are insufficient                                                                            | **Approved with restrictions**: mainly for geometry-dependent interactions; each use documented                                                                                                |
+| D10 | Playwright Test for end-to-end tests, initially proposed Chromium first, no component-test framework; migration and retirement of the script | **Approved in principle**; formalised by the approved TD-03 ADR revision; O7 supersedes only the initial browser scope with Chromium + Firefox; traceability matrix and parity review required |
+| D11 | Accept DEBT-12 as an accepted limitation                                                                                                     | **Rejected**: DEBT-12 stays open at P3 with its triggers                                                                                                                                       |
+| D12 | How to proceed when no in-stack fix for DEBT-02 exists (was O8)                                                                              | **Approved**: see [below](#d12--debt-02-blocked-upstream)                                                                                                                                      |
 
 #### D12 — DEBT-02 blocked upstream
 
@@ -656,20 +666,24 @@ Taken by the product owner on 2026-11-14, after TD-02 step 2b:
 | O1  | Branch protection and direct pushes to `dev` | **Approved and applied**: `master` requires both CI jobs; `dev` remains unprotected, permits direct pushes and runs CI after each push       |
 | O2  | Version pinning policy for GitHub Actions    | **Approved and applied**: every action reference uses a full immutable commit SHA, with the corresponding release version recorded beside it |
 
+### Taken on 2026-11-18
+
+| ID  | Decision                                                 | Outcome                                                                                                                                                                                                                                                                  |
+| --- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| O3  | ADR 0001 testing revision and end-to-end CI merge policy | **Approved**: once implemented, the E2E job runs automatically without `continue-on-error` but is not required during migration; requiring it after reviewed parity and demonstrated stability needs separate explicit approval; existing required checks stay unchanged |
+| O7  | Initial Playwright browser coverage                      | **Approved**: Chromium and Firefox are supported initial projects and share one behavioural matrix; WebKit is deferred to a future explicit decision                                                                                                                     |
+
 ### Still open
 
-| ID  | Decision                                                                                                    | Needed by               |
-| --- | ----------------------------------------------------------------------------------------------------------- | ----------------------- |
-| O3  | Text of the ADR 0001 revision for open question 8, including whether the end-to-end job is a required check | TD-03 decision step     |
-| O4  | Location of the end-to-end tests and of the traceability matrix                                             | TD-03 implementation    |
-| O5  | Whether results that lack an accessible structure get one (a UI change) or a `data-testid`                  | TD-03 implementation    |
-| O6  | Whether M0.3 UI implementation needs the complete Playwright migration or only the approved ADR decision    | M0.3 specification      |
-| O7  | Cross-browser coverage (Firefox, WebKit): if and when                                                       | Future product decision |
+| ID  | Decision                                                                                                 | Needed by            |
+| --- | -------------------------------------------------------------------------------------------------------- | -------------------- |
+| O4  | Location of the end-to-end tests and of the traceability matrix                                          | TD-03 implementation |
+| O5  | Whether results that lack an accessible structure get one (a UI change) or a `data-testid`               | TD-03 implementation |
+| O6  | Whether M0.3 UI implementation needs the complete Playwright migration or only the approved ADR decision | M0.3 specification   |
 
 ## 6. Closure of the phase
 
 The phase is complete when TD-02 and TD-01 are closed and reviewed (DEBT-02 may remain open as an
-upstream blocker, D12), TD-03 has an approved ADR
-revision and an implementation at reviewed parity with the script, the accessibility smoke test
-is recorded, and the register reflects the result. The closure is reviewed independently and
-approved by the product owner.
+upstream blocker, D12), TD-03 has an approved ADR revision and an implementation at reviewed
+parity with the script, the accessibility smoke test is recorded, and the register reflects the
+result. The closure is reviewed independently and approved by the product owner.
