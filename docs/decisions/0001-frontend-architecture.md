@@ -41,7 +41,7 @@ the conflict must be reported.
 
 ## 2. Technology stack
 
-| Area                     | Technology                        | In the repository today (2026-11-08)                                |
+| Area                     | Technology                        | In the repository today (2026-11-17)                                |
 | ------------------------ | --------------------------------- | ------------------------------------------------------------------- |
 | Framework                | Next.js 16 (App Router)           | Installed (16.x)                                                    |
 | UI                       | React 19                          | Installed (19.2.x)                                                  |
@@ -54,7 +54,8 @@ the conflict must be reported.
 | Shared application state | Redux Toolkit, with `react-redux` | Not installed                                                       |
 | Shareable scenarios      | URL                               | Search scenario, origin context, DC simulation scenario             |
 | Calculation engine       | M0.1, independent of the frontend | Implemented, with the effective DC power extension                  |
-| Tests (existing)         | Vitest                            | Installed, Node environment                                         |
+| Pure TypeScript tests    | Vitest                            | Installed, Node environment; 473 tests                              |
+| Browser end-to-end tests | Playwright Test, Chromium first   | Proposed by TD-03; not installed or operational                     |
 
 Rules:
 
@@ -63,8 +64,10 @@ Rules:
 - No library beyond this table is introduced, and no part of the stack is replaced. A need that
   the stack cannot meet is reported, not solved by adding a dependency.
 - Packages are installed in the implementation session that first needs them, not in advance.
-- The strategy for UI component tests and end-to-end tests is **not defined** (see
-  [Testing](#7-testing)).
+- The proposed browser-testing strategy is defined in [Testing](#7-testing). It introduces no
+  separate React component-test framework. Playwright Test is not part of the implemented stack
+  unless and until this TD-03 revision is independently reviewed and approved; approval would
+  authorise a later implementation step, not install the package or activate CI by itself.
 
 Packaging notes to verify at installation time (they do not change the stack):
 
@@ -413,12 +416,116 @@ discussion.
 
 ## 7. Testing
 
-- Vitest stays the test runner for domain, calculations, scenario codecs and selection logic.
-  These are plain TypeScript and run in the existing Node environment.
-- Every new pure module (scenario model and codec, selection rules, catalogue validation) has
-  unit tests, mirroring the source layout as today.
-- **Not defined:** how UI components and end-to-end flows are tested, and with which tools. No
-  test library is added until that strategy is decided.
+> **TD-03 proposed revision (2026-11-17):** this section is a decision draft pending independent
+> review and product-owner approval (O3). It records neither an installed Playwright dependency
+> nor an operational end-to-end suite or CI job. The existing browser script remains in use until
+> the reviewed parity gate below is met. DEBT-09 and DEBT-10 remain open.
+
+### Test levels
+
+- **Pure TypeScript logic:** Vitest remains the runner for domain, calculations, catalogue
+  validation, scenario codecs, application rules and presentation helpers. It runs in the Node
+  environment. New pure modules continue to receive focused tests that mirror the source layout.
+- **Browser-level behaviour:** Playwright Test is adopted for end-to-end tests against a
+  production Next.js build, with Chromium as the initial browser baseline. Firefox and WebKit are
+  possible future projects, but adding either is an explicit future product decision (O7), not
+  part of this revision.
+- **React component testing:** no separate component-test framework is introduced at this stage.
+  The current application keeps behaviour that can be isolated in pure functions under Vitest;
+  its material UI risks are integration behaviours that need the real application and browser.
+  This does not prohibit a later decision if future components demonstrate valuable isolated
+  behaviour that neither level covers efficiently.
+
+The end-to-end suite exercises the deployed shape of the App Router application rather than
+rendering components with a mocked router. Async Server Components are rendered by Next.js, and
+Client Components are hydrated and exercised in the browser. Tests cover observable outcomes of
+navigation and URL-owned state, including links, direct visits, History API changes, browser
+Back/Forward, and reconstruction of a scenario from a shared URL. They use real pointer and
+keyboard input for slider dragging and other pointer-dependent behaviour, so layout, pointer
+events and commit timing are present.
+
+Application readiness is established through user-observable state and interactability, using
+Playwright's locator assertions and auto-waiting. Tests do not probe hydration through React
+internal properties. Where the application responds to external History API changes, a test may
+use browser-context evaluation to create that external condition and then assert the visible
+result. Coverage includes the current Navigation API path and the application's fallback when
+that API is unavailable; browser setup may remove the API before the page loads for the fallback
+scenario. These are end-to-end conditions, not a second implementation of the application rules.
+
+A component-test framework is not justified by the current application: it cannot faithfully
+cover async Server Components or App Router transitions without replacing application behaviour
+with mocks, and a simulated DOM does not provide the layout, pointer capture, History API and
+Navigation API behaviour on which the simulator depends. A browser component runner would still
+miss route composition while duplicating the browser dependency. For the present component set,
+Vitest plus route-level Playwright coverage gives the useful separation without a third test
+level or premature component-specific harnesses.
+
+### Locator policy
+
+End-to-end tests select the interface as a user or assistive technology perceives it:
+
+1. Prefer accessible locators, especially `getByRole` and `getByLabel`, with the accessible name.
+2. Use visible text where it expresses accepted behaviour.
+3. Do not depend on CSS Module class names or inspect React internal properties such as
+   `__reactProps`.
+4. Use `data-testid` only when semantic locators are insufficient. Each introduced identifier
+   requires a documented justification in the testing documentation; geometry-dependent
+   interaction with a slider track is the principal known candidate.
+
+The migration replaces the browser script's class, element-shape, positional and React-internal
+selectors with accessible roles, labels, names, visible output and Playwright's waiting for
+observable state. A result that cannot be located semantically triggers the O5 review: either its
+accessible structure is improved through a separately approved UI change, or a justified and
+documented `data-testid` is used. This decision adds neither kind of markup.
+
+### Behavioural migration and retirement gate
+
+Before migration begins, prepare a traceability matrix that inventories:
+
+- every distinct behaviour and edge case exercised by
+  `scripts/verify-dc-simulator-url.mjs`, including URL defaults and invalid values, equivalent
+  encodings, pending and stale gestures, pointer and keyboard commits, station choices and result
+  formats, coincident thumbs, origin preservation, direct and router navigation, Back/Forward,
+  external History API changes, server-rendered state, listener lifecycle, Navigation API
+  availability and its fallback;
+- every M0.2 acceptance criterion involving browser behaviour, including route composition,
+  reactive results, history entry policy, chart interaction, URL reproducibility and navigation
+  continuity;
+- the expected Playwright test or tests for each row, or an explicit rationale for leaving the
+  row uncovered.
+
+The matrix is reviewed before migration starts and again before the old script is retired. The
+154 checks reported by the script are implementation-level assertions, not the parity measure:
+parity means that every distinct behaviour and edge case in the reviewed matrix is covered or has
+an approved rationale. During migration, the legacy script and Playwright suite run against the
+same production build so that their behavioural results are comparable. The script remains
+unchanged and available until the second review confirms parity; only then may implementation
+work remove it. The locations of the suite and matrix remain O4 and are chosen during
+implementation.
+
+### Continuous integration
+
+The implementation step adds an end-to-end job to the existing GitHub Actions triggers. It is
+separate from both the Linux quality gate and Windows tests, and has these constraints:
+
+- run on Linux with the pinned Node.js version used by the workflow;
+- install Playwright's Chromium and its required system dependencies reproducibly, with caching
+  only where it is safe and keyed to the dependency and browser versions;
+- use Playwright's `webServer` lifecycle to serve the production Next.js build, never the
+  development server;
+- upload the HTML report and, on failure, the configured traces and screenshots as artefacts;
+- run automatically for the pull-request and `dev`/`master` push events already covered by CI.
+
+The recommended merge policy for O3 is staged. While migration is incomplete, the job should run
+and remain visible but must not become a required status check: doing so would gate merges on
+coverage that has not yet reached reviewed parity and on timing-sensitive drag, navigation and
+history tests whose reliability has not been demonstrated in CI. After the parity review, a
+representative period of reliable CI runs and correction of material flakes, making the job
+required for merges into `master` is recommended because these browser behaviours are not covered
+by either existing required job. Retries may help diagnose genuinely timing-sensitive failures
+but must not conceal instability. Branch-protection activation is a repository-owner action and
+requires explicit product-owner approval; this ADR revision and its later implementation do not
+activate it.
 
 ## 8. Consequences and trade-offs
 
@@ -473,7 +580,15 @@ discussion.
    ("‹ Cerca"). Links to the simulator forward the same parameters. Model and codec:
    `src/scenarios/originContext.ts`. Parameter names are not a definitive URL schema (question 4).
 7. **Comparison capacity** beyond four vehicles and the behaviour of a full selection.
-8. **UI component and end-to-end test strategy** and tools.
+8. **UI component and end-to-end test strategy: proposed resolution, pending approval.** TD-03
+   proposes that Vitest remain responsible for pure TypeScript logic and that Playwright Test
+   cover browser-level end-to-end behaviour against a production build, initially in Chromium.
+   No React component-test framework is introduced. The selector, traceability, parity,
+   retirement and CI gates are specified in [Testing](#7-testing). Playwright is not installed,
+   the suite and CI job do not exist, and the legacy browser script remains current coverage.
+   Product-owner approval of O3 is required before this question is resolved and before the
+   implementation step begins. O4 and O5 remain implementation decisions; O6 belongs to the M0.3
+   specification; Firefox and WebKit remain open under O7.
 9. **Token organisation**: file location, naming (Livrea names such as Inchiostro, or role
    names), and how the A/B yellow intensity is expressed.
 10. **Font delivery** of Schibsted Grotesk (OFL), for example `next/font` or self-hosting.
