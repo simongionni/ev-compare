@@ -161,16 +161,16 @@ approved.
 
 | Item        | Steps                               | Scope                                                                   | Status                                                                                                                                                                                                 |
 | ----------- | ----------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| TD-02       | 2a–2j                               | Whole work package                                                      | **In progress, not closed.** Increments 1–3 complete; increments 4 and 5 not started                                                                                                                   |
+| TD-02       | 2a–2j                               | Whole work package                                                      | **In progress, not closed.** Increments 1–4 complete; Increment 5 not started                                                                                                                          |
 | Increment 1 | 2b                                  | Drive-letter investigation                                              | **Concluded on 2026-11-14 without a code change**: cause found, no reliable fix within the stack                                                                                                       |
 | Increment 2 | 2a, 2c, 2d                          | Line endings and Prettier normalisation                                 | **Completed on 2026-11-17**: DEBT-03 and DEBT-04 resolved by `9a26a2d`, `233a89e` and `3bdeb5c`                                                                                                        |
 | Increment 3 | 2e, 2f                              | ESLint warnings and vacuous assertions                                  | **Completed on 2026-11-17**: DEBT-05 and DEBT-06 resolved by `c0bbf0b` and `e65a8cd`                                                                                                                   |
-| Increment 4 | 2g (conditional), 2h, 2j (optional) | Remaining configuration, aggregate quality gate, optional blame hygiene | Not started                                                                                                                                                                                            |
+| Increment 4 | 2g (conditional), 2h, 2j (optional) | Remaining configuration, aggregate quality gate, optional blame hygiene | **Completed on 2026-11-17**: 2g deferred under D5; 2h implemented by `7bac9a1`; 2j implemented by `88c5932`                                                                                            |
 | Increment 5 | 2i                                  | GitHub Actions CI                                                       | Not started                                                                                                                                                                                            |
 | DEBT-02     | —                                   | —                                                                       | **Open, P1, blocked upstream** (D12). Not resolved, not an accepted limitation                                                                                                                         |
 | DEBT-03     | 2a                                  | —                                                                       | **Resolved** by `9a26a2d`; renormalisation changed no previously tracked index content                                                                                                                 |
 | DEBT-04     | 2c, 2d                              | —                                                                       | **Resolved** by `233a89e` and `3bdeb5c`; 29-file clean-LF inventory formatted reproducibly                                                                                                             |
-| DEBT-07     | 2g                                  | —                                                                       | Unresolved. Not the cause of DEBT-02                                                                                                                                                                   |
+| DEBT-07     | 2g                                  | —                                                                       | **Open, P3, deferred**: D5's drive-letter condition remains unmet; reassess after an upstream correction                                                                                               |
 | D5          | 2g                                  | —                                                                       | Still conditional; its drive-letter condition is not met. Increment 1 showed that native `resolve.tsconfigPaths` does not fix DEBT-02, so removing `vite-tsconfig-paths` is not an automatic follow-up |
 
 Findings of increment 1:
@@ -214,6 +214,19 @@ Findings of increment 3:
 - ESLint reports zero warnings and errors. Typecheck and all 473 tests from `C:\…` pass after
   each implementation commit. TD-02 remains in progress; DEBT-02, DEBT-07 and DEBT-08 remain
   unresolved, and Increment 4 has not started.
+
+Findings of increment 4:
+
+- Step 2g was deferred because D5's drive-letter condition remains unmet. `vitest.config.ts`,
+  `vite-tsconfig-paths` and the lockfile are unchanged; DEBT-07 remains open at P3.
+- Step 2h added the zero-warning lint gate and ordered aggregate `check` command in `7bac9a1`.
+- Optional step 2j added `.git-blame-ignore-revs` in `88c5932` for the two Prettier-only commits.
+  The `.gitattributes` commit was excluded because it changed no pre-existing lines and therefore
+  provides no blame benefit.
+- All individual checks and `npm run check` pass from the canonical upper-case Windows path. A
+  temporary, uncommitted failing first check confirmed that the aggregate command returns its
+  nonzero status and does not start later checks.
+- TD-02 remains in progress. Increment 5 still owns CI; DEBT-08 therefore remains in progress.
 
 #### Analysis at baseline
 

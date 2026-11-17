@@ -245,14 +245,15 @@ acPower,constantPowerCharging,energy,error,time}.ts`, `src/domain/{charging,char
 - **Priority.** P3. TD-02 step 2b found that neither the configuration file extension nor the
   plugin causes DEBT-02; the two entries are independent.
 - **Resolution trigger.** Next Vite or Vitest major update.
-- **Status.** scheduled (D5 conditionally approved). Work package: TD-02. Unresolved; D5's
-  condition that the drive-letter issue is resolved is not met as of 2026-11-14.
+- **Status.** open, P3, deferred in TD-02 Increment 4. D5's drive-letter condition remains unmet,
+  so `vitest.config.ts`, `vite-tsconfig-paths` and the lockfile were kept unchanged. Reassess after
+  an upstream correction makes it possible to verify both drive-letter variants.
 
-### DEBT-08 — No aggregate check command and no CI
+### DEBT-08 — Aggregate check implemented; no CI
 
-- **Description.** There is no workflow under `.github/` and no single command that runs the
-  repository checks. Each verification is assembled by hand, and the README and AGENTS.md list
-  the commands separately.
+- **Description.** `npm run check` now runs the repository checks in order and stops on failure,
+  but there is no workflow under `.github/`; checks are not yet automatic on pushes or pull
+  requests.
 - **Sources.** Not documented as debt. AGENTS.md, testing and verification.
 - **Category.** C2.
 - **Impact.** Checks are not repeated automatically on pull requests; results depend on who ran
@@ -261,8 +262,9 @@ acPower,constantPowerCharging,energy,error,time}.ts`, `src/domain/{charging,char
 - **Priority.** P2.
 - **Resolution trigger.** Once DEBT-03 to DEBT-06 make the checks deterministic and green, with
   Vitest run from the canonical upper-case path on Windows while DEBT-02 is open.
-- **Status.** scheduled (D6, D8 approved). Work package: TD-02 (command and basic CI). The
-  end-to-end job is added to CI later by TD-03.
+- **Status.** in progress. TD-02 Increment 4 implemented D6's aggregate command and zero-warning
+  lint gate in `7bac9a1`; Increment 5 still owns D8's basic CI. Do not resolve this entry until CI
+  is implemented. The end-to-end job is added later by TD-03.
 
 ### DEBT-09 — UI component and end-to-end test strategy undecided
 

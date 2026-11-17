@@ -76,6 +76,10 @@ PowerShell blocks `npm.ps1`.
 | `npm run typecheck`    | Generate Next.js route types and check TypeScript |
 | `npm run format`       | Format files with Prettier                        |
 | `npm run format:check` | Check formatting                                  |
+| `npm run check`        | Run the complete local quality gate               |
+
+`npm run check` stops at the first failure and runs formatting, zero-warning lint, type checking,
+the Vitest suite and the production build, in that order.
 
 ## Line endings
 
@@ -111,6 +115,15 @@ git stash drop 'stash@{0}'
 
 If applying the stash reports conflicts, resolve them before dropping it; Git retains the stash,
 so the saved work is not discarded.
+
+## Blame hygiene
+
+`.git-blame-ignore-revs` lists mechanical Prettier-only commits. Use it for one command with
+`git blame --ignore-revs-file .git-blame-ignore-revs <path>`, or enable it for this clone:
+
+```sh
+git config blame.ignoreRevsFile .git-blame-ignore-revs
+```
 
 ## Bootstrap choices
 

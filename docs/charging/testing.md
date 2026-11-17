@@ -75,6 +75,10 @@ There are two kinds of test:
 | `npm run typecheck`                                                 | TypeScript check, including `*.types.ts` tests |
 | `npm run lint`                                                      | ESLint                                         |
 | `npm run format:check`                                              | Check repository formatting with Prettier      |
+| `npm run check`                                                     | Run the complete local quality gate            |
+
+`npm run check` stops at the first failure and runs `format:check`, zero-warning `lint`,
+`typecheck`, `test` and `build`, in that order.
 
 On Windows PowerShell, use `npm.cmd` if script execution blocks `npm.ps1`.
 
@@ -83,4 +87,7 @@ as the VS Code terminal may open it) every test file fails during collection bec
 upstream Vitest defect; see [DEBT-02](../technical-debt.md#debt-02--vitest-fails-when-the-drive-letter-is-lower-case).
 
 Vitest uses [`vitest.config.ts`](../../vitest.config.ts), whose only setting is the
-`vite-tsconfig-paths` plugin that resolves the `@/` alias.
+`vite-tsconfig-paths` plugin that resolves the `@/` alias. TD-02 Increment 4 kept this
+configuration because D5 permits native `resolve.tsconfigPaths` only after the Windows
+drive-letter defect is resolved. That condition remains unmet, so DEBT-07 stays open at P3 and
+the two known configuration warnings remain expected.
