@@ -7,7 +7,7 @@
 | Baseline  | `dev` at `c6ee4d9` (M0.2 closure)                                                                        |
 | Register  | [Technical debt register](../technical-debt.md)                                                          |
 | Scope     | Four work packages, TD-01 to TD-04, and an accessibility smoke test. No feature work, no M0.3 definition |
-| Decisions | [§5](#5-decisions): D1–D10, D12, O1–O3 and O7 approved, some with conditions; D11 rejected               |
+| Decisions | [§5](#5-decisions): D1–D10, D12, O1–O4 and O7 approved, some with conditions; D11 rejected               |
 
 M0.1 and M0.2 are complete and stay closed. This phase repays the debt that makes the
 repository's checks unreliable or its layering inaccurate, and decides how the UI will be tested.
@@ -373,8 +373,8 @@ These closure criteria were met on 2026-11-17; TD-02 is complete.
 
 ### TD-03 — UI and end-to-end testing strategy
 
-**Register:** DEBT-09, DEBT-10. **Decisions:** D9 and D10, followed by O3 and O7, approved with
-the recorded restrictions and implementation gates.
+**Register:** DEBT-09, DEBT-10. **Decisions:** D9 and D10, followed by O3, O4 and O7, approved
+with the recorded restrictions and implementation gates.
 
 TD-03 has two steps:
 
@@ -432,17 +432,19 @@ TD-03 has two steps:
 2. **Initial cross-browser baseline (O7).** Chromium and Firefox are both supported Playwright
    projects from the start of implementation. They share one behavioural traceability matrix.
    WebKit is deferred to a future explicit decision.
-3. **Behavioural traceability matrix first.** Before any migration, a matrix maps every behaviour
+3. **Locations (O4).** Playwright specifications live in `e2e/`; the behavioural traceability
+   matrix lives at `docs/testing/e2e-traceability.md`.
+4. **Behavioural traceability matrix first.** Before any migration, a matrix maps every behaviour
    and edge case verified by `scripts/verify-dc-simulator-url.mjs`, and every M0.2 acceptance
    criterion that concerns browser behaviour, to its planned Playwright coverage (test name) in
    Chromium and Firefox, or records why it is not covered. Browser-specific API differences map
    to the supported or fallback path; a required Firefox scenario is not omitted merely to obtain
    a passing suite. Parity is measured in behaviours and edge cases, not in the literal count of
    154 checks. The matrix is reviewed before migration starts and again at parity.
-4. **Same build for both suites.** During migration, the old script and the new suite run against
+5. **Same build for both suites.** During migration, the old script and the new suite run against
    the same production build, and their results are compared.
-5. **Retirement.** The script is removed only after reviewed coverage parity against the matrix.
-6. **Selector policy (D9).** Accessible locators first (`getByRole`, `getByLabel` with the
+6. **Retirement.** The script is removed only after reviewed coverage parity against the matrix.
+7. **Selector policy (D9).** Accessible locators first (`getByRole`, `getByLabel` with the
    accessible name), then visible text. `data-testid` is allowed only where accessible semantic
    locators are insufficient, primarily for geometry-dependent interactions such as the pointer
    position on the slider track. Each `data-testid` is listed in the testing documentation with
@@ -450,7 +452,7 @@ TD-03 has two steps:
    `__reactProps` probe are replaced, for example by accessible structure and Playwright's
    auto-waiting on observable state. Simulated external URL changes stay as explicit
    `page.evaluate` or `page.addInitScript` steps.
-7. **CI (O3).** TD-03 adds an end-to-end job to the TD-02 workflow: reproducible setup of
+8. **CI (O3).** TD-03 adds an end-to-end job to the TD-02 workflow: reproducible setup of
    Playwright's Chromium and Firefox with their system dependencies on Linux (cached where
    appropriate), a production build started through `webServer`, and failure artefacts (trace,
    screenshot and HTML report uploaded when a test fails). The job runs automatically but is not
@@ -458,16 +460,16 @@ TD-03 has two steps:
    required after reviewed parity and demonstrated CI stability is the intended direction, but
    needs separate explicit product-owner approval. Existing Linux and Windows required checks do
    not change.
-8. **Out of scope:** screen-reader and keyboard verification by a person
+9. **Out of scope:** screen-reader and keyboard verification by a person
    ([accessibility smoke test](#accessibility-smoke-test)).
 
 #### Scope and files
 
 Decision step (complete): the separately reviewed ADR 0001 revision (§2 stack table, §7 testing,
 open question 8). Implementation step (pending): `package.json` and `package-lock.json`
-(`@playwright/test`), `playwright.config.ts`, the end-to-end test directory (location to confirm),
-`.gitignore` (reports and traces), the end-to-end job in `.github/workflows/ci.yml`, the
-traceability matrix (in the testing documentation), component files only for approved
+(`@playwright/test`), `playwright.config.ts`, the end-to-end test directory (`e2e/`), `.gitignore`
+(reports and traces), the end-to-end job in `.github/workflows/ci.yml`, the traceability matrix
+(`docs/testing/e2e-traceability.md`), component files only for approved
 `data-testid` attributes, `README.md`, the testing documentation, and the register.
 
 #### Risks
@@ -668,16 +670,16 @@ Taken by the product owner on 2026-11-14, after TD-02 step 2b:
 
 ### Taken on 2026-11-18
 
-| ID  | Decision                                                 | Outcome                                                                                                                                                                                                                                                                  |
-| --- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| O3  | ADR 0001 testing revision and end-to-end CI merge policy | **Approved**: once implemented, the E2E job runs automatically without `continue-on-error` but is not required during migration; requiring it after reviewed parity and demonstrated stability needs separate explicit approval; existing required checks stay unchanged |
-| O7  | Initial Playwright browser coverage                      | **Approved**: Chromium and Firefox are supported initial projects and share one behavioural matrix; WebKit is deferred to a future explicit decision                                                                                                                     |
+| ID  | Decision                                                        | Outcome                                                                                                                                                                                                                                                                  |
+| --- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| O3  | ADR 0001 testing revision and end-to-end CI merge policy        | **Approved**: once implemented, the E2E job runs automatically without `continue-on-error` but is not required during migration; requiring it after reviewed parity and demonstrated stability needs separate explicit approval; existing required checks stay unchanged |
+| O4  | Location of the end-to-end tests and of the traceability matrix | **Approved**: Playwright specifications live in `e2e/`; the matrix lives at `docs/testing/e2e-traceability.md`                                                                                                                                                           |
+| O7  | Initial Playwright browser coverage                             | **Approved**: Chromium and Firefox are supported initial projects and share one behavioural matrix; WebKit is deferred to a future explicit decision                                                                                                                     |
 
 ### Still open
 
 | ID  | Decision                                                                                                 | Needed by            |
 | --- | -------------------------------------------------------------------------------------------------------- | -------------------- |
-| O4  | Location of the end-to-end tests and of the traceability matrix                                          | TD-03 implementation |
 | O5  | Whether results that lack an accessible structure get one (a UI change) or a `data-testid`               | TD-03 implementation |
 | O6  | Whether M0.3 UI implementation needs the complete Playwright migration or only the approved ADR decision | M0.3 specification   |
 
