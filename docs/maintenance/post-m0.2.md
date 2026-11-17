@@ -2,12 +2,12 @@
 
 | Field     | Value                                                                                                    |
 | --------- | -------------------------------------------------------------------------------------------------------- |
-| Status    | **Approved with amendments** on 2026-11-14 after independent review. **Not implemented**                 |
+| Status    | **Approved with amendments** on 2026-11-14 after independent review. TD-02 in progress (§3)              |
 | Date      | Proposed 2026-11-13; revised 2026-11-14                                                                  |
 | Baseline  | `dev` at `c6ee4d9` (M0.2 closure)                                                                        |
 | Register  | [Technical debt register](../technical-debt.md)                                                          |
 | Scope     | Four work packages, TD-01 to TD-04, and an accessibility smoke test. No feature work, no M0.3 definition |
-| Decisions | [§5](#5-decisions): D1–D10 approved, some with conditions; D11 rejected                                  |
+| Decisions | [§5](#5-decisions): D1–D10 and D12 approved, some with conditions; D11 rejected                          |
 
 M0.1 and M0.2 are complete and stay closed. This phase repays the debt that makes the
 repository's checks unreliable or its layering inaccurate, and decides how the UI will be tested.
@@ -154,8 +154,40 @@ for `src/domain/**` forbidding `@/calculations/*`, so the direction cannot regre
 
 ### TD-02 — Tooling and quality
 
-**Register:** DEBT-02 to DEBT-08. **Decisions:** D1, D4, D6, D8 approved; D5 conditionally
+**Register:** DEBT-02 to DEBT-08. **Decisions:** D1, D4, D6, D8, D12 approved; D5 conditionally
 approved.
+
+#### Progress
+
+| Item        | Steps                               | Scope                                                                   | Status                                                                                                                                                                                                 |
+| ----------- | ----------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| TD-02       | 2a–2j                               | Whole work package                                                      | **In progress, not closed.** Increment 1 complete; increments 2–5 not started                                                                                                                          |
+| Increment 1 | 2b                                  | Drive-letter investigation                                              | **Concluded on 2026-11-14 without a code change**: cause found, no reliable fix within the stack                                                                                                       |
+| Increment 2 | 2a, 2c, 2d                          | Line endings and Prettier normalisation                                 | Not started                                                                                                                                                                                            |
+| Increment 3 | 2e, 2f                              | ESLint warnings and vacuous assertions                                  | Not started                                                                                                                                                                                            |
+| Increment 4 | 2g (conditional), 2h, 2j (optional) | Remaining configuration, aggregate quality gate, optional blame hygiene | Not started                                                                                                                                                                                            |
+| Increment 5 | 2i                                  | GitHub Actions CI                                                       | Not started                                                                                                                                                                                            |
+| DEBT-02     | —                                   | —                                                                       | **Open, P1, blocked upstream** (D12). Not resolved, not an accepted limitation                                                                                                                         |
+| DEBT-07     | 2g                                  | —                                                                       | Unresolved. Not the cause of DEBT-02                                                                                                                                                                   |
+| D5          | 2g                                  | —                                                                       | Still conditional; its drive-letter condition is not met. Increment 1 showed that native `resolve.tsconfigPaths` does not fix DEBT-02, so removing `vite-tsconfig-paths` is not an automatic follow-up |
+
+Findings of increment 1:
+
+- Vitest passes 473/473 from an upper-case `C:\…` working directory; from a genuine lower-case
+  `c:\…` working directory all 26 files fail during collection.
+- Cause: Vite and Vitest use module URLs that differ in drive-letter case, which loads duplicate
+  runtime instances. Reported upstream as
+  [vitest-dev/vitest#10692](https://github.com/vitest-dev/vitest/issues/10692); the proposed fix,
+  [vitest-dev/vitest#10843](https://github.com/vitest-dev/vitest/pull/10843), was closed without
+  merge.
+- Tried without effect: a different configuration file extension, native
+  `resolve.tsconfigPaths`, an explicit `root`, other pools, dependency deduplication.
+- `vmForks` passes the tests but was rejected: it changes test execution semantics and carries
+  documented risks.
+
+Per D12, the remaining increments proceed with Vitest run from the canonical upper-case drive
+path. TD-02 is closed only after increments 2–5 are implemented and verified and every
+[acceptance criterion](#acceptance-criteria-1) is met. DEBT-02 may still be open at that point.
 
 #### Analysis at baseline
 
@@ -174,18 +206,18 @@ The principle: **one cause per commit, and mechanical commits separated from sem
 mechanical commit is one that a reviewer can reproduce exactly by running the stated command on
 its parent; a semantic commit is reviewed line by line.
 
-| Step | Commit                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Kind               | Status in plan         |
-| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------ | ---------------------- |
-| 2a   | **Line endings.** Add `.gitattributes` with `* text=auto eol=lf` and binary rules for fonts and images. Run `git add --renormalize .`: since the index is already LF, the expected commit content is the `.gitattributes` file alone, which verifies that no file changes. Developers then refresh their working tree once (procedure documented in the commit and README). Not chosen: Prettier `endOfLine: "auto"`, which would hide the inconsistency rather than remove it | Mechanical         | Required (DEBT-03)     |
-| 2b   | **Drive-letter failure.** Reproduce with a minimal configuration and find the cause. Fix it within the stack so that `npm test` passes from both `c:\…` and `C:\…`. Replacing `vite-tsconfig-paths` (2g) is one candidate but is **not assumed** to fix it. A documented workaround is not an acceptable outcome                                                                                                                                                               | Semantic (config)  | Required (DEBT-02)     |
-| 2c   | **Prettier, code.** Re-inventory the drift immediately before this step (`prettier --list-different .` on an LF checkout), then `prettier --write` on the code files of that inventory only                                                                                                                                                                                                                                                                                    | Mechanical         | Required (DEBT-04, D1) |
-| 2d   | **Prettier, documents.** `prettier --write` on the documents of the same inventory, in a separate commit, because tables and wrapping in product documents change visibly                                                                                                                                                                                                                                                                                                      | Mechanical         | Required (DEBT-04, D4) |
-| 2e   | **Lint, compile-time tests.** A scoped override in `eslint.config.mjs` that turns off `@typescript-eslint/no-unused-vars` for `tests/**/*.types.ts` only, with a comment stating why. Not chosen: renaming 103 variables with a `_` prefix (churn) or disabling the rule globally                                                                                                                                                                                              | Semantic (config)  | Required (DEBT-05)     |
-| 2f   | **Conditional assertions.** Rewrite the 12 cases of DEBT-06 so the assertion always runs, for example `expect(result).toEqual({ ok: true, value: expect.closeTo(36 / 11, 2) })` or `expect(result).toMatchObject({ ok: false, error: { type: "invalidMaxPower" } })`. No rule is disabled                                                                                                                                                                                      | Semantic (tests)   | Required (DEBT-06, D1) |
-| 2g   | **Vitest configuration.** Rename to `vitest.config.mts`. Replace `vite-tsconfig-paths` with `resolve: { tsconfigPaths: true }` and remove the package **only if** the `@/` alias still resolves in tests, `npm run typecheck` and `npm test` stay correct, and the drive-letter issue is resolved (by this change or by 2b). Otherwise keep the plugin and record why. Update the README bootstrap choices and the testing page                                                | Semantic (config)  | Conditional (D5)       |
-| 2h   | **Aggregate check and zero-warning gate.** `lint` runs with `--max-warnings 0`; a `check` script runs, in order, `format:check`, `lint`, `typecheck`, `test` and `build`                                                                                                                                                                                                                                                                                                       | Semantic (scripts) | Required (D6)          |
-| 2i   | **Basic CI.** A GitHub Actions workflow, described [below](#basic-ci)                                                                                                                                                                                                                                                                                                                                                                                                          | Semantic (CI)      | Required (D8)          |
-| 2j   | **Blame hygiene.** `.git-blame-ignore-revs` listing the commits of 2a, 2c and 2d                                                                                                                                                                                                                                                                                                                                                                                               | Mechanical         | Optional               |
+| Step | Commit                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Kind               | Status in plan         |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ---------------------- |
+| 2a   | **Line endings.** Add `.gitattributes` with `* text=auto eol=lf` and binary rules for fonts and images. Run `git add --renormalize .`: since the index is already LF, the expected commit content is the `.gitattributes` file alone, which verifies that no file changes. Developers then refresh their working tree once (procedure documented in the commit and README). Not chosen: Prettier `endOfLine: "auto"`, which would hide the inconsistency rather than remove it  | Mechanical         | Required (DEBT-03)     |
+| 2b   | **Drive-letter failure.** Reproduce with a minimal configuration and find the cause; fix it within the stack so that `npm test` passes from both `c:\…` and `C:\…`. **Outcome:** cause found upstream, no fix within the stack, no commit ([progress](#progress)). DEBT-02 stays open, P1; the upper-case path is a temporary workaround, not a resolution (D12)                                                                                                                | Semantic (config)  | Concluded, no fix      |
+| 2c   | **Prettier, code.** Re-inventory the drift immediately before this step (`prettier --list-different .` on an LF checkout), then `prettier --write` on the code files of that inventory only                                                                                                                                                                                                                                                                                     | Mechanical         | Required (DEBT-04, D1) |
+| 2d   | **Prettier, documents.** `prettier --write` on the documents of the same inventory, in a separate commit, because tables and wrapping in product documents change visibly                                                                                                                                                                                                                                                                                                       | Mechanical         | Required (DEBT-04, D4) |
+| 2e   | **Lint, compile-time tests.** A scoped override in `eslint.config.mjs` that turns off `@typescript-eslint/no-unused-vars` for `tests/**/*.types.ts` only, with a comment stating why. Not chosen: renaming 103 variables with a `_` prefix (churn) or disabling the rule globally                                                                                                                                                                                               | Semantic (config)  | Required (DEBT-05)     |
+| 2f   | **Conditional assertions.** Rewrite the 12 cases of DEBT-06 so the assertion always runs, for example `expect(result).toEqual({ ok: true, value: expect.closeTo(36 / 11, 2) })` or `expect(result).toMatchObject({ ok: false, error: { type: "invalidMaxPower" } })`. No rule is disabled                                                                                                                                                                                       | Semantic (tests)   | Required (DEBT-06, D1) |
+| 2g   | **Vitest configuration.** Rename to `vitest.config.mts`. Replace `vite-tsconfig-paths` with `resolve: { tsconfigPaths: true }` and remove the package **only if** the `@/` alias still resolves in tests, `npm run typecheck` and `npm test` stay correct, and the drive-letter issue is resolved (by this change or by 2b). Otherwise keep the plugin and record why. Update the README bootstrap choices and the testing page. After 2b the drive-letter condition is not met | Semantic (config)  | Conditional (D5)       |
+| 2h   | **Aggregate check and zero-warning gate.** `lint` runs with `--max-warnings 0`; a `check` script runs, in order, `format:check`, `lint`, `typecheck`, `test` and `build`                                                                                                                                                                                                                                                                                                        | Semantic (scripts) | Required (D6)          |
+| 2i   | **Basic CI.** A GitHub Actions workflow, described [below](#basic-ci)                                                                                                                                                                                                                                                                                                                                                                                                           | Semantic (CI)      | Required (D8)          |
+| 2j   | **Blame hygiene.** `.git-blame-ignore-revs` listing the commits of 2a, 2c and 2d                                                                                                                                                                                                                                                                                                                                                                                                | Mechanical         | Optional               |
 
 #### Basic CI
 
@@ -194,9 +226,10 @@ its parent; a semantic commit is reviewed line by line.
 - **Linux job** (`ubuntu-latest`, Node.js 24 as in the README, `npm ci`): `npm run check`, the
   complete required checks: formatting, zero-warning lint, typecheck, Vitest, production build.
 - **Windows job** (`windows-latest`, Node.js 24, `npm ci`): `npm run format:check` and `npm test`.
-  The runner's workspace path starts with an upper-case drive letter, so `npm test` runs twice:
-  once from the workspace path and once after changing to the same path with a lower-case drive
-  letter. Without the second run the job would not guard against DEBT-02.
+  The required `npm test` runs from the runner's workspace path, which uses the canonical
+  upper-case drive letter. A second, diagnostic `npm test` runs after changing to the same path
+  with a lower-case drive letter; while DEBT-02 is open it is expected to fail and does not block
+  merging (D12). It shows when an upstream correction takes effect.
 - **Required checks and merge gating:** both jobs are required status checks for pull requests
   into `master`. Required checks are a repository setting on GitHub (branch protection or a
   ruleset), configured by the repository owner; the workflow file alone does not enforce them.
@@ -220,21 +253,27 @@ the status.
 
 - 2a: the working tree of each Windows clone must be refreshed once; a dirty tree at that moment
   can show spurious changes.
-- 2b: the cause may lie in Vitest or Vite rather than in the configuration; see stop conditions.
+- 2b: realised; the cause is upstream (see [progress](#progress)). Until it is corrected, a run
+  from a lower-case path still reports false failures.
 - 2c and 2d: Prettier on Markdown may reflow tables in product documents.
 - 2f: a rewritten assertion can be stricter than the original and fail; that would reveal a real
   defect, which must then be reported, not fixed silently.
 - 2g: removing a devDependency changes the lockfile.
 - 2i: CI depends on third-party actions (`actions/checkout`, `actions/setup-node`), whose versions
-  must be pinned; the lower-case path step on Windows must be verified to run Vitest from the
-  lower-case path for real (for example by printing `process.cwd()`).
+  must be pinned; the lower-case diagnostic step on Windows must be verified to run Vitest from
+  the lower-case path for real (for example by printing `process.cwd()`), and its failure must
+  not block the required checks.
 
 #### Tests
+
+On Windows, every `npm test` below runs from the canonical upper-case path unless stated
+otherwise (DEBT-02).
 
 - After every commit: `npm test` (473 tests, unchanged count) and `npm run typecheck`.
 - 2a, 2c, 2d: reproduce the commit by running the stated command on its parent; the result must
   equal the commit (`git diff` empty).
-- 2b and 2g: `npm test` from both `c:\…` and `C:\…`, locally and in the Windows CI job.
+- 2g: `npm test` from `C:\…` (must pass) and from `c:\…` (diagnostic, result recorded), locally
+  and in the Windows CI job.
 - 2f: for each rewritten assertion, temporarily break its precondition and confirm the test fails;
   revert.
 - 2i: a pull request with a deliberate formatting error and one with a failing test, each failing
@@ -244,23 +283,31 @@ the status.
 
 #### Acceptance criteria
 
+These are the closure criteria of TD-02. They are not met yet; TD-02 is in progress.
+
 - `npm run format:check` passes on Windows and on an LF checkout.
 - `npm run lint` reports 0 errors and 0 warnings and fails on any warning; no rule is disabled
   outside `tests/**/*.types.ts`.
-- `npm test` passes with 473 tests (or more, never fewer) on Windows from both upper- and
-  lower-case drive-letter paths. DEBT-02 is resolved only then.
+- `npm test` passes with 473 tests (or more, never fewer) on Linux and on Windows from the
+  canonical upper-case drive path.
 - `npm run check` runs formatting, lint, typecheck, tests and build, and passes.
 - CI runs on every pull request: the Linux job runs `npm run check`, the Windows job runs
-  formatting and Vitest from both path forms; both pass. The required checks are documented in
-  the README.
+  formatting and Vitest from the upper-case path as required checks, and both pass. The Windows
+  job also runs the non-blocking lower-case diagnostic. The required checks and the diagnostic are
+  documented in the README.
 - No change to the behaviour of any source file; mechanical commits are reproducible.
-- Register entries DEBT-02 to DEBT-08 resolved, or DEBT-07 recorded with the reason the plugin was
+- Register entries DEBT-03 to DEBT-08 resolved, or DEBT-07 recorded with the reason the plugin was
   kept.
+- DEBT-02 recorded as open, P1, blocked upstream, with its cause and references. TD-02 closes
+  without resolving it; DEBT-02 is resolved only when `npm test` passes from both drive-letter
+  variants, locally and in CI (D12).
 
 #### Stop conditions
 
-- No fix for DEBT-02 can be found within the stack: stop, report the cause and the options found.
-  DEBT-02 stays P1 and TD-02 is not closed.
+- No fix for DEBT-02 can be found within the stack: reached in step 2b and decided by D12. It no
+  longer stops TD-02.
+- A step would need a local patch of Vitest, the `vmForks` pool, or would record DEBT-02 as
+  resolved or as an accepted limitation without both drive-letter variants passing (D12).
 - A step needs a dependency outside ADR 0001 or a change in engine behaviour.
 - 2f reveals a failing behaviour: stop the step, report the defect for a separate decision.
 - 2a changes the content of any file in the index.
@@ -521,6 +568,26 @@ ADR decision and for the accessibility smoke test. This plan does not define M0.
 | D9  | `data-testid` where accessible semantic locators are insufficient                                                              | **Approved with restrictions**: mainly for geometry-dependent interactions; each use documented                                     |
 | D10 | Playwright Test for end-to-end tests, Chromium first, no component-test framework; migration and retirement of the script      | **Approved in principle**; formalised by TD-03's separately reviewed ADR revision; traceability matrix and parity review required   |
 | D11 | Accept DEBT-12 as an accepted limitation                                                                                       | **Rejected**: DEBT-12 stays open at P3 with its triggers                                                                            |
+| D12 | How to proceed when no in-stack fix for DEBT-02 exists (was O8)                                                                | **Approved**: see [below](#d12--debt-02-blocked-upstream)                                                                           |
+
+#### D12 — DEBT-02 blocked upstream
+
+Taken by the product owner on 2026-11-14, after TD-02 step 2b:
+
+1. DEBT-02 stays open at P1; it is neither resolved nor an accepted limitation.
+2. Its cause and the upstream references are recorded in the register.
+3. Vitest runs from the canonical upper-case Windows drive path as a temporary operational
+   workaround.
+4. No local patch of Vitest and no switch to the `vmForks` pool.
+5. The remaining TD-02 increments proceed while DEBT-02 is open. Once they are all implemented
+   and verified, TD-02 may be closed with DEBT-02 still open, with the workaround and the
+   non-blocking diagnostic in place. TD-02 is not closed by this decision.
+6. The Windows CI job runs the required tests from the canonical upper-case path.
+7. It keeps a lower-case diagnostic run, not merge-blocking while the upstream defect is
+   unresolved.
+8. DEBT-02 is revisited when an upstream correction is available, and resolved only after both
+   drive-letter variants are verified.
+9. DEBT-07 is tracked independently; D5 stays conditional and its conditions are not met.
 
 ### Still open
 
@@ -533,11 +600,11 @@ ADR decision and for the accessibility smoke test. This plan does not define M0.
 | O5  | Whether results that lack an accessible structure get one (a UI change) or a `data-testid`                    | TD-03 implementation    |
 | O6  | Whether M0.3 UI implementation needs the complete Playwright migration or only the approved ADR decision      | M0.3 specification      |
 | O7  | Cross-browser coverage (Firefox, WebKit): if and when                                                         | Future product decision |
-| O8  | If no in-stack fix for DEBT-02 exists: how to proceed (upstream report, alternative configuration, other)     | TD-02, only if reached  |
 
 ## 6. Closure of the phase
 
-The phase is complete when TD-02 and TD-01 are closed and reviewed, TD-03 has an approved ADR
+The phase is complete when TD-02 and TD-01 are closed and reviewed (DEBT-02 may remain open as an
+upstream blocker, D12), TD-03 has an approved ADR
 revision and an implementation at reviewed parity with the script, the accessibility smoke test
 is recorded, and the register reflects the result. The closure is reviewed independently and
 approved by the product owner.

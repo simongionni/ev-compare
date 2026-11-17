@@ -78,5 +78,9 @@ There are two kinds of test:
 
 On Windows PowerShell, use `npm.cmd` if script execution blocks `npm.ps1`.
 
+On Windows, run Vitest from the upper-case drive path (`C:\…`). From a lower-case path (`c:\…`,
+as the VS Code terminal may open it) every test file fails during collection because of an
+upstream Vitest defect; see [DEBT-02](../technical-debt.md#debt-02--vitest-fails-when-the-drive-letter-is-lower-case).
+
 Vitest uses [`vitest.config.ts`](../../vitest.config.ts), whose only setting is the
 `vite-tsconfig-paths` plugin that resolves the `@/` alias.

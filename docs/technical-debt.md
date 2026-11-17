@@ -1,10 +1,10 @@
 # Technical debt register
 
-| Field      | Value                                                                                                                   |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Baseline   | `dev` at `c6ee4d9` (M0.2 closure), verified on 2026-11-13; corrections verified on 2026-11-14                           |
-| Governance | [Post-M0.2 maintenance plan, TD-04](maintenance/post-m0.2.md#td-04--debt-governance)                                    |
-| Plan       | [Post-M0.2 maintenance plan](maintenance/post-m0.2.md): approved with amendments on 2026-11-14, **not implemented yet** |
+| Field      | Value                                                                                                             |
+| ---------- | ----------------------------------------------------------------------------------------------------------------- |
+| Baseline   | `dev` at `c6ee4d9` (M0.2 closure), verified on 2026-11-13; corrections verified on 2026-11-14                     |
+| Governance | [Post-M0.2 maintenance plan, TD-04](maintenance/post-m0.2.md#td-04--debt-governance)                              |
+| Plan       | [Post-M0.2 maintenance plan](maintenance/post-m0.2.md): approved with amendments on 2026-11-14; TD-02 in progress |
 
 This register collects, in one place, the technical debt of the repository. It does not replace
 the documents where debt was first recorded: those entries stay as they are, and each register
@@ -51,12 +51,13 @@ Criteria are defined in [TD-04](maintenance/post-m0.2.md#td-04--debt-governance)
 ## Summary
 
 Statuses as of 2026-11-14. "Scheduled" means assigned by the approved plan; none of these entries
-is resolved yet.
+is resolved yet. DEBT-02 is open because no fix exists within the stack: it is blocked upstream
+(decision D12).
 
 | ID      | Title                                                                | Cat.  | Prio. | Status    | WP or activity      |
 | ------- | -------------------------------------------------------------------- | ----- | ----- | --------- | ------------------- |
 | DEBT-01 | `CalculationResult` owned by the calculations layer                  | C1    | P2    | scheduled | TD-01               |
-| DEBT-02 | Vitest fails when the drive letter is lower case                     | C2    | P1    | scheduled | TD-02               |
+| DEBT-02 | Vitest fails when the drive letter is lower case                     | C2    | P1    | open      | Blocked upstream    |
 | DEBT-03 | Line endings: no `.gitattributes`, Windows-only drift                | C2    | P1    | scheduled | TD-02               |
 | DEBT-04 | Prettier content drift                                               | C2    | P2    | scheduled | TD-02               |
 | DEBT-05 | ESLint `no-unused-vars` in compile-time tests                        | C2    | P2    | scheduled | TD-02               |
@@ -78,8 +79,9 @@ is resolved yet.
 | DEBT-21 | No defined public surface of the engine                              | C4/C1 | P3    | open      | —                   |
 | DEBT-22 | Stale status text in agent and decision documents                    | C1    | P3    | open      | —                   |
 
-DEBT-01 to DEBT-11 are in the post-M0.2 phase (DEBT-11 only for its basic smoke test). The others
-stay open until their trigger occurs or a decision assigns them.
+DEBT-01 and DEBT-03 to DEBT-11 are in the post-M0.2 phase (DEBT-11 only for its basic smoke
+test). DEBT-02 stays open until an upstream correction is available; TD-02 keeps a diagnostic
+check for it. The others stay open until their trigger occurs or a decision assigns them.
 
 ## Entries
 
@@ -111,21 +113,36 @@ stay open until their trigger occurs or a decision assigns them.
 ### DEBT-02 — Vitest fails when the drive letter is lower case
 
 - **Description.** On Windows, `npm test` started from `c:\Users\…\ev-compare` (lower-case drive
-  letter, as the VS Code integrated terminal and its agents open it) fails all 26 test files with
-  `TypeError: Cannot read properties of undefined (reading 'config')` at the first `describe`,
-  running 0 tests. Started from `C:\Users\…\ev-compare`, the same tree passes 473/473. The
-  probable cause is the test runner loading two module instances under paths that differ only in
-  case; this is not confirmed.
-- **Sources.** Not documented. Reproduced at baseline with Vitest 5.1.0, Vite 8.3.5, Node 24.18.0.
+  letter, as the VS Code integrated terminal and its agents open it) fails all 26 test files during
+  collection with `TypeError: Cannot read properties of undefined (reading 'config')` at the first
+  `describe`, running 0 tests. Started from `C:\Users\…\ev-compare`, the same tree passes 473/473.
+- **Cause.** Confirmed in TD-02 step 2b: from a lower-case working directory, Vite and Vitest
+  use module URLs that differ in drive-letter case, so duplicate Vitest runtime instances are
+  loaded. The defect is upstream, not in the repository's configuration.
+- **Sources.** Reproduced at baseline with Vitest 5.1.0, Vite 8.3.5, Node 24.18.0. Upstream:
+  [vitest-dev/vitest#10692](https://github.com/vitest-dev/vitest/issues/10692) (issue);
+  [vitest-dev/vitest#10843](https://github.com/vitest-dev/vitest/pull/10843) (proposed fix, closed
+  without merge).
+- **Tried without effect.** A different configuration file extension, Vite's native
+  `resolve.tsconfigPaths`, an explicit `root`, other pools, dependency deduplication. `vmForks`
+  passes the tests but was rejected: it changes test execution semantics and carries documented
+  risks. A local patch of Vitest was also rejected (D12).
+- **Workaround.** Run Vitest from the canonical upper-case drive path (`C:\…`). This is a
+  temporary operational measure; it does not resolve the entry.
 - **Category.** C2.
 - **Impact.** A green suite reports as entirely red depending on how the terminal was opened.
   Reviews and agents can report false failures, or learn to ignore failures.
 - **Risk of deferring.** High: it affects every verification on the main development machine.
+  Reduced, not removed, by the workaround.
 - **Priority.** P1: the quality signal is wrong. It stays P1 until the tests pass reliably on
-  Windows from both upper- and lower-case drive-letter paths. A documented workaround (such as
-  "start from `C:\`") does not resolve it and does not close TD-02.
-- **Resolution trigger.** Immediately; at the latest before the next verified change.
-- **Status.** scheduled. Work package: [TD-02](maintenance/post-m0.2.md#td-02--tooling-and-quality).
+  Windows from both upper- and lower-case drive-letter paths. The workaround neither resolves the
+  entry nor makes it an accepted limitation.
+- **Resolution trigger.** An upstream correction becomes available. Before resolving, verify
+  `npm test` from both drive-letter variants, locally and in the Windows CI job.
+- **Status.** open, blocked upstream (D12). TD-02 step 2b ended on 2026-11-14 without a code
+  change. TD-02 is still in progress; it may close after its remaining increments with this entry
+  still open. The Windows CI job keeps a non-blocking lower-case
+  diagnostic run. See [TD-02, progress](maintenance/post-m0.2.md#progress).
 
 ### DEBT-03 — Line endings: no `.gitattributes`, Windows-only drift
 
@@ -214,9 +231,11 @@ acPower,constantPowerCharging,energy,error,time}.ts`, `src/domain/{charging,char
   any script that relies on the exit code of `npm ls --all` fails.
 - **Risk of deferring.** Low today; grows with the next Vite major, where the native config
   loader becomes the default.
-- **Priority.** P3. May become P1 if it turns out to cause DEBT-02.
-- **Resolution trigger.** Next Vite or Vitest major update, or as part of the DEBT-02 fix.
-- **Status.** scheduled (D5 conditionally approved). Work package: TD-02.
+- **Priority.** P3. TD-02 step 2b found that neither the configuration file extension nor the
+  plugin causes DEBT-02; the two entries are independent.
+- **Resolution trigger.** Next Vite or Vitest major update.
+- **Status.** scheduled (D5 conditionally approved). Work package: TD-02. Unresolved; D5's
+  condition that the drive-letter issue is resolved is not met as of 2026-11-14.
 
 ### DEBT-08 — No aggregate check command and no CI
 
@@ -229,7 +248,8 @@ acPower,constantPowerCharging,energy,error,time}.ts`, `src/domain/{charging,char
   what, where.
 - **Risk of deferring.** Medium: grows with every contributor or agent.
 - **Priority.** P2.
-- **Resolution trigger.** Once DEBT-02 to DEBT-06 make the checks deterministic and green.
+- **Resolution trigger.** Once DEBT-03 to DEBT-06 make the checks deterministic and green, with
+  Vitest run from the canonical upper-case path on Windows while DEBT-02 is open.
 - **Status.** scheduled (D6, D8 approved). Work package: TD-02 (command and basic CI). The
   end-to-end job is added to CI later by TD-03.
 
