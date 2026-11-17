@@ -1,0 +1,19 @@
+* text=auto eol=lf
+
+# Text-based image assets remain normalized as LF.
+*.svg text eol=lf
+
+# Binary image assets.
+*.gif binary
+*.ico binary
+*.jpeg binary
+*.jpg binary
+*.png binary
+*.webp binary
+
+# Binary font assets.
+*.eot binary
+*.otf binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
