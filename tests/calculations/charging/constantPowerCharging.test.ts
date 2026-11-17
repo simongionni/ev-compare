@@ -13,8 +13,10 @@ describe("constantPowerChargingTime", () => {
       toSocPercent,
       powerKw,
     });
-    expect(result.ok).toBe(true);
-    result.ok && expect(result.value).toBeCloseTo(1.8, 1);
+    expect(result).toEqual({
+      ok: true,
+      value: expect.closeTo(1.8, 1),
+    });
   });
 
   it("calculates charging time correctly for valid inputs with equal socpercents", () => {
@@ -28,8 +30,7 @@ describe("constantPowerChargingTime", () => {
       toSocPercent,
       powerKw,
     });
-    expect(result.ok).toBe(true);
-    result.ok && expect(result.value).toEqual(0);
+    expect(result).toEqual({ ok: true, value: 0 });
   });
 
   it("returns an error for invalid battery capacity", () => {

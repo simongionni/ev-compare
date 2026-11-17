@@ -32,8 +32,10 @@ describe("acChargingTime", () => {
       station: station.value,
     });
 
-    expect(result.ok).toBe(true);
-    result.ok && expect(result.value).toBeCloseTo(36 / 11, 2);
+    expect(result).toEqual({
+      ok: true,
+      value: expect.closeTo(36 / 11, 2),
+    });
   });
 
   it("accounts for a single-phase vehicle on a three-phase station", () => {
@@ -58,8 +60,10 @@ describe("acChargingTime", () => {
       station: station.value,
     });
 
-    expect(result.ok).toBe(true);
-    result.ok && expect(result.value).toBeCloseTo(36 / (11 / 3), 2);
+    expect(result).toEqual({
+      ok: true,
+      value: expect.closeTo(36 / (11 / 3), 2),
+    });
   });
 
   it("returns an error for invalid battery capacity", () => {

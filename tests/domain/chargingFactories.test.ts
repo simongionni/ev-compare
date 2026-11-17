@@ -132,10 +132,10 @@ describe("createACChargingCapability", () => {
       maxCurrentA: 10,
     };
     const result = createACChargingCapability(raw);
-    expect(result.ok).toBe(false);
-    !result.ok && result.error
-      ? expect(result.error.type).toBe("invalidMaxPower")
-      : null;
+    expect(result).toEqual({
+      ok: false,
+      error: { type: "invalidMaxPower", value: -1 },
+    });
   });
 
   it("returns an error for invalid phases", () => {
@@ -145,10 +145,10 @@ describe("createACChargingCapability", () => {
       maxCurrentA: 10,
     };
     const result = createACChargingCapability(raw);
-    expect(result.ok).toBe(false);
-    !result.ok && result.error
-      ? expect(result.error.type).toBe("invalidPhases")
-      : null;
+    expect(result).toEqual({
+      ok: false,
+      error: { type: "invalidPhases", value: 4 },
+    });
   });
 
   it("returns an error for invalid maxCurrentA", () => {
@@ -158,10 +158,10 @@ describe("createACChargingCapability", () => {
       maxCurrentA: -1,
     };
     const result = createACChargingCapability(raw);
-    expect(result.ok).toBe(false);
-    !result.ok && result.error
-      ? expect(result.error.type).toBe("invalidMaxCurrent")
-      : null;
+    expect(result).toEqual({
+      ok: false,
+      error: { type: "invalidMaxCurrent", value: -1 },
+    });
   });
 
   it.each([0, Number.NaN, Number.POSITIVE_INFINITY])(
@@ -200,8 +200,7 @@ describe("createACChargingCapability", () => {
       maxCurrentA: 10,
     };
     const result = createACChargingCapability(raw);
-    expect(result.ok).toBe(true);
-    result.ok && result.value ? expect(result.value).toEqual(raw) : null;
+    expect(result).toEqual({ ok: true, value: raw });
   });
 });
 
@@ -212,10 +211,10 @@ describe("createACChargingStation", () => {
       phases: 1,
     };
     const result = createACChargingStation(raw);
-    expect(result.ok).toBe(false);
-    !result.ok && result.error
-      ? expect(result.error.type).toBe("invalidMaxPower")
-      : null;
+    expect(result).toEqual({
+      ok: false,
+      error: { type: "invalidMaxPower", value: -1 },
+    });
   });
 
   it("returns an error for invalid phases", () => {
@@ -224,10 +223,10 @@ describe("createACChargingStation", () => {
       phases: 4,
     };
     const result = createACChargingStation(raw);
-    expect(result.ok).toBe(false);
-    !result.ok && result.error
-      ? expect(result.error.type).toBe("invalidPhases")
-      : null;
+    expect(result).toEqual({
+      ok: false,
+      error: { type: "invalidPhases", value: 4 },
+    });
   });
 
   it.each([0, Number.NaN, Number.POSITIVE_INFINITY])(
@@ -253,10 +252,10 @@ describe("createACChargingStation", () => {
       phases: 1,
     };
     const result = createACChargingStation(raw);
-    expect(result.ok).toBe(true);
-    result.ok && result.value
-      ? expect(result.value).toEqual({ ...raw, type: "AC" })
-      : null;
+    expect(result).toEqual({
+      ok: true,
+      value: { ...raw, type: "AC" },
+    });
   });
 });
 
@@ -391,6 +390,13 @@ describe("createDCChargingStation", () => {
     const result = createDCChargingStation(raw);
 
     expect(raw).toEqual({ maxPowerKw: 350 });
-    expect(result.ok && result.value).not.toBe(raw);
+    expect(result).toEqual({
+      ok: true,
+      value: { type: "DC", maxPowerKw: 350 },
+    });
+    if (!result.ok) {
+      throw new Error("Expected a valid DCChargingStation");
+    }
+    expect(result.value).not.toBe(raw);
   });
 });
