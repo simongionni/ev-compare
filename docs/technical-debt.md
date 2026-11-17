@@ -51,8 +51,8 @@ Criteria are defined in [TD-04](maintenance/post-m0.2.md#td-04--debt-governance)
 ## Summary
 
 Statuses as of 2026-11-17. "Scheduled" means assigned by the approved plan. DEBT-02 is open
-because no fix exists within the stack: it is blocked upstream (decision D12). DEBT-03 and
-DEBT-04 were resolved by TD-02 Increment 2.
+because no fix exists within the stack: it is blocked upstream (decision D12). DEBT-03 through
+DEBT-06 were resolved by TD-02 Increments 2 and 3.
 
 | ID      | Title                                                                | Cat.  | Prio. | Status    | WP or activity      |
 | ------- | -------------------------------------------------------------------- | ----- | ----- | --------- | ------------------- |
@@ -60,8 +60,8 @@ DEBT-04 were resolved by TD-02 Increment 2.
 | DEBT-02 | Vitest fails when the drive letter is lower case                     | C2    | P1    | open      | Blocked upstream    |
 | DEBT-03 | Line endings: no `.gitattributes`, Windows-only drift                | C2    | P1    | resolved  | TD-02               |
 | DEBT-04 | Prettier content drift                                               | C2    | P2    | resolved  | TD-02               |
-| DEBT-05 | ESLint `no-unused-vars` in compile-time tests                        | C2    | P2    | scheduled | TD-02               |
-| DEBT-06 | Conditional assertions that can pass vacuously                       | C3    | P2    | scheduled | TD-02               |
+| DEBT-05 | ESLint `no-unused-vars` in compile-time tests                        | C2    | P2    | resolved  | TD-02               |
+| DEBT-06 | Conditional assertions that can pass vacuously                       | C3    | P2    | resolved  | TD-02               |
 | DEBT-07 | Vitest configuration warnings and an invalid optional peer           | C2    | P3    | scheduled | TD-02               |
 | DEBT-08 | No aggregate check command and no CI                                 | C2    | P2    | scheduled | TD-02               |
 | DEBT-09 | UI component and end-to-end test strategy undecided                  | C4/C3 | P2    | scheduled | TD-03 (decision)    |
@@ -201,7 +201,9 @@ acPower,constantPowerCharging,energy,error,time}.ts`, `src/domain/{charging,char
 - **Risk of deferring.** Medium: real warnings in new code go unnoticed.
 - **Priority.** P2.
 - **Resolution trigger.** Before lint is made a gating check (D6).
-- **Status.** scheduled. Work package: TD-02.
+- **Status.** resolved on 2026-11-17 by `c0bbf0b`. A flat-config override disables
+  `@typescript-eslint/no-unused-vars` only for `tests/**/*.types.ts`; the rule remains active for
+  ordinary runtime tests and production code.
 
 ### DEBT-06 — Conditional assertions that can pass vacuously
 
@@ -220,7 +222,10 @@ acPower,constantPowerCharging,energy,error,time}.ts`, `src/domain/{charging,char
   are unguarded.
 - **Priority.** P2. Treated as a semantic change, separate from DEBT-05.
 - **Resolution trigger.** Before lint is made a gating check, or before the functions change.
-- **Status.** scheduled (D1 approved). Work package: TD-02.
+- **Status.** resolved on 2026-11-17 by `e65a8cd`. All 12 cases now assert the complete
+  discriminated result unconditionally, while preserving numeric precision, error payloads and
+  the DC station non-aliasing check. A temporary negative run made every former precondition
+  false and reported 12/12 target tests failing before the correct inputs were restored.
 
 ### DEBT-07 — Vitest configuration warnings and an invalid optional peer
 

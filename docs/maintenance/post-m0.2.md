@@ -161,10 +161,10 @@ approved.
 
 | Item        | Steps                               | Scope                                                                   | Status                                                                                                                                                                                                 |
 | ----------- | ----------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| TD-02       | 2a–2j                               | Whole work package                                                      | **In progress, not closed.** Increments 1 and 2 complete; increments 3–5 not started                                                                                                                   |
+| TD-02       | 2a–2j                               | Whole work package                                                      | **In progress, not closed.** Increments 1–3 complete; increments 4 and 5 not started                                                                                                                   |
 | Increment 1 | 2b                                  | Drive-letter investigation                                              | **Concluded on 2026-11-14 without a code change**: cause found, no reliable fix within the stack                                                                                                       |
 | Increment 2 | 2a, 2c, 2d                          | Line endings and Prettier normalisation                                 | **Completed on 2026-11-17**: DEBT-03 and DEBT-04 resolved by `9a26a2d`, `233a89e` and `3bdeb5c`                                                                                                        |
-| Increment 3 | 2e, 2f                              | ESLint warnings and vacuous assertions                                  | Not started                                                                                                                                                                                            |
+| Increment 3 | 2e, 2f                              | ESLint warnings and vacuous assertions                                  | **Completed on 2026-11-17**: DEBT-05 and DEBT-06 resolved by `c0bbf0b` and `e65a8cd`                                                                                                                   |
 | Increment 4 | 2g (conditional), 2h, 2j (optional) | Remaining configuration, aggregate quality gate, optional blame hygiene | Not started                                                                                                                                                                                            |
 | Increment 5 | 2i                                  | GitHub Actions CI                                                       | Not started                                                                                                                                                                                            |
 | DEBT-02     | —                                   | —                                                                       | **Open, P1, blocked upstream** (D12). Not resolved, not an accepted limitation                                                                                                                         |
@@ -203,6 +203,17 @@ Findings of increment 2:
 - `npm run format:check`, typecheck, all 473 tests from `C:\…` and the production build pass.
   DEBT-07's two Vitest configuration warnings remain for Increment 4; Increment 3 owns the
   existing ESLint warnings.
+
+Findings of increment 3:
+
+- Step 2e scoped the `@typescript-eslint/no-unused-vars` exception to `tests/**/*.types.ts` in
+  `c0bbf0b`; the rule remains active for runtime tests and production code.
+- Step 2f replaced all 12 conditional assertions with unconditional discriminated-result checks
+  in `e65a8cd`. A temporary negative run crossed every assertion's result precondition and
+  reported 12 failures; restoring the inputs returned the focused suite to 87/87 passing.
+- ESLint reports zero warnings and errors. Typecheck and all 473 tests from `C:\…` pass after
+  each implementation commit. TD-02 remains in progress; DEBT-02, DEBT-07 and DEBT-08 remain
+  unresolved, and Increment 4 has not started.
 
 #### Analysis at baseline
 

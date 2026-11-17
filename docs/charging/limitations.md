@@ -103,8 +103,10 @@ These were found while documenting the implementation. None has been changed in 
 11. **Formatting and lint drift.**
     - The formatting drift was resolved by TD-02 Increment 2; `npm run format:check` now passes.
       See [DEBT-03 and DEBT-04](../technical-debt.md#debt-03--line-endings-no-gitattributes-windows-only-drift).
-    - `npm run lint` passes without errors but reports many warnings: unused variables in the
-      `*.types.ts` compile-time tests, and the `result.ok && expect(...)` assertion pattern.
+    - The lint drift was resolved by TD-02 Increment 3: compile-time type tests have a narrowly
+      scoped unused-variable exception, and all conditional assertions now run unconditionally.
+      `npm run lint` reports zero warnings and errors. See
+      [DEBT-05 and DEBT-06](../technical-debt.md#debt-05--eslint-no-unused-vars-in-compile-time-tests).
 12. **Vitest configuration warnings.**
     - `vitest.config.ts` is ESM loaded as CommonJS.
     - `vite-tsconfig-paths` could be replaced by Vite's native `resolve.tsconfigPaths`.
