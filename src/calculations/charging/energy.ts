@@ -1,7 +1,7 @@
 import type { CalculationResult } from "@/calculations/result";
 import type { EnergyDeltaCalculationError } from "@/calculations/charging/error";
 
-export type EnergyDeltaForSocChangeInput  = {
+export type EnergyDeltaForSocChangeInput = {
   batteryCapacityKwh: number;
   fromSocPercent: number;
   toSocPercent: number;
@@ -16,41 +16,52 @@ export function energyDeltaForSocChange({
   batteryCapacityKwh,
   fromSocPercent,
   toSocPercent,
-}: EnergyDeltaForSocChangeInput): CalculationResult<number,EnergyDeltaCalculationError> {
+}: EnergyDeltaForSocChangeInput): CalculationResult<
+  number,
+  EnergyDeltaCalculationError
+> {
   if (batteryCapacityKwh <= 0 || !Number.isFinite(batteryCapacityKwh)) {
     return {
       ok: false,
       error: {
         type: "invalidBatteryCapacity",
-        value: batteryCapacityKwh
-      }
+        value: batteryCapacityKwh,
+      },
     };
   }
 
-  if (fromSocPercent < 0 || fromSocPercent > 100 || !Number.isFinite(fromSocPercent)) {
+  if (
+    fromSocPercent < 0 ||
+    fromSocPercent > 100 ||
+    !Number.isFinite(fromSocPercent)
+  ) {
     return {
       ok: false,
       error: {
         type: "invalidSoc",
         field: "fromSocPercent",
-        value: fromSocPercent
-      }
+        value: fromSocPercent,
+      },
     };
   }
 
-  if (toSocPercent < 0 || toSocPercent > 100 || !Number.isFinite(toSocPercent)) {
+  if (
+    toSocPercent < 0 ||
+    toSocPercent > 100 ||
+    !Number.isFinite(toSocPercent)
+  ) {
     return {
       ok: false,
       error: {
         type: "invalidSoc",
         field: "toSocPercent",
-        value: toSocPercent
-      }
+        value: toSocPercent,
+      },
     };
   }
 
   return {
     ok: true,
-    value: (toSocPercent - fromSocPercent) * 0.01 * batteryCapacityKwh
+    value: (toSocPercent - fromSocPercent) * 0.01 * batteryCapacityKwh,
   };
 }

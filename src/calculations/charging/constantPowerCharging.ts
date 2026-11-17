@@ -17,37 +17,40 @@ export type ConstantPowerChargingTimeInput = {
  */
 
 export function constantPowerChargingTime({
+  batteryCapacityKwh,
+  fromSocPercent,
+  toSocPercent,
+  powerKw,
+}: ConstantPowerChargingTimeInput): CalculationResult<
+  number,
+  ChargingCalculationError
+> {
+  // Validated before the range check, so an out-of-range SoC is reported as such.
+  const energyDeltaKwh = energyDeltaForSocChange({
     batteryCapacityKwh,
-    fromSocPercent,
-    toSocPercent,
-    powerKw,
-} : ConstantPowerChargingTimeInput): CalculationResult<number, ChargingCalculationError> {
-
-    // Validated before the range check, so an out-of-range SoC is reported as such.
-    const energyDeltaKwh = energyDeltaForSocChange({
-        batteryCapacityKwh,
+    fromSocPercent: fromSocPercent,
+    toSocPercent: toSocPercent,
+  });
+  if (!energyDeltaKwh.ok) {
+    return {
+      ok: false,
+      error: energyDeltaKwh.error,
+    };
+  }
+  if (fromSocPercent > toSocPercent) {
+    return {
+      ok: false,
+      error: {
+        type: "invalidSocRange",
+        message:
+          "The starting SoC percentage must not be greater than the ending SoC percentage.",
         fromSocPercent: fromSocPercent,
-        toSocPercent: toSocPercent
-    });
-    if (!energyDeltaKwh.ok) {
-        return {
-            ok: false,
-            error: energyDeltaKwh.error
-        };
-    }
-    if (fromSocPercent > toSocPercent) {
-        return {
-            ok: false,
-            error: {
-                type: "invalidSocRange",
-                message: "The starting SoC percentage must not be greater than the ending SoC percentage.",
-                fromSocPercent: fromSocPercent,
-                toSocPercent: toSocPercent
-            }
-        };
-    }
-    return timeForEnergyAtConstantPower({
-        energyKwh:  energyDeltaKwh.value,
-        powerKw
-    });
+        toSocPercent: toSocPercent,
+      },
+    };
+  }
+  return timeForEnergyAtConstantPower({
+    energyKwh: energyDeltaKwh.value,
+    powerKw,
+  });
 }

@@ -629,7 +629,11 @@ describe("simulateChargingSession", () => {
         expect(
           simulateChargingSession({
             vehicle,
-            station: { type: "AC", maxPowerKw: Number.POSITIVE_INFINITY, phases: 3 },
+            station: {
+              type: "AC",
+              maxPowerKw: Number.POSITIVE_INFINITY,
+              phases: 3,
+            },
             session: { initialSocPercent: 20, termination },
           }),
         ).toEqual({
@@ -655,28 +659,30 @@ describe("simulateChargingSession", () => {
       });
     });
 
-    it.each([Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY, 100.5])(
-      "rejects an initial SoC of %s",
-      (initialSocPercent) => {
-        expect(
-          simulateChargingSession({
-            vehicle,
-            station: acStation(22, 3),
-            session: {
-              initialSocPercent,
-              termination: { type: "duration", durationMinutes: 30 },
-            },
-          }),
-        ).toEqual({
-          ok: false,
-          error: {
-            type: "invalidSoc",
-            field: "fromSocPercent",
-            value: initialSocPercent,
+    it.each([
+      Number.NaN,
+      Number.POSITIVE_INFINITY,
+      Number.NEGATIVE_INFINITY,
+      100.5,
+    ])("rejects an initial SoC of %s", (initialSocPercent) => {
+      expect(
+        simulateChargingSession({
+          vehicle,
+          station: acStation(22, 3),
+          session: {
+            initialSocPercent,
+            termination: { type: "duration", durationMinutes: 30 },
           },
-        });
-      },
-    );
+        }),
+      ).toEqual({
+        ok: false,
+        error: {
+          type: "invalidSoc",
+          field: "fromSocPercent",
+          value: initialSocPercent,
+        },
+      });
+    });
 
     it.each([Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])(
       "rejects a target SoC of %s",

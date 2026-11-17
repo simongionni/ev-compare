@@ -77,5 +77,3 @@ export type ChargingSession = {
   initialSocPercent: number;
   termination: TerminationCondition;
 };
-
-

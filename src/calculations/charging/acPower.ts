@@ -23,17 +23,11 @@ export function resolveEffectiveAcPower({
   vehicle,
   station,
 }: ResolveEffectiveAcPowerInput): number {
-  const vehiclePowerPerPhase =
-    vehicle.maxPowerKw / vehicle.phases;
+  const vehiclePowerPerPhase = vehicle.maxPowerKw / vehicle.phases;
 
-  const stationPowerPerPhase =
-    station.maxPowerKw / station.phases;
+  const stationPowerPerPhase = station.maxPowerKw / station.phases;
 
-  const usablePhases =
-    Math.min(vehicle.phases, station.phases);
+  const usablePhases = Math.min(vehicle.phases, station.phases);
 
-  return (
-    Math.min(vehiclePowerPerPhase, stationPowerPerPhase)
-    * usablePhases
-  );
+  return Math.min(vehiclePowerPerPhase, stationPowerPerPhase) * usablePhases;
 }

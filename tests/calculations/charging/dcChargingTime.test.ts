@@ -303,7 +303,11 @@ describe("dcChargingTime", () => {
 
     it("reports an out-of-range starting SoC rather than a decreasing range", () => {
       expect(
-        dcChargingTime({ ...validInput, fromSocPercent: 120, toSocPercent: 80 }),
+        dcChargingTime({
+          ...validInput,
+          fromSocPercent: 120,
+          toSocPercent: 80,
+        }),
       ).toEqual({
         ok: false,
         error: { type: "invalidSoc", field: "fromSocPercent", value: 120 },
@@ -341,8 +345,14 @@ describe("dcChargingTime", () => {
       "rejects a station maximum power of %s even when the vehicle limit is valid",
       (maxPowerKw) => {
         expect(
-          dcChargingTime({ ...validInput, station: stationWithPower(maxPowerKw) }),
-        ).toEqual({ ok: false, error: { type: "invalidPower", value: maxPowerKw } });
+          dcChargingTime({
+            ...validInput,
+            station: stationWithPower(maxPowerKw),
+          }),
+        ).toEqual({
+          ok: false,
+          error: { type: "invalidPower", value: maxPowerKw },
+        });
       },
     );
 
@@ -354,7 +364,10 @@ describe("dcChargingTime", () => {
             ...validInput,
             vehicle: { ...flatVehicle, maxPowerKw },
           }),
-        ).toEqual({ ok: false, error: { type: "invalidPower", value: maxPowerKw } });
+        ).toEqual({
+          ok: false,
+          error: { type: "invalidPower", value: maxPowerKw },
+        });
       },
     );
 

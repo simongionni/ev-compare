@@ -15,7 +15,6 @@ export type EnergyDeltaCalculationError =
       toSocPercent: number;
     };
 
-
 export type TimeCalculationError =
   | {
       type: "invalidPower";
@@ -24,7 +23,7 @@ export type TimeCalculationError =
   | {
       type: "invalidEnergy";
       value: number;
-    }
+    };
 
 export type DcCurveError = {
   type: "invalidSoc";
@@ -33,8 +32,7 @@ export type DcCurveError = {
 };
 
 export type EffectiveDcPowerError =
-  | Extract<TimeCalculationError, { type: "invalidPower" }>
-  | DcCurveError;
+  Extract<TimeCalculationError, { type: "invalidPower" }> | DcCurveError;
 
 export type AcPowerError = {
   type: "invalidPhases";
@@ -57,5 +55,4 @@ export type ChargingSessionConfigurationError =
     };
 
 export type ChargingSessionError =
-  | ChargingCalculationError
-  | ChargingSessionConfigurationError;
+  ChargingCalculationError | ChargingSessionConfigurationError;
