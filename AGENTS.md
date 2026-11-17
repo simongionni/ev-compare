@@ -99,18 +99,26 @@ the source areas where ADR 0001 and the current implementation define them preci
 | `src/data/`         | Components and routes; Redux                                                                                       |
 | `src/application/`  | Components and routes; React and Redux                                                                             |
 
-The rules cover static runtime imports, type-only imports and re-exports written with either the
-`@/` alias or a canonical relative path made from one or more `../` segments. An import not
-rejected by ESLint is not automatically an approved dependency: `src/presentation/`,
-`src/components/` and `src/app/` have no additional layer rule because legitimate lower-layer
-consumption must remain possible and their finer boundaries are not settled precisely enough.
+The rules cover static runtime imports, type-only imports and re-exports. `@/` alias and package
+restrictions apply recursively at every depth. Relative-import restrictions are deliberately
+limited to depths where the current source layout identifies the target without resolving it:
+direct files in `src/domain/`, `src/scenarios/`, `src/data/` and `src/application/`, and direct or
+one-subdirectory files in `src/calculations/`. These rules match the exact number of leading
+`../` segments required to reach a top-level source area.
+
+ESLint's core rule does not resolve import targets. Files nested more deeply receive the alias and
+package restrictions but no relative-layer restriction; adding such production files requires a
+review of whether another depth-specific rule is justified. An import not rejected by ESLint is
+not automatically an approved dependency: `src/presentation/`, `src/components/` and `src/app/`
+have no additional layer rule because legitimate lower-layer consumption must remain possible and
+their finer boundaries are not settled precisely enough.
 
 Code review must still enforce requirements that import matching cannot prove, including browser
 global use, dynamic imports or CommonJS `require`, transitive dependencies, use of the documented
 calculation API rather than internals, absence of duplicated charging mathematics, catalogue
-validation through M0.1 factories, and correct ownership of state and derived values. Non-canonical
-relative traversal and aliases other than `@/` are also outside the guard; do not use them to evade
-the architecture.
+validation through M0.1 factories, and correct ownership of state and derived values. Relative
+imports below the covered depths, non-canonical relative traversal such as `./../`, and aliases
+other than `@/` are also outside the guard; do not use them to evade the architecture.
 
 ## Testing and verification
 
