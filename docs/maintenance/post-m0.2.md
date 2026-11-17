@@ -161,13 +161,15 @@ approved.
 
 | Item        | Steps                               | Scope                                                                   | Status                                                                                                                                                                                                 |
 | ----------- | ----------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| TD-02       | 2a–2j                               | Whole work package                                                      | **In progress, not closed.** Increment 1 complete; increments 2–5 not started                                                                                                                          |
+| TD-02       | 2a–2j                               | Whole work package                                                      | **In progress, not closed.** Increments 1 and 2 complete; increments 3–5 not started                                                                                                                   |
 | Increment 1 | 2b                                  | Drive-letter investigation                                              | **Concluded on 2026-11-14 without a code change**: cause found, no reliable fix within the stack                                                                                                       |
-| Increment 2 | 2a, 2c, 2d                          | Line endings and Prettier normalisation                                 | Not started                                                                                                                                                                                            |
+| Increment 2 | 2a, 2c, 2d                          | Line endings and Prettier normalisation                                 | **Completed on 2026-11-17**: DEBT-03 and DEBT-04 resolved by `9a26a2d`, `233a89e` and `3bdeb5c`                                                                                                        |
 | Increment 3 | 2e, 2f                              | ESLint warnings and vacuous assertions                                  | Not started                                                                                                                                                                                            |
 | Increment 4 | 2g (conditional), 2h, 2j (optional) | Remaining configuration, aggregate quality gate, optional blame hygiene | Not started                                                                                                                                                                                            |
 | Increment 5 | 2i                                  | GitHub Actions CI                                                       | Not started                                                                                                                                                                                            |
 | DEBT-02     | —                                   | —                                                                       | **Open, P1, blocked upstream** (D12). Not resolved, not an accepted limitation                                                                                                                         |
+| DEBT-03     | 2a                                  | —                                                                       | **Resolved** by `9a26a2d`; renormalisation changed no previously tracked index content                                                                                                                 |
+| DEBT-04     | 2c, 2d                              | —                                                                       | **Resolved** by `233a89e` and `3bdeb5c`; 29-file clean-LF inventory formatted reproducibly                                                                                                             |
 | DEBT-07     | 2g                                  | —                                                                       | Unresolved. Not the cause of DEBT-02                                                                                                                                                                   |
 | D5          | 2g                                  | —                                                                       | Still conditional; its drive-letter condition is not met. Increment 1 showed that native `resolve.tsconfigPaths` does not fix DEBT-02, so removing `vite-tsconfig-paths` is not an automatic follow-up |
 
@@ -188,6 +190,19 @@ Findings of increment 1:
 Per D12, the remaining increments proceed with Vitest run from the canonical upper-case drive
 path. TD-02 is closed only after increments 2–5 are implemented and verified and every
 [acceptance criterion](#acceptance-criteria-1) is met. DEBT-02 may still be open at that point.
+
+Findings of increment 2:
+
+- Step 2a added the LF policy in `9a26a2d`. The index already contained LF for every tracked text
+  file, so `git add --renormalize .` staged no content change outside `.gitattributes`.
+- The fresh inventory from a clean LF checkout contained the same 29 genuine files as the
+  baseline: 22 source, test and configuration files and 7 documents. The 30 additional files
+  previously reported on Windows differed only by CRLF.
+- Steps 2c and 2d formatted only those inventories in `233a89e` and `3bdeb5c`. Reapplying the
+  respective Prettier commands produced no further diff.
+- `npm run format:check`, typecheck, all 473 tests from `C:\…` and the production build pass.
+  DEBT-07's two Vitest configuration warnings remain for Increment 4; Increment 3 owns the
+  existing ESLint warnings.
 
 #### Analysis at baseline
 

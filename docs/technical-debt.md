@@ -50,16 +50,16 @@ Criteria are defined in [TD-04](maintenance/post-m0.2.md#td-04--debt-governance)
 
 ## Summary
 
-Statuses as of 2026-11-14. "Scheduled" means assigned by the approved plan; none of these entries
-is resolved yet. DEBT-02 is open because no fix exists within the stack: it is blocked upstream
-(decision D12).
+Statuses as of 2026-11-17. "Scheduled" means assigned by the approved plan. DEBT-02 is open
+because no fix exists within the stack: it is blocked upstream (decision D12). DEBT-03 and
+DEBT-04 were resolved by TD-02 Increment 2.
 
 | ID      | Title                                                                | Cat.  | Prio. | Status    | WP or activity      |
 | ------- | -------------------------------------------------------------------- | ----- | ----- | --------- | ------------------- |
 | DEBT-01 | `CalculationResult` owned by the calculations layer                  | C1    | P2    | scheduled | TD-01               |
 | DEBT-02 | Vitest fails when the drive letter is lower case                     | C2    | P1    | open      | Blocked upstream    |
-| DEBT-03 | Line endings: no `.gitattributes`, Windows-only drift                | C2    | P1    | scheduled | TD-02               |
-| DEBT-04 | Prettier content drift                                               | C2    | P2    | scheduled | TD-02               |
+| DEBT-03 | Line endings: no `.gitattributes`, Windows-only drift                | C2    | P1    | resolved  | TD-02               |
+| DEBT-04 | Prettier content drift                                               | C2    | P2    | resolved  | TD-02               |
 | DEBT-05 | ESLint `no-unused-vars` in compile-time tests                        | C2    | P2    | scheduled | TD-02               |
 | DEBT-06 | Conditional assertions that can pass vacuously                       | C3    | P2    | scheduled | TD-02               |
 | DEBT-07 | Vitest configuration warnings and an invalid optional peer           | C2    | P3    | scheduled | TD-02               |
@@ -159,7 +159,10 @@ check for it. The others stay open until their trigger occurs or a decision assi
 - **Risk of deferring.** High: it hides real drift and produces artificial diffs.
 - **Priority.** P1.
 - **Resolution trigger.** Before any formatting change (DEBT-04).
-- **Status.** scheduled. Work package: TD-02.
+- **Status.** resolved on 2026-11-17 by `9a26a2d`. `.gitattributes` makes LF canonical for text,
+  keeps SVG assets as LF text and marks image and font binaries explicitly. `git add
+--renormalize .` changed no previously tracked index content. Existing Windows checkouts use
+  the non-destructive refresh procedure in the [README](../README.md#line-endings).
 
 ### DEBT-04 — Prettier content drift
 
@@ -179,7 +182,10 @@ acPower,constantPowerCharging,energy,error,time}.ts`, `src/domain/{charging,char
 - **Risk of deferring.** Medium: TD-01 touches two of these files.
 - **Priority.** P2.
 - **Resolution trigger.** Before the next change to any of these files.
-- **Status.** scheduled (D1, D4 approved). Work package: TD-02.
+- **Status.** resolved on 2026-11-17 by `233a89e` (22 source, test and configuration files) and
+  `3bdeb5c` (7 documentation files). The fresh inventory matched the baseline: 29 genuine
+  formatting differences on a clean LF checkout. Both commits are reproducible by applying
+  Prettier 3.9.6 to their recorded file lists.
 
 ### DEBT-05 — ESLint `no-unused-vars` in compile-time tests
 

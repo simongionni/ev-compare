@@ -77,6 +77,41 @@ PowerShell blocks `npm.ps1`.
 | `npm run format`       | Format files with Prettier                        |
 | `npm run format:check` | Check formatting                                  |
 
+## Line endings
+
+Git stores text files with LF line endings. `.gitattributes` enforces the same checkout form on
+Windows and Linux; image and font binaries are excluded from text normalization.
+
+An existing Windows checkout created before this policy may still contain CRLF files. Refresh it
+once after pulling the policy commit. Do not overwrite uncommitted work: if `git status --short`
+has output, save it first and restore it only after the refresh succeeds.
+
+```powershell
+git status --short
+git stash push --include-untracked -m "before LF working-tree refresh" # only when the tree is dirty
+$crlfFiles = git -c core.quotepath=false ls-files --eol |
+  Where-Object { $_ -match 'w/crlf' } |
+  ForEach-Object { ($_ -split "`t", 2)[1] }
+foreach ($relativePath in $crlfFiles) {
+  $path = Join-Path (Get-Location) $relativePath
+  $bytes = [IO.File]::ReadAllBytes($path)
+  $lf = [Collections.Generic.List[byte]]::new($bytes.Length)
+  for ($i = 0; $i -lt $bytes.Length; $i++) {
+    if ($bytes[$i] -eq 13 -and $i + 1 -lt $bytes.Length -and $bytes[$i + 1] -eq 10) { continue }
+    $lf.Add($bytes[$i])
+  }
+  [IO.File]::WriteAllBytes($path, $lf.ToArray())
+}
+git add --renormalize .
+git status --short
+git stash apply 'stash@{0}' # only when a stash was created
+# After verifying the restored changes:
+git stash drop 'stash@{0}'
+```
+
+If applying the stash reports conflicts, resolve them before dropping it; Git retains the stash,
+so the saved work is not discarded.
+
 ## Bootstrap choices
 
 Next.js App Router with React and strict TypeScript; CSS Modules with CSS custom properties,

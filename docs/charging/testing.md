@@ -66,15 +66,15 @@ There are two kinds of test:
 
 ## Commands
 
-| Command                                                             | Purpose                                                                                                                   |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `npm test`                                                          | Run all Vitest tests once                                                                                                 |
-| `npx vitest`                                                        | Watch mode                                                                                                                |
-| `npx vitest run tests/calculations/charging/dcChargingTime.test.ts` | Run one file                                                                                                              |
-| `npx vitest run -t "simulateChargingSession"`                       | Run tests whose name matches                                                                                              |
-| `npm run typecheck`                                                 | TypeScript check, including `*.types.ts` tests                                                                            |
-| `npm run lint`                                                      | ESLint                                                                                                                    |
-| `npm run format:check`                                              | Prettier check (currently reports existing drift; see [technical debt](limitations.md#open-questions-and-technical-debt)) |
+| Command                                                             | Purpose                                        |
+| ------------------------------------------------------------------- | ---------------------------------------------- |
+| `npm test`                                                          | Run all Vitest tests once                      |
+| `npx vitest`                                                        | Watch mode                                     |
+| `npx vitest run tests/calculations/charging/dcChargingTime.test.ts` | Run one file                                   |
+| `npx vitest run -t "simulateChargingSession"`                       | Run tests whose name matches                   |
+| `npm run typecheck`                                                 | TypeScript check, including `*.types.ts` tests |
+| `npm run lint`                                                      | ESLint                                         |
+| `npm run format:check`                                              | Check repository formatting with Prettier      |
 
 On Windows PowerShell, use `npm.cmd` if script execution blocks `npm.ps1`.
 

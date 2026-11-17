@@ -101,8 +101,8 @@ These were found while documenting the implementation. None has been changed in 
     `ACChargingTimeInput` is the only input type that is not exported, and `acChargingTime.ts`
     imports domain types without `import type`.
 11. **Formatting and lint drift.**
-    - `npm run format:check` reports most charging source and test files as not formatted to
-      the Prettier config.
+    - The formatting drift was resolved by TD-02 Increment 2; `npm run format:check` now passes.
+      See [DEBT-03 and DEBT-04](../technical-debt.md#debt-03--line-endings-no-gitattributes-windows-only-drift).
     - `npm run lint` passes without errors but reports many warnings: unused variables in the
       `*.types.ts` compile-time tests, and the `result.ok && expect(...)` assertion pattern.
 12. **Vitest configuration warnings.**
