@@ -1,4 +1,4 @@
-import type { CalculationResult } from "@/calculations/result";
+import type { CalculationResult } from "@/domain/result";
 import type {
   ACChargingCapability,
   DCChargingCapability,

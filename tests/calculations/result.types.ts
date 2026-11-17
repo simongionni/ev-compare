@@ -1,5 +1,20 @@
 import type * as CalculationResult from "@/calculations/result";
 import type { ChargingCalculationError } from "@/calculations/charging/error";
+import type { CalculationResult as CalculationResultFromCalculations } from "@/calculations/result";
+import type { CalculationResult as CalculationResultFromDomain } from "@/domain/result";
+
+declare const domainResult: CalculationResultFromDomain<number, string>;
+declare const calculationsResult: CalculationResultFromCalculations<
+  number,
+  string
+>;
+
+const compatibleWithCalculations: CalculationResultFromCalculations<
+  number,
+  string
+> = domainResult;
+const compatibleWithDomain: CalculationResultFromDomain<number, string> =
+  calculationsResult;
 
 const validOkResult: CalculationResult.CalculationResult<number, string> = {
   ok: true,

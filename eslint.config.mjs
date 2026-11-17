@@ -7,6 +7,23 @@ export default defineConfig([
   ...nextVitals,
   ...nextTs,
   {
+    files: ["src/domain/**/*.{js,jsx,ts,tsx,mjs,cjs}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/calculations/*"],
+              message:
+                "The domain layer must not depend on the calculations layer.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     files: ["tests/**/*.types.ts"],
     rules: {
       // Compile-time assertions and type declarations are checked by TypeScript, not consumed at runtime.

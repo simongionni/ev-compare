@@ -1,4 +1,4 @@
-import type { CalculationResult } from "@/calculations/result";
+import type { CalculationResult } from "@/domain/result";
 
 /**
  * Search scenario of Discovery: the direct search by make or model.
