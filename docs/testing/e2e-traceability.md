@@ -116,10 +116,10 @@ tests or attempt to infer source architecture from rendered output.
 ## Migration summary
 
 As of 2026-11-21, 4 of 53 rows are migrated and have passed in both required browser projects:
-E2E-001, E2E-002, E2E-024 and E2E-040. The other 49 rows remain planned. This is the first
-executable increment, not behavioural parity; the legacy verification script remains required
-during the transition. The new CI job is automatic and failure-visible but remains non-required
-under O3.
+E2E-001, E2E-002, E2E-024 and E2E-040. Of the other rows, 48 remain planned for Playwright and
+E2E-047 is intentionally retained in Vitest. This is the first executable increment, not
+behavioural parity; the legacy verification script remains required during the transition. The
+new CI job is automatic and failure-visible but remains non-required under O3.
 
 ## Coverage accounting
 
@@ -129,11 +129,11 @@ The inventory contains **53 unique behaviours or edge cases**:
 - **16** are additional browser-facing M0.2 acceptance behaviours not completely represented by
   a distinct legacy scenario (E2E-038–E2E-053).
 - Existing coverage at this baseline: **32 Legacy**, **17 Partial**, **3 None** and **1 Vitest**.
-- Planned migration: **52 rows require Playwright coverage in both projects**; **1 row
-  (E2E-047)** deliberately remains at the pure Vitest level unless a production-reachable error
-  path is separately approved.
-- Migration status now: **0 migrated**, **52 planned**, **1 retained in Vitest**. The legacy script
-  remains the active browser verification until reviewed parity is achieved.
+- Migration scope at the historical baseline: **52 rows require Playwright coverage in both
+  projects**; **1 row (E2E-047)** deliberately remains at the pure Vitest level unless a
+  production-reachable error path is separately approved.
+- Migration status now: **4 migrated**, **48 remaining Playwright rows**, **1 retained in Vitest**.
+  The legacy script remains the active browser verification until reviewed parity is achieved.
 
 The counts above are row counts, not assertion counts. A row may need several assertions, and one
 Playwright test may satisfy several rows, but no row is complete until its full observable
