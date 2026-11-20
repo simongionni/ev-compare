@@ -34,6 +34,12 @@ milestone specifications describe approved intent; their status says whether it 
 | [Technical debt register](technical-debt.md)           | Current                   | Debt, tooling problems and test gaps verified at the M0.2 baseline, with status |
 | [Post-M0.2 maintenance plan](maintenance/post-m0.2.md) | Approved, not implemented | Work packages TD-01 to TD-04, sequence, decisions taken and open                |
 
+## End-to-end testing
+
+| Page                                                    | Contents                                                                                |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [Behavioural traceability](testing/e2e-traceability.md) | Playwright migration status, browser results, planned behaviours and parity limitations |
+
 ## Product, UX and visual identity
 
 These pages describe intent and design, not implemented features.

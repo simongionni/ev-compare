@@ -64,22 +64,46 @@ Open http://localhost:3000 (it opens Discovery at `/cerca`). A vehicle's analysi
 `/veicoli/<id>`, for example http://localhost:3000/veicoli/nordis-e4. On Windows, use `npm.cmd` if
 PowerShell blocks `npm.ps1`.
 
+Install the Playwright browser binaries once before running end-to-end tests locally:
+
+```sh
+npx playwright install chromium firefox
+```
+
+On Linux, include the browsers' system dependencies with
+`npx playwright install --with-deps chromium firefox`.
+
 ## Commands
 
-| Command                | Purpose                                           |
-| ---------------------- | ------------------------------------------------- |
-| `npm run dev`          | Start the development server                      |
-| `npm run build`        | Create a production build                         |
-| `npm start`            | Serve the production build                        |
-| `npm run lint`         | Run ESLint                                        |
-| `npm test`             | Run the Vitest test suite                         |
-| `npm run typecheck`    | Generate Next.js route types and check TypeScript |
-| `npm run format`       | Format files with Prettier                        |
-| `npm run format:check` | Check formatting                                  |
-| `npm run check`        | Run the complete local quality gate               |
+| Command                   | Purpose                                            |
+| ------------------------- | -------------------------------------------------- |
+| `npm run dev`             | Start the development server                       |
+| `npm run build`           | Create a production build                          |
+| `npm start`               | Serve the production build                         |
+| `npm run lint`            | Run ESLint                                         |
+| `npm test`                | Run the Vitest test suite                          |
+| `npm run test:e2e`        | Build, then run Playwright in Chromium and Firefox |
+| `npm run test:e2e:headed` | Build, then run both browsers headed for debugging |
+| `npm run typecheck`       | Generate Next.js route types and check TypeScript  |
+| `npm run format`          | Format files with Prettier                         |
+| `npm run format:check`    | Check formatting                                   |
+| `npm run check`           | Run the complete local quality gate                |
 
 `npm run check` stops at the first failure and runs formatting, zero-warning lint, type checking,
 the Vitest suite and the production build, in that order.
+
+Playwright always starts a fresh production server on port 3100 through its configuration;
+it does not reuse a development server. The local E2E commands build first so `.next` belongs to
+the current checkout. CI builds once explicitly and then uses `npm run test:e2e:ci`, which starts
+the same Playwright-managed production server without rebuilding. HTML reports are written to
+`playwright-report/`; traces, screenshots and other failure output are written to `test-results/`.
+
+The first migration increment covers traceability rows E2E-001, E2E-002, E2E-024 and E2E-040 in
+both Chromium and Firefox. The remaining rows and current limitations are tracked in the
+[end-to-end traceability matrix](docs/testing/e2e-traceability.md). During migration the legacy
+verification remains available: after `npm run build`, start the production app with
+`npm start -- -p 3123` and run `node scripts/verify-dc-simulator-url.mjs` in another terminal
+against its default `http://localhost:3123` target.
 
 ## Continuous integration
 
@@ -89,12 +113,17 @@ The [CI workflow](.github/workflows/ci.yml) runs on every pull request and on pu
 - **Linux quality gate** runs `npm run check` on `ubuntu-latest`.
 - **Windows tests** runs the formatting check and the required Vitest suite from the canonical
   upper-case drive path on `windows-latest`.
+- **Playwright E2E** installs Chromium and Firefox with their Linux dependencies, builds once,
+  starts that production build through Playwright, and runs the same behavioural suite in both
+  browsers. It uploads the HTML report and failure artefacts; during migration it is automatic
+  and failure-visible but is not a required status check.
 
-Both jobs are required status checks for merges into the protected `master` branch. Direct pushes
-to `dev` remain allowed and trigger CI after the push. The Windows job also runs Vitest from the
-same workspace with a genuine lower-case drive letter and prints Node's `process.cwd()`. This
-temporary, non-blocking diagnostic tracks [DEBT-02](docs/technical-debt.md#debt-02--vitest-fails-when-the-drive-letter-is-lower-case);
-its expected upstream failure does not weaken either required check.
+The Linux and Windows jobs are required status checks for merges into the protected `master`
+branch. Direct pushes to `dev` remain allowed and trigger CI after the push. The Windows job also
+runs Vitest from the same workspace with a genuine lower-case drive letter and prints Node's
+`process.cwd()`. This temporary, non-blocking diagnostic tracks
+[DEBT-02](docs/technical-debt.md#debt-02--vitest-fails-when-the-drive-letter-is-lower-case); its
+expected upstream failure does not weaken either required check.
 
 The first operational run, [CI run 44182405822](https://github.com/simongionni/ev-compare/actions/runs/44182405822),
 passed both jobs on 2026-11-17. It recorded `D:\a\ev-compare\ev-compare` for the required Windows
