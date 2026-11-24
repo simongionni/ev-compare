@@ -9,6 +9,10 @@ export const finalSoc = (page: Page) =>
   page.getByRole("slider", { name: "Livello di carica finale" });
 export const result = (page: Page) =>
   page.getByRole("region", { name: "Risultato" });
+export const chart = (page: Page) =>
+  page.getByRole("region", { name: "Potenza per livello di carica" });
+export const chartInspection = (page: Page) =>
+  page.getByRole("slider", { name: /^Ispeziona il grafico:/ });
 
 export async function expectPathAndSearch(page: Page, expected: string) {
   await expect(page).toHaveURL((url) => url.pathname + url.search === expected);
