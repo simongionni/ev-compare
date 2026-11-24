@@ -420,9 +420,10 @@ discussion.
 > **TD-03 revision approved (2026-11-18):** this section records the approved testing architecture.
 > Implementation subsequently delivered an operational Playwright Chromium/Firefox suite and CI.
 > Independent behavioural parity was accepted on 2026-11-24 (see `docs/testing/e2e-traceability.md`).
-> Retirement of the legacy verifier is staged in a separate cleanup PR, gated on repository-owner
-> activation of the `Playwright E2E` required check. DEBT-09 is closed; DEBT-10 remains open until
-> the guarded cleanup is merged and validated.
+> The legacy verifier was retired on `dev` via PR #2 after the reviewed parity gate and
+> repository-owner activation of required `Playwright E2E` on `master`. The post-merge CI
+> (`ecdbcc6`) passed. DEBT-09 and DEBT-10 are closed; subsequent releases to `master` remain
+> governed by the protected branch workflow.
 
 ### Test levels
 

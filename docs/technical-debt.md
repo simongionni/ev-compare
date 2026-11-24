@@ -4,7 +4,7 @@
 | ---------- | ------------------------------------------------------------------------------------------------------------------------ |
 | Baseline   | `dev` at `c6ee4d9` (M0.2 closure), verified on 2026-11-13; corrections verified on 2026-11-14                            |
 | Governance | [Post-M0.2 maintenance plan, TD-04](maintenance/post-m0.2.md#td-04--debt-governance)                                     |
-| Plan       | [Post-M0.2 maintenance plan](maintenance/post-m0.2.md): approved with amendments; TD-02 and TD-03 decision step complete |
+| Plan       | [Post-M0.2 maintenance plan](maintenance/post-m0.2.md): approved with amendments; TD-02 and TD-03 complete              |
 
 This register collects, in one place, the technical debt of the repository. It does not replace
 the documents where debt was first recorded: those entries stay as they are, and each register
@@ -65,7 +65,7 @@ DEBT-03 through DEBT-06, DEBT-08 and DEBT-09 are resolved; DEBT-07 remains open 
 | DEBT-07 | Vitest configuration warnings and an invalid optional peer           | C2    | P3    | open      | Deferred under D5   |
 | DEBT-08 | No aggregate check command and no CI                                 | C2    | P2    | resolved  | TD-02               |
 | DEBT-09 | UI component and end-to-end test strategy undecided                  | C4/C3 | P2    | resolved  | TD-03 (decision)    |
-| DEBT-10 | Browser verification is a manual script outside the test suite       | C3    | P2    | scheduled | TD-03               |
+| DEBT-10 | Browser verification is a manual script outside the test suite       | C3    | P2    | resolved  | TD-03               |
 | DEBT-11 | Accessible names and announcements not verified with a screen reader | C3    | P2    | scheduled | Accessibility smoke |
 | DEBT-12 | Marginal URL synchronisation limits of the DC simulator              | C1    | P3    | open      | —                   |
 | DEBT-13 | Inconsistent error vocabulary                                        | C4    | P3    | open      | —                   |
@@ -79,7 +79,7 @@ DEBT-03 through DEBT-06, DEBT-08 and DEBT-09 are resolved; DEBT-07 remains open 
 | DEBT-21 | No defined public surface of the engine                              | C4/C1 | P3    | open      | —                   |
 | DEBT-22 | Stale status text in agent and decision documents                    | C1    | P3    | open      | —                   |
 
-DEBT-01, DEBT-03 through DEBT-06, DEBT-08 and DEBT-09 are resolved. DEBT-07, DEBT-10 and DEBT-11
+DEBT-01, DEBT-03 through DEBT-06, and DEBT-08 through DEBT-10 are resolved. DEBT-07 and DEBT-11
 remain in the post-M0.2 phase (DEBT-11 only for its basic smoke test). DEBT-02 stays open until an
 upstream correction is available; TD-02 keeps a diagnostic check for it. The others stay open
 until their trigger occurs or a decision assigns them.
@@ -319,7 +319,9 @@ acPower,constantPowerCharging,energy,error,time}.ts`, `src/domain/{charging,char
 - **Priority.** P2.
 - **Resolution trigger.** Every Next.js update (re-run by hand until automated); automation in
   TD-03 after its ADR decision.
-- **Status.** scheduled (D9, D10 approved with restrictions). Work package: TD-03.
+- **Status.** resolved (2026-11-24). TD-03 delivered 52/52 accepted browser behaviours in
+  Playwright Chromium/Firefox, with E2E-047 deliberately retained in Vitest. The legacy script
+  was retired by PR #2; required checks and post-merge CI succeeded on `dev` (`ecdbcc6`).
 - **Scope note.** This entry is about **automation**. The legacy checks still run in Chromium only
   (M0.2 caveat, item 2), but O7 requires the Playwright replacement to support Chromium and
   Firefox from the start. WebKit remains deferred

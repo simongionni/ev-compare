@@ -381,7 +381,12 @@ TD-03 has two steps:
 1. **Decision step — approved 2026-11-18.** The separately reviewed ADR 0001 revision resolves
    open question 8. Its approval resolves DEBT-09 but does not install Playwright or implement the
    suite or CI job.
-2. **Implementation step — implemented; final retirement pending.** Playwright Chromium/Firefox and its CI job are operational, with 52/52 browser-facing behaviours migrated and independently reviewed on 2026-11-24 (see `docs/testing/e2e-traceability.md`). The dedicated legacy cleanup PR must remain unmerged until `Playwright E2E` is a required status check on `master` and the cleanup CI passes; TD-03/DEBT-10 close after the guarded merge is validated.
+2. **Implementation step — complete 2026-11-24.** Playwright Chromium/Firefox covers all 52
+   browser-facing behaviours; E2E-047 remains in Vitest. Independent parity and Livrea visual
+   review are recorded in `docs/testing/e2e-traceability.md`. Following owner activation of the
+   required `Playwright E2E` check, PR #2 removed the legacy verifier. Its CI and the post-merge
+   `dev` CI (`ecdbcc6`) passed all Linux, Windows and Playwright checks. TD-03 and DEBT-10 are closed.
+   Promotion of other `dev` changes to `master` follows the separate protected release workflow.
 
 #### Current state
 

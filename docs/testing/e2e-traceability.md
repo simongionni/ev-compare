@@ -118,8 +118,8 @@ tests or attempt to infer source architecture from rendered output.
 As of 2026-11-24, 52 of 53 rows are migrated and have passed in both required browser projects:
 E2E-001–046 and E2E-048–053. Independent visual review accepted E2E-043, E2E-044 and
 E2E-051 within the approved M0.2 scope; E2E-047 is retained in Vitest.
-The historical legacy script is proposed for retirement in PR #2, after reviewed parity and
-promotion of `Playwright E2E` to a required status check under O3.
+The legacy verifier was retired on `dev` via PR #2 after owner activation of the required
+`Playwright E2E` check. The PR and post-merge CI (`ecdbcc6`) passed in both browser projects.
 
 ## Coverage accounting
 
@@ -133,7 +133,7 @@ The inventory contains **53 unique behaviours or edge cases**:
   projects**; **1 row (E2E-047)** deliberately remains at the pure Vitest level unless a
   production-reachable error path is separately approved.
 - Migration status now: **52 migrated**, **0 Partial Playwright rows**, **0 planned Playwright
-  rows** and **1 retained in Vitest**. The legacy verifier remains until guarded retirement.
+  rows** and **1 retained in Vitest**. The legacy verifier is retired from `dev` after guarded parity approval.
 
 The counts above are row counts, not assertion counts. A row may need several assertions, and one
 Playwright test may satisfy several rows, but no row is complete until its full observable
