@@ -1,10 +1,19 @@
 # End-to-end behavioural traceability
 
 This is the TD-03 migration inventory for the completed M0.2 vertical slice. Playwright,
-Chromium and Firefox projects, 49 migrated rows and 3 screenshot-review Partial rows are
-implemented. Behavioural
-parity is measured by the rows below, not by reproducing the legacy script's 154
-implementation-level checks one for one.
+Chromium and Firefox projects cover all 52 browser-facing rows; the remaining E2E-047 is intentionally retained in Vitest. Independent chart and M0.2-scoped Livrea visual reviews were accepted on 2026-11-24. Behavioural parity is measured by the rows below, not by reproducing the legacy script's 154 implementation-level checks one for one.
+
+## Final behavioural parity review (2026-11-24)
+
+**Result: behavioural parity ACCEPTED for the approved M0.2 scope, with retirement controls outstanding.**
+
+- Legacy inventory: E2E-001–037 (37 behavioural rows) migrated, with all 37 mapped to executable Playwright checks. The legacy script's 154 assertion-level checks are not treated as 154 independent behavioural requirements.
+- M0.2 browser acceptance: E2E-038–046 and E2E-048–053 (15 additional rows) migrated. E2E-047 remains deliberately in Vitest because no approved production-reachable engine-error path exists.
+- Both required browser projects passed the Playwright CI job for implementation commit `d1c895a`, GitHub Actions run `45494961677`; Linux quality and Windows jobs also passed. Subsequent commits `9ae8b86` and `1e9a3fd` updated only traceability documentation.
+- Independent screenshot review accepted E2E-043 and E2E-044. The E2E-051 review accepts the selected Livrea Consolidated visual language *within the M0.2 first vertical slice*: advanced criteria and dual-vehicle comparison layouts in the original reference SVGs are explicitly out of scope under `docs/milestones/m0.2-first-vertical-slice.md` §3. The review artifacts are candidates in the Playwright HTML report, not automated image-diff baselines.
+- Known non-blocking limitations remain: full keyboard Tab-order / screen-reader smoke review, comprehensive contrast audit and ongoing human review of visual changes. These are not invented as parity failures for the accepted M0.2 contract.
+
+**Retirement decision:** the legacy script is eligible for removal, but it is **not yet retired**. Under ADR 0001 / O3, Playwright must be promoted to a required CI status with explicit owner approval after stable runs. Once that protection is approved and effective, remove the legacy verifier and its obsolete references in a separate small change, run the full gates, and close TD-03. Preserve the E2E traceability inventory and the independent-review evidence.
 
 ## Scope and baseline
 
@@ -25,9 +34,7 @@ Coverage terms:
   appropriate level; the row records why no browser test is proposed.
 - **None**: no existing automated check directly protects the observable behaviour.
 
-Rows marked **Migrated** name the executable test and record its latest local Chromium and
-Firefox result. **Partial** rows also have passing browser evidence but still depend on independent
-visual approval; no Playwright row remains **Planned**. Test names are deliberately behavioural;
+Rows marked **Migrated** name the executable test and record its Chromium and Firefox evidence. Independent visual review has approved E2E-043, E2E-044 and E2E-051; no Playwright row remains **Partial** or **Planned**. Test names are deliberately behavioural;
 implementation may group several rows in one spec as long as reporting keeps the row IDs
 traceable.
 
