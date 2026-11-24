@@ -118,8 +118,8 @@ tests or attempt to infer source architecture from rendered output.
 As of 2026-11-24, 52 of 53 rows are migrated and have passed in both required browser projects:
 E2E-001–046 and E2E-048–053. Independent visual review accepted E2E-043, E2E-044 and
 E2E-051 within the approved M0.2 scope; E2E-047 is retained in Vitest.
-The legacy verification script remains required during the transition. The CI job is automatic
-and failure-visible but remains non-required under O3.
+The historical legacy script is proposed for retirement in PR #2, after reviewed parity and
+promotion of `Playwright E2E` to a required status check under O3.
 
 ## Coverage accounting
 

@@ -381,7 +381,7 @@ TD-03 has two steps:
 1. **Decision step — approved 2026-11-18.** The separately reviewed ADR 0001 revision resolves
    open question 8. Its approval resolves DEBT-09 but does not install Playwright or implement the
    suite or CI job.
-2. **Implementation step — pending.** Begins only after the approved revision and TD-02 closure.
+2. **Implementation step — implemented; final retirement pending.** Playwright Chromium/Firefox and its CI job are operational, with 52/52 browser-facing behaviours migrated and independently reviewed on 2026-11-24 (see `docs/testing/e2e-traceability.md`). The dedicated legacy cleanup PR must remain unmerged until `Playwright E2E` is a required status check on `master` and the cleanup CI passes; TD-03/DEBT-10 close after the guarded merge is validated.
 
 #### Current state
 
