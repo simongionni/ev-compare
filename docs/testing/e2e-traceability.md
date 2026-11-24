@@ -13,7 +13,7 @@ Chromium and Firefox projects cover all 52 browser-facing rows; the remaining E2
 - Independent screenshot review accepted E2E-043 and E2E-044. The E2E-051 review accepts the selected Livrea Consolidated visual language *within the M0.2 first vertical slice*: advanced criteria and dual-vehicle comparison layouts in the original reference SVGs are explicitly out of scope under `docs/milestones/m0.2-first-vertical-slice.md` §3. The review artifacts are candidates in the Playwright HTML report, not automated image-diff baselines.
 - Known non-blocking limitations remain: full keyboard Tab-order / screen-reader smoke review, comprehensive contrast audit and ongoing human review of visual changes. These are not invented as parity failures for the accepted M0.2 contract.
 
-**Retirement decision:** the legacy script is eligible for removal, but it is **not yet retired**. Under ADR 0001 / O3, Playwright must be promoted to a required CI status with explicit owner approval after stable runs. Once that protection is approved and effective, remove the legacy verifier and its obsolete references in a separate small change, run the full gates, and close TD-03. Preserve the E2E traceability inventory and the independent-review evidence.
+**Retirement implementation (proposed, pending merge):** the legacy verifier has been removed on the dedicated cleanup branch only. This change must not merge into `dev` until the repository owner activates `Playwright E2E` as a required status check for `master`, verifies that protection is effective, and the cleanup PR passes the full CI suite. After merge, preserve this traceability inventory and review evidence; close TD-03 only after the required check and post-merge validation are confirmed.
 
 ## Scope and baseline
 
@@ -126,8 +126,7 @@ tests or attempt to infer source architecture from rendered output.
 
 As of 2026-11-24, 52 of 53 rows are migrated and have passed in both required browser projects:
 E2E-001–046 and E2E-048–053 have Playwright coverage and independent acceptance evidence, including the M0.2-scoped Livrea visual review for E2E-051. E2E-047 remains intentionally in Vitest.
-The legacy verification script remains required during the transition. The CI job is automatic
-and failure-visible but remains non-required under O3.
+The legacy verifier remains present on the protected integration branches pending the gated cleanup merge. Playwright currently runs automatically and failure-visibly; O3 requires promotion to a required status check before the cleanup merge.
 
 ## Coverage accounting
 
@@ -140,8 +139,7 @@ The inventory contains **53 unique behaviours or edge cases**:
 - Migration scope at the historical baseline: **52 rows require Playwright coverage in both
   projects**; **1 row (E2E-047)** deliberately remains at the pure Vitest level unless a
   production-reachable error path is separately approved.
-- Migration status now: **52 migrated**, **0 Partial Playwright rows**, **0 planned Playwright rows** and **1 retained in Vitest**. The legacy script remains
-  the active browser verification until reviewed parity is achieved.
+- Migration status now: **52 migrated**, **0 Partial Playwright rows**, **0 planned Playwright rows** and **1 retained in Vitest**. The dedicated cleanup PR proposes removal of the legacy script after reviewed parity and activation of the required Playwright CI check.
 
 The counts above are row counts, not assertion counts. A row may need several assertions, and one
 Playwright test may satisfy several rows, but no row is complete until its full observable
@@ -178,8 +176,4 @@ internal properties from the legacy harness are not migration targets.
 
 ## Review and parity gate
 
-This matrix needs review before Playwright migration begins and again before the legacy script is
-retired. During migration both suites run against the same production build. A row becomes
-migrated only when its planned test passes in Chromium and Firefox, or when its recorded rationale
-has been explicitly approved. The script is not removed merely because all new tests pass or
-because their assertion count reaches 154.
+The matrix received an independent parity and visual review on 2026-11-24. During migration, both suites ran against the production build. A row is Migrated only after Chromium/Firefox evidence or an approved rationale. Legacy removal is separately gated by the required Playwright branch-protection check and full cleanup PR CI, not by matching the legacy assertion count of 154.
