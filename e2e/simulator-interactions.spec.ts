@@ -1,80 +1,15 @@
-import { expect, test, type Locator, type Page } from "@playwright/test";
-
-const simulatorPath = "/veicoli/nordis-e4/simulazione-dc";
-const defaultScenario = "?colonnina=150&inizio=10&fine=80";
-
-const initialSoc = (page: Page) =>
-  page.getByRole("slider", { name: "Livello di carica iniziale" });
-const finalSoc = (page: Page) =>
-  page.getByRole("slider", { name: "Livello di carica finale" });
-const result = (page: Page) => page.getByRole("region", { name: "Risultato" });
-
-async function expectPathAndSearch(page: Page, expected: string) {
-  await expect(page).toHaveURL((url) => url.pathname + url.search === expected);
-}
-
-async function expectScenario(
-  page: Page,
-  stationKw: 50 | 150 | 350,
-  initial: number,
-  final: number,
-) {
-  await expect(
-    page.getByRole("radio", { name: `${stationKw} kW`, exact: true }),
-  ).toBeChecked();
-  await expect(initialSoc(page)).toHaveAttribute(
-    "aria-valuenow",
-    String(initial),
-  );
-  await expect(finalSoc(page)).toHaveAttribute("aria-valuenow", String(final));
-  await expect(
-    page.getByText(`da ${initial}% a ${final}% · colonnina ${stationKw} kW`, {
-      exact: true,
-    }),
-  ).toBeVisible();
-}
-
-async function openScenario(page: Page, query = defaultScenario) {
-  await page.goto(`${simulatorPath}${query}`);
-  await expect(
-    page.getByRole("heading", { name: "Ricarica rapida di Nordis E4" }),
-  ).toBeVisible();
-}
-
-async function pixelsPerSocPoint(page: Page) {
-  const initialBox = await initialSoc(page).boundingBox();
-  const finalBox = await finalSoc(page).boundingBox();
-  if (initialBox === null || finalBox === null) {
-    throw new Error("The SoC slider thumbs have no layout boxes");
-  }
-
-  const initialCenter = initialBox.x + initialBox.width / 2;
-  const finalCenter = finalBox.x + finalBox.width / 2;
-  return (finalCenter - initialCenter) / 70;
-}
-
-async function startDragTo(
-  page: Page,
-  thumb: Locator,
-  targetSoc: number,
-  pixelsPerPoint: number,
-) {
-  const box = await thumb.boundingBox();
-  const currentValue = Number(await thumb.getAttribute("aria-valuenow"));
-  if (box === null || !Number.isFinite(currentValue)) {
-    throw new Error("The SoC thumb is not ready for pointer interaction");
-  }
-
-  const startX = box.x + box.width / 2;
-  const y = box.y + box.height / 2;
-  await page.mouse.move(startX, y);
-  await page.mouse.down();
-  await page.mouse.move(
-    startX + (targetSoc - currentValue) * pixelsPerPoint,
-    y,
-    { steps: 8 },
-  );
-}
+import { expect, test } from "@playwright/test";
+import {
+  expectPathAndSearch,
+  expectScenario,
+  finalSoc,
+  initialSoc,
+  openScenario,
+  pixelsPerSocPoint,
+  result,
+  simulatorPath,
+  startDragTo,
+} from "./simulator-helpers";
 
 test("E2E-010 drag updates controls and results without changing URL or history", async ({
   page,
