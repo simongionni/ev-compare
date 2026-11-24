@@ -1,10 +1,10 @@
 # Technical debt register
 
-| Field      | Value                                                                                                                    |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Baseline   | `dev` at `c6ee4d9` (M0.2 closure), verified on 2026-11-13; corrections verified on 2026-11-14                            |
-| Governance | [Post-M0.2 maintenance plan, TD-04](maintenance/post-m0.2.md#td-04--debt-governance)                                     |
-| Plan       | [Post-M0.2 maintenance plan](maintenance/post-m0.2.md): approved with amendments; TD-02 and TD-03 complete               |
+| Field      | Value                                                                                                      |
+| ---------- | ---------------------------------------------------------------------------------------------------------- |
+| Baseline   | `dev` at `c6ee4d9` (M0.2 closure), verified on 2026-11-13; corrections verified on 2026-11-14              |
+| Governance | [Post-M0.2 maintenance plan, TD-04](maintenance/post-m0.2.md#td-04--debt-governance)                       |
+| Plan       | [Post-M0.2 maintenance plan](maintenance/post-m0.2.md): approved with amendments; TD-02 and TD-03 complete |
 
 This register collects, in one place, the technical debt of the repository. It does not replace
 the documents where debt was first recorded: those entries stay as they are, and each register
