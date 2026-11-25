@@ -26,8 +26,8 @@ milestone specifications describe approved intent; their status says whether it 
 | Page                                                                   | Status                                                                            | Contents                                                                                               |
 | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | [M0.2 — First vertical slice](milestones/m0.2-first-vertical-slice.md) | Completed (increments 1, 2 and 3 implemented; accepted with non-blocking caveats) | Discovery → Vehicle Analysis → DC simulation: scope, data, navigation, acceptance criteria, acceptance |
-| [M0.3 — Advanced Discovery](milestones/m0.3-advanced-discovery.md)     | Draft for review, not implemented                                                 | Criteria, requirements and preferences, weighted ranking, near matches, URL state, open issues         |
-| [M0.3 acceptance matrix](milestones/m0.3-acceptance-matrix.md)         | Approved input                                                                    | Acceptance scenarios AC-01–AC-42                                                                       |
+| [M0.3 — Advanced Discovery](milestones/m0.3-advanced-discovery.md)     | Revised draft for second review, not implemented                                  | Criteria, requirements and preferences, weighted ranking, near matches, URL state, open issues         |
+| [M0.3 acceptance matrix](milestones/m0.3-acceptance-matrix.md)         | Revision 2, canonical test cases for second review                                | Acceptance scenarios AC-01–AC-72                                                                       |
 
 ## Maintenance
 
